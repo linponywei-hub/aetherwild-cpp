@@ -3,11 +3,11 @@
 .env
 .env.*
 !.env.example
-build*
-runtime-data
-reference
+build/
+build-sanitize/
+runtime-data/
 *.zip
 *.awc*
 *.log
-__pycache__
-node_modules
+__pycache__/
+node_modules/
