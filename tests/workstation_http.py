@@ -51,6 +51,16 @@ end=request('state',token=a['token'])[1]['player']['position']
 length=math.dist([start[k] for k in ['x','y','z']],[end[k] for k in ['x','y','z']])
 check(0<length<2)
 check(request('input',{'sequence':2,'x':100,'z':0,'yaw':0},a['token'])[0]==400)
+code,synced=request('input',{'sequence':3,'x':0,'z':0,'yaw':0,'snapshot':True},a['token'])
+check(code==200 and synced['player']['id']==a['player']['id'])
+check(synced['_sync']['epoch']==r['_sync']['epoch'])
+check(synced['_sync']['sequence']>r['_sync']['sequence'])
+check(request('input',{'sequence':4,'x':0,'z':0,'yaw':0,'snapshot':True})[0]==401)
+code,legacy=request('input',{'sequence':4,'x':0,'z':0,'yaw':0},a['token'])
+check(code==200 and legacy=={'ok':True})
+code,newer=request('state',token=a['token'])
+check(newer['_sync']['sequence']>synced['_sync']['sequence'])
+
 check(command(a,'save')[0]==200)
 snapshot=request('state',token=b['token'])[1]
 check(any(p['id']==a['player']['id'] for p in snapshot['players']))

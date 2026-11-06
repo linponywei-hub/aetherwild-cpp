@@ -143,6 +143,8 @@ int main(int argc,char**argv) {
         std::cout<<"Aetherwild C++ workstation ready\n  Local: http://localhost:"<<port<<"/\n"<<std::flush;
         auto last=std::chrono::steady_clock::now();
         double pending=0;
+        const auto syncEpoch=std::to_string(std::chrono::system_clock::now().time_since_epoch().count());
+        std::uint64_t syncSequence=0;
         while(!stopRequested) {
             auto now=std::chrono::steady_clock::now();
             pending+=std::min(.25,std::chrono::duration<double>(now-last).count());
@@ -194,11 +196,13 @@ int main(int argc,char**argv) {
                                         "ok",true
                                     }
                                 };
+                                if(body.flag("snapshot"))result=runtime.snapshot(token);
                             }
                             else if(request.path=="/api/command")result=runtime.command(token,body);
                             else throw RuleError("不存在的API");
                         }
                     }
+                    if(result.contains("player"))result["_sync"]=Json{{"epoch",syncEpoch},{"sequence",++syncSequence}};
                     response(client,200,"application/json; charset=utf-8",result.dump());
                 }
                 else {
