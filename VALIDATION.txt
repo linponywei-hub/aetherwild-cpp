@@ -1,4 +1,4 @@
-界域紀元 C++ 工作站 0.2.0 — 實測紀錄
+界域紀元 C++ 工作站 0.2.1 — 實測紀錄
 日期：2026-11-07（台灣）
 環境：Linux GCC14.2.0、Python3.12.14、受管理工作站瀏覽器。
 
@@ -103,3 +103,6 @@ HTTP RESTART OK: durable world and session restored
 既有202項檢查仍通過，JavaScript語法檢查通過。
 Render YAML本機語法／指定Free單一服務檢查通過；完整Render schema透過目前執行環境抓取逾時，未取得CLI平台驗證。
 沒有Docker環境，容器建置須由Render建置階段驗證。沒有宣稱雲端服務已上線。
+
+0.2.1 Cloud access on ASan/UBSan:
+CLOUD ACCESS OK: 12 checks; first visitor cannot take ownership; secrets not saved; graceful shutdown

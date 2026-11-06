@@ -1,12 +1,13 @@
-界域紀元 C++ 工作站測試版 0.2.0
+界域紀元 C++ 工作站測試版 0.2.1／AI交接包
 
-已加入可操作第一人稱畫面；遊戲規則與HTTP服務由原生C++執行。
-Windows：先具備C++ Build Tools與CMake，再雙擊OPEN_WORKSTATION_WINDOWS.cmd。
-已開啟的工作站可直接選擇角色後測試，不用先在你電腦安裝工具。
+先讀 AI_HANDOFF.md，再讀 README.md、VALIDATION.txt 與 DEPLOY_RENDER.md。
+共同編輯：https://github.com/linponywei-hub/aetherwild-cpp
+其他 AI 從最新 main 建立自己的分支，提交後以 Pull Request 共同檢查與合併。
 
-WASD 移動；Shift 奔跑；Space 跳躍；E 互動；左鍵 普攻；Q 武器技；R 藥水；B 終端。
-第一個建立的角色是測試Owner。終端→管理有快速驗收用補給、城鎮與副本入口瞬移。
+C++20 遊戲規則與原生 HTTP 已完成可操作測試版，瀏覽器負責畫面與輸入。
+Windows：需要 C++ Build Tools 與 CMake，執行 OPEN_WORKSTATION_WINDOWS.cmd。
+Linux：python3 tools/build.py，再 python3 tools/run_workstation.py。
 
-先讀README.md、docs/06_工作站測試.md。尚未完成的功能詳見docs/04_移植狀態.md。
-這不是已完成正式Google登入與大規模網路部署的完整MMO。
-原版完整封存在reference，不參與新的執行架構。
+目前沒有公開遊戲網址；Render 配置已準備，容器與雲端部署仍待驗證。
+這不是正式完整 MMO。沒有預編譯 Windows／Mac 安裝包。
+原始0.30.1封存在 reference，不參與新架構。測試帳號／session／密碼未收錄。
