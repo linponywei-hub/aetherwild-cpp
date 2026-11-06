@@ -1,0 +1,11 @@
+build*/
+*.awc
+*.awc.bak
+*.awc.tmp
+__pycache__/
+runtime-data/
+.env
+.env.*
+!.env.example
+reference/*.zip
+*.log

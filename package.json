@@ -1,0 +1,1 @@
+{"name":"aetherwild-native-workstation","version":"0.2.1","private":true,"type":"module","scripts":{"dev":"python3 tools/run_workstation.py"}}

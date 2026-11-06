@@ -1,0 +1,25 @@
+# syntax=docker/dockerfile:1
+FROM gcc:14-bookworm AS builder
+WORKDIR /src
+RUN apt-get update && apt-get install -y --no-install-recommends python3 && rm -rf /var/lib/apt/lists/*
+COPY include/ include/
+COPY src/ src/
+COPY apps/ apps/
+COPY tests/ tests/
+COPY tools/build.py tools/build.py
+ENV AW_BUILD_JOBS=1
+RUN python3 tools/build.py
+RUN python3 tests/http_runner.py && python3 tests/cloud_access.py
+RUN mkdir -p /runtime-libs && cp -L "$(g++ -print-file-name=libstdc++.so.6)" /runtime-libs/ && cp -L "$(gcc -print-file-name=libgcc_s.so.1)" /runtime-libs/
+
+FROM debian:bookworm-slim AS runtime
+WORKDIR /app
+COPY --from=builder /runtime-libs/ /opt/aetherwild/lib/
+COPY --from=builder /src/build/aetherwild_workstation /app/aetherwild_workstation
+COPY web/ /app/web/
+COPY assets/reference/ /app/assets/reference/
+RUN mkdir -p /app/runtime-data && chown -R 10001:10001 /app/runtime-data
+ENV LD_LIBRARY_PATH=/opt/aetherwild/lib AETHERWILD_PUBLIC=1 AETHERWILD_DATA_DIR=/app/runtime-data
+USER 10001:10001
+EXPOSE 10000
+CMD ["/app/aetherwild_workstation", "--root", "/app"]
