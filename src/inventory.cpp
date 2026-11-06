@@ -68,6 +68,13 @@ namespace aw {
         p.equipped[d.slot]=id;
         ProgressionSystem::refresh(p,c);
     }
+    void InventorySystem::unequip(Player& p,const Id& id,const Catalog& c) {
+        require(p.vitals.alive(),"死亡角色無法卸下裝備");
+        auto slot=std::find_if(p.equipped.begin(),p.equipped.end(),[&](const auto& e){return e.second==id;});
+        require(slot!=p.equipped.end(),"此裝備未穿戴");
+        p.equipped.erase(slot);
+        ProgressionSystem::refresh(p,c);
+    }
     void InventorySystem::usePotion(Player& p,const Id& id,const Catalog&) {
         require(p.vitals.alive(),"死亡角色無法喝藥");
         require(id=="potion"||id=="energy_potion","未知藥水");
@@ -76,6 +83,19 @@ namespace aw {
         });
         if(id=="potion")p.vitals.restore(70,0);
         else p.vitals.restore(0,60);
+    }
+    void InventorySystem::storeItem(Player& p,const Id& id,const Id& npc,const Catalog& c,bool withdraw) {
+        nearbyNpc(p,npc,"merchant",c);
+        require(p.vitals.alive(),"死亡角色無法存取裝備");
+        auto& source=withdraw?p.warehouseItems:p.inventory;
+        auto& target=withdraw?p.inventory:p.warehouseItems;
+        auto item=std::find_if(source.begin(),source.end(),[&](const auto& v){return v.id==id;});
+        require(item!=source.end(),withdraw?"倉庫內沒有此裝備":"背包內沒有此裝備");
+        require(std::none_of(p.equipped.begin(),p.equipped.end(),[&](const auto& e){return e.second==id;}),"穿戴中的裝備無法存入，請先換裝");
+        require(std::none_of(target.begin(),target.end(),[&](const auto& v){return v.id==id;}),"裝備實例重複");
+        // Copy first: a failed allocation leaves the original instance untouched.
+        target.push_back(*item);
+        source.erase(item);
     }
     void InventorySystem::store(Player& p,const Id& id,Quantity n,const Id& npc,const Catalog& c,bool withdraw) {
         nearbyNpc(p,npc,"merchant",c);

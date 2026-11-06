@@ -31,6 +31,19 @@ check(command(b,'admin_supply')[0]==400)
 party=command(a,'party_create')[1]['party']['id']
 check(command(a,'party_invite',target=b['player']['id'])[0]==200)
 check(command(b,'party_join',target=party)[1]['party']['id']==party)
+# Equipment warehouse uses unique instances, not catalog item codes.
+item=a['player']['inventory'][0]['id']
+check(command(a,'store_item',target=item)[0]==400)
+check(command(a,'unequip',target=item)[0]==200)
+rid=uuid.uuid4().hex
+body={'request':rid,'type':'store_item','target':item}
+code,stored=request('command',body,a['token'])
+check(code==200 and stored['player']['warehouseItems'][0]['id']==item)
+check(request('command',body,a['token'])[1]['player']['warehouseItems']==stored['player']['warehouseItems'])
+check(command(a,'equip',target=item)[0]==400)
+check(command(b,'withdraw_item',target=item)[0]==400)
+check(command(a,'withdraw_item',target=item)[1]['player']['warehouseItems']==[])
+check(command(a,'store_item',target=item)[0]==200)
 start=request('state',token=a['token'])[1]['player']['position']
 check(request('input',{'sequence':1,'x':1,'z':1,'yaw':0},a['token'])[0]==200)
 time.sleep(.25)

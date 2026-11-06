@@ -911,11 +911,13 @@ namespace aw {
             CraftingSystem::craft(world_,p,target,npc.empty()&&catalog_.recipes.at(target).station=="smith"?nearService("smith"):npc,catalog_);
         }
         else if(type=="equip")InventorySystem::equip(p,target,catalog_);
+        else if(type=="unequip")InventorySystem::unequip(p,target,catalog_);
         else if(type=="potion")InventorySystem::usePotion(p,target.empty()?"potion":target,catalog_);
         else if(type=="accept")QuestSystem::accept(p,target,npc.empty()?catalog_.quests.at(target).npc:npc,catalog_);
         else if(type=="quest")QuestSystem::claim(p,target,npc.empty()?catalog_.quests.at(target).npc:npc,catalog_);
         else if(type=="job")ProgressionSystem::changeClass(p,target,npc.empty()?nearService("guild"):npc,catalog_);
         else if(type=="buy")EconomySystem::buy(world_,p,target,j.contains("count")?j.at("count").integer():1,npc.empty()?nearService("merchant"):npc,catalog_);
+        else if(type=="store_item"||type=="withdraw_item")InventorySystem::storeItem(p,target,npc.empty()?nearService("merchant"):npc,catalog_,type=="withdraw_item");
         else if(type=="store"||type=="withdraw")InventorySystem::store(p,target,j.contains("count")?j.at("count").integer():1,npc.empty()?nearService("merchant"):npc,catalog_,type=="withdraw");
         else if(type=="heal") {
             nearService("healer");

@@ -195,6 +195,7 @@ namespace aw {
         Materials materials, warehouse;
         std::map<Id,int> tools;
         std::vector<ItemInstance> inventory;
+        std::vector<ItemInstance> warehouseItems; // Owned instances, unavailable for equipment until withdrawn.
         std::map<Slot,Id> equipped;
         std::set<Id> jobs {
             "warrior"

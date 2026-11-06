@@ -1,4 +1,4 @@
-界域紀元 C++ 工作站測試版 0.2.1／AI交接包
+界域紀元 C++ 工作站測試版 0.2.2／AI交接包
 
 先讀 AI_HANDOFF.md，再讀 README.md、VALIDATION.txt 與 DEPLOY_RENDER.md。
 共同編輯：https://github.com/linponywei-hub/aetherwild-cpp

@@ -11,7 +11,7 @@ namespace aw {
             for(auto*m: {&p.materials,&p.warehouse})for(auto&[id,n]:*m)require(!id.empty()&&n>=0&&(c.resources.contains(id)||c.arrowBonus.contains(id)||id=="potion"||id=="energy_potion"),"存檔材料錯誤");
             for(auto&[id,n]:p.tools)require((id=="axe"||id=="pick"||id=="sickle")&&n>=1&&n<=5,"存檔工具錯誤");
             std::set<Id>ids;
-            for(auto&i:p.inventory)require(!i.id.empty()&&ids.insert(i.id).second&&c.items.contains(i.definition)&&i.requiredLevel>=1&&i.requiredLevel<=100&&i.upgrade>=0&&i.upgrade<=20&&static_cast<int>(i.rarity)>=0&&static_cast<int>(i.rarity)<=6,"存檔裝備錯誤");
+            for(auto* items:{&p.inventory,&p.warehouseItems})for(auto&i:*items)require(!i.id.empty()&&ids.insert(i.id).second&&c.items.contains(i.definition)&&i.requiredLevel>=1&&i.requiredLevel<=100&&i.upgrade>=0&&i.upgrade<=20&&static_cast<int>(i.rarity)>=0&&static_cast<int>(i.rarity)<=6,"存檔裝備錯誤");
             for(auto&[slot,id]:p.equipped) {
                 auto it=std::find_if(p.inventory.begin(),p.inventory.end(),[&](auto&i) {
                     return i.id==id;
@@ -66,7 +66,7 @@ namespace aw {
         tmp+=".tmp";
         std::ofstream o(tmp,std::ios::binary|std::ios::trunc);
         require(bool(o),"無法開啟存檔");
-        o<<std::setprecision(17)<<"AWCHAR 1\n"<<std::quoted(p.id)<<' '<<std::quoted(p.accountId)<<' '<<std::quoted(p.name)<<' '<<std::quoted(p.profession)<<'\n'<<p.level<<' '<<p.xp<<' '<<p.coins<<' '<<p.bankCoins<<' '<<p.gatherXp<<'\n'<<p.vitals.hp<<' '<<p.vitals.mp<<' '<<p.vitals.stamina<<' '<<p.sprintLocked<<'\n'<<p.position.x<<' '<<p.position.y<<' '<<p.position.z<<' '<<std::quoted(p.lastCity)<<'\n';
+        o<<std::setprecision(17)<<"AWCHAR 2\n"<<std::quoted(p.id)<<' '<<std::quoted(p.accountId)<<' '<<std::quoted(p.name)<<' '<<std::quoted(p.profession)<<'\n'<<p.level<<' '<<p.xp<<' '<<p.coins<<' '<<p.bankCoins<<' '<<p.gatherXp<<'\n'<<p.vitals.hp<<' '<<p.vitals.mp<<' '<<p.vitals.stamina<<' '<<p.sprintLocked<<'\n'<<p.position.x<<' '<<p.position.y<<' '<<p.position.z<<' '<<std::quoted(p.lastCity)<<'\n';
         writeMap(o,p.materials);
         writeMap(o,p.warehouse);
         Materials tools;
@@ -79,6 +79,8 @@ namespace aw {
         for(auto*s: {&p.jobs,&p.secrets,&p.learnedSkills,&p.unlockedMaps,&p.processedRewards})writeSet(o,*s);
         o<<p.quests.size()<<'\n';
         for(auto&[id,q]:p.quests)o<<std::quoted(id)<<' '<<q.count<<' '<<q.claimed<<'\n';
+        o<<p.warehouseItems.size()<<'\n';
+        for(auto&i:p.warehouseItems)o<<std::quoted(i.id)<<' '<<std::quoted(i.definition)<<' '<<static_cast<int>(i.rarity)<<' '<<i.requiredLevel<<' '<<i.upgrade<<'\n';
         o<<"END\n";
         o.flush();
         require(bool(o),"存檔寫入失敗");
@@ -104,7 +106,7 @@ namespace aw {
         std::string magic;
         int version=0;
         i>>magic>>version;
-        require(magic=="AWCHAR"&&version==1,"存檔格式或版本不符");
+        require(magic=="AWCHAR"&&(version==1||version==2),"存檔格式或版本不符");
         Player p;
         p.jobs.clear();
         i>>std::quoted(p.id)>>std::quoted(p.accountId)>>std::quoted(p.name)>>std::quoted(p.profession)>>p.level>>p.xp>>p.coins>>p.bankCoins>>p.gatherXp>>p.vitals.hp>>p.vitals.mp>>p.vitals.stamina>>p.sprintLocked>>p.position.x>>p.position.y>>p.position.z>>std::quoted(p.lastCity);
@@ -138,6 +140,16 @@ namespace aw {
             QuestProgress q;
             i>>std::quoted(id)>>q.count>>q.claimed;
             require(p.quests.emplace(id,q).second,"重複任務");
+        }
+        if(version>=2) {
+            n=count(i);
+            for(std::size_t j=0;j<n;j++) {
+                ItemInstance v;
+                int rarity=0;
+                i>>std::quoted(v.id)>>std::quoted(v.definition)>>rarity>>v.requiredLevel>>v.upgrade;
+                v.rarity=static_cast<Rarity>(rarity);
+                p.warehouseItems.push_back(v);
+            }
         }
         std::string end;
         i>>end;
