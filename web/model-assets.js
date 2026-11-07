@@ -45,7 +45,8 @@ export class ModelAssets {
     return this.cache.get(cacheKey);
   }
   async instantiate(id) {
-    const { root, asset, animations } = await this.template(id);
+    const { root, animations } = await this.template(id);
+    const asset = validateModelAsset(this.registry[id]);
     // Cloning skinned meshes needs SkeletonUtils; defer that to the rigging stage.
     let skinned = false;
     root.traverse(node => { if (node.isSkinnedMesh) skinned = true; });
