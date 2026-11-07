@@ -56,6 +56,9 @@ export class RealmScene {
  animate(){requestAnimationFrame(()=>this.animate());if(this.renderer.software&&performance.now()-(this.lastRender||0)<33)return;this.lastRender=performance.now();let dt=Math.min(.1,this.clock.getDelta());this.time+=dt;for(const npc of this.npcObjects.values()){if(npc.userData.eileenTest){
         const player=this.state?.player;
         const near=player?.scene==='world'&&Math.hypot(player.position.x-npc.position.x,player.position.z-npc.position.z)<5;
+         const model=npc.userData.modelInstance;
+         const walking=!near&&!!model&&!!npc.userData.modelClips?.some(c=>/walk|run|行走/i.test(c.name));
+         if(model){const phase=this.time*.48;const tx=walking?Math.sin(phase)*1.1:0;const tz=walking?Math.cos(phase)*.65-.65:0;const blend=Math.min(1,dt*2.5);model.position.x+=(tx-model.position.x)*blend;model.position.z+=(tz-model.position.z)*blend;}
         if(near){
           const desired=Math.atan2(player.position.x-npc.position.x,player.position.z-npc.position.z);
           let delta=Math.atan2(Math.sin(desired-npc.rotation.y),Math.cos(desired-npc.rotation.y));
@@ -66,7 +69,7 @@ export class RealmScene {
         }
         const mixer=npc.userData.modelMixer,clips=npc.userData.modelClips||[];
         if(mixer){
-          const selected=near?clips.find(c=>/talk|speak|greet|交談/i.test(c.name)):null;
+          const selected=near?clips.find(c=>/talk|speak|greet|交談/i.test(c.name)):(walking?clips.find(c=>/walk|run|行走/i.test(c.name)):null);
           const next=selected||clips.find(c=>/idle|breathe|待機/i.test(c.name))||clips[0];
           if(next&&npc.userData.activeClip!==next){
             const previous=npc.userData.activeClip;
