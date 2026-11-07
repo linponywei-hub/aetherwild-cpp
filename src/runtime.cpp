@@ -53,7 +53,7 @@ namespace aw {
             return weaponName(k);
         }
     }
-    GameRuntime::GameRuntime(std::filesystem::path path):catalog_(makeCatalog()),buildings_(buildings(catalog_)),savePath_(std::move(path)) {
+    GameRuntime::GameRuntime(std::filesystem::path path,bool legacyTestWorld):catalog_(makeCatalog()),buildings_(buildings(catalog_)),savePath_(std::move(path)) {
         configureContent(false);
         const char* publicMode=std::getenv("AETHERWILD_PUBLIC");
         if(publicMode&&std::string(publicMode)=="1") {
@@ -98,6 +98,7 @@ namespace aw {
             restore(Json::parse(text));
         }
         else populate();
+        if(!legacyTestWorld)applyWorldPatch();
     }
     Id GameRuntime::token() {
         Id v;
@@ -435,9 +436,12 @@ namespace aw {
         j["contentIndex"]=Json::object();
         for(auto section:{"classes","monsters","equipment","skills","regions","releases","cityLore","storyRealms"})j["contentIndex"][section]=contentBundle().at(section);
         if(catalog_.worldLimit>1800){
-            Json heights=Json::array();for(int z=0;z<=64;z++)for(int x=0;x<=64;x++)heights.push(worldLandHeight({-32000+x*1000.0,0,-32000+z*1000.0},catalog_));
-            j["terrain"]=Json{{"side",65},{"step",1000},{"x",-32000},{"z",-32000},{"heights",heights}};
+            Json heights=Json::array();for(int z=0;z<=128;z++)for(int x=0;x<=128;x++)heights.push(worldLandHeight({-catalog_.worldLimit+x*catalog_.worldLimit/64,0,-catalog_.worldLimit+z*catalog_.worldLimit/64},catalog_));
+            j["terrain"]=Json{{"side",129},{"step",catalog_.worldLimit/64},{"x",-catalog_.worldLimit},{"z",-catalog_.worldLimit},{"heights",heights}};
         }
+        j["landscape"]=atlasSurface();
+        j["atlas"]=contentBundle().at("atlas_layout");
+        j["worldLimit"]=catalog_.worldLimit;
         j["worldVersion"]=contentState_.flag("expanded")?2:1;
         j["release"]=contentState_.num("release",1);
         j["prices"]=costJson(catalog_.prices);

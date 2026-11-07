@@ -69,12 +69,12 @@ void installContent(Catalog& c){
  c.validate();
 }
 void expandContentWorld(Catalog& c){
- const auto& b=contentBundle();const auto old=c.regions;c.worldLimit=32000;c.contentRelease=1;
+ const auto& b=contentBundle();const auto old=c.regions;c.worldLimit=48000;c.contentRelease=1;
  for(auto&[id,v]:b.at("regions").objectItems()){
   // The underground city is a separate instance, never a second overworld at 0,0.
   c.regionReleases[id]=static_cast<int>(v.num("release",1));
   auto p=v.at("center");bool under=v.str("layer")=="underground";
-  auto center=Vec3{p.num("x"),id=="frosthold"?260.0:0,p.num("z")};
+  auto center=Vec3{p.num("x"),id=="frosthold"?850.0:(id=="cinder"?80.0:(id=="tidehaven"||id=="aw_westport"||id=="aw_southmill"?4.0:0)),p.num("z")};
   if(under)center={800,-200,800}; // metadata anchor only; unavailable overworld service.
   c.regions[id]={id,v.str("name"),center,v.num("radius_m"),static_cast<int>(v.at("level_band").arrayItems()[0].integer()),v.str("kind")=="city",v.str("kind")=="wild"||under};
  }
@@ -94,19 +94,15 @@ void expandContentWorld(Catalog& c){
   auto r=c.regions.at(v.str("region"));auto pos=r.center;pos.x+=r.radius+100;int level=std::min(95,r.level+4);
   c.bosses.emplace(id,BossDefinition{id,r.id,v.str("name"),pos,level,18000+level*1800.0,65+level*5.0});
  }
+ for(auto&[id,d]:c.dungeons)d.entrancePosition.y=worldLandHeight(d.entrancePosition,c);
  for(auto&[id,boss]:c.bosses){auto&r=c.regions.at(boss.region);if(!r.wilderness){double dx=boss.position.x-r.center.x,dz=boss.position.z-r.center.z,len=std::max(1.0,std::hypot(dx,dz));boss.position.x=r.center.x+dx/len*(r.radius+100);boss.position.z=r.center.z+dz/len*(r.radius+100);}boss.position.y=worldLandHeight(boss.position,c);}
  for(auto&[id,n]:c.npcs){auto r=c.regions.at(n.region);n.position=r.center;}
  installContent(c);
 }
 double worldLandHeight(Vec3 p,const Catalog& c){
  if(c.worldLimit<=1800)return 0;
- auto hill=[&](double x,double z,double width,double height){double dx=(p.x-x)/width,dz=(p.z-z)/width;return height*std::exp(-(dx*dx+dz*dz));};
- double y=5*std::sin(p.x/1300)*std::cos(p.z/1700)+2*std::sin((p.x+p.z)/600);
- y+=hill(-15500,-20500,5200,460)+hill(-6500,-27000,4400,180)+hill(-17000,-10500,4200,130);
- y+=hill(9500,8500,2200,65)+hill(23500,-25000,3500,65);
- // Preserve low-relief dark forest; major routes are blended into gentle ground.
- double dark=std::clamp((5000-std::hypot(p.x+25000,p.z+2000))/2000.0,0.0,1.0);y*=1-dark;
- for(auto&[id,r]:c.regions){if(r.wilderness)continue;double d=std::hypot(p.x-r.center.x,p.z-r.center.z);double t=std::clamp((d-r.radius-30)/1000,0.0,1.0);t=t*t*(3-2*t);y=r.center.y*(1-t)+y*t;}
+ double y=atlasHeight(p);
+ for(auto&[id,r]:c.regions){if(r.wilderness||id=="tidehaven"||id=="aw_westport"||id=="aw_southmill")continue;double d=std::hypot(p.x-r.center.x,p.z-r.center.z);double t=std::clamp((d-r.radius-30)/1000,0.0,1.0);t=t*t*(3-2*t);y=r.center.y*(1-t)+y*t;}
  return y;
 }
 bool contentRegionOpen(const Catalog& c,const Id& id){return !c.regionReleases.contains(id)||c.regionReleases.at(id)<=c.contentRelease;}

@@ -2,6 +2,10 @@
 #include "json.hpp"
 namespace aw {
 const Json& contentBundle();
+const Json& atlasSurface();
+bool atlasWater(Vec3);
+double atlasHeight(Vec3);
+double harborGround(Vec3,const Catalog&);
 const Json* contentEntry(const std::string& section,const Id& id);
 void installContent(Catalog&);
 void expandContentWorld(Catalog&);

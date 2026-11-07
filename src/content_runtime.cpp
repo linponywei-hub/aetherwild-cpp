@@ -12,6 +12,7 @@ Json GameRuntime::adminMap(const Id& key)const{
  auto role=social_.accounts.at(p.accountId).role;
  require(role==Role::Owner||role==Role::Admin,"需要管理員權限");
  Json j{{"ok",true},{"expanded",contentState_.flag("expanded")},{"release",contentState_.num("release",1)},{"planned",Json::array()},{"current",Json::array()},{"roads",Json::array()}};
+ j["atlas"]=contentBundle().at("atlas_layout");
  for(const auto&[id,r]:contentBundle().at("regions").objectItems()){
   j["planned"].push(Json{{"id",id},{"name",r.str("name")},{"center",r.at("center")},{"radius",r.num("radius_m",850)},{"layer",r.str("layer")},{"release",r.num("release",1)},{"open",contentState_.flag("expanded")&&r.num("release",1)<=contentState_.num("release",1)}});
  }
@@ -23,6 +24,25 @@ Json GameRuntime::adminMap(const Id& key)const{
  for(const auto&[id,r]:contentBundle().at("roads").objectItems())j["roads"].push(Json{{"a",r.str("a")},{"b",r.str("b")}});
  return j;
 }
+void GameRuntime::applyWorldPatch(){
+ const bool expanded=contentState_.flag("expanded");
+ const bool remap=expanded&&contentState_.num("layoutVersion")<2;
+ const bool terrainChanged=contentState_.num("terrainVersion")<1;
+ contentState_["release"]=5;
+ if(!expanded)startExpandedWorld();
+ else if(remap){
+  const auto& previous=contentBundle().at("atlas_layout").at("previousRegions");
+  auto shift=[&](Vec3 p,const Id& id){if(!previous.contains(id)||!catalog_.regions.contains(id))return p;const auto& old=previous.at(id).at("center");const auto& next=catalog_.regions.at(id).center;p.x+=next.x-old.num("x");p.z+=next.z-old.num("z");p.y=std::max(p.y,next.y);p.y=groundBelow(p,catalog_);return p;};
+  auto nearest=[&](Vec3 p){Id result="windchime";double best=1e30;for(const auto&[id,r]:previous.objectItems()){if(id=="aw_underlost")continue;const auto& c=r.at("center");double d=std::hypot(p.x-c.num("x"),p.z-c.num("z"));if(d<best){best=d;result=id;}}return result;};
+  for(auto&[id,p]:world_.players)if(p.scene=="world")p.position=shift(p.position,nearest(p.position));
+  for(auto&[id,m]:world_.monsters)if(m.scene=="world"){m.position=shift(m.position,m.region);homes_[id]=m.position;}
+  for(auto&[id,r]:world_.resources)r.position=shift(r.position,nearest(r.position));
+ }
+ contentState_["layoutVersion"]=2;contentState_["terrainVersion"]=1;contentState_["expanded"]=true;catalog_.contentRelease=5;
+ for(const auto&[rid,r]:catalog_.regions)if(rid!="aw_underlost"){int index=0;for(const auto&[code,definition]:catalog_.resources){const auto id="resource_"+rid+"_"+code;if(world_.resources.contains(id))continue;double a=++index*2.399963;Vec3 pos{r.center.x+std::cos(a)*(r.radius+30),0,r.center.z+std::sin(a)*(r.radius+30)};pos.y=worldLandHeight(pos,catalog_);ResourceNode node;node.id=id;node.definition=code;node.position=pos;world_.resources.emplace(id,node);}}
+
+ if(!expanded||remap||terrainChanged){contentState_["npcPoses"]=Json::object();contentState_["npcHomes"]=Json::object();configureContent(true);for(auto&[id,p]:world_.players)if(p.scene=="world"){auto&m=motion_[id];m.velocityY=0;m.lift.clear();m.grounded=true;p.position.y=std::max(p.position.y,catalog_.regions.at(p.lastCity).center.y);p.position.y=groundBelow(p.position,catalog_);m.peak=p.position.y;}}
+}
 void GameRuntime::configureContent(bool expanded){
  if(!contentState_.contains("expanded"))contentState_=initialContent();
  catalog_=makeCatalog();installContent(catalog_);if(expanded){expandContentWorld(catalog_);catalog_.contentRelease=static_cast<int>(contentState_.num("release",1));}buildings_=buildings(catalog_);
@@ -30,7 +50,7 @@ void GameRuntime::configureContent(bool expanded){
   const auto& r=catalog_.regions.at(n.region);auto p=cityArrival(r);
   if(n.role=="guild")p.z-=5;else if(n.role=="merchant")p.x+=5;else if(n.role=="smith")p.x-=5;else if(n.role=="healer")p.z+=5;else if(n.role=="cartographer"){p.x+=5;p.z+=5;}
   else{double angle=i++*2.399963;p.x+=std::cos(angle)*37;p.z+=std::sin(angle)*37;}
-  n.position=p;
+  p.y=groundBelow(p,catalog_);n.position=p;
   if(contentState_.contains("npcPoses")&&contentState_.at("npcPoses").contains(id)){auto saved=unvec(contentState_.at("npcPoses").at(id));if(distance(saved,p)<=100)n.position=saved;}
  }
 }
@@ -40,7 +60,8 @@ void GameRuntime::checkContentRegion(const Id& region)const{
 }
 bool contentPositionAllowed(const Catalog& catalog,Vec3 p){
  if(catalog.worldLimit<=1800)return true;
- if(!finite(p)||std::abs(p.x)>32000||std::abs(p.z)>32000)return false;
+ if(!finite(p)||std::abs(p.x)>catalog.worldLimit||std::abs(p.z)>catalog.worldLimit)return false;
+ if(catalog.contentRelease>=5)return true;
  int release=catalog.contentRelease;const auto& regions=contentBundle().at("regions");
  double nearest=1e30;bool allowed=false;
  for(auto&[id,v]:regions.objectItems()){
@@ -64,11 +85,13 @@ bool contentPositionAllowed(const Catalog& catalog,Vec3 p){
 }
 bool GameRuntime::contentAllowed(Vec3 p)const{return contentPositionAllowed(catalog_,p);}
 void GameRuntime::startExpandedWorld(){
- require(!contentState_.flag("expanded"),"擴建世界已啟用");require(world_.runs.empty(),"請先讓所有隊伍離開副本，再切換世界版本");
+ require(!contentState_.flag("expanded"),"擴建世界已啟用");
+ contentState_["layoutVersion"]=2;
  auto old=catalog_;contentState_["npcPoses"]=Json::object();configureContent(true);contentState_["expanded"]=true;contentState_["npcHomes"]=Json::object();
  for(auto&[id,p]:world_.players){
+  if(p.scene!="world")continue;
   auto region=old.regions.contains(p.lastCity)?p.lastCity:Id("windchime");auto a=old.regions.at(region).center,b=catalog_.regions.at(region).center;
-  p.position.x+=b.x-a.x;p.position.z+=b.z-a.z;
+  p.position.x+=b.x-a.x;p.position.z+=b.z-a.z;p.position.y+=b.y-a.y;
   if(!contentAllowed(p.position)){p.position=cityArrival(catalog_.regions.at("windchime"));p.lastCity="windchime";}
   auto& motion=motion_[id];motion.velocityY=0;motion.lift.clear();motion.peak=p.position.y;motion.grounded=true;
  }
@@ -194,12 +217,12 @@ Json GameRuntime::contentSnapshot(const Player& p)const{
   if(p.scene=="world"&&distance(p.position,pos)<180){auto v=b;v["position"]=vec(pos);v["read"]=contentState_.at("booksRead").contains(p.id)&&contentState_.at("booksRead").at(p.id).flag(id);out["books"].push(v);}
  }
  if(contentState_.flag("expanded")&&p.scene=="world"){
-  auto x=std::floor(p.position.x/128)*128-1536,z=std::floor(p.position.z/128)*128-1536;Json heights=Json::array();
-  for(int row=0;row<49;row++)for(int col=0;col<49;col++)heights.push(worldLandHeight({x+col*64,0,z+row*64},catalog_));
-  out["terrainPatch"]=Json{{"side",49},{"step",64},{"x",x},{"z",z},{"heights",heights}};
+  auto cell=std::pair{static_cast<int>(std::floor(p.position.x/512)),static_cast<int>(std::floor(p.position.z/512))};
+  if(!terrainCache_.contains(cell)){if(terrainCache_.size()>=64)terrainCache_.clear();double x=cell.first*512.0-256,z=cell.second*512.0-256;Json heights=Json::array();for(int row=0;row<33;row++)for(int col=0;col<33;col++)heights.push(worldLandHeight({x+col*32,0,z+row*32},catalog_));terrainCache_[cell]=Json{{"side",33},{"step",32},{"x",x},{"z",z},{"heights",heights}};}
+  out["terrainPatch"]=terrainCache_.at(cell);
  }
  // Collision-consistent visible boundary anchors, only near a closed edge.
- if(contentState_.flag("expanded")&&p.scene=="world")for(int i=0;i<32;i++){
+ if(catalog_.contentRelease<5&&contentState_.flag("expanded")&&p.scene=="world")for(int i=0;i<32;i++){
   double angle=i*6.283185307/32;Vec3 q=p.position;double low=0,high=0;
   for(double step=50;step<=1200;step+=50){q.x=p.position.x+std::cos(angle)*step;q.z=p.position.z+std::sin(angle)*step;if(!contentAllowed(q)){high=step;low=step-50;break;}}
   if(!high)continue;

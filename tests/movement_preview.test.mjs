@@ -50,7 +50,15 @@ test('old server without movement hints uses authoritative rendering',()=>{
  const p=new MovementPreview(catalog);p.reconcile({...snapshot(),_motion:undefined},0);assert.equal(p.advance(.02,.02,right),null);
 });
 
-test('expanded world uses authoritative terrain instead of legacy flat prediction',()=>{
- const p=new MovementPreview(catalog);p.reconcile(snapshot(8000,{content:{expanded:true}}),0,.3);
- assert.equal(p.advance(1/60,1/60,right),null);
+test('expanded world predicts walking and jumping beyond old 1790m bounds on server terrain',()=>{
+ const p=new MovementPreview({...catalog,worldLimit:48000});const patch={x:7900,z:-100,step:100,side:3,heights:[20,20,20,20,20,20,20,20,20]};
+ const s=snapshot(8000,{player:{...snapshot().player,position:{x:8000,y:20,z:0}},content:{expanded:true,worldLimit:48000,terrainPatch:patch}});p.reconcile(s,0,.6);
+ const first=p.advance(1/60,1/60,right);assert.ok(first.x>8000);assert.equal(first.y,20);
+ p.pressJump(.02);p.jumpSent(10);const jump=p.advance(1/60,2/60,right);assert.ok(jump.y>20.1,'jump responds locally before 600ms server reply');assert.equal(s.player.position.x,8000);
+});
+
+test('600ms delayed acknowledged input replays both network legs without steady walking drag',()=>{
+ const p=new MovementPreview(catalog);p.reconcile(snapshot(),0,.6);let value;
+ for(let i=1;i<=180;i++){const now=i/60;p.noteInput(i,now);if(i>36&&i%6===0)p.reconcile(snapshot(5*(now-.6),{_motion:{...motion,sequence:i-36}}),now,.6);value=p.advance(1/60,now,right);}
+ assert.ok(value.x>14.5,'three seconds of walking must stay close to local 15m path despite 600ms ACKs');
 });

@@ -92,7 +92,7 @@ int main() {
             CHECK(std::abs(groundBelow(pos,c)-16)<.001);
         });
         test("verified actor ownership and permissions",[] {
-            GameRuntime g;
+            GameRuntime g({},true);
             auto p=create(g,"owner"),q=create(g,"visitor");
             CHECK(g.snapshot(p.str("token")).str("role")=="owner");
             CHECK(g.snapshot(q.str("token")).str("role")=="player");
@@ -107,7 +107,7 @@ int main() {
             });
         });
         test("idempotent commands and rollback",[] {
-            GameRuntime g;
+            GameRuntime g({},true);
             auto p=create(g);
             auto first=cmd(g,p,"buy","potion","once");
             auto coins=first.at("player").num("coins");
@@ -126,7 +126,7 @@ int main() {
             std::filesystem::create_directories(folder);
             Id key,id,itemId;
             {
-                GameRuntime g(folder/"world.json");
+                GameRuntime g(folder/"world.json",true);
                 auto session=create(g,"warehouse"),other=create(g,"other");
                 key=session.str("token");
                 id=session.at("player").str("id");
@@ -152,7 +152,7 @@ int main() {
                 g.save();
             }
             {
-                GameRuntime g(folder/"world.json");
+                GameRuntime g(folder/"world.json",true);
                 CHECK(g.world().players.at(id).warehouseItems.front().id==itemId);
                 auto result=g.command(key,Json{{"type","withdraw_item"},{"target",itemId},{"request","retrieve-after-restart"}});
                 CHECK(result.at("player").at("warehouseItems").arrayItems().empty());
@@ -161,7 +161,7 @@ int main() {
             std::filesystem::remove_all(folder);
         });
         test("movement presentation hints do not mutate authoritative state",[] {
-            GameRuntime g;
+            GameRuntime g({},true);
             auto p=create(g);
             auto key=p.str("token");
             auto a=g.snapshot(key);
@@ -177,7 +177,7 @@ int main() {
             CHECK(!g.snapshot(key).at("_motion").flag("jumpPending"));
         });
         test("authoritative normalized movement building collision",[] {
-            GameRuntime g;
+            GameRuntime g({},true);
             auto p=create(g);
             auto key=p.str("token"),id=p.at("player").str("id");
             auto before=g.world().players.at(id).position;
@@ -220,7 +220,7 @@ int main() {
             buildings(g.definitions())));
         });
         test("craft forging location and material atomicity",[] {
-            GameRuntime g;
+            GameRuntime g({},true);
             auto p=create(g);
             cmd(g,p,"admin_supply");
             auto key=p.str("token"),id=p.at("player").str("id");
@@ -239,7 +239,7 @@ int main() {
             auto path=folder/"world.json";
             std::filesystem::remove(path);
             std::filesystem::remove(path.string()+".bak");
-            GameRuntime g(path);
+            GameRuntime g(path,true);
             auto p=create(g,"leader"),q=create(g,"member");
             auto pid=p.at("player").str("id"),qid=q.at("player").str("id");
             cmd(g,p,"admin_supply");
@@ -294,7 +294,7 @@ int main() {
             CHECK(g.world().players.at(qid).learnedSkills.contains("wind"));
             auto gold=g.world().players.at(pid).coins;
             g.save();
-            GameRuntime restarted(path);
+            GameRuntime restarted(path,true);
             CHECK(restarted.world().players.at(pid).coins==gold);
             CHECK(restarted.world().runs.at(run).members.size()==2);
             no([&] {
@@ -304,7 +304,7 @@ int main() {
             std::filesystem::remove_all(folder);
         });
         test("lift call ride destination remains grounded",[] {
-            GameRuntime g;
+            GameRuntime g({},true);
             auto p=create(g);
             auto id=p.at("player").str("id"),key=p.str("token");
             cmd(g,p,"admin_travel","astral");
@@ -326,7 +326,7 @@ int main() {
         test("restart during lift keeps destination and passenger",[] {
             auto folder=std::filesystem::temp_directory_path()/"aw-lift-save-unit";
             std::filesystem::remove_all(folder);
-            GameRuntime g(folder/"world.json");
+            GameRuntime g(folder/"world.json",true);
             auto p=create(g);
             auto id=p.at("player").str("id");
             cmd(g,p,"admin_travel","astral");
@@ -336,7 +336,7 @@ int main() {
             cmd(g,p,"lift");
             time(g,2);
             g.save();
-            GameRuntime restored(folder/"world.json");
+            GameRuntime restored(folder/"world.json",true);
             restored.input(p.str("token"),Json {
                 {
                     "sequence",1
