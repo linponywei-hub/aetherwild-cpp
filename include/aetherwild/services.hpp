@@ -14,6 +14,7 @@ namespace aw {
         static void add(Materials&,const Id&,Quantity);
         static ItemInstance create(World&,const Catalog&,const Id&,Rarity=Rarity::Common,int required=0);
         static Stats bonuses(const Player&,const Catalog&);
+        static Stats itemStats(const ItemInstance&,const Catalog&);
         static void equip(Player&,const Id&,const Catalog&);
         static void unequip(Player&,const Id& instance,const Catalog&);
         static void usePotion(Player&,const Id&,const Catalog&);
@@ -45,6 +46,11 @@ namespace aw {
     class CraftingSystem {
         public: static Id requiredRegion(const Recipe&,const Player&,const Catalog&);
         static void craft(World&,Player&,const Id& recipe,const Id& npc,const Catalog&);
+    };
+    struct EnhancementQuote { Quantity coins; Materials materials; double chance; int nextLevel; };
+    class EnhancementSystem {
+        public: static EnhancementQuote quote(int level);
+        static bool enhance(World&,Player&,const Id& item,const Id& npc,int expectedLevel,const Catalog&,double roll);
     };
     class DungeonSystem {
         public: static Id enter(World&,Player&,const Id& dungeon,const Catalog&);

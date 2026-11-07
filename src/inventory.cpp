@@ -26,11 +26,23 @@ namespace aw {
             w.nextId("item"),code,r,required?required:d.requiredLevel,0
         };
     }
+    Stats InventorySystem::itemStats(const ItemInstance& i,const Catalog& c) {
+        const auto& d=c.items.at(i.definition);
+        auto b=d.stats;
+        constexpr double rarity[]= {1,1.4,1.9,2.25,2.8,3.8,5};
+        double m=rarity[static_cast<int>(i.rarity)]*(1+.16*i.upgrade);
+        b.hp*=m;
+        b.mp*=m;
+        b.defense*=m;
+        b.crit*=m;
+        b.speed*=m;
+        b.attack*=m*(d.slot==Slot::Weapon?1+.08*(i.requiredLevel-1):1);
+        return b;
+    }
     Stats InventorySystem::bonuses(const Player& p,const Catalog& c) {
         Stats s;
         std::map<Id,int> sets;
         std::set<Id> seen;
-        constexpr double rarity[]= {1,1.4,1.9,2.25,2.8,3.8,5};
         for(auto&[slot,id]:p.equipped) {
             auto i=std::find_if(p.inventory.begin(),p.inventory.end(),[&](auto&v) {
                 return v.id==id;
@@ -38,14 +50,7 @@ namespace aw {
             if(i==p.inventory.end()||!seen.insert(id).second)continue;
             auto&d=c.items.at(i->definition);
             if(d.slot!=slot)continue;
-            auto b=d.stats;
-            double m=rarity[static_cast<int>(i->rarity)]*(1+.16*i->upgrade);
-            b.hp*=m;
-            b.mp*=m;
-            b.defense*=m;
-            b.crit*=m;
-            b.speed*=m;
-            b.attack*=m*(d.slot==Slot::Weapon?1+.08*(i->requiredLevel-1):1);
+            auto b=itemStats(*i,c);
             s+=b;
             if(!d.set.empty())sets[d.set]++;
         }

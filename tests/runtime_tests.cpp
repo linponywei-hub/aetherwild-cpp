@@ -389,6 +389,29 @@ int main() {
             GameRuntime g({},true);auto a=create(g,"Appearance A"),b=create(g,"Appearance B");auto aid=a.at("player").str("id"),bid=b.at("player").str("id");auto snap=g.snapshot(a.str("token"));CHECK(snap.at("players").arrayItems().size()==1);auto visible=snap.at("players").arrayItems()[0];CHECK(visible.str("name")=="Appearance B");CHECK(visible.str("weaponType")=="sword");CHECK(visible.at("weapon").contains("code"));CHECK(!visible.contains("inventory")&&!visible.contains("warehouseItems"));
             auto item=g.world().players.at(bid).equipped.at(Slot::Weapon);cmd(g,b,"unequip",item);CHECK(g.snapshot(a.str("token")).at("players").arrayItems()[0].str("weaponType")=="unarmed");g.world().players.at(bid).position.x+=200;CHECK(g.snapshot(a.str("token")).at("players").arrayItems().empty());
         });
+        test("original enhancement rules, failure reset and atomic rejection",[]{
+            auto c=makeCatalog();World w;Player p;p.id="forge";p.profession="warrior";p.vitals.hp=100;p.scene="world";auto npc="windchime_smith";p.position=c.npcs.at(npc).position;p.coins=100000000;p.materials["ore"]=100;p.inventory.push_back(InventorySystem::create(w,c,"ironblade"));auto id=p.inventory.front().id;p.equipped[Slot::Weapon]=id;
+            CHECK(EnhancementSystem::quote(0).coins==220);CHECK(EnhancementSystem::quote(1).coins==396);CHECK(EnhancementSystem::quote(6).chance==.75);CHECK(EnhancementSystem::quote(19).chance>=.02);
+            auto before=InventorySystem::bonuses(p,c).attack;
+            for(int level=0;level<6;level++){CHECK(EnhancementSystem::quote(level).chance==1);CHECK(EnhancementSystem::enhance(w,p,id,npc,level,c,.999999));CHECK(p.inventory.front().upgrade==level+1);}
+            CHECK(InventorySystem::bonuses(p,c).attack>before);auto coins=p.coins;CHECK(!EnhancementSystem::enhance(w,p,id,npc,6,c,.999999));CHECK(p.inventory.front().upgrade==0);CHECK(p.coins<coins);CHECK(p.materials.at("ore")==86);CHECK(InventorySystem::bonuses(p,c).attack==before);
+            auto reject=[&](auto action){auto money=p.coins,ore=p.materials.at("ore");auto upgrade=p.inventory.front().upgrade;auto events=w.events.size();no(action);CHECK(p.coins==money&&p.materials.at("ore")==ore&&p.inventory.front().upgrade==upgrade&&w.events.size()==events);};
+            reject([&]{EnhancementSystem::enhance(w,p,id,npc,1,c,0);});reject([&]{EnhancementSystem::enhance(w,p,"other-player-item",npc,0,c,0);});reject([&]{EnhancementSystem::enhance(w,p,id,"windchime_merchant",0,c,0);});
+            p.position.x+=20;reject([&]{EnhancementSystem::enhance(w,p,id,npc,0,c,0);});p.position=c.npcs.at(npc).position;
+            p.vitals.hp=0;reject([&]{EnhancementSystem::enhance(w,p,id,npc,0,c,0);});p.vitals.hp=100;
+            p.coins=0;reject([&]{EnhancementSystem::enhance(w,p,id,npc,0,c,0);});p.coins=100000000;p.materials["ore"]=1;reject([&]{EnhancementSystem::enhance(w,p,id,npc,0,c,0);});p.materials["ore"]=100;
+            p.scene="dungeon:test";reject([&]{EnhancementSystem::enhance(w,p,id,npc,0,c,0);});p.scene="world";
+            reject([&]{EnhancementSystem::enhance(w,p,id,npc,0,c,1);});
+            auto held=p.inventory.front();p.inventory.clear();p.warehouseItems.push_back(held);auto money=p.coins;no([&]{EnhancementSystem::enhance(w,p,id,npc,0,c,0);});CHECK(p.coins==money&&p.warehouseItems.front().upgrade==0);p.inventory.push_back(held);p.warehouseItems.clear();
+            p.inventory.front().upgrade=20;reject([&]{EnhancementSystem::enhance(w,p,id,npc,20,c,0);});
+        });
+        test("runtime enhancement receipts stale quotes privacy and save",[]{
+            auto path=std::filesystem::temp_directory_path()/"aw_forge_world.json";std::filesystem::remove(path);std::filesystem::remove(path.string()+".bak");GameRuntime g(path,true);auto a=create(g,"Smith QA"),b=create(g,"Other QA");auto key=a.str("token"),pid=a.at("player").str("id");cmd(g,a,"admin_supply");auto c=g.catalog();Vec3 smith;for(const auto& n:c.at("npcs").arrayItems())if(n.str("id")=="windchime_smith")smith=unvec(n.at("position"));g.world().players.at(pid).position=smith;auto snap=g.snapshot(key);auto item=snap.at("player").at("equipped").str("0");auto q=snap.at("enhancement").at("quotes").at(item);CHECK(snap.at("enhancement").str("npc")=="windchime_smith");CHECK(snap.at("equipmentStats").contains(item));
+            Json operation{{"type","enhance"},{"target",item},{"npc","windchime_smith"},{"expected",0},{"request","forge-once"}};auto first=g.command(key,operation);auto coins=first.at("player").at("coins").integer();auto twice=g.command(key,operation);CHECK(twice.at("player").at("coins").integer()==coins);CHECK(g.world().players.at(pid).inventory.front().upgrade==1);
+            operation["request"]="stale-forge";no([&]{g.command(key,operation);});CHECK(g.world().players.at(pid).coins==coins);
+            operation["expected"]=1;operation["request"]="other-forge";no([&]{g.command(b.str("token"),operation);});auto other=g.snapshot(b.str("token"));CHECK(!other.at("equipmentStats").contains(item));
+            g.save();GameRuntime restored(path,true);CHECK(restored.world().players.at(pid).inventory.front().upgrade==1);CHECK(restored.snapshot(key).at("player").at("coins").integer()==coins);CHECK(restored.command(key,Json{{"type","enhance"},{"target",item},{"npc","windchime_smith"},{"expected",0},{"request","forge-once"}}).at("player").at("coins").integer()==coins);std::filesystem::remove(path);std::filesystem::remove(path.string()+".bak");
+        });
         std::cout<<"OK "<<groups<<" workstation groups, "<<checks<<" checks\n";
         return 0;
     }
