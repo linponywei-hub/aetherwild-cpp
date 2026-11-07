@@ -14,7 +14,10 @@ export function updateContentScene(scene,state){
  if(patch&&scene.patchKey!==patch.x+':'+patch.z){
   scene.patchKey=patch.x+':'+patch.z;if(scene.terrainPatch){scene.contentRoot.remove(scene.terrainPatch);scene.terrainPatch.geometry.dispose();scene.terrainPatch.material.dispose();}
   scene.terrainPatch=terrainMesh(patch,'#708766');scene.contentRoot.add(scene.terrainPatch);
-  if(scene.globalTerrain){const g=scene.globalTerrain.geometry,v=g.attributes.position,all=scene.globalTerrain.userData.fullIndices,idx=[];for(let i=0;i<all.length;i+=3){const cx=(v.getX(all[i])+v.getX(all[i+1])+v.getX(all[i+2]))/3,cz=(v.getZ(all[i])+v.getZ(all[i+1])+v.getZ(all[i+2]))/3;if(Math.hypot(cx-state.player.position.x,cz-state.player.position.z)>650)idx.push(all[i],all[i+1],all[i+2]);}g.setIndex(idx);}
+  if(scene.globalTerrain){const material=scene.globalTerrain.material;
+   if(!material.userData.patchBounds){material.userData.patchBounds=new T.Vector4();material.onBeforeCompile=shader=>{shader.uniforms.patchBounds={value:material.userData.patchBounds};shader.vertexShader='varying vec2 patchWorld;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\npatchWorld=(modelMatrix*vec4(position,1.0)).xz;');shader.fragmentShader='uniform vec4 patchBounds; varying vec2 patchWorld;\n'+shader.fragmentShader.replace('#include <clipping_planes_fragment>','#include <clipping_planes_fragment>\nif(patchWorld.x>patchBounds.x && patchWorld.y>patchBounds.y && patchWorld.x<patchBounds.z && patchWorld.y<patchBounds.w) discard;');};material.customProgramCacheKey=()=> 'terrain-patch-clip-v1';material.needsUpdate=true;}
+   material.userData.patchBounds.set(patch.x+1,patch.z+1,patch.x+(patch.side-1)*patch.step-1,patch.z+(patch.side-1)*patch.step-1);
+  }
  }
  const propsKey=Math.floor(state.player.position.x/32)+':'+Math.floor(state.player.position.z/32)+':'+c.release;
  if(scene.propsKey!==propsKey){scene.propsKey=propsKey;for(const child of [...scene.contentProps.children]){scene.contentProps.remove(child);child.traverse(o=>{o.geometry?.dispose();o.material?.dispose?.();});}

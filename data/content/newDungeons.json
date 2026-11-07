@@ -171,8 +171,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -3051,
-      "z": 5188
+      "x": -4823,
+      "z": -14204
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -204,8 +204,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -4421,
-      "z": 6298
+      "x": -6193,
+      "z": -13094
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -237,8 +237,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -5900,
-      "z": 5338
+      "x": -7672,
+      "z": -14054
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -270,8 +270,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -5444,
-      "z": 3634
+      "x": -7216,
+      "z": -15758
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -303,8 +303,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -3683,
-      "z": 3542
+      "x": -5455,
+      "z": -15850
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -336,8 +336,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -12551,
-      "z": 3388
+      "x": -25111,
+      "z": 2308
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -369,8 +369,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -13921,
-      "z": 4498
+      "x": -26481,
+      "z": 3418
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -402,8 +402,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -15400,
-      "z": 3538
+      "x": -27960,
+      "z": 2458
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -435,8 +435,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -14944,
-      "z": 1834
+      "x": -27504,
+      "z": 754
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -468,8 +468,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -13183,
-      "z": 1742
+      "x": -25743,
+      "z": 662
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -501,8 +501,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -15551,
-      "z": -10112
+      "x": -29335,
+      "z": -17916
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -534,8 +534,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -16921,
-      "z": -9002
+      "x": -30705,
+      "z": -16806
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -567,8 +567,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -18400,
-      "z": -9962
+      "x": -32184,
+      "z": -17766
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -600,8 +600,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -17944,
-      "z": -11666
+      "x": -31728,
+      "z": -19470
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -633,8 +633,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -16183,
-      "z": -11758
+      "x": -29967,
+      "z": -19562
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -666,8 +666,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 22449,
-      "z": 4388
+      "x": 28649,
+      "z": 388
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -699,8 +699,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 21079,
-      "z": 5498
+      "x": 27279,
+      "z": 1498
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -732,8 +732,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 19600,
-      "z": 4538
+      "x": 25800,
+      "z": 538
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -765,8 +765,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 20056,
-      "z": 2834
+      "x": 26256,
+      "z": -1166
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -798,8 +798,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 21817,
-      "z": 2742
+      "x": 28017,
+      "z": -1258
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -831,8 +831,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -14051,
-      "z": -20112
+      "x": -21463,
+      "z": -26044
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -864,8 +864,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -15421,
-      "z": -19002
+      "x": -22833,
+      "z": -24934
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -897,8 +897,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -16900,
-      "z": -19962
+      "x": -24312,
+      "z": -25894
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -930,8 +930,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -16444,
-      "z": -21666
+      "x": -23856,
+      "z": -27598
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -963,8 +963,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -14683,
-      "z": -21758
+      "x": -22095,
+      "z": -27690
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -996,8 +996,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 13449,
-      "z": 18388
+      "x": 28009,
+      "z": 25028
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -1029,8 +1029,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 12079,
-      "z": 19498
+      "x": 26639,
+      "z": 26138
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -1062,8 +1062,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 10600,
-      "z": 18538
+      "x": 25160,
+      "z": 25178
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -1095,8 +1095,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 11056,
-      "z": 16834
+      "x": 25616,
+      "z": 23474
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -1128,8 +1128,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 12817,
-      "z": 16742
+      "x": 27377,
+      "z": 23382
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -1161,8 +1161,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 17449,
-      "z": -15612
+      "x": 19881,
+      "z": -22908
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -1194,8 +1194,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 16079,
-      "z": -14502
+      "x": 18511,
+      "z": -21798
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -1227,8 +1227,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 14600,
-      "z": -15462
+      "x": 17032,
+      "z": -22758
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -1260,8 +1260,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 15056,
-      "z": -17166
+      "x": 17488,
+      "z": -24462
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -1293,8 +1293,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 16817,
-      "z": -17258
+      "x": 19249,
+      "z": -24554
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -1326,8 +1326,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -23165,
-      "z": -1508
+      "x": -35029,
+      "z": 7916
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -1359,8 +1359,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -24901,
-      "z": -103
+      "x": -36765,
+      "z": 9321
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -1392,8 +1392,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -26774,
-      "z": -1319
+      "x": -38638,
+      "z": 8105
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -1425,8 +1425,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -26196,
-      "z": -3477
+      "x": -38060,
+      "z": 5947
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -1458,8 +1458,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -23965,
-      "z": -3593
+      "x": -35829,
+      "z": 5831
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -1491,8 +1491,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 4949,
-      "z": -23612
+      "x": 2537,
+      "z": -31036
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -1524,8 +1524,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 3579,
-      "z": -22502
+      "x": 1167,
+      "z": -29926
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -1557,8 +1557,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 2100,
-      "z": -23462
+      "x": -312,
+      "z": -30886
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -1590,8 +1590,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 2556,
-      "z": -25166
+      "x": 144,
+      "z": -32590
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -1623,8 +1623,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 4317,
-      "z": -25258
+      "x": 1905,
+      "z": -32682
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -1656,8 +1656,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -23551,
-      "z": 14388
+      "x": -28695,
+      "z": 27844
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -1689,8 +1689,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -24921,
-      "z": 15498
+      "x": -30065,
+      "z": 28954
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -1722,8 +1722,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -26400,
-      "z": 14538
+      "x": -31544,
+      "z": 27994
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -1755,8 +1755,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -25944,
-      "z": 12834
+      "x": -31088,
+      "z": 26290
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -1788,8 +1788,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -24183,
-      "z": 12742
+      "x": -29327,
+      "z": 26198
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -1821,8 +1821,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -3051,
-      "z": 24888
+      "x": 105,
+      "z": 34180
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -1854,8 +1854,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -4421,
-      "z": 25998
+      "x": -1265,
+      "z": 35290
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -1887,8 +1887,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -5900,
-      "z": 25038
+      "x": -2744,
+      "z": 34330
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -1920,8 +1920,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -5444,
-      "z": 23334
+      "x": -2288,
+      "z": 32626
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -1953,8 +1953,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -3683,
-      "z": 23242
+      "x": -527,
+      "z": 32534
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -1986,8 +1986,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 26949,
-      "z": -11112
+      "x": 37417,
+      "z": -24124
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -2019,8 +2019,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 25579,
-      "z": -10002
+      "x": 36047,
+      "z": -23014
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -2052,8 +2052,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 24100,
-      "z": -10962
+      "x": 34568,
+      "z": -23974
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -2085,8 +2085,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 24556,
-      "z": -12666
+      "x": 35024,
+      "z": -25678
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -2118,8 +2118,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 26317,
-      "z": -12758
+      "x": 36785,
+      "z": -25770
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -2151,8 +2151,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -1165,
-      "z": -7508
+      "x": 6379,
+      "z": -14932
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -2184,8 +2184,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -2901,
-      "z": -6103
+      "x": 4643,
+      "z": -13527
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -2217,8 +2217,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -4774,
-      "z": -7319
+      "x": 2770,
+      "z": -14743
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -2250,8 +2250,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -4196,
-      "z": -9477
+      "x": 3348,
+      "z": -16901
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -2283,8 +2283,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -1965,
-      "z": -9593
+      "x": 5579,
+      "z": -17017
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -2316,8 +2316,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 9335,
-      "z": -6008
+      "x": 14507,
+      "z": 13612
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -2349,8 +2349,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 7599,
-      "z": -4603
+      "x": 12771,
+      "z": 15017
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -2382,8 +2382,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 5726,
-      "z": -5819
+      "x": 10898,
+      "z": 13801
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -2415,8 +2415,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 6304,
-      "z": -7977
+      "x": 11476,
+      "z": 11643
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -2448,8 +2448,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 8535,
-      "z": -8093
+      "x": 13707,
+      "z": 11527
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -2481,8 +2481,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -9165,
-      "z": 10492
+      "x": -14549,
+      "z": 13164
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -2514,8 +2514,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -10901,
-      "z": 11897
+      "x": -16285,
+      "z": 14569
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -2547,8 +2547,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -12774,
-      "z": 10681
+      "x": -18158,
+      "z": 13353
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -2580,8 +2580,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -12196,
-      "z": 8523
+      "x": -17580,
+      "z": 11195
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -2613,8 +2613,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -9965,
-      "z": 8407
+      "x": -15349,
+      "z": 11079
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -2646,8 +2646,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 11335,
-      "z": 8992
+      "x": 18987,
+      "z": -10324
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -2679,8 +2679,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 9599,
-      "z": 10397
+      "x": 17251,
+      "z": -8919
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -2712,8 +2712,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 7726,
-      "z": 9181
+      "x": 15378,
+      "z": -10135
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -2745,8 +2745,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 8304,
-      "z": 7023
+      "x": 15956,
+      "z": -12293
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -2778,8 +2778,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 10535,
-      "z": 6907
+      "x": 18187,
+      "z": -12409
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -2811,8 +2811,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -22165,
-      "z": 23992
+      "x": -15829,
+      "z": 29164
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -2844,8 +2844,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -23901,
-      "z": 25397
+      "x": -17565,
+      "z": 30569
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -2877,8 +2877,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -25774,
-      "z": 24181
+      "x": -19438,
+      "z": 29353
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -2910,8 +2910,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -25196,
-      "z": 22023
+      "x": -18860,
+      "z": 27195
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -2943,8 +2943,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -22965,
-      "z": 21907
+      "x": -16629,
+      "z": 27079
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -2976,8 +2976,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -6165,
-      "z": -16008
+      "x": -23637,
+      "z": -31764
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -3009,8 +3009,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -7901,
-      "z": -14603
+      "x": -25373,
+      "z": -30359
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -3042,8 +3042,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -9774,
-      "z": -15819
+      "x": -27246,
+      "z": -31575
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -3075,8 +3075,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -9196,
-      "z": -17977
+      "x": -26668,
+      "z": -33733
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -3108,8 +3108,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -6965,
-      "z": -18093
+      "x": -24437,
+      "z": -33849
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -3141,8 +3141,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 28835,
-      "z": 15992
+      "x": 37611,
+      "z": 36780
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -3174,8 +3174,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 27099,
-      "z": 17397
+      "x": 35875,
+      "z": 38185
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -3207,8 +3207,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 25226,
-      "z": 16181
+      "x": 34002,
+      "z": 36969
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -3240,8 +3240,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 25804,
-      "z": 14023
+      "x": 34580,
+      "z": 34811
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -3273,8 +3273,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 28035,
-      "z": 13907
+      "x": 36811,
+      "z": 34695
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -3306,8 +3306,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -4665,
-      "z": -26508
+      "x": 4267,
+      "z": -34708
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -3339,8 +3339,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -6401,
-      "z": -25103
+      "x": 2531,
+      "z": -33303
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -3372,8 +3372,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -8274,
-      "z": -26319
+      "x": 658,
+      "z": -34519
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -3405,8 +3405,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -7696,
-      "z": -28477
+      "x": 1236,
+      "z": -36677
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -3438,8 +3438,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": -5465,
-      "z": -28593
+      "x": 3467,
+      "z": -36793
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -3471,8 +3471,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 25335,
-      "z": -24508
+      "x": 33131,
+      "z": -32276
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -3504,8 +3504,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 23599,
-      "z": -23103
+      "x": 31395,
+      "z": -30871
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -3537,8 +3537,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 21726,
-      "z": -24319
+      "x": 29522,
+      "z": -32087
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -3570,8 +3570,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 22304,
-      "z": -26477
+      "x": 30100,
+      "z": -34245
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -3603,8 +3603,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 24535,
-      "z": -26593
+      "x": 32331,
+      "z": -34361
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -3636,8 +3636,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 30335,
-      "z": -508
+      "x": 38571,
+      "z": -8468
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "puzzle",
@@ -3669,8 +3669,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 28599,
-      "z": 897
+      "x": 36835,
+      "z": -7063
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "rescue",
@@ -3702,8 +3702,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 26726,
-      "z": -319
+      "x": 34962,
+      "z": -8279
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "investigation",
@@ -3735,8 +3735,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 27304,
-      "z": -2477
+      "x": 35540,
+      "z": -10437
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "combat",
@@ -3768,8 +3768,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 29535,
-      "z": -2593
+      "x": 37771,
+      "z": -10553
     },
     "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
     "type": "mixed",
@@ -3966,8 +3966,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 4300,
-      "z": 17500
+      "x": 648,
+      "z": 21248
     },
     "entrance_validation": "待地形驗證",
     "type": "puzzle",
@@ -3999,8 +3999,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 3067,
-      "z": 19208
+      "x": -585,
+      "z": 22956
     },
     "entrance_validation": "待地形驗證",
     "type": "investigation",
@@ -4032,8 +4032,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 1058,
-      "z": 18577
+      "x": -2594,
+      "z": 22325
     },
     "entrance_validation": "待地形驗證",
     "type": "rescue",
@@ -4065,8 +4065,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 1023,
-      "z": 16472
+      "x": -2629,
+      "z": 20220
     },
     "entrance_validation": "待地形驗證",
     "type": "combat",
@@ -4098,8 +4098,8 @@
     "status": "proposed_new",
     "layer": "surface",
     "suggested_anchor": {
-      "x": 3010,
-      "z": 15774
+      "x": -642,
+      "z": 19522
     },
     "entrance_validation": "待地形驗證",
     "type": "mixed",

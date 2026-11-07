@@ -52,6 +52,8 @@ namespace aw {
         bool contentAllowed(Vec3)const;
         void checkContentRegion(const Id&)const;
         void startExpandedWorld();
+        void applyWorldPatch();
+        mutable std::map<std::pair<int,int>,Json> terrainCache_;
         std::filesystem::path savePath_;
         double savedAt_ {};
         Id token();
@@ -62,7 +64,7 @@ namespace aw {
         void ai(double);
         Json state()const;
         void restore(const Json&);
-        public: explicit GameRuntime(std::filesystem::path savePath= {});
+        public: explicit GameRuntime(std::filesystem::path savePath= {},bool legacyTestWorld=false);
         Json createSession(const Json&);
         Json snapshot(const Id& token)const;
         Json catalog()const;
