@@ -172,6 +172,7 @@ int main(int argc,char**argv) {
                         auto auth=request.headers.contains("authorization")?request.headers.at("authorization"):"";
                         auto token=auth.starts_with("Bearer ")?auth.substr(7):"";
                         if(request.method=="GET"&&request.path=="/api/state")result=runtime.snapshot(token);
+                        else if(request.method=="GET"&&request.path=="/api/admin/map")result=runtime.adminMap(token);
                         else {
                             require(request.method=="POST"&&request.headers["x-aetherwild-client"]=="1","不接受跨站操作");
                             require(request.headers["content-type"].starts_with("application/json"),"需要JSON內容");
@@ -309,6 +310,7 @@ int main(int argc,char**argv) {
                                         client.lastStreamSnapshot=now;result=runtime.snapshot(client.token);
                                     }
                                     else if(channel=="command")result=runtime.command(client.token,message.at("body"));
+                                    else if(channel=="admin_map")result=runtime.adminMap(client.token);
                                     else if(channel=="state")result=runtime.snapshot(client.token);
                                     else throw RuleError("未知WebSocket通道");
                                 }
