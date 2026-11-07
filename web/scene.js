@@ -107,6 +107,35 @@ export class RealmScene {
        if(v.weapon==='bow'){this.box(gear,.48,.22,.28,armor,0,.48,0);this.box(gear,.12,.44,.16,'#765739',-.3,.52,-.13);}
        if(v.weapon==='sword'){this.box(gear,.48,.26,.32,armor,0,.47,0);this.mesh(new T.CylinderGeometry(.22,.22,.055,12),this.mat('#555b63'),[-.35,.45,.1],gear).rotation.z=Math.PI/2;}
        if(v.weapon==='dagger')this.box(gear,.35,.14,.25,armor,0,.42,0);
+       // Distinct silhouette kits, built once per variant from low-poly meshes.
+       const leather=this.mat('#49372b'),bronze=this.mat('#b08b43'),bone=this.mat('#e1d5ae');
+       if(v.weapon==='dagger'){
+         this.mesh(new T.ConeGeometry(.12,.3,5),bone,[-.14,.8,0],gear).rotation.z=.4;
+         this.mesh(new T.ConeGeometry(.12,.3,5),bone,[.14,.8,0],gear).rotation.z=-.4;
+         this.box(gear,.43,.12,.3,leather,0,.34,0);
+       }
+       if(v.weapon==='stone'){
+         this.box(gear,.42,.25,.34,leather,0,.43,-.12);
+         for(let n=0;n<3;n++)this.sphere(gear,.08,'#78756d',-.12+n*.12,.48,-.34);
+       }
+       if(v.weapon==='sword'){
+         this.box(gear,.62,.17,.34,bronze,0,.7,0);
+         this.box(gear,.15,.28,.15,bronze,0,.86,0);
+       }
+       if(v.weapon==='bow'){
+         const quiver=this.cylinder(gear,.11,.09,.4,leather,-.24,.59,-.26,7);
+         for(let n=0;n<4;n++)this.box(gear,.012,.34,.012,bone,-.32+n*.055,.86,-.26);
+         this.box(gear,.5,.1,.3,leather,0,.34,0);
+       }
+       if(v.weapon==='staff'){
+         this.box(gear,.5,.32,.4,armor,0,.42,0);
+         for(const side of [-1,1])this.mesh(new T.ConeGeometry(.1,.25,6),bone,[side*.2,.9,.05],gear);
+       }
+       if(v.weapon==='axe'){
+         this.box(gear,.72,.3,.4,bronze,0,.48,0);
+         this.mesh(new T.ConeGeometry(.19,.34,6),bronze,[0,.95,0],gear);
+         for(const side of [-1,1])this.mesh(new T.ConeGeometry(.12,.28,6),bone,[side*.28,.85,0],gear).rotation.z=side*.5;
+       }
        const steel=this.mat('#8b8d83'),wood=this.mat('#69533a');
        if(v.weapon==='stone')this.sphere(gear,.09,'#777870',.33,.5,.1);
        if(v.weapon==='dagger'||v.weapon==='sword')this.box(gear,.055,v.weapon==='dagger'?.28:.44,.06,steel,.32,.48,.05);
