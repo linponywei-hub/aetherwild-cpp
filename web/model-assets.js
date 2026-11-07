@@ -99,16 +99,15 @@ export class ModelAssets {
       group.userData.modelInstance = instance;
       if (group.userData.modelMixer) group.userData.modelMixer.stopAllAction();
       group.userData.modelMixer = null;
-      // Do not play unverified proxy-rig animation on Eileen: skin deformation
-      // must be validated before animation can be safely enabled.
-      if (animations.length && id !== 'HUM_EILEEN_TEST_001') {
+      // Drive the supplied GLB clips using the cloned skeleton, without forced joint offsets.
+      if (animations.length) {
         const mixer = new T.AnimationMixer(instance);
         const idle = animations.find(clip => /idle|breathe|待機/i.test(clip.name)) || animations[0];
         mixer.clipAction(idle).play();
         group.userData.modelMixer = mixer;
         group.userData.modelClips = animations;
       }
-      group.userData.modelHealth = {status: id === 'HUM_EILEEN_TEST_001' ? 'rig-review-required' : 'loaded', animationCount: animations.length};
+      group.userData.modelHealth = {status: id === 'HUM_EILEEN_TEST_001' ? 'proxy-rig-animation-test' : 'loaded', animationCount: animations.length};
       // Hide only the procedural body. Preserve labels, collision proxies and weapons.
       for (const part of group.userData.proceduralParts || []) part.visible = false;
       return true;
