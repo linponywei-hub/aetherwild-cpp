@@ -280,13 +280,21 @@ export class RealmScene {
      pose('Spine',gatherPhase*.15+windup*.12-release*.22,windup*-.22+release*.32);
      // Keep the lowest animated foot at or above its original grounded position.
      // Avoid full skinned-mesh bounding-box recalculation on every frame.
-     if(preview.userData.footBaseline!==undefined){
-       model.updateMatrixWorld(true);
-       const feet=[joints.LeftFoot,joints.RightFoot].filter(Boolean);
-       const footY=Math.min(...feet.map(b=>{const v=new T.Vector3();b.getWorldPosition(v);return v.y;}));
-       const target=preview.userData.baseModelY+Math.max(0,preview.userData.footBaseline-footY+.045);
-       model.position.y=Math.max(model.position.y,target);
+     // Foot grounding is in WORLD coordinates, not model-local coordinates.
+     // Previous code mixed the two spaces, so it could not correct terrain penetration.
+     const feet=[joints.LeftFoot,joints.RightFoot].filter(Boolean);
+     if(feet.length){
+       model.updateWorldMatrix(true,true);
+       let lift=0;
+       for(const foot of feet){
+         const w=new T.Vector3();foot.getWorldPosition(w);
+         const floor=this.landHeight(w.x,w.z);
+         // The ankle joint is above the sole; reserve a small sole offset.
+         lift=Math.max(lift,floor+.13-w.y);
+       }
+       if(lift>0)model.position.y+=Math.min(.35,lift);
      }
+
    }
    for(const npc of this.npcObjects.values()){if(npc.userData.eileenTest){
         const player=this.state?.player;
