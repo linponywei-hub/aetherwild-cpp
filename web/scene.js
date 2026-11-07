@@ -66,17 +66,20 @@ export class RealmScene {
    this.root.add(goblin);
    this.goblinPreview=goblin;
    const name=this.label('哥布林 · 模型測試','#a8e69b',1);
-   name.position.y=3.1;
+   name.position.y=.95;
    goblin.add(name);
    import('/vendor/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync('/assets/models/characters/monsters/goblin-test.glb')).then(({scene})=>{
      if(!goblin.parent)return;
      const box=new T.Box3().setFromObject(scene),h=box.max.y-box.min.y;
      if(!Number.isFinite(h)||h<=0)throw Error('Invalid goblin bounds');
-     scene.scale.setScalar(1.5/h);
+     scene.scale.setScalar(0.5/h);
      scene.updateMatrixWorld(true);
      scene.position.y-=new T.Box3().setFromObject(scene).min.y;
      for(const part of [...goblin.children])if(part!==name)part.visible=false;
      goblin.add(scene);
+     goblin.userData.animatedModel=scene;
+     goblin.userData.baseModelY=scene.position.y;
+     goblin.userData.baseModelYaw=scene.rotation.y;
    }).catch(error=>console.warn('[Aetherwild] Goblin GLB not uploaded; preview remains procedural',error));
  }
  goblinTest(e){
@@ -87,7 +90,7 @@ export class RealmScene {
        if(!g.parent)return;
        const bounds=new T.Box3().setFromObject(scene),height=bounds.max.y-bounds.min.y;
        if(!Number.isFinite(height)||height<=0)throw Error('Invalid goblin model bounds');
-       scene.scale.setScalar(1.5/height);
+       scene.scale.setScalar(0.5/height);
        scene.updateMatrixWorld(true);
        const grounded=new T.Box3().setFromObject(scene);
        scene.position.y-=grounded.min.y;
@@ -116,7 +119,15 @@ export class RealmScene {
  for(const[key,g]of this.entities)if(!needed.has(key)){this.entityRoot.remove(g);g.traverse(o=>{o.geometry?.dispose();if(o.material&&!o.material.map)o.material.dispose();});this.entities.delete(key);this.nameplates.remove(key);}
  if(state.lifts?.[0])this.liftRoot.position.y=state.lifts[0].position.y;this.chest.visible=!!state.run&&!state.run.claimed;this.world.fog.density=p.scene==='world'?2.6/this.renderDistance:.013;this.renderer.toneMappingExposure=Number(localStorage.getItem('aw-brightness')||1.05)*(p.scene==='world'?1:1.4);this.makeScenery(p.position.x,p.position.z);updateContentScene(this,state);updateCastTelegraphs(this,state);}
  aim(){this.ray.setFromCamera(this.mouse,this.camera);this.ray.far=45;const roots=[...this.entityRoot.children.filter(o=>o.visible)];if(this.root.visible)roots.push(...this.root.children.filter(o=>o.visible&&o.userData.kind&&o.position.distanceTo(this.camera.position)<55));if(this.dungeon.visible)roots.push(...this.dungeon.children.filter(o=>o.userData.kind));const hits=this.ray.intersectObjects(roots,true);let found=null;for(const hit of hits){let o=hit.object;while(o&&!o.userData.kind)o=o.parent;if(o&&o.visible&&hit.distance<45){found={kind:o.userData.kind,data:o.userData.data,distance:hit.distance,object:o};break;}if(hit.distance<4)break;}this.target=found;this.cb.target?.(found);}
- animate(){requestAnimationFrame(()=>this.animate());if(this.renderer.software&&performance.now()-(this.lastRender||0)<33)return;this.lastRender=performance.now();let dt=Math.min(.1,this.clock.getDelta());this.time+=dt;for(const npc of this.npcObjects.values()){if(npc.userData.eileenTest){
+ animate(){requestAnimationFrame(()=>this.animate());if(this.renderer.software&&performance.now()-(this.lastRender||0)<33)return;this.lastRender=performance.now();let dt=Math.min(.1,this.clock.getDelta());this.time+=dt;
+   // Goblin test has no embedded clips: animate its rigid model safely.
+   if(this.goblinPreview?.userData.animatedModel){
+     const preview=this.goblinPreview,model=preview.userData.animatedModel;
+     model.position.y=preview.userData.baseModelY+Math.sin(this.time*2.2)*.015;
+     model.rotation.y=preview.userData.baseModelYaw+Math.sin(this.time*.8)*.13;
+     model.rotation.z=Math.sin(this.time*1.35)*.025;
+   }
+   for(const npc of this.npcObjects.values()){if(npc.userData.eileenTest){
         const player=this.state?.player;
         const near=player?.scene==='world'&&Math.hypot(player.position.x-npc.position.x,player.position.z-npc.position.z)<5;
          const model=npc.userData.modelInstance;
