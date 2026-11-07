@@ -1,41 +1,30 @@
-# Render 雲端測試部署
+# Render 連線與部署（目前實際配置）
 
-## 本次設定
+服務：https://aetherwild-cpp-test.onrender.com/
+後台：https://dashboard.render.com/web/srv-dbn5vdd9fdbs739adpk0
 
-- 單一C++ Docker Web Service，名稱aetherwild-cpp-test。
-- Free運算方案，新加坡區域；不建立付費資料庫、磁碟或其他服務。
-- 根目錄Dockerfile建置原生C++，建置階段執行核心及工作站測試。
-- 綁定0.0.0.0:$PORT，HTTP健康端點/api/health。
-- 關閉自動部署，避免每次原始碼更新都直接替換測試世界。
-- GAME_OWNER_CODE、GAME_INVITE_CODE由Render以generateValue產生，原始碼不包含實際值。
-- SIGTERM/SIGINT會停止接收新操作，保存世界檢查點後結束程序。
+工作區Pony's workspace已由使用者確認。Free／Singapore／Docker，單一服務，不含付費磁碟或資料庫；auto deploy off。直接建立服務，未建立Blueprint。render.yaml是配置參考；目前平台健康檢查使用預設TCP，原生/api/health另以HTTPS檢查。
 
-這些檔案已準備，**不代表雲端服務已建立或部署成功**。GitHub上傳、Render工作區確認、Blueprint規劃與核准、Docker建置、live狀態及實際網址驗證都必須分別完成。
+已上線來源：ai/equipment-warehouse-v0.2.2，commit a5b533b54785a85957a0495d5c7dc1085dc8d9a1；deploy dep-dbn60st6e07s73dnvjv0。後續部署修正獨立在ai/render-deployment分支，與遊戲內容分開整合；服務不會因這個分支推送而自動換版。
 
-## 登入測試世界
+## 玩家登入
 
-在Render服務的Environment中查看GAME_OWNER_CODE；使用網站建立角色畫面的「擁有者驗證」欄位登入。一般測試玩家使用GAME_INVITE_CODE。不要把擁有者碼提供給一般玩家。
+從Render後台進入Environment查看GAME_INVITE_CODE，貼到遊戲「測試邀請碼」。擁有者使用GAME_OWNER_CODE，展開「擁有者驗證」後填入；擁有者碼不可交給一般玩家。不要把任何碼貼入原始碼、PR或交接文件。
 
-在雲端模式，第一個只有邀請碼的訪客仍是Player，不能搶先取得Owner。未正確配置足夠長度的兩個碼時，雲端服務會拒絕啟動。
+## 建置與環境
 
-不要在聊天、原始碼、Git提交、日誌或截圖公開實際碼。只有Game Session令牌與角色綁定會保存於執行資料，不保存原始邀請碼或擁有者碼。
+Dockerfile使用GCC14編譯原生C++，執行核心／runtime／HTTP／cloud-access測試後產生執行映像。tools/build.py必須存在遠端倉庫及Docker context；.dockerignore僅排除建置輸出目錄，不得用build*排掉build.py，也不得排除assets/reference執行素材。
 
-## Free方案的保存限制
+PORT=10000，監聽0.0.0.0；AETHERWILD_PUBLIC=1；AETHERWILD_DATA_DIR=/app/runtime-data。GAME_OWNER_CODE和GAME_INVITE_CODE已以隨機值設定於Render（不記錄真值）；本服務由MCP直接建立，不是generateValue同步中的Blueprint。SIGTERM/SIGINT保存後退出。
 
-Render Free Web Service閒置15分鐘會休眠；休眠、重啟與重新部署會清除本機檔案。這個版本目前使用世界JSON檔，因此雲端測試角色進度並非永久。即使畫面顯示存檔成功，也只能保證當前執行個體內的檢查點，不會讓Free檔案系統變永久。
+## 持久化與整合邊界
 
-需要長期保存時，另行評估並確認付費磁碟或正式資料庫方案；不可自動升級付費。此測試服務不承諾正式MMO容量。
+角色JSON與API介面保持現有設計；共同契約及分工請讀docs/07_連線與儲存介面.md。本部署分支不修改領域、角色序列化、技能、任務或資料庫。
 
-參考：https://render.com/docs/free
+Free服務休眠、重啟或重新部署可能清除本機檔案，world-v2.json不是永久保存；目前沒有外部資料庫或備份。不得未經使用者同意升級付費。長期保存需另外完成存儲設計與遷移。
 
-## 驗證與限制
+## 驗證
 
-- 原生GCC建置與202項既有核心／工作站檢查。
-- tests/cloud_access.py：12項雲端啟動、身份、去重、秘密保存及正常關機檢查。
-- tests/http_runner.py：18項HTTP整合與實際重啟檢查。
-- render.yaml已通過本機YAML語法、單一Free服務與秘密生成設定檢查。
-- 本環境無Docker及Render CLI，未實際建立容器，也未執行Render平台驗證。必須以Render規劃／建置結果補齊驗證，不能把原生建置通過當成容器或雲端部署通過。
+Render確認live；HTTPS /api/health、受邀Player登入、首頁與client.js／scene.js資產檢查通過；瀏覽器顯示角色建立介面與3D背景。尚未驗證雲端大量玩家容量或長期保存；兩客戶端持續input的完整雲端多人驗收仍待執行。
 
-## 原始交接包
-
-部署倉庫只包含執行所需的新原始碼與素材。原v0.30.1完整封存仍在下載交接ZIP的reference/original_v0.30.1.zip；不另上傳到部署倉庫。較早的MANIFEST只適用對應下載ZIP，不作為此Git倉庫清單。
+部署新內容前先合併受測分支、確認來源commit，告知Free存檔影響，手動觸發一次部署並追蹤至live，再實際檢查HTTPS與登入；不要以建立服務成功代替上線驗證。
