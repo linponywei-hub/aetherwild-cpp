@@ -138,26 +138,28 @@ export class RealmScene {
    const ai=g.userData.ai ||= {mode:'patrol',timer:0,attackCooldown:1.5,stones:0,projectiles:[],home:g.position.clone(),seed:0};
    ai.timer+=dt;ai.attackCooldown-=dt;
    const dx=p.position.x-g.position.x,dz=p.position.z-g.position.z,dist=Math.hypot(dx,dz);
-   if(dist<13)ai.mode=dist<3?'retreat':dist<7?'attack':'chase';
+   if(dist<13)ai.mode=dist<2.5?'retreat':dist<7?'strafe':'chase';
    else if(dist>19)ai.mode='patrol';
    const heading=dist>.01?Math.atan2(dx,dz):g.rotation.y;
    if(ai.mode!=='patrol')g.rotation.y+=Math.atan2(Math.sin(heading-g.rotation.y),Math.cos(heading-g.rotation.y))*Math.min(1,dt*4);
    let vx=0,vz=0;
-   if(ai.mode==='chase'&&dist>5){vx=dx/dist*1.5;vz=dz/dist*1.5;}
+   if(ai.mode==='chase'&&dist>5){vx=dx/dist*2;vz=dz/dist*2;}
+   if(ai.mode==='strafe'&&dist>0.1){const dir=Math.sin(ai.timer*.8)>0?1:-1;vx=dz/dist*1.15*dir;vz=-dx/dist*1.15*dir;}
    if(ai.mode==='retreat'&&dist<2.8){vx=-dx/dist*1.1;vz=-dz/dist*1.1;}
    if(ai.mode==='patrol'){
-     const a=ai.timer*.45;const tx=ai.home.x+Math.cos(a)*2,tz=ai.home.z+Math.sin(a)*2;
+     const a=ai.timer*.6;const tx=ai.home.x+Math.cos(a)*4,tz=ai.home.z+Math.sin(a)*4;
      const px=tx-g.position.x,pz=tz-g.position.z,d=Math.hypot(px,pz);
      if(d>.3){vx=px/d*.65;vz=pz/d*.65;g.rotation.y=Math.atan2(vx,vz);}
    }
    g.position.x+=vx*dt;g.position.z+=vz*dt;
    g.position.y=this.landHeight(g.position.x,g.position.z)+.04;
    const model=g.userData.animatedModel;
-   if(model){const moving=Math.hypot(vx,vz)>.1;model.rotation.z=Math.sin(this.time*(moving?9:1.35))*(moving?.075:.025);}
+   ai.moving=Math.hypot(vx,vz)>.1;
+   if(model){model.rotation.z=Math.sin(this.time*(ai.moving?11:1.35))*(ai.moving?.07:.02);}
    if(dist<10&&ai.attackCooldown<=0){
-     if(ai.stones<=0){ai.mode='gather';ai.stones=3;ai.attackCooldown=1.2;}
+     if(ai.stones<=0){ai.stones=3;ai.gatherUntil=this.time+.7;ai.attackCooldown=1.2;}
      else {
-       ai.stones--;ai.mode='throw';ai.attackCooldown=2.2+Math.random()*.8;
+       ai.stones--;ai.throwUntil=this.time+.55;ai.attackCooldown=2.2+Math.random()*.8;
        const stone=this.mesh(new T.DodecahedronGeometry(.085,0),this.mat('#88857c'),[g.position.x,g.position.y+1.0,g.position.z],this.world);
        const target=new T.Vector3(p.position.x,p.position.y+1.1,p.position.z);
        const origin=stone.position.clone();const velocity=target.sub(origin).normalize().multiplyScalar(8);
@@ -175,9 +177,13 @@ export class RealmScene {
    // Goblin test has no embedded clips: animate its rigid model safely.
    if(this.goblinPreview?.userData.animatedModel){
      const preview=this.goblinPreview,model=preview.userData.animatedModel;
-     model.position.y=preview.userData.baseModelY+Math.sin(this.time*2.2)*.015;
-     model.rotation.y=preview.userData.baseModelYaw+Math.sin(this.time*.8)*.13;
-     model.rotation.z=Math.sin(this.time*1.35)*.025;
+     const ai=preview.userData.ai,walking=!!ai?.moving;
+     const stride=Math.sin(this.time*11);
+     const throwing=ai?.throwUntil>this.time,gathering=ai?.gatherUntil>this.time;
+     model.position.y=preview.userData.baseModelY+(walking?Math.abs(stride)*.035:Math.sin(this.time*2.2)*.008)+(gathering?-.07:0);
+     model.rotation.y=preview.userData.baseModelYaw+(walking?Math.sin(this.time*5.5)*.075:Math.sin(this.time*.8)*.035);
+     model.rotation.x=throwing?-.3+Math.sin(this.time*19)*.12:gathering?.25:walking?stride*.075:0;
+     model.rotation.z=walking?Math.sin(this.time*5.5)*.06:Math.sin(this.time*1.35)*.012;
    }
    for(const npc of this.npcObjects.values()){if(npc.userData.eileenTest){
         const player=this.state?.player;
