@@ -54,6 +54,13 @@ export class RealmScene {
     const fitted=new T.Box3().setFromObject(scene);
     const center=fitted.getCenter(new T.Vector3());
     scene.position.set(-center.x,-fitted.min.y,-center.z);
+    // Ground-contact correction: sample the terrain under the entire building footprint.
+    // Using only the center height makes a house float above sloping terrain.
+    const footprint=[[0,0],[-.4,-.4],[-.4,.4],[.4,-.4],[.4,.4]];
+    const heights=footprint.map(([u,v])=>this.landHeight(group.position.x+u*building.width,group.position.z+v*building.depth)).filter(Number.isFinite);
+    if(heights.length)group.position.y=Math.min(...heights);
+    // Source meshes can contain low stray vertices; compensate a small remaining visual gap.
+    scene.position.y-=Math.min(.12,Math.max(0,building.height*.015));
     scene.traverse(obj=>{if(obj.isMesh){obj.castShadow=true;obj.receiveShadow=true;}});
     group.children.forEach(child=>child.visible=false);
     group.add(scene);
