@@ -78,6 +78,10 @@ export class RealmScene {
             npc.userData.activeClip=next;
           }
           mixer.update(dt);
+          // Idle/Walk/Talk clips omit upper-arm rotations: restore relaxed pose each frame.
+          for (const shoulder of npc.userData.eileenShoulders || []) {
+            shoulder.bone.rotation.z = shoulder.angle;
+          }
 
         }
         if(model&&!mixer){model.position.y=Math.sin(this.time*1.65)*.025;model.rotation.y=Math.sin(this.time*.55)*.07;}
