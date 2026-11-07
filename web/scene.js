@@ -60,12 +60,12 @@ export class RealmScene {
    }
    this.sphere(goblin,.14,skin,0,1.64,.28,[.9,.7,1.6]);
    this.box(goblin,.6,.43,.35,cloth,0,.88,0);
-   goblin.position.set(88,0,24);
+   goblin.position.set(0,this.landHeight(0,48)+.12,48);
    goblin.name='Goblin_Visual_Test';
    goblin.userData={kind:'goblin-preview',nonCombat:true};
    this.root.add(goblin);
    const name=this.label('哥布林 · 模型測試','#a8e69b',1);
-   name.position.y=2.35;
+   name.position.y=3.1;
    goblin.add(name);
    import('/vendor/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync('/assets/models/characters/monsters/goblin-test.glb')).then(({scene})=>{
      if(!goblin.parent)return;
