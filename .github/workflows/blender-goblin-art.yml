@@ -1,0 +1,26 @@
+name: Blender Goblin Art and Animations
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/blender/build_goblin_variants.py'
+      - '.github/workflows/blender-goblin-art.yml'
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Blender
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y blender
+          blender --version
+      - name: Build six GLB variants and animation clips
+        run: |
+          blender --background --factory-startup --python tools/blender/build_goblin_variants.py -- web/assets/models/characters/monsters/goblin-test.glb output/goblins
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goblin-art-animation-glbs
+          path: output/goblins/
+          if-no-files-found: error
