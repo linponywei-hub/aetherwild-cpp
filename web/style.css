@@ -4,4 +4,4 @@
 
 
 /* Content panels contain presentation only; C++ owns every consequence. */
-.book-text{white-space:pre-line;line-height:1.9}.story-card{border:1px solid #78917b55;padding:16px;margin:16px 0;border-radius:10px}.story-card button{margin:5px}.class-options{max-height:180px;overflow:auto;grid-template-columns:repeat(3,1fr)}#panel details{padding:12px 0;border-bottom:1px solid #78917b33}#panel details summary{cursor:pointer}
+.book-text{white-space:pre-line;line-height:1.9}.story-card{border:1px solid #78917b55;padding:16px;margin:16px 0;border-radius:10px}.story-card button{margin:5px}.class-options{display:grid;max-height:180px;overflow:auto;grid-template-columns:repeat(3,1fr)}.create-card{max-height:calc(78vh - 20px);overflow-y:auto}#panel details{padding:12px 0;border-bottom:1px solid #78917b33}#panel details summary{cursor:pointer}

@@ -1,4 +1,5 @@
 #include "aetherwild/runtime.hpp"
+#include "aetherwild/websocket.hpp"
 #include <chrono>
 #include <csignal>
 #include <cstdlib>
@@ -99,6 +100,11 @@ namespace {
     }
     struct Client {
         Socket socket;
+        bool websocket=false,closing=false;
+        Id token;
+        std::string fragment;
+        bool fragmented=false;
+        std::chrono::steady_clock::time_point lastStreamSnapshot{};
         std::string input,output;
         std::size_t sent=0;
         std::chrono::steady_clock::time_point progress;
@@ -244,13 +250,14 @@ int main(int argc,char**argv) {
                     auto socket=accept(server,nullptr,nullptr);
                     if(socket==static_cast<Socket>(-1))break;
                     if(clients.size()>=48||!nonblocking(socket)){closeSocket(socket);continue;}
-                    clients.push_back({socket,{}, {},0,now});
+                    Client client;client.socket=socket;client.progress=now;clients.push_back(std::move(client));
                 }
             }
             for(auto it=clients.begin();it!=clients.end();) {
                 auto& client=*it;
                 bool closed=false;
-                if(client.output.empty()) {
+                if(client.websocket&&client.sent>65536){client.output.erase(0,client.sent);client.sent=0;}
+                if(client.output.empty()||client.websocket) {
                     try {
                         char buffer[8192];
                         // A bounded amount per client keeps simulation and other sockets fair.
@@ -259,8 +266,17 @@ int main(int argc,char**argv) {
                             if(n>0) {
                                 client.input.append(buffer,n);client.progress=now;
                                 require(client.input.size()<=49152,"請求過大");
+                                if(client.websocket)break;
                                 if(auto request=receive(client.input)) {
-                                    client.output=handle(std::move(*request));
+                                    if(request->path=="/api/socket") {
+                                        auto& h=request->headers;
+                                        require(request->method=="GET"&&lower(h["upgrade"])=="websocket"&&h["sec-websocket-version"]=="13","WebSocket升級格式錯誤");
+                                        const auto host=h["host"],origin=h["origin"];
+                                        require(!host.empty()&&(origin=="https://"+host||origin=="http://"+host),"WebSocket來源不符");
+                                        require(lower(h["connection"]).find("upgrade")!=std::string::npos,"WebSocket連線標頭錯誤");
+                                        client.output="HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: "+ws::acceptKey(h["sec-websocket-key"])+"\r\n\r\n";
+                                        client.websocket=true;
+                                    }else client.output=handle(std::move(*request));
                                     client.input.clear();break;
                                 }
                             }else {
@@ -268,8 +284,43 @@ int main(int argc,char**argv) {
                                 break;
                             }
                         }
+                        if(client.websocket&&!client.closing)for(int count=0;count<4;count++) {
+                            auto frame=ws::decode(client.input);if(!frame)break;
+                            if(frame->opcode==8){client.output+=ws::encode({},8);client.closing=true;break;}
+                            if(frame->opcode==9){client.output+=ws::encode(frame->payload,10);continue;}
+                            if(frame->opcode==10)continue;
+                            if(frame->opcode==1){require(!client.fragmented,"WebSocket片段順序錯誤");client.fragment=frame->payload;}
+                            else{require(client.fragmented,"WebSocket缺少首片段");client.fragment+=frame->payload;}
+                            require(client.fragment.size()<=16384,"WebSocket訊息過大");
+                            client.fragmented=!frame->final;if(client.fragmented)continue;
+                            require(ws::utf8(client.fragment),"WebSocket文字編碼錯誤");
+                            Id reply;
+                            try {
+                                const auto message=Json::parse(client.fragment);reply=message.str("id");require(reply.size()<=100,"訊息ID過長");
+                                const auto channel=message.str("channel");Json result;
+                                if(channel=="auth") {
+                                    require(client.token.empty(),"已完成連線驗證");
+                                    auto key=message.str("token");result=runtime.snapshot(key);client.token=std::move(key);
+                                }else {
+                                    require(!client.token.empty(),"請先登入驗證");
+                                    if(channel=="input"){
+                                        runtime.input(client.token,message.at("body"));
+                                        if(!message.at("body").flag("jump")&&std::chrono::duration<double>(now-client.lastStreamSnapshot).count()<.095){client.fragment.clear();continue;}
+                                        client.lastStreamSnapshot=now;result=runtime.snapshot(client.token);
+                                    }
+                                    else if(channel=="command")result=runtime.command(client.token,message.at("body"));
+                                    else if(channel=="state")result=runtime.snapshot(client.token);
+                                    else throw RuleError("未知WebSocket通道");
+                                }
+                                result["_sync"]=Json{{"epoch",syncEpoch},{"sequence",++syncSequence}};
+                                result["_reply"]=reply;client.output+=ws::encode(result.dump());
+                            }catch(const std::exception& e){client.output+=ws::encode(Json{{"ok",false},{"error",e.what()},{"_reply",reply}}.dump());if(client.token.empty()){client.output+=ws::encode(std::string("\x03\xf0",2),8);client.closing=true;}}
+                            client.fragment.clear();
+                            require(client.output.size()-client.sent<=512*1024,"WebSocket接收端過慢");
+                        }
                     }catch(const std::exception& e) {
-                        response(client.output,400,"application/json; charset=utf-8",Json{{"ok",false},{"error",e.what()}}.dump());
+                        if(client.websocket){client.output+=ws::encode(std::string("\x03\xea",2),8);client.closing=true;}
+                        else response(client.output,400,"application/json; charset=utf-8",Json{{"ok",false},{"error",e.what()}}.dump());
                     }
                 }
                 if(!closed&&!client.output.empty()) {
@@ -281,11 +332,11 @@ int main(int argc,char**argv) {
                         0
 #endif
                     );
-                    if(n>0){client.sent+=n;client.progress=now;closed=client.sent==client.output.size();}
+                    if(n>0){client.sent+=n;client.progress=now;if(client.sent==client.output.size()){closed=!client.websocket||client.closing;client.output.clear();client.sent=0;}}
                     else if(n==0||!wouldBlock())closed=true;
                 }
                 const double idle=std::chrono::duration<double>(now-client.progress).count();
-                if(idle>(client.output.empty()?2.0:15.0))closed=true;
+                if(idle>(client.websocket?(client.token.empty()?5.0:45.0):(client.output.empty()?2.0:15.0)))closed=true;
                 if(closed){closeSocket(client.socket);it=clients.erase(it);}else ++it;
             }
         }

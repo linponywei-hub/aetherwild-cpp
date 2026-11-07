@@ -20,3 +20,7 @@ CMake、Windows、容器建置與線上換版仍需各自驗收。先前的VALID
 目前原線上來源為ai/equipment-warehouse-v0.2.2，auto deploy off。僅合併GitHub不會更新服務；需將既有Render服務srv-dbn5vdd9fdbs739adpk0的來源切成受測main整合commit，再手動部署，追蹤至live，驗證health、catalog十起始職業及圖鑑/羈絆/故事模組。Free服務重新部署可能重設本機測試角色進度，已在本次對話告知。
 
 部署完成後，以擁有者登入「管理」頁啟用64公里世界，第一批五區先開，王城維持第二批。若有玩家仍在副本，伺服器會拒絕切換；先讓隊伍退出，不直接改玩家存檔。
+
+## WebSocket後續整合
+
+最新連線以docs/12_WebSocket與即時效能數據.md為準。遊戲內容與WebSocket／Canvas效能分支已在獨立ai/integrated-content-realtime進行三方整合，保留既有profile、warehouseItems、contentState、_sync與_motion；擴圖仍停用舊平地預測。發布來源會先合併至main，再以安全fast-forward同步既有Render追蹤分支；不必改Render來源設定或新增服務。詳見docs/RELEASE_COORDINATION.md。

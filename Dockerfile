@@ -9,7 +9,7 @@ COPY tests/ tests/
 COPY tools/build.py tools/build.py
 ENV AW_BUILD_JOBS=1
 RUN python3 tools/build.py
-RUN python3 tests/http_runner.py && python3 tests/cloud_access.py
+RUN python3 tests/http_runner.py && python3 tests/content_http.py && python3 tests/cloud_access.py
 RUN mkdir -p /runtime-libs && cp -L "$(g++ -print-file-name=libstdc++.so.6)" /runtime-libs/ && cp -L "$(gcc -print-file-name=libgcc_s.so.1)" /runtime-libs/
 
 FROM debian:bookworm-slim AS runtime
