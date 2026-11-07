@@ -1,5 +1,3 @@
-import * as THREE from '/vendor/three.module.js';
-
 // Visual-only registry. No authoritative game rules belong in this module.
 // Register GLB files here after placing them under web/assets/models/.
 export const MODEL_ASSETS = Object.freeze({
@@ -50,7 +48,9 @@ export class ModelAssets {
   async instantiate(id) {
     const { root, asset, animations } = await this.template(id);
     // Cloning skinned meshes needs SkeletonUtils; defer that to the rigging stage.
-    if (root.getObjectByProperty('isSkinnedMesh', true)) {
+    let skinned = false;
+    root.traverse(node => { if (node.isSkinnedMesh) skinned = true; });
+    if (skinned) {
       throw new Error('Skinned GLB requires SkeletonUtils integration before instancing');
     }
     const instance = root.clone(true);
@@ -76,4 +76,5 @@ export class ModelAssets {
     }
   }
   clearCache() { this.cache.clear(); }
+  registeredIds() { return Object.keys(this.registry); }
 }
