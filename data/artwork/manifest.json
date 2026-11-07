@@ -8119,8 +8119,15 @@
       "name": "熾焰爆流",
       "category": "skill",
       "type": "skill",
-      "status": "pending",
-      "path": "assets/reference/items/ember.png"
+      "status": "ready",
+      "path": "assets/reference/items/ember.png",
+      "sha256": "52c80f190b4d9abf9d4529b89ac74ed8194df7411e7eabe79baba996521ff000",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 103247,
+      "prompt": "Use case: stylized-concept. One production fantasy RPG skill illustration for 熾焰爆流, Blazing Eruption, exact game ID ember. A spectacular explosive jet of molten orange red fire blasting diagonally upward from a concentrated burst, twisting tongues of flame and glowing cinders with a white hot core, energetic directional attack silhouette. Refined semi-realistic fantasy game painting, detailed flame structure, isolated magical effect, centered landscape 3:2 framing, all flames contained with transparent padding. Actual RGBA transparent background. No circular badge, no frame, no text, no watermark, no scenery, no opaque background and no painted checkerboard."
     },
     "frost": {
       "id": "frost",
@@ -8143,8 +8150,15 @@
       "name": "黑棘侵蝕",
       "category": "skill",
       "type": "skill",
-      "status": "pending",
-      "path": "assets/reference/items/nightthorn.png"
+      "status": "ready",
+      "path": "assets/reference/items/nightthorn.png",
+      "sha256": "ba93b7824822440a009d28295b8ddeac632ee8eb77469654993aed5aa410a502",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 96152,
+      "prompt": "Use case: stylized-concept. Create one production fantasy RPG skill illustration for 黑棘侵蝕 (Blackthorn Corruption), exact game ID nightthorn. A dramatic twisting eruption of sharp black thorn vines, entangling a translucent spectral limb while violet corrosive magic eats through it, vivid readable silhouette and expressive attack motion. Detailed semi-realistic painted fantasy game art, refined thorns and purple energy, centered isolated visual effect, landscape 3:2 framing, all effect inside frame with generous transparent padding. Actual transparent RGBA background. No circular badge, no frame, no text, no letters, no scenery, no black background, no checkerboard."
     },
     "oathguard": {
       "id": "oathguard",
@@ -8167,8 +8181,15 @@
       "name": "風息護幕",
       "category": "skill",
       "type": "skill",
-      "status": "pending",
-      "path": "assets/reference/items/wind.png"
+      "status": "ready",
+      "path": "assets/reference/items/wind.png",
+      "sha256": "9b8ba31fe5968d460867c27d2c94152cae4772034477fede760882af5a33a7de",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 54857,
+      "prompt": "Use case: stylized-concept. One production fantasy RPG skill illustration: 風息護幕, Wind Shelter, game ID wind. An elegant curved translucent turquoise wind barrier swirling protectively around a small central adventurer silhouette, flowing pale green air ribbons and few delicate leaves showing shelter and wind motion, no environment. Detailed semi-realistic fantasy game painting, dramatic clean readable isolated silhouette, subtle luminous wind with solid visible edges, landscape 3:2 composition, centered, generous transparent padding, actual RGBA transparent background. No circular badge, no border, no text, no symbols resembling letters, no scenery, no checkerboard, no opaque background."
     },
     "cotton": {
       "id": "cotton",
