@@ -1,0 +1,27 @@
+name: Blender Goblin Grounding
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/blender/fix_goblin_ground.py'
+      - '.github/workflows/blender-goblin.yml'
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Blender
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y blender
+          blender --version
+      - name: Ground original goblin GLB
+        run: |
+          blender --background --factory-startup --python tools/blender/fix_goblin_ground.py -- web/assets/models/characters/monsters/goblin-test.glb output/goblin-grounded.glb output/ground-report.json
+      - name: Upload corrected GLB and validation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: goblin-grounded-glb
+          path: output/
+          if-no-files-found: error
