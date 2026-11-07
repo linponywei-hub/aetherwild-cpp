@@ -4,7 +4,15 @@ import {batchParts} from './mesh-batch.js';
 import {surfaceAt} from './landscape-model.js';
 export class CityScene {
  constructor(scene){this.scene=scene;this.chunks=[];this.glows=[];this.lamps=[];this.scenery=new Map();this.lights=[];this.pending=[];
-  const batches=new Map();for(const b of scene.catalog.buildings){if(!b.style.includes('|'))continue;const key=chunkKey(b.position.x,b.position.z);if(!batches.has(key))batches.set(key,{x:Math.floor(b.position.x/128)*128,z:Math.floor(b.position.z/128)*128,parts:[]});const batch=batches.get(key);for(const p of buildingParts(b))batch.parts.push({...p,x:p.x+b.position.x-batch.x,y:p.y+b.position.y,z:p.z+b.position.z-batch.z});if(b.style.endsWith('|lamp'))this.lamps.push({x:b.position.x,y:b.position.y+b.height,z:b.position.z});}
+  const batches=new Map();let starterHouseIndex=0;for(const b of scene.catalog.buildings){if(!b.style.includes('|'))continue;
+   // The starter town uses pipe-style buildings rendered by CityScene, not RealmScene's simple buildings.
+   // Replace up to five town buildings with the user's optimized GLBs, keeping their original geometry until loading succeeds.
+   if(b.region==='windchime'&&starterHouseIndex<5){
+    const fallback=new T.Group();fallback.position.set(b.position.x,b.position.y,b.position.z);
+    const parts=buildingParts(b);if(parts.length)fallback.add(batchParts(parts));
+    scene.root.add(fallback);scene.loadVillageHouse(fallback,++starterHouseIndex,b);
+    continue;
+   }const key=chunkKey(b.position.x,b.position.z);if(!batches.has(key))batches.set(key,{x:Math.floor(b.position.x/128)*128,z:Math.floor(b.position.z/128)*128,parts:[]});const batch=batches.get(key);for(const p of buildingParts(b))batch.parts.push({...p,x:p.x+b.position.x-batch.x,y:p.y+b.position.y,z:p.z+b.position.z-batch.z});if(b.style.endsWith('|lamp'))this.lamps.push({x:b.position.x,y:b.position.y+b.height,z:b.position.z});}
   for(const r of scene.catalog.regions){if(r.wilderness||['tidehaven','aw_westport','aw_southmill'].includes(r.id))continue;const u=r.urbanRadius||80;for(const axis of [0,1])for(let along=-u*.6;along<u*.6;along+=48){const length=Math.min(48,u*.6-along),x=r.position.x+(axis?0:along+length/2),z=r.position.z+(axis?along+length/2:0),key=chunkKey(x,z);if(!batches.has(key))batches.set(key,{x:Math.floor(x/128)*128,z:Math.floor(z/128)*128,parts:[]});const b=batches.get(key);b.parts.push({shape:'box',x:x-b.x,y:r.elevation+.035,z:z-b.z,sx:axis?8:length,sy:.06,sz:axis?length:8,color:'#b2a682'});}}
   for(const batch of batches.values()){const root=new T.Group();root.position.set(batch.x,0,batch.z);root.userData.cullRadius=128;for(const glow of [false,true]){const parts=batch.parts.filter(p=>!!p.glow===glow);if(!parts.length)continue;const mesh=batchParts(parts,{glow});root.add(mesh);if(glow)this.glows.push(mesh.material);}scene.root.add(root);this.chunks.push(root);}
   for(let i=0;i<6;i++){const light=new T.PointLight('#ffd391',0,18,2);scene.world.add(light);this.lights.push(light);}
