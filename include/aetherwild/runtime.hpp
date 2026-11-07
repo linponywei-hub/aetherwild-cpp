@@ -51,6 +51,7 @@ namespace aw {
         void contentTick(double);
         bool monsterAbility(Monster&,Player*);
         Json contentSnapshot(const Player&)const;
+        Json equippedSkills(const Player&)const;
         bool contentAllowed(Vec3)const;
         void checkContentRegion(const Id&)const;
         void startExpandedWorld();

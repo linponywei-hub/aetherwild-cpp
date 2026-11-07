@@ -99,7 +99,9 @@ namespace aw {
             restore(Json::parse(text));
         }
         else populate();
-        if(!legacyTestWorld)applyWorldPatch();
+        if(!legacyTestWorld){applyWorldPatch();
+            for(auto&[id,p]:world_.players)if(p.scene=="world"&&blocked(p.position,buildings_)){bool found=false;const auto old=p.position;for(int rad=2;rad<=60&&!found;rad+=2)for(int n=0;n<16;n++){Vec3 v{old.x+std::cos(n*tau/16)*rad,old.y+2,old.z+std::sin(n*tau/16)*rad};v.y=groundBelow(v,catalog_);if(!blocked(v,buildings_)&&contentAllowed(v)){p.position=v;found=true;break;}}if(!found)p.position=cityArrival(catalog_.regions.at(p.lastCity));motion_[id].velocityY=0;}
+        }
     }
     Id GameRuntime::token() {
         Id v;
@@ -207,7 +209,7 @@ namespace aw {
         for(auto k: {
             "regions","items","resources","npcs","dungeons","quests","recipes","classes","skills","buildings"
         })j[k]=Json::array();
-        for(auto&[id,r]:catalog_.regions)j["regions"].push(Json {
+        for(auto&[id,r]:catalog_.regions)j["regions"].push(Json { {"urbanRadius",urbanRadius(r)},
             {
                 "id",id
             },
@@ -478,6 +480,7 @@ namespace aw {
                 "chat",chat_
             }
         };
+        j["player"]["skillSlots"]=equippedSkills(p);j["player"]["skillOptions"]=Json::array();for(const auto& skill:p.learnedSkills)if(catalog_.skills.contains(skill)&&catalog_.skills.at(skill).effect!="dash"&&(!catalog_.skillOwners.contains(skill)||catalog_.skillOwners.at(skill)==p.profession))j["player"]["skillOptions"].push(skill);
         j["player"]["weaponType"]=weaponName(catalog_.classes.at(p.profession).weapon);
         const double epoch=std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count();
         j["environment"]=Json{{"unixSeconds",epoch},{"cycleSeconds",1800}};
@@ -501,9 +504,13 @@ namespace aw {
             if(online) {
                 auto pub=playerJson(other,false);
                 pub["yaw"]=motion_.contains(id)?motion_.at(id).yaw:0;
+                pub["weaponType"]="unarmed";pub["weapon"]=Json{};
+                auto equipped=other.equipped.find(Slot::Weapon);
+                if(equipped!=other.equipped.end())for(const auto& item:other.inventory)if(item.id==equipped->second){const auto& def=catalog_.items.at(item.definition);pub["weaponType"]=weaponName(def.weapon);pub["weapon"]=Json{{"code",def.id},{"name",def.name},{"type",weaponName(def.weapon)},{"rarity",static_cast<int>(item.rarity)},{"upgrade",item.upgrade}};break;}
+
                 if(!catalog_.classes.at(other.profession).secret.empty())pub["profession"]="unknown";
                 j["online"].push(pub);
-                if(id!=p.id&&other.scene==p.scene)j["players"].push(pub);
+                if(id!=p.id&&other.scene==p.scene&&distance(other.position,p.position)<=180)j["players"].push(pub);
             }
         }
         for(auto&[id,mob]:world_.monsters)if(mob.scene==p.scene&&distance(mob.position,p.position)<320) {

@@ -45,6 +45,9 @@ try:
  s.json({'channel':'admin_map','id':'atlas'});atlas=s.read()[1]
  check(atlas.get('ok')==False if state['role']=='player' else len(atlas['planned'])==25)
  check(atlas['_reply']=='atlas')
+ check(len(state['player']['skillSlots'])==5)
+ s.json({'channel':'command','id':'slot-clear','body':{'type':'skill_slot','request':'ws-slot-clear','slot':0,'skill':''}});clear=s.read()[1];check(clear['player']['skillSlots'][0]=='')
+ s.json({'channel':'command','id':'slot-bad','body':{'type':'skill_slot','request':'ws-slot-bad','slot':5,'skill':''}});check(s.read()[1]['ok']==False)
  s.send('ping-check',opcode=9);check(s.read()==(10,b'ping-check'))
  if 'content' in state:
   # The content command router and realtime channel share one authoritative world.
