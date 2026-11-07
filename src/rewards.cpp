@@ -1,4 +1,5 @@
 #include "aetherwild/services.hpp"
+#include "aetherwild/content.hpp"
 namespace aw {
     bool RewardSystem::claim(World& w,Player& p,const Id& id,const Catalog& c) {
         if(p.processedRewards.contains(id))return false;
@@ -49,7 +50,7 @@ namespace aw {
                     "weapon","armor","helm","boots","charm"
                 };
                 Id slot=slots[(hash+i)%5];
-                if(slot=="weapon")slot=c.classes.at(p.profession).weapon==WeaponKind::Staff?"staff":c.classes.at(p.profession).weapon==WeaponKind::Bow?"bow":"sword";
+                if(slot=="weapon")slot=weaponName(c.classes.at(p.profession).weapon);
                 auto code=m.definition+"_"+slot;
                 if(c.items.contains(code))r.items.push_back(InventorySystem::create(w,c,code,Rarity::Rare));
             }
@@ -67,3 +68,4 @@ namespace aw {
         });
     }
 }
+

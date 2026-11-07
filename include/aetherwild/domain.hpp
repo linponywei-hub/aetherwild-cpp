@@ -24,7 +24,7 @@ namespace aw {
     };
     double distance(Vec3 a, Vec3 b);
     bool finite(Vec3 v);
-    enum class WeaponKind {None, Sword, Staff, Bow};
+    enum class WeaponKind {None, Sword, Staff, Bow, ShieldBlade, Daggers, Gauntlets, Instrument, Totem, Cannon, Toolgun, Chakram, Hammer, Spear, Focus, Greatsword};
     enum class Slot {Weapon, Armor, Helm, Boots, Charm};
     enum class Rarity {Common, Rare, Epic, Excellent, Legendary, Mythic, Immortal};
     struct Stats {
@@ -167,6 +167,12 @@ namespace aw {
         std::map<Id, NpcDefinition> npcs;
         std::map<Id,double> arrowBonus;
         Materials prices;
+        double worldLimit {1800};
+        int contentRelease {5};
+        std::map<Id,int> regionReleases;
+        std::map<Id,std::string> classRoles;
+        std::map<Id,std::vector<Id>> classSkills;
+        std::map<Id,Id> skillOwners, starterItems;
         void validate() const;
     };
     Catalog makeCatalog();
@@ -230,6 +236,11 @@ namespace aw {
         frozenUntil {};
         bool boss {},
         rewardIssued {};
+        Id castSkill;
+        Vec3 castPoint;
+        double castResolve {}, abilityReady {};
+        Id tauntedBy;
+        double tauntUntil {};
         std::map<Id,double> contribution;
         double receiveDamage(double amount) {
             return vitals.receiveDamage(amount);
@@ -286,3 +297,4 @@ namespace aw {
         bool killed {};
     };
 }
+

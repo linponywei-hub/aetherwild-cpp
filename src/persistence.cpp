@@ -6,7 +6,7 @@ namespace aw {
     namespace {
         void validate(const Player&p,const Catalog&c) {
             require(!p.id.empty()&&!p.name.empty()&&p.id.size()<=128&&p.name.size()<=128&&c.classes.contains(p.profession)&&p.level>=1&&p.level<=100&&p.coins>=0&&p.bankCoins>=0&&p.xp>=0&&p.gatherXp>=0,"存檔角色數值錯誤");
-            require(p.scene=="world"&&c.regions.contains(p.lastCity)&&!c.regions.at(p.lastCity).wilderness&&finite(p.position)&&std::abs(p.position.x)<=1800&&std::abs(p.position.z)<=1800,"存檔場景錯誤");
+            require(p.scene=="world"&&c.regions.contains(p.lastCity)&&!c.regions.at(p.lastCity).wilderness&&finite(p.position)&&std::abs(p.position.x)<=c.worldLimit&&std::abs(p.position.z)<=c.worldLimit,"存檔場景錯誤");
             require(std::isfinite(p.vitals.hp)&&std::isfinite(p.vitals.mp)&&std::isfinite(p.vitals.stamina)&&p.vitals.hp>=0&&p.vitals.mp>=0&&p.vitals.stamina>=0,"存檔生命數值錯誤");
             for(auto*m: {&p.materials,&p.warehouse})for(auto&[id,n]:*m)require(!id.empty()&&n>=0&&(c.resources.contains(id)||c.arrowBonus.contains(id)||id=="potion"||id=="energy_potion"),"存檔材料錯誤");
             for(auto&[id,n]:p.tools)require((id=="axe"||id=="pick"||id=="sickle")&&n>=1&&n<=5,"存檔工具錯誤");
@@ -151,3 +151,4 @@ namespace aw {
         return p;
     }
 }
+

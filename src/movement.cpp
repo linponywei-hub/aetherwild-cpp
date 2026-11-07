@@ -1,5 +1,6 @@
 #include "aetherwild/services.hpp"
 #include "aetherwild/geometry.hpp"
+#include "aetherwild/content.hpp"
 namespace aw {
     bool MovementSystem::safe(Vec3 pos,const Id& scene,const Catalog& c) {
         if(scene!="world")return false;
@@ -27,7 +28,8 @@ namespace aw {
     }
     void MovementSystem::move(Player& p,Vec3 dest,double dt,bool sprint,const Catalog& c,double now) {
         require(p.vitals.alive()&&finite(dest)&&std::isfinite(dt)&&dt>0&&dt<=1,"移動參數錯誤");
-        require(std::abs(dest.x)<=1800&&std::abs(dest.z)<=1800&&std::abs(dest.y-p.position.y)<=1.4,"超出邊界或需要樓層碰撞解算");
+        require(std::abs(dest.x)<=c.worldLimit&&std::abs(dest.z)<=c.worldLimit&&std::abs(dest.y-p.position.y)<=1.4,"超出邊界或需要樓層碰撞解算");
+        require(p.scene!="world"||contentPositionAllowed(c,dest),"此路段尚未開放");
         bool running=sprint&&!p.sprintLocked&&p.vitals.stamina>=18*dt;
         double speed=5+InventorySystem::bonuses(p,c).speed;
         require(distance(dest,p.position)<=(running?speed*1.6:speed)*dt+1e-6,"移動速度超過上限");
@@ -39,3 +41,4 @@ namespace aw {
         }
     }
 }
+

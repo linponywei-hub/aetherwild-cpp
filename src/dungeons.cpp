@@ -1,8 +1,10 @@
 #include "aetherwild/services.hpp"
+#include "aetherwild/content.hpp"
 namespace aw {
     Id DungeonSystem::enter(World& w,Player& p,const Id& id,const Catalog& c) {
         require(c.dungeons.contains(id)&&p.scene=="world"&&p.vitals.alive(),"無法進入副本");
         auto&d=c.dungeons.at(id);
+        require(contentRegionOpen(c,d.region),"此區副本尚未開放");
         require(p.level>=d.level,"副本等級不足");
         require(distance(p.position,d.entrancePosition)<=8,"請先抵達副本入口");
         DungeonRun r;
@@ -78,3 +80,4 @@ namespace aw {
         w.runs.erase(run.id);
     }
 }
+

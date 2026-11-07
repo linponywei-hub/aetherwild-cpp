@@ -1,0 +1,617 @@
+[
+  {
+    "id": "aw_crownreach",
+    "name": "曙冠王城",
+    "center": {
+      "x": 0,
+      "z": 0
+    },
+    "biome": "王城平原",
+    "kind": "city",
+    "landmarks": [
+      "水鐘王庭",
+      "七地使館",
+      "放射大道"
+    ],
+    "design_note": "王城必須位於全圖幾何中心，不以舊村當中心。",
+    "atlas_index": 1,
+    "layer": "surface",
+    "radius_m": 850,
+    "level_band": [
+      25,
+      55
+    ],
+    "release": 2
+  },
+  {
+    "id": "windchime",
+    "name": "風鈴新手村",
+    "center": {
+      "x": -4500,
+      "z": 4800
+    },
+    "biome": "田園河谷",
+    "kind": "village",
+    "landmarks": [
+      "老磨坊",
+      "風鈴田",
+      "舊驛道"
+    ],
+    "design_note": "保留新手安全圈，至王城走完整驛道約7公里。",
+    "atlas_index": 2,
+    "layer": "surface",
+    "radius_m": 450,
+    "level_band": [
+      1,
+      8
+    ],
+    "release": 1
+  },
+  {
+    "id": "verdant",
+    "name": "翠冠城",
+    "center": {
+      "x": -14000,
+      "z": 3000
+    },
+    "biome": "巨樹森林",
+    "kind": "city",
+    "landmarks": [
+      "多層樹冠",
+      "藤橋",
+      "根脈濕地"
+    ],
+    "design_note": "房屋位於巨樹上；林下仍保留自然地面。",
+    "atlas_index": 3,
+    "layer": "surface",
+    "radius_m": 850,
+    "level_band": [
+      6,
+      25
+    ],
+    "release": 1
+  },
+  {
+    "id": "cinder",
+    "name": "燼鐵城",
+    "center": {
+      "x": -17000,
+      "z": -10500
+    },
+    "biome": "火山工業",
+    "kind": "city",
+    "landmarks": [
+      "熔爐",
+      "工業運河",
+      "鐵路",
+      "高架天橋"
+    ],
+    "design_note": "蒸氣機械城市，工業與居住區分流。",
+    "atlas_index": 4,
+    "layer": "surface",
+    "radius_m": 850,
+    "level_band": [
+      25,
+      55
+    ],
+    "release": 2
+  },
+  {
+    "id": "tidehaven",
+    "name": "潮汐港城",
+    "center": {
+      "x": 21000,
+      "z": 4000
+    },
+    "biome": "海上船城",
+    "kind": "city",
+    "landmarks": [
+      "繫泊巨船",
+      "跨船木橋",
+      "燈塔",
+      "防波堤"
+    ],
+    "design_note": "城市建立在停泊海上的船上，不能畫成空中島嶼。",
+    "atlas_index": 5,
+    "layer": "surface",
+    "radius_m": 850,
+    "level_band": [
+      12,
+      40
+    ],
+    "release": 3
+  },
+  {
+    "id": "frosthold",
+    "name": "霜白城",
+    "center": {
+      "x": -15500,
+      "z": -20500
+    },
+    "biome": "巨大雪山",
+    "kind": "city",
+    "landmarks": [
+      "山坡村屋",
+      "暖棚",
+      "雪崩溝",
+      "埋鐘"
+    ],
+    "design_note": "保持雪山村莊外觀，非平地冰雪大都會。",
+    "atlas_index": 6,
+    "layer": "surface",
+    "radius_m": 850,
+    "level_band": [
+      25,
+      55
+    ],
+    "release": 4
+  },
+  {
+    "id": "sundune",
+    "name": "曜砂城",
+    "center": {
+      "x": 12000,
+      "z": 18000
+    },
+    "biome": "綠洲沙漠",
+    "kind": "city",
+    "landmarks": [
+      "日輪庭",
+      "商隊帳市",
+      "水渠",
+      "砂岩街"
+    ],
+    "design_note": "水道控制街區成長，沙海留足旅行尺度。",
+    "atlas_index": 7,
+    "layer": "surface",
+    "radius_m": 850,
+    "level_band": [
+      25,
+      55
+    ],
+    "release": 5
+  },
+  {
+    "id": "astral",
+    "name": "星穹城",
+    "center": {
+      "x": 16000,
+      "z": -16000
+    },
+    "biome": "浮空星島",
+    "kind": "city",
+    "landmarks": [
+      "浮島",
+      "星環",
+      "升降站",
+      "城下遺構"
+    ],
+    "design_note": "原本約76m浮島高度不因平面擴圖自動放大。",
+    "atlas_index": 8,
+    "layer": "surface",
+    "radius_m": 850,
+    "level_band": [
+      25,
+      55
+    ],
+    "release": 4
+  },
+  {
+    "id": "darkforest",
+    "name": "暗黑森林",
+    "center": {
+      "x": -25000,
+      "z": -2000
+    },
+    "biome": "黑棘古林",
+    "kind": "wild",
+    "landmarks": [
+      "低起伏死林",
+      "黑根祭壇",
+      "霧池"
+    ],
+    "design_note": "保留現版無大山的林區特徵，以樹根、霧和水道製造複雜度。",
+    "atlas_index": 9,
+    "layer": "surface",
+    "radius_m": 2800,
+    "level_band": [
+      55,
+      75
+    ],
+    "release": 5
+  },
+  {
+    "id": "aw_northwatch",
+    "name": "北境長垣城",
+    "center": {
+      "x": 3500,
+      "z": -24000
+    },
+    "biome": "寒原邊城",
+    "kind": "city",
+    "landmarks": [
+      "長垣關",
+      "馴獸營",
+      "凍河橋"
+    ],
+    "design_note": "軍鎮之外保有牧民與市集生活，不等於敵國。",
+    "atlas_index": 10,
+    "layer": "surface",
+    "radius_m": 850,
+    "level_band": [
+      25,
+      55
+    ],
+    "release": 4
+  },
+  {
+    "id": "aw_westport",
+    "name": "西岸霧港城",
+    "center": {
+      "x": -25000,
+      "z": 14000
+    },
+    "biome": "海霧港灣",
+    "kind": "city",
+    "landmarks": [
+      "潮石碼頭",
+      "白牆坡屋",
+      "霧鐘"
+    ],
+    "design_note": "沿海陸上港城，與海上船城功能不同。",
+    "atlas_index": 11,
+    "layer": "surface",
+    "radius_m": 850,
+    "level_band": [
+      12,
+      40
+    ],
+    "release": 3
+  },
+  {
+    "id": "aw_southmill",
+    "name": "南川豐穗城",
+    "center": {
+      "x": -4500,
+      "z": 24500
+    },
+    "biome": "河網農城",
+    "kind": "city",
+    "landmarks": [
+      "水輪磨坊",
+      "糧倉",
+      "稻田",
+      "分洪閘"
+    ],
+    "design_note": "供應全境糧食，也是玩家住宅與生活技能中心。",
+    "atlas_index": 12,
+    "layer": "surface",
+    "radius_m": 850,
+    "level_band": [
+      12,
+      40
+    ],
+    "release": 2
+  },
+  {
+    "id": "aw_eastglass",
+    "name": "東境琉光城",
+    "center": {
+      "x": 25500,
+      "z": -11500
+    },
+    "biome": "鹽晶高地",
+    "kind": "city",
+    "landmarks": [
+      "彩玻璃廊",
+      "鹽田",
+      "晶鏡塔"
+    ],
+    "design_note": "以光學、玻璃與遠征補給區別於星術城。",
+    "atlas_index": 13,
+    "layer": "surface",
+    "radius_m": 850,
+    "level_band": [
+      25,
+      55
+    ],
+    "release": 5
+  },
+  {
+    "id": "aw_windplain",
+    "name": "風息大平原",
+    "center": {
+      "x": -3000,
+      "z": -8000
+    },
+    "biome": "草原",
+    "kind": "wild",
+    "landmarks": [
+      "丘陵",
+      "牧群",
+      "斷牆",
+      "季節溪"
+    ],
+    "design_note": "新手過渡至王城及工業路線的第一片長途荒野。",
+    "atlas_index": 14,
+    "layer": "surface",
+    "radius_m": 2800,
+    "level_band": [
+      6,
+      25
+    ],
+    "release": 1
+  },
+  {
+    "id": "aw_reedbasin",
+    "name": "蘆影湖盆",
+    "center": {
+      "x": 7500,
+      "z": -6500
+    },
+    "biome": "湖泊濕地",
+    "kind": "wild",
+    "landmarks": [
+      "蘆葦湖",
+      "沉木",
+      "棧道",
+      "水鳥島"
+    ],
+    "design_note": "游泳初中級探索，保留乾燥替代路。",
+    "atlas_index": 15,
+    "layer": "surface",
+    "radius_m": 2800,
+    "level_band": [
+      12,
+      40
+    ],
+    "release": 1
+  },
+  {
+    "id": "aw_moonveil",
+    "name": "月紗瀑布谷",
+    "center": {
+      "x": -11000,
+      "z": 10000
+    },
+    "biome": "瀑布峽谷",
+    "kind": "wild",
+    "landmarks": [
+      "月紗潭",
+      "映月池",
+      "瀑布",
+      "水簾洞"
+    ],
+    "design_note": "瀑布上下層需可讀路線，現有moonveil入口附掛此區。",
+    "atlas_index": 16,
+    "layer": "surface",
+    "radius_m": 2800,
+    "level_band": [
+      6,
+      25
+    ],
+    "release": 1
+  },
+  {
+    "id": "aw_ambermesa",
+    "name": "琥珀台地",
+    "center": {
+      "x": 9500,
+      "z": 8500
+    },
+    "biome": "平頂台地",
+    "kind": "wild",
+    "landmarks": [
+      "赭岩台地",
+      "長橋",
+      "琥珀礦",
+      "鷹巢"
+    ],
+    "design_note": "上層視野與下層狹谷形成兩套探索路線。",
+    "atlas_index": 17,
+    "layer": "surface",
+    "radius_m": 2800,
+    "level_band": [
+      25,
+      55
+    ],
+    "release": 2
+  },
+  {
+    "id": "aw_silvergrass",
+    "name": "銀草游牧地",
+    "center": {
+      "x": -24000,
+      "z": 23500
+    },
+    "biome": "高草原",
+    "kind": "wild",
+    "landmarks": [
+      "銀草海",
+      "石環",
+      "游牧營",
+      "古獸道"
+    ],
+    "design_note": "坐騎故事與遷徙路線，不把所有原野填成房屋。",
+    "atlas_index": 18,
+    "layer": "surface",
+    "radius_m": 2800,
+    "level_band": [
+      25,
+      55
+    ],
+    "release": 3
+  },
+  {
+    "id": "aw_ashmarch",
+    "name": "灰燼邊境",
+    "center": {
+      "x": -8000,
+      "z": -16500
+    },
+    "biome": "火山荒地",
+    "kind": "wild",
+    "landmarks": [
+      "冷熔岩",
+      "熱泉",
+      "廢鐵軌",
+      "灰穀倉"
+    ],
+    "design_note": "火山區到寒原的氣候緩衝。",
+    "atlas_index": 19,
+    "layer": "surface",
+    "radius_m": 2800,
+    "level_band": [
+      25,
+      55
+    ],
+    "release": 2
+  },
+  {
+    "id": "aw_thundercoast",
+    "name": "雷鳴海岬",
+    "center": {
+      "x": 27000,
+      "z": 15500
+    },
+    "biome": "暴風海岸",
+    "kind": "wild",
+    "landmarks": [
+      "玄武岩海柱",
+      "海蝕洞",
+      "斷燈塔"
+    ],
+    "design_note": "海上高階探索；天候變化保留可辨識避難點。",
+    "atlas_index": 20,
+    "layer": "surface",
+    "radius_m": 2800,
+    "level_band": [
+      25,
+      55
+    ],
+    "release": 3
+  },
+  {
+    "id": "aw_mirrorice",
+    "name": "映雪冰原",
+    "center": {
+      "x": -6500,
+      "z": -27000
+    },
+    "biome": "冰川湖",
+    "kind": "wild",
+    "landmarks": [
+      "映雪湖支脈",
+      "藍冰裂口",
+      "遷徙白鹿"
+    ],
+    "design_note": "高階寒地與霜白的救援路連接。",
+    "atlas_index": 21,
+    "layer": "surface",
+    "radius_m": 2800,
+    "level_band": [
+      25,
+      55
+    ],
+    "release": 4
+  },
+  {
+    "id": "aw_starfall",
+    "name": "隕星盆地",
+    "center": {
+      "x": 23500,
+      "z": -25000
+    },
+    "biome": "星隕荒原",
+    "kind": "wild",
+    "landmarks": [
+      "隕坑",
+      "漂浮碎石",
+      "廢觀測站"
+    ],
+    "design_note": "地面星脈區，不把整個東北都變成浮空城。",
+    "atlas_index": 22,
+    "layer": "surface",
+    "radius_m": 2800,
+    "level_band": [
+      55,
+      75
+    ],
+    "release": 4
+  },
+  {
+    "id": "aw_sunken",
+    "name": "沉鐘群島",
+    "center": {
+      "x": 28500,
+      "z": -1000
+    },
+    "biome": "群島水域",
+    "kind": "wild",
+    "landmarks": [
+      "沉鐘塔",
+      "珊瑚礁",
+      "漂流村",
+      "潛水遺跡"
+    ],
+    "design_note": "初期船渡與淺水，深潛內容待系統成熟後開放。",
+    "atlas_index": 23,
+    "layer": "surface",
+    "radius_m": 2800,
+    "level_band": [
+      25,
+      55
+    ],
+    "release": 3
+  },
+  {
+    "id": "aw_underlost",
+    "name": "失落之城・迴燈",
+    "center": {
+      "x": 0,
+      "z": 0
+    },
+    "biome": "地下界域",
+    "kind": "underground",
+    "landmarks": [
+      "菌光街",
+      "水市",
+      "無名者議席",
+      "零鐘庭"
+    ],
+    "design_note": "平面中心坐標僅表示示意投影；獨立世界層，不與王城同一樓板。",
+    "atlas_index": 24,
+    "layer": "underground",
+    "radius_m": 450,
+    "level_band": [
+      55,
+      75
+    ],
+    "release": 5
+  },
+  {
+    "id": "aw_oldriver",
+    "name": "晴川故道",
+    "center": {
+      "x": 2500,
+      "z": 17500
+    },
+    "biome": "舊河道濕林",
+    "kind": "wild",
+    "landmarks": [
+      "廢棄分洪堤",
+      "古驛橋",
+      "沉沒戶籍所",
+      "河源紀念林"
+    ],
+    "design_note": "第25區：把各城的水權、遷居與地下撤離故事匯合於同一條古河道。",
+    "atlas_index": 25,
+    "layer": "surface",
+    "radius_m": 2600,
+    "level_band": [
+      45,
+      70
+    ],
+    "release": 5
+  }
+]

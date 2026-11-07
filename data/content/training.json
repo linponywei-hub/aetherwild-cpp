@@ -1,0 +1,1106 @@
+[
+  {
+    "id": "aw_training_priest",
+    "name": "牧師的第一份承諾",
+    "class_id": "priest",
+    "giver": "astral_guild",
+    "region": "astral",
+    "story": "照護者跨越不同信仰共用醫療知識，救援不是信仰考試。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「照護屏障」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_priest_1",
+      "aw_gear_priest_2",
+      "aw_gear_priest_3"
+    ],
+    "dialogue": [
+      "亞斯：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_duelist",
+    "name": "雙月劍士的第一份承諾",
+    "class_id": "duelist",
+    "giver": "cinder_guild",
+    "region": "cinder",
+    "story": "兩把劍代表護送與斷後，同一個人不能只記得進攻的一面。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「雙刃互架」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_duelist_1",
+      "aw_gear_duelist_2",
+      "aw_gear_duelist_3"
+    ],
+    "dialogue": [
+      "巴洛：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_witch",
+    "name": "巫毒女巫的第一份承諾",
+    "class_id": "witch",
+    "giver": "astral_guild",
+    "region": "astral",
+    "story": "以草藥、契約與詛咒研究痛苦的流動；職業不綁定玩家性別，也不等於邪惡。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「藥煙護身」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_witch_1",
+      "aw_gear_witch_2",
+      "aw_gear_witch_3"
+    ],
+    "dialogue": [
+      "亞斯：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_necromancer",
+    "name": "亡靈召喚師的第一份承諾",
+    "class_id": "necromancer",
+    "giver": "astral_guild",
+    "region": "astral",
+    "story": "護衛為自願留下的戰鬥殘響；召喚結束必須解散，不役使未同意的亡者。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「骨燈護幕」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_necromancer_1",
+      "aw_gear_necromancer_2",
+      "aw_gear_necromancer_3"
+    ],
+    "dialogue": [
+      "亞斯：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_warrior",
+    "name": "戰士的第一份承諾",
+    "class_id": "warrior",
+    "giver": "windchime_guild",
+    "region": "windchime",
+    "story": "最早的戰士是守在撤離路口的護衛，旋風斬用來逼退包圍者。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「穩步架刃」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_warrior_1",
+      "aw_gear_warrior_2",
+      "aw_gear_warrior_3"
+    ],
+    "dialogue": [
+      "艾琳：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_mage",
+    "name": "法師的第一份承諾",
+    "class_id": "mage",
+    "giver": "windchime_guild",
+    "region": "windchime",
+    "story": "星火起初是遠距發送安全訊號的方法，後來才成為攻擊法術。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「星紗護身」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_mage_1",
+      "aw_gear_mage_2",
+      "aw_gear_mage_3"
+    ],
+    "dialogue": [
+      "艾琳：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_ranger",
+    "name": "遊俠的第一份承諾",
+    "class_id": "ranger",
+    "giver": "windchime_guild",
+    "region": "windchime",
+    "story": "辨認足跡與節省箭材是守林人的本事，不以獵殺數量衡量成熟。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「低枝藏身」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_ranger_1",
+      "aw_gear_ranger_2",
+      "aw_gear_ranger_3"
+    ],
+    "dialogue": [
+      "艾琳：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_knight",
+    "name": "符文騎士的第一份承諾",
+    "class_id": "knight",
+    "giver": "cinder_guild",
+    "region": "cinder",
+    "story": "把撤離誓約刻在護甲上，提醒自己保護的是具體的人。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「符盾架勢」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_knight_1",
+      "aw_gear_knight_2",
+      "aw_gear_knight_3"
+    ],
+    "dialogue": [
+      "巴洛：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_battlemage",
+    "name": "元素術士的第一份承諾",
+    "class_id": "battlemage",
+    "giver": "astral_guild",
+    "region": "astral",
+    "story": "研究元素交換的代價，不能把一處失去的熱量當成憑空得到。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「相位護幕」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_battlemage_1",
+      "aw_gear_battlemage_2",
+      "aw_gear_battlemage_3"
+    ],
+    "dialogue": [
+      "亞斯：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_hawkeye",
+    "name": "鷹眼獵手的第一份承諾",
+    "class_id": "hawkeye",
+    "giver": "verdant_guild",
+    "region": "verdant",
+    "story": "遠望不只為找敵人，也為看見需要繞開的住家與同行者。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「靜目守勢」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_hawkeye_1",
+      "aw_gear_hawkeye_2",
+      "aw_gear_hawkeye_3"
+    ],
+    "dialogue": [
+      "希芙：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_paladin",
+    "name": "聖域守護者的第一份承諾",
+    "class_id": "paladin",
+    "giver": "cinder_guild",
+    "region": "cinder",
+    "story": "聖域是一個暫時可以喘息的地方，守護者必須想好撤退路。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「誓甲守勢」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_paladin_1",
+      "aw_gear_paladin_2",
+      "aw_gear_paladin_3"
+    ],
+    "dialogue": [
+      "巴洛：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_archmage",
+    "name": "星焰大魔導的第一份承諾",
+    "class_id": "archmage",
+    "giver": "astral_guild",
+    "region": "astral",
+    "story": "能喚來隕星的人先學會觀測落點，力量不能省去責任。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「星焰護幕」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_archmage_1",
+      "aw_gear_archmage_2",
+      "aw_gear_archmage_3"
+    ],
+    "dialogue": [
+      "亞斯：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_windlord",
+    "name": "風行領主的第一份承諾",
+    "class_id": "windlord",
+    "giver": "verdant_guild",
+    "region": "verdant",
+    "story": "領風者選擇路線而非統治天空，對隊友回報每一次改向。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「風衣守勢」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_windlord_1",
+      "aw_gear_windlord_2",
+      "aw_gear_windlord_3"
+    ],
+    "dialogue": [
+      "希芙：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_shadow",
+    "name": "影刃行者的第一份承諾",
+    "class_id": "shadow",
+    "giver": "tidehaven_guild",
+    "region": "tidehaven",
+    "story": "無聲之墓保存了未署名的救援者。他們穿過封鎖線，不為暗殺的榮耀，而為把還活著的人帶回來。暗影收割的吸血是回收散逸共鳴，並非必須飲用生命。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「斂息遮影」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_shadow_1",
+      "aw_gear_shadow_2",
+      "aw_gear_shadow_3"
+    ],
+    "dialogue": [
+      "萊恩：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_sage",
+    "name": "星語賢者的第一份承諾",
+    "class_id": "sage",
+    "giver": "astral_guild",
+    "region": "astral",
+    "story": "聽見星穹回響的人也要能聽完地面的話；智慧包含承認資料缺漏。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「星語護頁」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_sage_1",
+      "aw_gear_sage_2",
+      "aw_gear_sage_3"
+    ],
+    "dialogue": [
+      "亞斯：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_tank",
+    "name": "守衛的第一份承諾",
+    "class_id": "aw_class_tank",
+    "giver": "windchime_guild",
+    "region": "windchime",
+    "story": "最早的守衛站在撤離門前，學會替同伴擋下第一波壓力，而非只靠自己更耐打。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「立盾守勢」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_tank_1",
+      "aw_gear_aw_class_tank_2",
+      "aw_gear_aw_class_tank_3"
+    ],
+    "dialogue": [
+      "艾琳：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_assassin",
+    "name": "刺客的第一份承諾",
+    "class_id": "aw_class_assassin",
+    "giver": "windchime_guild",
+    "region": "windchime",
+    "story": "暗巷信使把潛行用於救援與情報，刺客的訓練同樣包含分辨不可攻擊的目標。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「斂息潛行」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_assassin_1",
+      "aw_gear_aw_class_assassin_2",
+      "aw_gear_aw_class_assassin_3"
+    ],
+    "dialogue": [
+      "艾琳：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_acolyte",
+    "name": "祈護者的第一份承諾",
+    "class_id": "aw_class_acolyte",
+    "giver": "windchime_guild",
+    "region": "windchime",
+    "story": "各地照護者共用急救與祈護知識，信仰不作接受治療的條件。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「掌心回暖」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_acolyte_1",
+      "aw_gear_aw_class_acolyte_2",
+      "aw_gear_aw_class_acolyte_3"
+    ],
+    "dialogue": [
+      "艾琳：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_monk",
+    "name": "武僧的第一份承諾",
+    "class_id": "aw_class_monk",
+    "giver": "windchime_guild",
+    "region": "windchime",
+    "story": "長途搬運與救援鍛鍊出以呼吸掌握重心的武藝，並不綁定任何玩家宗教。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「調息護身」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_monk_1",
+      "aw_gear_aw_class_monk_2",
+      "aw_gear_aw_class_monk_3"
+    ],
+    "dialogue": [
+      "艾琳：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_engineer",
+    "name": "機械師的第一份承諾",
+    "class_id": "aw_class_engineer",
+    "giver": "windchime_guild",
+    "region": "windchime",
+    "story": "工班把維修工具改成便攜戰具；每一次輸出都必須留下足夠的冷卻與撤離能力。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「展開護板」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_engineer_1",
+      "aw_gear_aw_class_engineer_2",
+      "aw_gear_aw_class_engineer_3"
+    ],
+    "dialogue": [
+      "艾琳：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_bard",
+    "name": "吟遊者的第一份承諾",
+    "class_id": "aw_class_bard",
+    "giver": "windchime_guild",
+    "region": "windchime",
+    "story": "流動樂手把報時、行軍與安慰編入旋律，支持隊友但不能用歌聲強迫他人同意。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「穩拍行歌」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_bard_1",
+      "aw_gear_aw_class_bard_2",
+      "aw_gear_aw_class_bard_3"
+    ],
+    "dialogue": [
+      "艾琳：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_druid",
+    "name": "自然行者的第一份承諾",
+    "class_id": "aw_class_druid",
+    "giver": "windchime_guild",
+    "region": "windchime",
+    "story": "守林者研究共生和棲地，借來的自然力量需要補種、照護與歸還。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「苔衣護持」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_druid_1",
+      "aw_gear_aw_class_druid_2",
+      "aw_gear_aw_class_druid_3"
+    ],
+    "dialogue": [
+      "艾琳：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_shieldguard",
+    "name": "壁壘衛士的第一份承諾",
+    "class_id": "aw_class_shieldguard",
+    "giver": "aw_npc_crown_archivist",
+    "region": "aw_crownreach",
+    "story": "從護門到護街，壁壘衛士必須選擇盾牆面向，也信任隊友照看背後。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「城門立壁」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_shieldguard_1",
+      "aw_gear_aw_class_shieldguard_2",
+      "aw_gear_aw_class_shieldguard_3"
+    ],
+    "dialogue": [
+      "王庫抄寫官蘇棠：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_ironfortress",
+    "name": "鐵城重衛的第一份承諾",
+    "class_id": "aw_class_ironfortress",
+    "giver": "cinder_guild",
+    "region": "cinder",
+    "story": "重甲源於礦井防塌裝備，抵擋巨力時也需要排熱與足底支撐。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「鎧板互鎖」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_ironfortress_1",
+      "aw_gear_aw_class_ironfortress_2",
+      "aw_gear_aw_class_ironfortress_3"
+    ],
+    "dialogue": [
+      "巴洛：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_tidewarden",
+    "name": "潮誓護衛的第一份承諾",
+    "class_id": "aw_class_tidewarden",
+    "giver": "tidehaven_guild",
+    "region": "tidehaven",
+    "story": "船醫護送隊以潮汐節奏分擔壓力，不把自己的傷轉嫁給沒有同意的人。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「繫錨守勢」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_tidewarden_1",
+      "aw_gear_aw_class_tidewarden_2",
+      "aw_gear_aw_class_tidewarden_3"
+    ],
+    "dialogue": [
+      "萊恩：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_silentblade",
+    "name": "緘影刃的第一份承諾",
+    "class_id": "aw_class_silentblade",
+    "giver": "aw_exp_npc_aw_underlost_local",
+    "region": "aw_underlost",
+    "story": "地下信使以無聲步法穿越警戒，保密的目的是保護住民而非掩蓋責任。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「暗廊斂息」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_silentblade_1",
+      "aw_gear_aw_class_silentblade_2",
+      "aw_gear_aw_class_silentblade_3"
+    ],
+    "dialogue": [
+      "菌田學徒小苔：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_venomreaper",
+    "name": "毒棘行者的第一份承諾",
+    "class_id": "aw_class_venomreaper",
+    "giver": "sundune_guild",
+    "region": "sundune",
+    "story": "藥師辨識毒與藥的界線，所有毒刃都附有可取得的解毒知識。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「無味藏息」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_venomreaper_1",
+      "aw_gear_aw_class_venomreaper_2",
+      "aw_gear_aw_class_venomreaper_3"
+    ],
+    "dialogue": [
+      "扎伊：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_mirage",
+    "name": "幻砂舞刃的第一份承諾",
+    "class_id": "aw_class_mirage",
+    "giver": "sundune_guild",
+    "region": "sundune",
+    "story": "商隊舞者用反光與節拍擾亂追兵，幻影不等於可任意穿越牆壁。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「折光藏身」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_mirage_1",
+      "aw_gear_aw_class_mirage_2",
+      "aw_gear_aw_class_mirage_3"
+    ],
+    "dialogue": [
+      "扎伊：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_oathhealer",
+    "name": "誓約療師的第一份承諾",
+    "class_id": "aw_class_oathhealer",
+    "giver": "aw_npc_crown_archivist",
+    "region": "aw_crownreach",
+    "story": "醫療誓約要求先解釋代價、尊重拒絕，不能把治療當作取得服從的交換。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「知情療癒」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_oathhealer_1",
+      "aw_gear_aw_class_oathhealer_2",
+      "aw_gear_aw_class_oathhealer_3"
+    ],
+    "dialogue": [
+      "王庫抄寫官蘇棠：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_luminary",
+    "name": "晨燈祭司的第一份承諾",
+    "class_id": "aw_class_luminary",
+    "giver": "frosthold_guild",
+    "region": "frosthold",
+    "story": "雪山湯屋把熱湯與燈光變成救援信號，晨燈法術保存了這份習慣。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「暖爐回復」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_luminary_1",
+      "aw_gear_aw_class_luminary_2",
+      "aw_gear_aw_class_luminary_3"
+    ],
+    "dialogue": [
+      "伊恩：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_exorcist",
+    "name": "鎮魂師的第一份承諾",
+    "class_id": "aw_class_exorcist",
+    "giver": "aw_exp_npc_darkforest_local",
+    "region": "darkforest",
+    "story": "鎮魂不是抹消亡者，而是讓失控殘響能被辨認、安放與解散。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「守魂紙障」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_exorcist_1",
+      "aw_gear_aw_class_exorcist_2",
+      "aw_gear_aw_class_exorcist_3"
+    ],
+    "dialogue": [
+      "白繩救援員回木：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_ironfist",
+    "name": "鐵息拳師的第一份承諾",
+    "class_id": "aw_class_ironfist",
+    "giver": "cinder_guild",
+    "region": "cinder",
+    "story": "鐵工搬運隊以呼吸協調重物，拳術借的是重心而不是憑空產生衝擊。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「內息固身」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_ironfist_1",
+      "aw_gear_aw_class_ironfist_2",
+      "aw_gear_aw_class_ironfist_3"
+    ],
+    "dialogue": [
+      "巴洛：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_galefist",
+    "name": "疾風鬥士的第一份承諾",
+    "class_id": "aw_class_galefist",
+    "giver": "aw_exp_npc_aw_windplain_local",
+    "region": "aw_windplain",
+    "story": "原野嚮導以短步轉向與低姿勢躲開獸群，進退都保留落腳空間。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「風息守心」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_galefist_1",
+      "aw_gear_aw_class_galefist_2",
+      "aw_gear_aw_class_galefist_3"
+    ],
+    "dialogue": [
+      "牧人小犁：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_breathwalker",
+    "name": "靜脈行者的第一份承諾",
+    "class_id": "aw_class_breathwalker",
+    "giver": "aw_exp_npc_aw_mirrorice_local",
+    "region": "aw_mirrorice",
+    "story": "冰原救援員學會在壓力中穩定呼吸，替全隊找回能繼續前進的節奏。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「緩息定心」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_breathwalker_1",
+      "aw_gear_aw_class_breathwalker_2",
+      "aw_gear_aw_class_breathwalker_3"
+    ],
+    "dialogue": [
+      "鹿路嚮導白茸：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_mechanist",
+    "name": "機關術師的第一份承諾",
+    "class_id": "aw_class_mechanist",
+    "giver": "cinder_guild",
+    "region": "cinder",
+    "story": "把大型工廠拆成可控小裝置，裝置損壞也不能堵死隊伍的退路。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「折疊鋼罩」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_mechanist_1",
+      "aw_gear_aw_class_mechanist_2",
+      "aw_gear_aw_class_mechanist_3"
+    ],
+    "dialogue": [
+      "巴洛：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_artillery",
+    "name": "熔壓砲手的第一份承諾",
+    "class_id": "aw_class_artillery",
+    "giver": "cinder_guild",
+    "region": "cinder",
+    "story": "遠距火力從礦井破岩工具演變而來，每次開火都需確認後座、落點和友方位置。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「駐鋤穩架」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_artillery_1",
+      "aw_gear_aw_class_artillery_2",
+      "aw_gear_aw_class_artillery_3"
+    ],
+    "dialogue": [
+      "巴洛：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_runesmith",
+    "name": "符鑄師的第一份承諾",
+    "class_id": "aw_class_runesmith",
+    "giver": "aw_exp_npc_aw_eastglass_local",
+    "region": "aw_eastglass",
+    "story": "在裝備上留下可檢查的能量路徑，符文不再只是無人讀懂的權威裝飾。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「回路護甲」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_runesmith_1",
+      "aw_gear_aw_class_runesmith_2",
+      "aw_gear_aw_class_runesmith_3"
+    ],
+    "dialogue": [
+      "曬鹽人晝白：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_battlecantor",
+    "name": "戰歌領奏的第一份承諾",
+    "class_id": "aw_class_battlecantor",
+    "giver": "aw_exp_npc_aw_northwatch_local",
+    "region": "aw_northwatch",
+    "story": "邊關鼓手不讓節拍把人推向死亡，而是用明確訊號讓所有人知道何時退。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「守拍行歌」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_battlecantor_1",
+      "aw_gear_aw_class_battlecantor_2",
+      "aw_gear_aw_class_battlecantor_3"
+    ],
+    "dialogue": [
+      "馴獸員北茸：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_dreamweaver",
+    "name": "夢弦師的第一份承諾",
+    "class_id": "aw_class_dreamweaver",
+    "giver": "verdant_guild",
+    "region": "verdant",
+    "story": "以自願進入的記憶旋律安慰疲憊旅人，對話與故事不能操控玩家的選擇。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「清醒護調」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_dreamweaver_1",
+      "aw_gear_aw_class_dreamweaver_2",
+      "aw_gear_aw_class_dreamweaver_3"
+    ],
+    "dialogue": [
+      "希芙：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_chronicle",
+    "name": "史詩記錄者的第一份承諾",
+    "class_id": "aw_class_chronicle",
+    "giver": "astral_guild",
+    "region": "astral",
+    "story": "保存多版本史詩，發動力量需要指出來源，而非宣稱唯一正確的歷史。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「引文護頁」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_chronicle_1",
+      "aw_gear_aw_class_chronicle_2",
+      "aw_gear_aw_class_chronicle_3"
+    ],
+    "dialogue": [
+      "亞斯：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_beastwarden",
+    "name": "獸語守望的第一份承諾",
+    "class_id": "aw_class_beastwarden",
+    "giver": "aw_exp_npc_aw_silvergrass_local",
+    "region": "aw_silvergrass",
+    "story": "與野獸建立可退出的合作，寵物與臨時召喚物使用不同資料與負載上限。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「共棲苔衣」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_beastwarden_1",
+      "aw_gear_aw_class_beastwarden_2",
+      "aw_gear_aw_class_beastwarden_3"
+    ],
+    "dialogue": [
+      "牧道見證人銀穗：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_thornkeeper",
+    "name": "荊棘牧守的第一份承諾",
+    "class_id": "aw_class_thornkeeper",
+    "giver": "verdant_guild",
+    "region": "verdant",
+    "story": "根牆保護苗圃，也會擋住需要通行的人；施術者必須能撤回自己放出的障礙。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「盤根護身」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_thornkeeper_1",
+      "aw_gear_aw_class_thornkeeper_2",
+      "aw_gear_aw_class_thornkeeper_3"
+    ],
+    "dialogue": [
+      "希芙：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_tidecaller",
+    "name": "泉潮行者的第一份承諾",
+    "class_id": "aw_class_tidecaller",
+    "giver": "aw_exp_npc_aw_reedbasin_local",
+    "region": "aw_reedbasin",
+    "story": "水道照護者將乾淨水與共鳴結合，不能以魔法名義無限制抽走湖水。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「清流回復」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_tidecaller_1",
+      "aw_gear_aw_class_tidecaller_2",
+      "aw_gear_aw_class_tidecaller_3"
+    ],
+    "dialogue": [
+      "舟匠半槳：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_berserker",
+    "name": "赤誓鬥士的第一份承諾",
+    "class_id": "aw_class_berserker",
+    "giver": "cinder_guild",
+    "region": "cinder",
+    "story": "工班角力傳承追求在壓力下仍能停手，憤怒不是失去目標辨識的理由。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「熱血守勢」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_berserker_1",
+      "aw_gear_aw_class_berserker_2",
+      "aw_gear_aw_class_berserker_3"
+    ],
+    "dialogue": [
+      "巴洛：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_spearwarden",
+    "name": "長槍巡衛的第一份承諾",
+    "class_id": "aw_class_spearwarden",
+    "giver": "aw_npc_crown_archivist",
+    "region": "aw_crownreach",
+    "story": "驛路護送者以槍距控制路口，保護身後的旅人而不是只追逐逃跑敵人。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「橫槍守線」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_spearwarden_1",
+      "aw_gear_aw_class_spearwarden_2",
+      "aw_gear_aw_class_spearwarden_3"
+    ],
+    "dialogue": [
+      "王庫抄寫官蘇棠：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  },
+  {
+    "id": "aw_training_aw_class_beastmaster",
+    "name": "巡野馴獵師的第一份承諾",
+    "class_id": "aw_class_beastmaster",
+    "giver": "aw_exp_npc_aw_silvergrass_local",
+    "region": "aw_silvergrass",
+    "story": "獵人以觀察建立協作，不以抓捕所有野生動物充實自己的戰力。",
+    "steps": [
+      "辨識可攻擊訓練靶與友方旁觀者；不用攻擊NPC通過試煉。",
+      "演練「林緣藏身」與安全撤退。",
+      "完成一次護送／支援／目標處理，結束後能停止輸出並回報。"
+    ],
+    "unlock_policy": "基礎職業先免費開放再提供練習；不以高好感或第2批王城作起始前置。既有隱藏職業保留原副本、等級與材料限制。",
+    "reward": [
+      "aw_gear_aw_class_beastmaster_1",
+      "aw_gear_aw_class_beastmaster_2",
+      "aw_gear_aw_class_beastmaster_3"
+    ],
+    "dialogue": [
+      "牧道見證人銀穗：力量會讓你能做更多事，先學會哪時候該停。",
+      "玩家：如果我現在還做不到呢？",
+      "那就回訓練場再試。我們不用別人的性命當你的考卷。"
+    ]
+  }
+]
