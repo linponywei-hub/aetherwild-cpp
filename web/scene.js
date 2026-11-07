@@ -88,7 +88,7 @@ export class RealmScene {
          node.material=Array.isArray(node.material)?node.material.map(m=>m.clone()):node.material?.clone();
          const mats=Array.isArray(node.material)?node.material:[node.material];
          for(const mat of mats)if(mat?.color)mat.color.multiply(new T.Color(v.tint));
-         node.castShadow=true;
+         node.castShadow=false;
        });
        const bounds=new T.Box3().setFromObject(copy),h=bounds.max.y-bounds.min.y;
        if(!Number.isFinite(h)||h<=0)continue;
@@ -158,6 +158,7 @@ export class RealmScene {
    const p=this.state?.player;
    if(!p||p.scene!=='world')return;
    for(const g of this.goblinPack||[]){
+   if(Math.hypot(p.position.x-(g.position.x+this.goblinPackRoot.position.x),p.position.z-(g.position.z+this.goblinPackRoot.position.z))>30)continue;
    const ai=g.userData.ai ||= {mode:'patrol',timer:0,attackCooldown:1.5,stones:0,projectiles:[],home:g.position.clone(),seed:g.userData.packIndex};
    ai.timer+=dt;ai.attackCooldown-=dt;
    const worldPos=new T.Vector3();g.getWorldPosition(worldPos);
@@ -207,10 +208,19 @@ export class RealmScene {
    }
  }
  animate(){requestAnimationFrame(()=>this.animate());if(this.renderer.software&&performance.now()-(this.lastRender||0)<33)return;this.lastRender=performance.now();let dt=Math.min(.1,this.clock.getDelta());this.time+=dt;
-   this.updateGoblinAI(dt);
+   // Fixed midday lighting for the preview build.
+   this.sun.position.set(-35,180,-25);this.sun.intensity=3.4;
+   this.hemisphere.intensity=2.05;
+   this.goblinAiAccumulator=(this.goblinAiAccumulator||0)+dt;
+   if(this.goblinAiAccumulator>=.05){this.updateGoblinAI(Math.min(.1,this.goblinAiAccumulator));this.goblinAiAccumulator=0;}
    // Goblin test has no embedded clips: animate its rigid model safely.
    for(const preview of this.goblinPack||[]){
      if(!preview.userData.animatedModel)continue;
+     const player=this.state?.player;
+     const wx=preview.position.x+(this.goblinPackRoot?.position.x||0),wz=preview.position.z+(this.goblinPackRoot?.position.z||0);
+     const nearby=player?.scene==='world'&&Math.hypot(player.position.x-wx,player.position.z-wz)<28;
+     preview.visible=nearby;
+     if(!nearby)continue;
      const model=preview.userData.animatedModel;
      const ai=preview.userData.ai,walking=!!ai?.moving;
      const stride=Math.sin(this.time*11);
