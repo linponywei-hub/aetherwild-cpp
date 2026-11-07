@@ -13,7 +13,7 @@ import {MovementPreview} from '/movement-preview.js';
 import * as T from '/vendor/three.module.js';
 import {SoftwareRenderer} from '/software-renderer.js';
 export class RealmScene {
- constructor(canvas,catalog,callbacks){this.canvas=canvas;this.catalog=catalog;this.cb=callbacks;this.world=new T.Scene();this.world.background=new T.Color('#b8cbd1');this.world.fog=new T.FogExp2('#b8c9c0',.0037);this.camera=new T.PerspectiveCamera(68,innerWidth/innerHeight,.08,1500);this.applySettings();this.camera.position.set(0,2,34);this.camera.rotation.order='YXZ';this.yaw=0;this.pitch=-.08;this.keys=new Set();this.jump=false;this.state=null;this.preview=new MovementPreview(catalog);this.networkRTT=0;this.target=null;this.entities=new Map();this.npcObjects=new Map();this.nameplates=new Nameplates();this.modelAssets=new ModelAssets();this.sceneryCell='';this.swing=0;this.feedback=new CombatFeedback();this.time=0;this.arrowTrails=[];this.clock=new T.Clock();try{this.renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});}catch{this.renderer=new SoftwareRenderer(canvas);}this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));this.renderer.setSize(innerWidth,innerHeight);this.renderer.shadowMap.enabled=localStorage.getItem('aw-shadows')!=='0';this.renderer.shadowMap.type=T.PCFSoftShadowMap;this.renderer.outputColorSpace=T.SRGBColorSpace;this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.05;this.hemisphere=new T.HemisphereLight('#d1e5ed','#586d38',2.05);this.world.add(this.hemisphere);this.sun=new T.DirectionalLight('#ffdfaa',3.4);this.sun.position.set(-80,110,-60);this.sun.castShadow=true;this.sun.shadow.mapSize.set(1024,1024);this.sun.shadow.camera.left=-95;this.sun.shadow.camera.right=95;this.sun.shadow.camera.top=95;this.sun.shadow.camera.bottom=-95;this.sun.shadow.camera.near=.5;this.sun.shadow.camera.far=700;this.sun.shadow.normalBias=.04;this.sun.shadow.bias=-.00015;this.world.add(this.sun,this.sun.target);this.root=new T.Group();this.dungeon=new T.Group();this.ambient=new T.Group();this.entityRoot=new T.Group();this.world.add(this.root,this.dungeon,this.ambient,this.entityRoot);this.makeWorld();this.makeGoblinPreview();this.makeDungeon();this.dungeon.visible=false;this.ray=new T.Raycaster();this.mouse=new T.Vector2(0,0);this.weaponScene=new T.Scene();this.weaponCamera=new T.PerspectiveCamera(68,innerWidth/innerHeight,.01,5);this.weaponScene.add(this.weaponCamera,new T.HemisphereLight('#ffffff','#6b705a',2.5));this.makeWeapon('warrior');this.world.add(this.camera);this.start=performance.now();this.active=false;window.addEventListener('resize',()=>this.resize());document.addEventListener('pointerlockchange',()=>callbacks.lock?.(document.pointerLockElement===canvas));document.addEventListener('mousemove',e=>{if(document.pointerLockElement===canvas){const sens=Number(localStorage.getItem('aw-sensitivity')||1);this.yaw-=e.movementX*.0022*sens;this.pitch=Math.max(-1.3,Math.min(1.3,this.pitch-e.movementY*.0022*sens));}});this.environment=new EnvironmentVisual(this);this.animate();}
+ constructor(canvas,catalog,callbacks){this.canvas=canvas;this.catalog=catalog;this.cb=callbacks;this.world=new T.Scene();this.world.background=new T.Color('#b8cbd1');this.world.fog=new T.FogExp2('#b8c9c0',.0037);this.camera=new T.PerspectiveCamera(68,innerWidth/innerHeight,.08,1500);this.applySettings();this.camera.position.set(0,2,34);this.camera.rotation.order='YXZ';this.yaw=0;this.pitch=-.08;this.keys=new Set();this.jump=false;this.state=null;this.preview=new MovementPreview(catalog);this.networkRTT=0;this.target=null;this.entities=new Map();this.npcObjects=new Map();this.nameplates=new Nameplates();this.modelAssets=new ModelAssets();this.sceneryCell='';this.swing=0;this.feedback=new CombatFeedback();this.time=0;this.arrowTrails=[];this.clock=new T.Clock();try{this.renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});}catch{this.renderer=new SoftwareRenderer(canvas);}this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));this.renderer.setSize(innerWidth,innerHeight);this.renderer.shadowMap.enabled=localStorage.getItem('aw-shadows')!=='0';this.renderer.shadowMap.type=T.PCFSoftShadowMap;this.renderer.outputColorSpace=T.SRGBColorSpace;this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.05;this.hemisphere=new T.HemisphereLight('#d1e5ed','#586d38',2.05);this.world.add(this.hemisphere);this.sun=new T.DirectionalLight('#ffdfaa',3.4);this.sun.position.set(-35,180,-25);this.sun.castShadow=true;this.sun.shadow.mapSize.set(1024,1024);this.sun.shadow.camera.left=-95;this.sun.shadow.camera.right=95;this.sun.shadow.camera.top=95;this.sun.shadow.camera.bottom=-95;this.sun.shadow.camera.near=.5;this.sun.shadow.camera.far=700;this.sun.shadow.normalBias=.04;this.sun.shadow.bias=-.00015;this.world.add(this.sun,this.sun.target);this.root=new T.Group();this.dungeon=new T.Group();this.ambient=new T.Group();this.entityRoot=new T.Group();this.world.add(this.root,this.dungeon,this.ambient,this.entityRoot);this.makeWorld();this.makeGoblinPreview();this.makeDungeon();this.dungeon.visible=false;this.ray=new T.Raycaster();this.mouse=new T.Vector2(0,0);this.weaponScene=new T.Scene();this.weaponCamera=new T.PerspectiveCamera(68,innerWidth/innerHeight,.01,5);this.weaponScene.add(this.weaponCamera,new T.HemisphereLight('#ffffff','#6b705a',2.5));this.makeWeapon('warrior');this.world.add(this.camera);this.start=performance.now();this.active=false;window.addEventListener('resize',()=>this.resize());document.addEventListener('pointerlockchange',()=>callbacks.lock?.(document.pointerLockElement===canvas));document.addEventListener('mousemove',e=>{if(document.pointerLockElement===canvas){const sens=Number(localStorage.getItem('aw-sensitivity')||1);this.yaw-=e.movementX*.0022*sens;this.pitch=Math.max(-1.3,Math.min(1.3,this.pitch-e.movementY*.0022*sens));}});this.environment=new EnvironmentVisual(this);this.animate();}
  shootArrow(){const direction=new T.Vector3();this.camera.getWorldDirection(direction);const g=new T.Group();const material=new T.MeshBasicMaterial({color:'#e5d5a5'}),shaft=new T.Mesh(new T.CylinderGeometry(.012,.012,.7,4),material);g.add(shaft);const tip=new T.Mesh(new T.ConeGeometry(.035,.11,4),material);tip.position.y=.4;g.add(tip);g.position.copy(this.camera.position).addScaledVector(direction,.8);g.position.y-=.13;g.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),direction);this.world.add(g);this.arrowTrails.push({g,direction,life:.32});}
  contactShadow(parent,x,z){const m=new T.Mesh(new T.CircleGeometry(1,12),new T.MeshBasicMaterial({color:'#102018',transparent:true,opacity:.25,depthWrite:false,side:T.DoubleSide}));m.rotation.x=-Math.PI/2;m.scale.set(x,z,1);m.position.y=.035;m.castShadow=m.receiveShadow=false;parent.add(m);return m;}
  mat(color,extra={}){return new T.MeshStandardMaterial({color,roughness:.88,...extra});}
@@ -100,12 +100,18 @@ export class RealmScene {
        g.userData.groundClearance=.12;
        // Role equipment is attached to the variant, not baked into the shared GLB.
        const gear=new T.Group();g.add(gear);
+       const armor=this.mat(v.weapon==='axe'?'#8a542d':v.weapon==='staff'?'#594a80':v.weapon==='bow'?'#5e7040':'#71533c');
+       if(v.weapon==='axe'){this.box(gear,.55,.18,.33,'#a68132',0,.62,0);this.sphere(gear,.25,'#a57c2f',0,.82,0,[1.2,.55,1]);}
+       if(v.weapon==='staff'){this.mesh(new T.ConeGeometry(.22,.45,6),armor,[0,.82,0],gear);this.sphere(gear,.1,'#4edcce',.3,.96,0);}
+       if(v.weapon==='bow'){this.box(gear,.48,.22,.28,armor,0,.48,0);this.box(gear,.12,.44,.16,'#765739',-.3,.52,-.13);}
+       if(v.weapon==='sword'){this.box(gear,.48,.26,.32,armor,0,.47,0);this.mesh(new T.CylinderGeometry(.22,.22,.055,12),this.mat('#555b63'),[-.35,.45,.1],gear).rotation.z=Math.PI/2;}
+       if(v.weapon==='dagger')this.box(gear,.35,.14,.25,armor,0,.42,0);
        const steel=this.mat('#8b8d83'),wood=this.mat('#69533a');
        if(v.weapon==='stone')this.sphere(gear,.09,'#777870',.33,.5,.1);
        if(v.weapon==='dagger'||v.weapon==='sword')this.box(gear,.055,v.weapon==='dagger'?.28:.44,.06,steel,.32,.48,.05);
        if(v.weapon==='staff')this.cylinder(gear,.035,.035,.8,wood,.3,.55,0,6);
        if(v.weapon==='axe'){this.cylinder(gear,.035,.035,.7,wood,.32,.52,0,6);this.box(gear,.3,.2,.08,steel,.32,.83,0);}
-       if(v.weapon==='bow'){const bow=this.mesh(new T.TorusGeometry(.25,.025,5,14,Math.PI),wood,[.3,.52,.05],gear);bow.rotation.z=Math.PI/2;}
+       if(v.weapon==='bow'){const bow=this.mesh(new T.TorusGeometry(.29,.035,6,24,Math.PI),wood,[.38,.58,.2],gear);bow.rotation.z=Math.PI/2;this.cylinder(gear,.008,.008,.58,'#ded4ad',.38,.58,.2,5);this.box(gear,.025,.025,.48,'#c4c6b7',.4,.6,.28);}
        g.userData.gear=gear;
      }
    }).catch(error=>console.warn('[Aetherwild] Goblin pack GLB failed; placeholders retained',error));
@@ -176,18 +182,25 @@ export class RealmScene {
    const model=g.userData.animatedModel;
    ai.moving=Math.hypot(vx,vz)>.1;
    if(model){model.rotation.z=Math.sin(this.time*(ai.moving?11:1.35))*(ai.moving?.07:.02);}
-   if(dist<10&&ai.attackCooldown<=0){
-     if(ai.stones<=0){ai.stones=3;ai.gatherUntil=this.time+.7;ai.attackCooldown=1.2;}
+   const weapon=g.userData.variant.weapon;
+   const range=weapon==='bow'?12:weapon==='staff'?10:weapon==='stone'?10:2.2;
+   if(dist<range&&ai.attackCooldown<=0){
+     if(weapon==='stone'&&ai.stones<=0){ai.stones=3;ai.gatherUntil=this.time+.7;ai.attackCooldown=1.2;}
      else {
-       ai.stones--;ai.throwUntil=this.time+.55;ai.attackCooldown=2.2+Math.random()*.8;
-       const stone=this.mesh(new T.DodecahedronGeometry(.085,0),this.mat('#88857c'),[worldPos.x+Math.sin(g.rotation.y)*.28,worldPos.y+.48,worldPos.z+Math.cos(g.rotation.y)*.28],this.world);
+       if(weapon==='stone')ai.stones--;
+       ai.throwUntil=this.time+.55;ai.attackCooldown=(weapon==='dagger'?1.1:weapon==='sword'?1.6:weapon==='axe'?2.7:weapon==='bow'?2:weapon==='staff'?3:2.2)+Math.random()*.4;
+       if(['stone','bow','staff'].includes(weapon)){
+       const projectile=weapon==='bow'?new T.ConeGeometry(.055,.35,6):weapon==='staff'?new T.SphereGeometry(.12,8,6):new T.DodecahedronGeometry(.085,0);
+       const material=this.mat(weapon==='staff'?'#65d8d8':weapon==='bow'?'#b5a38a':'#88857c');
+       const stone=this.mesh(projectile,material,[worldPos.x+Math.sin(g.rotation.y)*.28,worldPos.y+.48,worldPos.z+Math.cos(g.rotation.y)*.28],this.world);
        const target=new T.Vector3(p.position.x,p.position.y+1.1,p.position.z);
        const origin=stone.position.clone();const velocity=target.sub(origin).normalize().multiplyScalar(8);
-       velocity.y+=1.5;ai.projectiles.push({mesh:stone,velocity,life:2.4});
+       velocity.y+=weapon==='stone'?1.5:0;ai.projectiles.push({mesh:stone,velocity,life:2.4,gravity:weapon==='stone'?9.8:0});
+       }
      }
    }
    for(const shot of [...ai.projectiles]){
-     shot.life-=dt;shot.velocity.y-=9.8*dt;shot.mesh.position.addScaledVector(shot.velocity,dt);
+     shot.life-=dt;shot.velocity.y-=shot.gravity*dt;shot.mesh.position.addScaledVector(shot.velocity,dt);
      const ground=this.landHeight(shot.mesh.position.x,shot.mesh.position.z);
      if(shot.life<=0||shot.mesh.position.y<ground){this.world.remove(shot.mesh);shot.mesh.geometry.dispose();shot.mesh.material.dispose();ai.projectiles.splice(ai.projectiles.indexOf(shot),1);}
    }
