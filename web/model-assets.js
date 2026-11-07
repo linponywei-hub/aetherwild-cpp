@@ -1,3 +1,4 @@
+import * as T from '/vendor/three.module.js';
 import {BASE_MODELS, MODEL_VARIANTS, resolveVariant} from '/model-catalog.js';
 // Visual-only registry. No authoritative game rules belong in this module.
 // Register GLB files here after placing them under web/assets/models/.
@@ -47,13 +48,22 @@ export class ModelAssets {
   async instantiate(id) {
     const { root, animations } = await this.template(id);
     const asset = validateModelAsset(this.registry[id]);
-    // Cloning skinned meshes needs SkeletonUtils; defer that to the rigging stage.
-    let skinned = false;
-    root.traverse(node => { if (node.isSkinnedMesh) skinned = true; });
-    if (skinned) {
-      throw new Error('Skinned GLB requires SkeletonUtils integration before instancing');
-    }
+    // Rebuild the skeleton against cloned bones: Object3D.clone() otherwise
+    // retains bone references from the cached template and breaks animation.
+    const originals = [], copies = [];
+    root.traverse(node => originals.push(node));
     const instance = root.clone(true);
+    instance.traverse(node => copies.push(node));
+    const lookup = new Map(originals.map((node, i) => [node, copies[i]]));
+    for (const source of originals) {
+      if (!source.isSkinnedMesh) continue;
+      const target = lookup.get(source);
+      const skeleton = new T.Skeleton(
+        source.skeleton.bones.map(bone => lookup.get(bone)),
+        source.skeleton.boneInverses.map(matrix => matrix.clone())
+      );
+      target.bind(skeleton, source.bindMatrix.clone());
+    }
     instance.scale.multiplyScalar(asset.scale ?? 1);
     instance.rotation.y += asset.yaw ?? 0;
     if (asset.tint && asset.tint !== '#ffffff') instance.traverse(node => {
@@ -66,12 +76,21 @@ export class ModelAssets {
   async attach(group, id) {
     if (!this.registry[id]) return false;
     try {
-      const { instance } = await this.instantiate(id);
+      const { instance, animations } = await this.instantiate(id);
       if (!group.parent || group.userData.modelAssetId !== id) return false;
       const previous = group.userData.modelInstance;
       if (previous) group.remove(previous);
       group.add(instance);
       group.userData.modelInstance = instance;
+      if (group.userData.modelMixer) group.userData.modelMixer.stopAllAction();
+      group.userData.modelMixer = null;
+      if (animations.length) {
+        const mixer = new T.AnimationMixer(instance);
+        const idle = animations.find(clip => /idle|breathe|待機/i.test(clip.name)) || animations[0];
+        mixer.clipAction(idle).play();
+        group.userData.modelMixer = mixer;
+        group.userData.modelClips = animations;
+      }
       // Hide only the procedural body. Preserve labels, collision proxies and weapons.
       for (const part of group.userData.proceduralParts || []) part.visible = false;
       return true;
