@@ -70,6 +70,19 @@ export class RealmScene {
    import('/vendor/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync('/assets/models/characters/monsters/goblin-test.glb')).then(({scene})=>{
      for(const g of this.goblinPack){
        const v=g.userData.variant,copy=scene.clone(true);
+       // Clone the skeleton per goblin: default clone(true) shares the source
+       // skeleton and otherwise every variant drives the same armature.
+       const originals=[],clones=[];
+       scene.traverse(n=>originals.push(n));copy.traverse(n=>clones.push(n));
+       const mapping=new Map(originals.map((n,i)=>[n,clones[i]]));
+       for(const original of originals)if(original.isSkinnedMesh){
+         const target=mapping.get(original);
+         const bones=original.skeleton.bones.map(b=>mapping.get(b));
+         if(bones.every(Boolean))target.bind(new T.Skeleton(bones,original.skeleton.boneInverses.map(m=>m.clone())),original.bindMatrix.clone());
+       }
+       const joints={};copy.traverse(n=>{if(n.isBone)joints[n.name.replace(/^mixamorig:/,'')]=n;});
+       g.userData.joints=joints;
+       g.userData.restPose=Object.fromEntries(Object.entries(joints).map(([k,b])=>[k,b.quaternion.clone()]));
        copy.traverse(node=>{
          if(!node.isMesh)return;
          node.material=Array.isArray(node.material)?node.material.map(m=>m.clone()):node.material?.clone();
@@ -192,6 +205,20 @@ export class RealmScene {
      model.rotation.y=preview.userData.baseModelYaw+(walking?Math.sin(this.time*5.5)*.075:Math.sin(this.time*.8)*.035);
      model.rotation.x=throwing?-.3+Math.sin(this.time*19)*.12:gathering?.25:walking?stride*.075:0;
      model.rotation.z=walking?Math.sin(this.time*5.5)*.06:Math.sin(this.time*1.35)*.012;
+     // Real skeletal animation: drive both legs, knees, arms and elbows.
+     const joints=preview.userData.joints||{},rest=preview.userData.restPose||{};
+     const phase=this.time*10+preview.userData.packIndex*.7;
+     const swing=walking?Math.sin(phase)*.55:0;
+     const bend=walking?Math.max(0,Math.sin(phase))*.48:0;
+     const throwPhase=throwing?Math.sin((ai.throwUntil-this.time)/.55*Math.PI):0;
+     const gatherPhase=gathering?Math.sin((ai.gatherUntil-this.time)/.7*Math.PI):0;
+     const pose=(name,x=0,y=0,z=0)=>{const bone=joints[name],base=rest[name];if(!bone||!base)return;bone.quaternion.copy(base).multiply(new T.Quaternion().setFromEuler(new T.Euler(x,y,z)));};
+     pose('LeftUpLeg',swing+gatherPhase*.45);pose('RightUpLeg',-swing+gatherPhase*.45);
+     pose('LeftLeg',-bend);pose('RightLeg',walking?-Math.max(0,-Math.sin(phase))*.48:0);
+     pose('LeftFoot',walking?Math.sin(phase)*.15:0);pose('RightFoot',walking?-Math.sin(phase)*.15:0);
+     pose('LeftArm',-swing*.75+gatherPhase*.35);pose('RightArm',swing*.75-throwPhase*1.15+gatherPhase*.4);
+     pose('LeftForeArm',-.12-gatherPhase*.5);pose('RightForeArm',-.15-throwPhase*.85-gatherPhase*.6);
+     pose('Spine',gatherPhase*.2-throwPhase*.16);
    }
    for(const npc of this.npcObjects.values()){if(npc.userData.eileenTest){
         const player=this.state?.player;
