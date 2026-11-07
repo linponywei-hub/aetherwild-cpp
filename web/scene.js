@@ -47,7 +47,19 @@ export class RealmScene {
  human(role='warrior',id='',assetOverride=null){const g=humanoid(role,id||role);g.userData.proceduralParts=[...g.children];const assetId=({warrior:'HUM_WARRIOR_001',mage:'HUM_MAGE_001',ranger:'HUM_RANGER_001',merchant:'HUM_MERCHANT_001',guard:'HUM_GUARD_001'})[role]||'HUM_NPC_001';g.userData.modelAssetId=assetOverride||assetId;if(this.renderer.software)this.contactShadow(g,.45,.35);else if(this.modelAssets.registry[g.userData.modelAssetId])queueMicrotask(()=>this.modelAssets.attach(g,g.userData.modelAssetId));return g;}
  makeGoblinPreview(){
    // A local visual test outside the safe village perimeter (not a server monster).
-   const goblin=this.wolf(false,'windchime');
+   const goblin=new T.Group();
+   // Readable procedural goblin until the uploaded GLB is available in GitHub.
+   const skin='#679b43',cloth='#66513a';
+   this.sphere(goblin,.34,skin,0,1.15,0,[.85,1.1,.72]);
+   this.sphere(goblin,.28,skin,0,1.78,0,[1,.95,.85]);
+   for(const side of [-1,1]){
+     this.mesh(new T.ConeGeometry(.17,.58,6),this.mat(skin),[side*.46,1.85,0],goblin).rotation.z=side*1.22;
+     this.sphere(goblin,.12,'#f5d45d',side*.12,1.8,.24);
+     this.sphere(goblin,.13,skin,side*.43,1.12,0,[.8,2,.8]);
+     this.sphere(goblin,.13,skin,side*.19,.52,0,[.9,2,.9]);
+   }
+   this.sphere(goblin,.14,skin,0,1.64,.28,[.9,.7,1.6]);
+   this.box(goblin,.6,.43,.35,cloth,0,.88,0);
    goblin.position.set(88,0,24);
    goblin.name='Goblin_Visual_Test';
    goblin.userData={kind:'goblin-preview',nonCombat:true};
