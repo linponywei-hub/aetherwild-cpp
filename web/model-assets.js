@@ -71,7 +71,7 @@ export class ModelAssets {
       const box = new T.Box3().setFromObject(instance);
       const height = box.max.y - box.min.y;
       if (Number.isFinite(height) && height > 0.0001) {
-        const targetHeight = 3.225; // player camera is at 1.68 world units
+        const targetHeight = 2.795; // player camera is at 1.68 world units
         const scale = Math.min(10000, Math.max(0.0001, targetHeight / height));
         instance.scale.multiplyScalar(scale);
         instance.updateMatrixWorld(true);
