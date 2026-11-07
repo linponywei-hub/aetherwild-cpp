@@ -33,6 +33,7 @@ export class GLTFLoader {
       cursor+=length;
     }
     if(!json||!bin)throw Error('GLB missing JSON or BIN');
+    if(json.extensionsRequired?.length)throw Error('Unsupported required GLB extensions: '+json.extensionsRequired.join(','));
     if(json.skins?.length||json.animations?.length)throw Error('Rigged GLB requires animation importer');
     const objectUrls=[];
     const textures=await Promise.all((json.textures||[]).map(async tex=>{
