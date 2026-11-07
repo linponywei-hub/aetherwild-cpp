@@ -356,6 +356,21 @@ int main() {
             CHECK(restored.world().players.at(id).vitals.alive());
             std::filesystem::remove_all(folder);
         });
+        test("server bow draw release cancellation and shared environment",[] {
+            GameRuntime g({},true);auto a=g.createSession(Json{{"name","弓箭測試"},{"profession","ranger"}});auto token=a.str("token"),id=a.at("player").str("id");
+            auto& p=g.world().players.at(id);p.scene="bow-test";p.position={0,0,0};p.materials["woodarrow"]=30;
+            auto spawn=[&](const Id& mid){CombatSystem::spawn(g.world(),mid,{0,0,-12},5,"windchime");auto& m=g.world().monsters.at(mid);m.scene=p.scene;m.attack=0;m.vitals.hp=m.vitals.maxHp=10000;};spawn("bow-a");spawn("bow-b");
+            auto snap=g.snapshot(token);CHECK(snap.at("environment").num("cycleSeconds")==1800);CHECK(snap.at("environment").num("unixSeconds")>1700000000);
+            no([&]{cmd(g,a,"bow_release","bow-a");});no([&]{cmd(g,a,"attack","bow-a");});
+            auto arrows=g.world().players.at(id).materials.at("woodarrow");cmd(g,a,"bow_draw");CHECK(g.snapshot(token).at("bow").flag("drawing"));
+            auto hp=g.world().monsters.at("bow-a").vitals.hp;cmd(g,a,"bow_release","bow-a");double quick=hp-g.world().monsters.at("bow-a").vitals.hp;
+            CHECK(quick>0);CHECK(g.world().players.at(id).materials.at("woodarrow")==arrows-1);CHECK(!g.snapshot(token).at("bow").flag("drawing"));
+            no([&]{cmd(g,a,"bow_release","bow-a");});time(g,1);cmd(g,a,"bow_draw");time(g,.65);cmd(g,a,"bow_draw");time(g,.65);
+            hp=g.world().monsters.at("bow-b").vitals.hp;auto full=cmd(g,a,"bow_release","bow-b");CHECK(hp-g.world().monsters.at("bow-b").vitals.hp>quick);CHECK(!full.at("bow").flag("drawing"));
+            time(g,1);cmd(g,a,"bow_draw");arrows=g.world().players.at(id).materials.at("woodarrow");cmd(g,a,"bow_cancel");CHECK(g.world().players.at(id).materials.at("woodarrow")==arrows);no([&]{cmd(g,a,"bow_release","bow-b");});
+            cmd(g,a,"bow_draw");g.world().players.at(id).scene="another-scene";no([&]{cmd(g,a,"bow_release","bow-b");});CHECK(!g.snapshot(token).at("bow").flag("drawing"));
+            g.world().players.at(id).scene="bow-test";cmd(g,a,"bow_cancel");cmd(g,a,"bow_draw");time(g,12.1);no([&]{cmd(g,a,"bow_release","bow-b");});
+        });
         std::cout<<"OK "<<groups<<" workstation groups, "<<checks<<" checks\n";
         return 0;
     }
