@@ -107,6 +107,16 @@ export class ModelAssets {
         group.userData.modelMixer = mixer;
         group.userData.modelClips = animations;
       }
+      // The supplied GLB animation clips do not keyframe either upper arm.
+      // Add an explicit shoulder-down pose on the existing skin (not the mesh root).
+      if (id === 'HUM_EILEEN_TEST_001') {
+        const joints = {};
+        instance.traverse(node => { if (node.isBone) joints[node.name] = node; });
+        group.userData.eileenShoulders = [
+          { bone: joints.Eileen_LeftUpperArm, angle: 0.88 },
+          { bone: joints.Eileen_RightUpperArm, angle: -0.88 }
+        ].filter(entry => !!entry.bone);
+      }
       group.userData.modelHealth = {status: id === 'HUM_EILEEN_TEST_001' ? 'proxy-rig-animation-test' : 'loaded', animationCount: animations.length};
       // Hide only the procedural body. Preserve labels, collision proxies and weapons.
       for (const part of group.userData.proceduralParts || []) part.visible = false;
