@@ -34,6 +34,6 @@ NPC目前是每人獨立狀態的規則式AI，沒有外部語言模型呼叫。
 
 未變更 Dockerfile、render.yaml、認證與連線設定；不自動合併main或部署。與裝備倉庫PR #1可能重疊的檔案是domain.hpp、runtime.hpp、runtime.cpp、runtime_state.cpp、persistence.cpp及網頁UI，合併時保留雙方存檔欄位。
 
-基底Dockerfile引用的 tools/build.py 在基底快照中缺少；本分支以獨立test_content.py驗證，不代替部署AI處理該建置入口。
+部署修正PR #2已合併，補回tools/build.py；整合分支也讓該入口執行content C++測試。PR #1倉庫與非阻塞同步整合保留；擴建世界暫停舊平面地形的瀏覽器移動預覽，使用伺服器位置呈現，避免把玩家畫面限制在舊1790公尺邊界。
 
 瀏覽器視覺驗收尚未完成：本地Chromium被環境socket權限阻擋，雲端瀏覽器無法連到測試伺服器的loopback。JS語法及HTTP測試不能替代正式畫面、動畫、效能與跨平台驗收。

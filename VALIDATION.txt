@@ -106,3 +106,11 @@ Render YAML本機語法／指定Free單一服務檢查通過；完整Render sche
 
 0.2.1 Cloud access on ASan/UBSan:
 CLOUD ACCESS OK: 12 checks; first visitor cannot take ownership; secrets not saved; graceful shutdown
+
+
+
+0.2.2 裝備倉庫增量（2026-11-07）：
+Release與ASan/UBSan：21核心組171檢查 + 10工作站組60檢查，共231檢查通過。
+原生HTTP：26項通過；實際進程重啟恢復裝備倉庫與session。
+Release與ASan/UBSan原生HTTP均通過26項與重啟；雲端存取12項亦均通過。
+JavaScript client.js語法檢查通過。此輪未瀏覽器手動點擊；LeakSanitizer未執行。

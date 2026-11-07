@@ -123,6 +123,8 @@ namespace aw {
         for(auto&[k,v]:p.tools)j["tools"][k]=v;
         j["inventory"]=Json::array();
         for(auto&i:p.inventory)j["inventory"].push(itemJson(i));
+        j["warehouseItems"]=Json::array();
+        for(auto&i:p.warehouseItems)j["warehouseItems"].push(itemJson(i));
         j["equipped"]=Json::object();
         for(auto&[k,v]:p.equipped)j["equipped"][std::to_string(static_cast<int>(k))]=v;
         j["jobs"]=strings(p.jobs);
@@ -179,6 +181,12 @@ namespace aw {
             int slot=std::stoi(k);
             require(slot>=0&&slot<=4&&ids.contains(v.string()),"裝備參照錯誤");
             p.equipped[static_cast<Slot>(slot)]=v.string();
+        }
+        if(j.contains("warehouseItems"))for(auto&v:j.at("warehouseItems").arrayItems()) {
+            auto i=itemFromJson(v);
+            require(!i.id.empty()&&c.items.contains(i.definition)&&ids.insert(i.id).second&&i.requiredLevel>=1&&i.requiredLevel<=100&&i.upgrade>=0&&i.upgrade<=20,"倉庫裝備資料錯誤");
+            require(std::none_of(p.equipped.begin(),p.equipped.end(),[&](const auto& e){return e.second==i.id;}),"倉庫裝備不可穿戴");
+            p.warehouseItems.push_back(i);
         }
         p.jobs=unstrings(j.at("jobs"));
         p.secrets=unstrings(j.at("secrets"));

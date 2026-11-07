@@ -31,6 +31,19 @@ check(command(b,'admin_supply')[0]==400)
 party=command(a,'party_create')[1]['party']['id']
 check(command(a,'party_invite',target=b['player']['id'])[0]==200)
 check(command(b,'party_join',target=party)[1]['party']['id']==party)
+# Equipment warehouse uses unique instances, not catalog item codes.
+item=a['player']['inventory'][0]['id']
+check(command(a,'store_item',target=item)[0]==400)
+check(command(a,'unequip',target=item)[0]==200)
+rid=uuid.uuid4().hex
+body={'request':rid,'type':'store_item','target':item}
+code,stored=request('command',body,a['token'])
+check(code==200 and stored['player']['warehouseItems'][0]['id']==item)
+check(request('command',body,a['token'])[1]['player']['warehouseItems']==stored['player']['warehouseItems'])
+check(command(a,'equip',target=item)[0]==400)
+check(command(b,'withdraw_item',target=item)[0]==400)
+check(command(a,'withdraw_item',target=item)[1]['player']['warehouseItems']==[])
+check(command(a,'store_item',target=item)[0]==200)
 start=request('state',token=a['token'])[1]['player']['position']
 check(request('input',{'sequence':1,'x':1,'z':1,'yaw':0},a['token'])[0]==200)
 time.sleep(.25)
@@ -38,6 +51,16 @@ end=request('state',token=a['token'])[1]['player']['position']
 length=math.dist([start[k] for k in ['x','y','z']],[end[k] for k in ['x','y','z']])
 check(0<length<2)
 check(request('input',{'sequence':2,'x':100,'z':0,'yaw':0},a['token'])[0]==400)
+code,synced=request('input',{'sequence':3,'x':0,'z':0,'yaw':0,'snapshot':True},a['token'])
+check(code==200 and synced['player']['id']==a['player']['id'])
+check(synced['_sync']['epoch']==r['_sync']['epoch'])
+check(synced['_sync']['sequence']>r['_sync']['sequence'])
+check(request('input',{'sequence':4,'x':0,'z':0,'yaw':0,'snapshot':True})[0]==401)
+code,legacy=request('input',{'sequence':4,'x':0,'z':0,'yaw':0},a['token'])
+check(code==200 and legacy=={'ok':True})
+code,newer=request('state',token=a['token'])
+check(newer['_sync']['sequence']>synced['_sync']['sequence'])
+
 check(command(a,'save')[0]==200)
 snapshot=request('state',token=b['token'])[1]
 check(any(p['id']==a['player']['id'] for p in snapshot['players']))
@@ -45,3 +68,4 @@ check('profiles' not in snapshot and 'token' not in snapshot)
 check(command(a,'party_leave')[0]==200)
 check(command(b,'party_leave')[0]==200)
 print('HTTP WORKSTATION OK:',checks,'checks; native engine, identity, idempotency, multiplayer, movement, save')
+

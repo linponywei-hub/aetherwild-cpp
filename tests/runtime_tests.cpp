@@ -120,6 +120,62 @@ int main() {
             });
             CHECK(g.snapshot(p.str("token")).at("player").num("coins")==coins);
         });
+        test("equipment storage commands replay privacy and restart",[] {
+            const auto folder=std::filesystem::temp_directory_path()/"aw_equipment_warehouse_test";
+            std::filesystem::remove_all(folder);
+            std::filesystem::create_directories(folder);
+            Id key,id,itemId;
+            {
+                GameRuntime g(folder/"world.json");
+                auto session=create(g,"warehouse"),other=create(g,"other");
+                key=session.str("token");
+                id=session.at("player").str("id");
+                auto& p=g.world().players.at(id);
+                auto item=InventorySystem::create(g.world(),g.definitions(),p.inventory.front().definition);
+                itemId=item.id;
+                p.inventory.push_back(item);
+                auto result=cmd(g,session,"store_item",itemId,"store-once");
+                CHECK(result.at("player").at("warehouseItems").arrayItems().size()==1);
+                cmd(g,session,"store_item",itemId,"store-once");
+                CHECK(p.warehouseItems.size()==1);
+                no([&]{cmd(g,other,"withdraw_item",itemId);});
+                CHECK(g.world().players.at(id).warehouseItems.size()==1);
+                auto& restored=g.world().players.at(id);
+                CHECK(!playerJson(restored,false).contains("warehouseItems"));
+                auto fields=playerJson(restored).objectItems();
+                fields.erase("warehouseItems");
+                Json old(fields);
+                CHECK(playerFromJson(old,g.definitions()).warehouseItems.empty());
+                auto bad=playerJson(restored);
+                bad["warehouseItems"].push(itemJson(restored.inventory.front()));
+                no([&]{playerFromJson(bad,g.definitions());});
+                g.save();
+            }
+            {
+                GameRuntime g(folder/"world.json");
+                CHECK(g.world().players.at(id).warehouseItems.front().id==itemId);
+                auto result=g.command(key,Json{{"type","withdraw_item"},{"target",itemId},{"request","retrieve-after-restart"}});
+                CHECK(result.at("player").at("warehouseItems").arrayItems().empty());
+                CHECK(g.world().players.at(id).inventory.back().id==itemId);
+            }
+            std::filesystem::remove_all(folder);
+        });
+        test("movement presentation hints do not mutate authoritative state",[] {
+            GameRuntime g;
+            auto p=create(g);
+            auto key=p.str("token");
+            auto a=g.snapshot(key);
+            CHECK(a.at("_motion").num("speed")==5);
+            CHECK(a.at("_motion").num("gravity")==22);
+            g.input(key,Json{{"sequence",7},{"x",0},{"z",0},{"yaw",0},{"jump",true}});
+            auto b=g.snapshot(key);
+            CHECK(b.at("_motion").at("sequence").integer()==7);
+            CHECK(b.at("_motion").flag("jumpPending"));
+            CHECK(b.at("player").at("position").dump()==a.at("player").at("position").dump());
+            g.tick(.05);
+            CHECK(g.snapshot(key).at("_motion").num("velocityY")>0);
+            CHECK(!g.snapshot(key).at("_motion").flag("jumpPending"));
+        });
         test("authoritative normalized movement building collision",[] {
             GameRuntime g;
             auto p=create(g);
@@ -308,3 +364,4 @@ int main() {
         return 1;
     }
 }
+

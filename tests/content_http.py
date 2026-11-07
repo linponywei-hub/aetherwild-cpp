@@ -39,6 +39,11 @@ with tempfile.TemporaryDirectory(prefix='aw_content_http_') as folder:
   check(req('state',token=tb)[1]['content']['relations']['windchime_merchant']['score']==0)
   check(cmd(ta,'npc_chat',target='windchime_merchant',topic='forged',score=100)[0]==400)
   check(cmd(tb,'content_release',release=2)[0]==400);check(cmd(ta,'npc_gift',target='windchime_merchant')[0]==400)
+  # A new-class weapon must survive warehouse storage and the expanded-world migration.
+  stored_id=a['player']['inventory'][0]['id']
+  check(cmd(ta,'unequip',target=stored_id)[0]==200)
+  code,stored=cmd(ta,'store_item',target=stored_id);check(code==200);check(any(i['id']==stored_id for i in stored['player']['warehouseItems']))
+  check(all(i['id']!=stored_id for i in req('state',token=tb)[1]['player']['warehouseItems']))
   seq=100
   for _ in range(3):seq+=1;req('input',{'sequence':seq,'x':1,'z':0,'yaw':0},ta);time.sleep(.2)
   seq+=1;req('input',{'sequence':seq,'x':0,'z':0,'yaw':0},ta)
@@ -52,6 +57,7 @@ with tempfile.TemporaryDirectory(prefix='aw_content_http_') as folder:
  p=launch()
  try:
   code,restored=req('state',token=ta);check(code==200);check(restored['content']['expanded']);check(restored['content']['release']==2);check(restored['player']['profession']=='aw_class_tank')
+  check(any(i['id']==stored_id for i in restored['player']['warehouseItems']))
   other=req('state',token=tb)[1];check(other['player']['profession']=='aw_class_assassin');check(other['content']['relations']['windchime_merchant']['score']==0)
  finally:p.terminate();p.communicate(timeout=10)
 print('CONTENT HTTP OK:',checks,'checks including actual process restart')

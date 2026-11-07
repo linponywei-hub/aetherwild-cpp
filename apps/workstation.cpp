@@ -4,7 +4,8 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
-#include <thread>
+#include <optional>
+#include <cerrno>
 #ifdef _WIN32
 #ifndef NOMINMAX
 #define NOMINMAX
@@ -21,6 +22,7 @@ static void closeSocket(Socket s) {
 #include <sys/select.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <fcntl.h>
 using Socket=int;
 static void closeSocket(Socket s) {
     close(s);
@@ -38,23 +40,30 @@ namespace {
         for(char&c:s)if(c>='A'&&c<='Z')c+=32;
         return s;
     }
-    Request receive(Socket socket) {
+    bool nonblocking(Socket socket) {
 #ifdef _WIN32
-        DWORD timeout=1500;
-        setsockopt(socket,SOL_SOCKET,SO_RCVTIMEO,reinterpret_cast<char*>(&timeout),sizeof(timeout));
+        u_long enabled=1;
+        return ioctlsocket(socket,FIONBIO,&enabled)==0;
 #else
-        timeval timeout {1,500000};
-        setsockopt(socket,SOL_SOCKET,SO_RCVTIMEO,&timeout,sizeof(timeout));
+        const int flags=fcntl(socket,F_GETFL,0);
+        return flags>=0&&fcntl(socket,F_SETFL,flags|O_NONBLOCK)==0;
 #endif
-        std::string data;
-        char buf[8192];
-        std::size_t end;
-        while((end=data.find("\r\n\r\n"))==std::string::npos) {
-            int n=recv(socket,buf,sizeof(buf),0);
-            require(n>0,"請求不完整");
-            data.append(buf,n);
+    }
+    bool wouldBlock() {
+#ifdef _WIN32
+        const auto e=WSAGetLastError();
+        return e==WSAEWOULDBLOCK||e==WSAEINTR;
+#else
+        return errno==EAGAIN||errno==EWOULDBLOCK||errno==EINTR;
+#endif
+    }
+    std::optional<Request> receive(const std::string& data) {
+        const auto end=data.find("\r\n\r\n");
+        if(end==std::string::npos) {
             require(data.size()<32768,"標頭過大");
+            return std::nullopt;
         }
+        require(end<32768,"標頭過大");
         Request r;
         std::istringstream in(data.substr(0,end));
         std::string version;
@@ -79,35 +88,21 @@ namespace {
         }
         require(length<=16384,"內容過大");
         r.body=data.substr(end+4);
-        while(r.body.size()<length) {
-            int n=recv(socket,buf,std::min(sizeof(buf),length-r.body.size()),0);
-            require(n>0,"請求內容不完整");
-            r.body.append(buf,n);
-        }
+        if(r.body.size()<length)return std::nullopt;
         r.body.resize(length);
         auto q=r.path.find('?');
         if(q!=std::string::npos)r.path.resize(q);
         return r;
     }
-    void sendAll(Socket s,const std::string&text) {
-        std::size_t at=0;
-        while(at<text.size()) {
-            int n=send(s,text.data()+at,static_cast<int>(std::min<std::size_t>(65536,text.size()-at)),
-#ifdef MSG_NOSIGNAL
-            MSG_NOSIGNAL
-#else
-            0
-#endif
-            );
-            if(n<=0)return;
-            at+=n;
-        }
+    void response(std::string& wire,int code,const std::string&mime,const std::string&body) {
+        wire="HTTP/1.1 "+std::to_string(code)+(code==200?" OK":code==401?" Unauthorized":" Bad Request")+"\r\nContent-Type: "+mime+"\r\nContent-Length: "+std::to_string(body.size())+"\r\nConnection: close\r\nX-Content-Type-Options: nosniff\r\nCache-Control: no-store\r\n\r\n"+body;
     }
-    void response(Socket s,int code,const std::string&mime,const std::string&body) {
-        std::string head="HTTP/1.1 "+std::to_string(code)+(code==200?" OK":code==401?" Unauthorized":" Bad Request")+"\r\nContent-Type: "+mime+"\r\nContent-Length: "+std::to_string(body.size())+"\r\nConnection: close\r\nX-Content-Type-Options: nosniff\r\nCache-Control: no-store\r\n\r\n";
-        sendAll(s,head);
-        sendAll(s,body);
-    }
+    struct Client {
+        Socket socket;
+        std::string input,output;
+        std::size_t sent=0;
+        std::chrono::steady_clock::time_point progress;
+    };
     std::string contentType(const std::filesystem::path&p) {
         auto e=p.extension().string();
         return e==".html"?"text/html; charset=utf-8":e==".js"?"text/javascript; charset=utf-8":e==".css"?"text/css; charset=utf-8":e==".svg"?"image/svg+xml":e==".webp"?"image/webp":e==".jpg"?"image/jpeg":e==".png"?"image/png":"application/octet-stream";
@@ -140,26 +135,15 @@ int main(int argc,char**argv) {
         addr.sin_addr.s_addr=htonl(INADDR_ANY);
         require(bind(server,reinterpret_cast<sockaddr*>(&addr),sizeof(addr))==0,"工作站埠已被使用");
         require(listen(server,32)==0,"無法開始監聽");
+        require(nonblocking(server),"無法設定非阻塞監聽");
         std::cout<<"Aetherwild C++ workstation ready\n  Local: http://localhost:"<<port<<"/\n"<<std::flush;
         auto last=std::chrono::steady_clock::now();
         double pending=0;
-        while(!stopRequested) {
-            auto now=std::chrono::steady_clock::now();
-            pending+=std::min(.25,std::chrono::duration<double>(now-last).count());
-            last=now;
-            while(pending>=.05) {
-                runtime.tick(.05);
-                pending-=.05;
-            }
-            fd_set set;
-            FD_ZERO(&set);
-            FD_SET(server,&set);
-            timeval wait {0,20000};
-            if(select(static_cast<int>(server)+1,&set,nullptr,nullptr,&wait)<=0)continue;
-            auto client=accept(server,nullptr,nullptr);
-            if(client==static_cast<Socket>(-1))continue;
+        const auto syncEpoch=std::to_string(std::chrono::system_clock::now().time_since_epoch().count());
+        std::uint64_t syncSequence=0;
+        auto handle=[&](Request request) {
+            std::string wire;
             try {
-                auto request=receive(client);
                 if(request.path.starts_with("/api/")) {
                     Json result;
                     if(request.path=="/api/health")result=Json {
@@ -194,12 +178,14 @@ int main(int argc,char**argv) {
                                         "ok",true
                                     }
                                 };
+                                if(body.flag("snapshot"))result=runtime.snapshot(token);
                             }
                             else if(request.path=="/api/command")result=runtime.command(token,body);
                             else throw RuleError("不存在的API");
                         }
                     }
-                    response(client,200,"application/json; charset=utf-8",result.dump());
+                    if(result.contains("player"))result["_sync"]=Json{{"epoch",syncEpoch},{"sequence",++syncSequence}};
+                    response(wire,200,"application/json; charset=utf-8",result.dump());
                 }
                 else {
                     require(request.method=="GET"&&request.path.find("..") ==std::string::npos&&request.path.find('%')==std::string::npos&&request.path.find('\\')==std::string::npos,"路徑錯誤");
@@ -208,13 +194,17 @@ int main(int argc,char**argv) {
                     auto path=base/relative;
                     require(std::filesystem::is_regular_file(path),"檔案不存在");
                     std::ifstream file(path,std::ios::binary);
-                    std::string bytes((std::istreambuf_iterator<char>(file)), {});
-                    response(client,200,contentType(path),bytes);
+                    const auto size=std::filesystem::file_size(path);
+                    require(size<=16*1024*1024,"靜態資產過大");
+                    std::string bytes(static_cast<std::size_t>(size),'\0');
+                    file.read(bytes.data(),static_cast<std::streamsize>(size));
+                    require(file.gcount()==static_cast<std::streamsize>(size),"無法完整讀取資產");
+                    response(wire,200,contentType(path),bytes);
                 }
             }
             catch(const RuleError&e) {
                 auto text=std::string(e.what());
-                response(client,text.find("登入")!=std::string::npos?401:400,"application/json; charset=utf-8",Json {
+                response(wire,text.find("登入")!=std::string::npos?401:400,"application/json; charset=utf-8",Json {
                     {
                         "ok",false
                     },
@@ -225,7 +215,7 @@ int main(int argc,char**argv) {
                 .dump());
             }
             catch(const std::exception&e) {
-                response(client,400,"application/json; charset=utf-8",Json {
+                response(wire,400,"application/json; charset=utf-8",Json {
                     {
                         "ok",false
                     },
@@ -235,8 +225,71 @@ int main(int argc,char**argv) {
                 }
                 .dump());
             }
-            closeSocket(client);
+            return wire;
+        };
+        std::vector<Client> clients;
+        while(!stopRequested) {
+            auto now=std::chrono::steady_clock::now();
+            pending+=std::min(.25,std::chrono::duration<double>(now-last).count());
+            last=now;
+            while(pending>=.05) {
+                runtime.tick(.05);
+                pending-=.05;
+            }
+            fd_set set;
+            FD_ZERO(&set);FD_SET(server,&set);
+            timeval wait {0,5000};
+            if(select(static_cast<int>(server)+1,&set,nullptr,nullptr,&wait)>0) {
+                for(int accepted=0;accepted<8;accepted++) {
+                    auto socket=accept(server,nullptr,nullptr);
+                    if(socket==static_cast<Socket>(-1))break;
+                    if(clients.size()>=48||!nonblocking(socket)){closeSocket(socket);continue;}
+                    clients.push_back({socket,{}, {},0,now});
+                }
+            }
+            for(auto it=clients.begin();it!=clients.end();) {
+                auto& client=*it;
+                bool closed=false;
+                if(client.output.empty()) {
+                    try {
+                        char buffer[8192];
+                        // A bounded amount per client keeps simulation and other sockets fair.
+                        for(int reads=0;reads<4;reads++) {
+                            const int n=recv(client.socket,buffer,sizeof(buffer),0);
+                            if(n>0) {
+                                client.input.append(buffer,n);client.progress=now;
+                                require(client.input.size()<=49152,"請求過大");
+                                if(auto request=receive(client.input)) {
+                                    client.output=handle(std::move(*request));
+                                    client.input.clear();break;
+                                }
+                            }else {
+                                if(n==0||!wouldBlock())closed=true;
+                                break;
+                            }
+                        }
+                    }catch(const std::exception& e) {
+                        response(client.output,400,"application/json; charset=utf-8",Json{{"ok",false},{"error",e.what()}}.dump());
+                    }
+                }
+                if(!closed&&!client.output.empty()) {
+                    const auto remaining=client.output.size()-client.sent;
+                    const int n=send(client.socket,client.output.data()+client.sent,static_cast<int>(std::min<std::size_t>(65536,remaining)),
+#ifdef MSG_NOSIGNAL
+                        MSG_NOSIGNAL
+#else
+                        0
+#endif
+                    );
+                    if(n>0){client.sent+=n;client.progress=now;closed=client.sent==client.output.size();}
+                    else if(n==0||!wouldBlock())closed=true;
+                }
+                const double idle=std::chrono::duration<double>(now-client.progress).count();
+                if(idle>(client.output.empty()?2.0:15.0))closed=true;
+                if(closed){closeSocket(client.socket);it=clients.erase(it);}else ++it;
+            }
         }
+        for(auto& client:clients)closeSocket(client.socket);
         runtime.save();closeSocket(server);
     }
     catch(const std::exception&e) {
@@ -244,3 +297,4 @@ int main(int argc,char**argv) {
         return 1;
     }
 }
+

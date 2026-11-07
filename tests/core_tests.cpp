@@ -348,6 +348,58 @@ int main() {
             });
             CHECK(m.at("stone")==INT64_MAX);
         });
+        group("equipment warehouse ownership atomicity and character compatibility",[] {
+            Simulation s;
+            auto& p=s.addPlayer("p","倉庫測試");
+            auto& c=s.catalog();
+            auto& w=s.world();
+            const Id npc="windchime_merchant";
+            const auto equipped=p.inventory.front().id;
+            rejected([&]{InventorySystem::storeItem(p,equipped,npc,c);});
+            CHECK(p.warehouseItems.empty());
+            auto item=InventorySystem::create(w,c,p.inventory.front().definition,Rarity::Rare,1);
+            item.upgrade=3;
+            p.inventory.push_back(item);
+            p.position={1000,0,1000};
+            rejected([&]{InventorySystem::storeItem(p,item.id,npc,c);});
+            CHECK(p.inventory.back().id==item.id);
+            p.position=c.npcs.at(npc).position;
+            InventorySystem::storeItem(p,item.id,npc,c);
+            CHECK(p.warehouseItems.size()==1&&p.warehouseItems.front().upgrade==3);
+            rejected([&]{InventorySystem::equip(p,item.id,c);});
+            rejected([&]{InventorySystem::storeItem(p,item.id,npc,c);});
+            rejected([&]{InventorySystem::storeItem(p,"other_player_item",npc,c,true);});
+            CHECK(p.warehouseItems.size()==1);
+            CharacterFile::save(p,"warehouse.awc",c);
+            auto loaded=CharacterFile::load("warehouse.awc",c);
+            CHECK(loaded.warehouseItems.front().id==item.id);
+            CHECK(loaded.warehouseItems.front().rarity==Rarity::Rare);
+            loaded.warehouseItems.push_back(loaded.inventory.front());
+            rejected([&]{CharacterFile::save(loaded,"invalid-warehouse.awc",c);});
+            InventorySystem::storeItem(p,item.id,npc,c,true);
+            CHECK(p.warehouseItems.empty()&&p.inventory.back().id==item.id);
+            CHECK(p.inventory.back().upgrade==3);
+            const double oldMax=p.vitals.maxHp;
+            InventorySystem::unequip(p,equipped,c);
+            CHECK(p.equipped.empty()&&p.vitals.maxHp<=oldMax);
+            rejected([&]{InventorySystem::unequip(p,equipped,c);});
+            InventorySystem::storeItem(p,equipped,npc,c);
+            CHECK(p.warehouseItems.front().id==equipped);
+            InventorySystem::storeItem(p,equipped,npc,c,true);
+            // A v1 character has no warehouse item section; verify backward loading.
+            CharacterFile::save(p,"warehouse.awc",c);
+            std::ifstream input("warehouse.awc");
+            std::string data((std::istreambuf_iterator<char>(input)),{});
+            data.replace(0,8,"AWCHAR 1");
+            const auto tail=data.rfind("0\nEND\n");
+            CHECK(tail!=std::string::npos);
+            data.erase(tail,2);
+            std::ofstream("warehouse-v1.awc")<<data;
+            CHECK(CharacterFile::load("warehouse-v1.awc",c).warehouseItems.empty());
+            std::filesystem::remove("warehouse.awc");
+            std::filesystem::remove("warehouse.awc.bak");
+            std::filesystem::remove("warehouse-v1.awc");
+        });
         group("fall damage boundaries and low health",[] {
             CHECK(MovementSystem::landingDamage(6,100,.6)==0);
             CHECK(MovementSystem::landingDamage(100,100,.59)==0);
@@ -575,3 +627,4 @@ int main() {
         return 1;
     }
 }
+

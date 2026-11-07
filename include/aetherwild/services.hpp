@@ -15,7 +15,9 @@ namespace aw {
         static ItemInstance create(World&,const Catalog&,const Id&,Rarity=Rarity::Common,int required=0);
         static Stats bonuses(const Player&,const Catalog&);
         static void equip(Player&,const Id&,const Catalog&);
+        static void unequip(Player&,const Id& instance,const Catalog&);
         static void usePotion(Player&,const Id&,const Catalog&);
+        static void storeItem(Player&,const Id& instance,const Id& npc,const Catalog&,bool withdraw=false);
         static void store(Player&,const Id&,Quantity,const Id& npc,const Catalog&,bool withdraw=false);
     };
     class QuestSystem {
@@ -80,3 +82,4 @@ namespace aw {
         void advance(double dt);
     };
 }
+
