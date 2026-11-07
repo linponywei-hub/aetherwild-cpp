@@ -5,6 +5,24 @@ Json initialContent(){return Json{{"expanded",false},{"release",1},{"relations",
 Json& playerObject(Json& root,const Id& id){if(!root.contains(id))root[id]=Json::object();return root[id];}
 double planeDistance(Vec3 a,Vec3 b){return std::hypot(a.x-b.x,a.z-b.z);}
 }
+// Read-only projection: no save, release change, or private player data.
+Json GameRuntime::adminMap(const Id& key)const{
+ require(profiles_.contains(key),"登入已失效");
+ const auto& p=world_.players.at(profiles_.at(key).player);
+ auto role=social_.accounts.at(p.accountId).role;
+ require(role==Role::Owner||role==Role::Admin,"需要管理員權限");
+ Json j{{"ok",true},{"expanded",contentState_.flag("expanded")},{"release",contentState_.num("release",1)},{"planned",Json::array()},{"current",Json::array()},{"roads",Json::array()}};
+ for(const auto&[id,r]:contentBundle().at("regions").objectItems()){
+  j["planned"].push(Json{{"id",id},{"name",r.str("name")},{"center",r.at("center")},{"radius",r.num("radius_m",850)},{"layer",r.str("layer")},{"release",r.num("release",1)},{"open",contentState_.flag("expanded")&&r.num("release",1)<=contentState_.num("release",1)}});
+ }
+ for(const auto&[id,r]:catalog_.regions){
+  auto definition=contentEntry("regions",id);
+  bool open=!contentState_.flag("expanded")||(definition&&definition->num("release",1)<=contentState_.num("release",1));
+  j["current"].push(Json{{"id",id},{"name",r.name},{"center",vec(r.center)},{"radius",r.radius},{"open",open}});
+ }
+ for(const auto&[id,r]:contentBundle().at("roads").objectItems())j["roads"].push(Json{{"a",r.str("a")},{"b",r.str("b")}});
+ return j;
+}
 void GameRuntime::configureContent(bool expanded){
  if(!contentState_.contains("expanded"))contentState_=initialContent();
  catalog_=makeCatalog();installContent(catalog_);if(expanded){expandContentWorld(catalog_);catalog_.contentRelease=static_cast<int>(contentState_.num("release",1));}buildings_=buildings(catalog_);

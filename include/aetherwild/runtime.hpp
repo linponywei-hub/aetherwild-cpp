@@ -66,6 +66,7 @@ namespace aw {
         Json createSession(const Json&);
         Json snapshot(const Id& token)const;
         Json catalog()const;
+        Json adminMap(const Id& token)const;
         Json command(const Id& token,const Json&);
         void input(const Id& token,const Json&);
         void tick(double);

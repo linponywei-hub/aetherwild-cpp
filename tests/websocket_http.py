@@ -42,6 +42,9 @@ try:
  check(b'Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=' in s.header)
  s.json({'channel':'auth','id':'auth','token':session['token']});op,state=s.read()
  check(op==1 and state['player']['id']==session['player']['id'])
+ s.json({'channel':'admin_map','id':'atlas'});atlas=s.read()[1]
+ check(atlas.get('ok')==False if state['role']=='player' else len(atlas['planned'])==25)
+ check(atlas['_reply']=='atlas')
  s.send('ping-check',opcode=9);check(s.read()==(10,b'ping-check'))
  if 'content' in state:
   # The content command router and realtime channel share one authoritative world.
@@ -56,6 +59,7 @@ try:
   try:
    tank.json({'channel':'auth','id':'auth','token':new['token']});response=tank.read()[1]
    check(response['player']['profession']=='aw_class_tank')
+   tank.json({'channel':'admin_map','id':'denied'});check(tank.read()[1]['ok']==False)
    item=response['player']['inventory'][0]['id']
    tank.json({'channel':'command','id':'unequip','body':{'request':'ws-tank-unequip','type':'unequip','target':item}});check(tank.read()[1]['ok'])
    tank.json({'channel':'command','id':'store','body':{'request':'ws-tank-store','type':'store_item','target':item}});response=tank.read()[1]
