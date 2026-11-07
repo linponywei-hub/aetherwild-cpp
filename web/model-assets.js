@@ -64,6 +64,19 @@ export class ModelAssets {
       );
       target.bind(skeleton, source.bindMatrix.clone());
     }
+    // Normalize Eileen to player eye level, regardless of the source GLB's units.
+    if (id === 'HUM_EILEEN_TEST_001') {
+      instance.updateMatrixWorld(true);
+      const bounds = new T.Box3().setFromObject(instance);
+      const height = bounds.max.y - bounds.min.y;
+      if (Number.isFinite(height) && height > 0.001) {
+        const factor = Math.min(1000, Math.max(0.001, 1.8 / height));
+        instance.scale.multiplyScalar(factor);
+        instance.updateMatrixWorld(true);
+        const grounded = new T.Box3().setFromObject(instance);
+        instance.position.y -= grounded.min.y;
+      }
+    }
     instance.scale.multiplyScalar(asset.scale ?? 1);
     instance.rotation.y += asset.yaw ?? 0;
     if (asset.tint && asset.tint !== '#ffffff') instance.traverse(node => {
