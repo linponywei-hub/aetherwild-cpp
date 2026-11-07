@@ -27,7 +27,7 @@ with tempfile.TemporaryDirectory(prefix='aw_bow_http_') as folder:
    except OSError:pass
    time.sleep(.05)
   a=request('session',{'name':'Bow HTTP','profession':'ranger'})[1];b=request('session',{'name':'Dagger HTTP','profession':'aw_class_assassin'})[1];ta,tb=a['token'],b['token']
-  snap=request('state',token=ta)[1];check(snap['environment']['cycleSeconds']==1800);check(snap['bow']['fullDrawSeconds']==1.2)
+  snap=request('state',token=ta)[1];check(snap['environment']['cycleSeconds']==1800);check(snap['bow']['fullDrawSeconds']==1.2);check(snap['player']['weaponType']=='bow')
   other=request('state',token=tb)[1];check(abs(other['environment']['unixSeconds']-snap['environment']['unixSeconds'])<20)
   check(command(tb,'bow_draw')[0]==400);check(command(ta,'bow_release',charge=999999)[0]==400);check(command(ta,'attack')[0]==400)
   catalog=request('catalog')[1];entrance=next(d['id'] for d in catalog['dungeons'] if d['region']=='windchime');check(command(ta,'admin_entrance',target=entrance)[0]==200)
@@ -39,5 +39,9 @@ with tempfile.TemporaryDirectory(prefix='aw_bow_http_') as folder:
   again=request('command',receipt,ta)[1];check(again['player']['materials']['woodarrow']==before-1);check(not again['bow']['drawing'])
   time.sleep(.85);check(command(ta,'bow_draw')[0]==200);time.sleep(1.25);code,full=command(ta,'bow_release');check(code==200)
   last=[e for e in full['events'] if e['type']=='ArrowReleased'][-1];check(last['value']>=1.55)
-  print('BOW HTTP OK:',checks,'checks; authority, forged charge, cancel, full draw and duplicate release')
+  backup=request('admin/backup',token=ta)[1];check(backup['format']=='aetherwild-world-backup')
+  time.sleep(.85);check(command(ta,'bow_draw')[0]==200)
+  check(request('admin/restore',{'backup':backup,'confirm':'RESTORE_WORLD'},ta)[0]==200)
+  recovered=request('state',token=ta)[1];check(not recovered['bow']['drawing']);check(recovered['player']['weaponType']=='bow');check(recovered['_sync']['epoch']!=snap['_sync']['epoch'])
+  print('BOW HTTP OK:',checks,'checks; authority, forged charge, cancel, full draw, duplicate release and backup/restore integration')
  finally:p.terminate();p.communicate(timeout=15)

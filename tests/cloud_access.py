@@ -45,10 +45,32 @@ with tempfile.TemporaryDirectory(prefix='aw_cloud_access_') as folder:
   good=request('command',{'type':'admin_supply','request':'allowed'},host['token'])
   check(good[0]==200 and good[1]['player']['level']==60)
   check(owner not in json.dumps(good[1]) and invite not in json.dumps(good[1]))
+  backup=request('admin/backup',token=host['token'])[1]
+  check(owner not in json.dumps(backup) and invite not in json.dumps(backup))
  finally:
   p.terminate();stdout,stderr=p.communicate(timeout=6)
  check(p.returncode==0)
  saved=json.loads((Path(folder)/'runtime-data/world-v2.json').read_text())
  check(len(saved['players'])==2)
  check(owner not in json.dumps(saved) and invite not in json.dumps(saved))
+ # Simulate losing only disposable fixture storage, with provider secrets retained.
+ (Path(folder)/'runtime-data').rename(Path(folder)/'old-runtime-data')
+ p=subprocess.Popen([str(exe),'--root',folder,'--port',str(port)],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+ try:
+  for _ in range(600):
+   if p.poll() is not None:raise RuntimeError('Cold-recovery fixture exited')
+   try:
+    if request('health')[0]==200:break
+   except Exception:time.sleep(.05)
+  else:raise RuntimeError('Cold recovery fixture not ready')
+  check(request('state',token=host['token'])[0]==401)
+  body={'backup':backup,'confirm':'RESTORE_WORLD','ownerCode':invite}
+  check(request('admin/restore',body)[0]==400)
+  body['ownerCode']=owner;code,recovery=request('admin/restore',body);check(code==200);check(recovery['token']==host['token'])
+  restored=request('state',token=host['token'])[1];check(restored['player']['level']==60);check(restored['role']=='owner')
+  check(request('state',token=visitor['token'])[1]['role']=='player')
+  bad=json.loads(json.dumps(backup));bad['world']['version']=999
+  check(request('admin/restore',{'backup':bad,'confirm':'RESTORE_WORLD','ownerCode':owner})[0]==400)
+  check(request('state',token=host['token'])[1]['player']['level']==60)
+ finally:p.terminate();p.communicate(timeout=6)
 print('CLOUD ACCESS OK:',checks,'checks; first visitor cannot take ownership; secrets not saved; graceful shutdown')

@@ -42,3 +42,15 @@ Release與ASan/UBSan均通過341項C++（核心171／runtime67／content103）�
 ASan使用detect_leaks=0。7.1MiB編譯內容的儀器化啟動超過舊cloud_access fixture的5秒窗口；該fixture比照其他內容測試改成30秒readiness窗口並加上提早退出／逾時明確錯誤，之後一般與ASan權限12項皆通過。這只影響隔離測試等待，不放寬遊戲輸入／存取權限或正式服務限制。
 
 Windows、macOS、正式容量與使用者端幀率仍未實機驗證；容器與公開換版仍須以Render該整合commit的live狀態及公開HTTPS/WSS檢查為準。
+
+## PR #14 / #15 整合發布（2026-11-07）
+
+使用者已在收到免費部署可能重置測試角色的說明後要求先上線並「直接合併」。此次沿用既有免費 Render，不升級、不建立付費磁碟或資料庫。
+
+基底 main aa3551b（已合併 PR #15），保全分支 8790a93（PR #14）。共同保留羅盤、遠端玩家/NPC時間軸播放、武器前景深度、命中回饋、Owner世界備份與還原，以及小地圖、30分鐘晝夜、蓄力弓與雙匕首。
+
+新增 GET /api/admin/backup、POST /api/admin/restore；既有 command 增加 bow_draw/bow_release/bow_cancel。玩家快照增加 weaponType、environment、bow；world-v2.json沿用既有模型，沒有SQL遷移。瀏覽器IndexedDB是Owner在線期間的本機備援，Free伺服器仍為暫存磁碟。
+
+主要共同檔案：src/runtime.cpp、web/client.js、web/scene.js、web/style.css；逐段保留兩方功能後驗證。詳細接口見 docs/16_打擊感與資料復原.md 與 docs/16_小地圖晝夜與拉弓.md。之後的AI請從合併後main建立自己的分支，不覆蓋發布指標。
+
+本次整合驗證：Release與ASan/UBSan（detect_leaks=0）核心171、runtime83、content72項皆通過；Release HTTP32、WebSocket26、內容HTTP64、公開權限22；蓄力弓與備份還原共同回歸27；Node35項、所有web模組語法及git diff --check通過。ASan HTTP/WS、公開權限及27項弓／還原檢查亦通過。Windows/macOS與私人角色GPU畫面未實機驗證。Render是否已換版需另查該整合提交的live部署。
