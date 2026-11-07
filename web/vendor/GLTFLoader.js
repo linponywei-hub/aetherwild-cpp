@@ -37,13 +37,13 @@ export class GLTFLoader {
     const objectUrls=[];
     const textures=await Promise.all((json.textures||[]).map(async tex=>{
       const image=json.images?.[tex.source];
-      if(!image?.bufferView) {if(image?.bufferView!==0)throw Error('Only embedded GLB images supported');}
+      if(!image || image.bufferView === undefined)throw Error('Only embedded GLB images supported');
       const v=json.bufferViews[image.bufferView];
       const bytes=new Uint8Array(bin,v.byteOffset||0,v.byteLength);
       const blob=new Blob([bytes],{type:image.mimeType||'image/png'});
       const blobUrl=URL.createObjectURL(blob);objectUrls.push(blobUrl);
       const bitmap=await createImageBitmap(blob);
-      const texture=new T.CanvasTexture(bitmap);
+      const texture=new T.Texture(bitmap);
       texture.flipY=false;
       const sampler=json.samplers?.[tex.sampler]||{};
       texture.wrapS=sampler.wrapS===33071?T.ClampToEdgeWrapping:sampler.wrapS===33648?T.MirroredRepeatWrapping:T.RepeatWrapping;
