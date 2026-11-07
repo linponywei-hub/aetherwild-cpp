@@ -10,6 +10,7 @@ namespace aw {
         return p;
     }
     std::vector<Building> buildings(const Catalog&c) {
+        if(c.worldLimit>1800)return cityBuildings(c);
         std::vector<Building> v;
         for(auto&[id,r]:c.regions) {
             if(r.wilderness)continue;

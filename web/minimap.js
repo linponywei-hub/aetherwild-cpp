@@ -17,13 +17,14 @@ export class MiniMap {
    for(const b of model?.biomes||[]){polygon(b.polygon);ctx.fillStyle=biomeColor(b.id);ctx.fill();}
    // A new repeating material stays at a fixed world scale. Never magnify the full-world atlas.
    if(this.texture.complete&&this.texture.naturalWidth){this.pattern??=ctx.createPattern(this.texture,'repeat');ctx.save();ctx.globalAlpha=.2;ctx.scale(.22,.22);ctx.fillStyle=this.pattern;ctx.fillRect((p.position.x-w/scale)/.22,(p.position.z-h/scale)/.22,2*w/scale/.22,2*h/scale/.22);ctx.restore();}
-   const grid=state.content?.terrain||catalog.terrain;
+   const grid=state.content?.terrainPatch||catalog.terrain;
    for(let z=Math.floor((p.position.z-h/scale)/24)*24;z<p.position.z+h/scale;z+=24)for(let x=Math.floor((p.position.x-w/scale)/24)*24;x<p.position.x+w/scale;x+=24){const a=gridHeight(grid,x,z),b=gridHeight(grid,x+24,z+24);if(a===null||b===null)continue;const slope=Math.max(-.14,Math.min(.16,(a-b)/100));ctx.fillStyle=slope>0?'rgba(255,248,211,'+slope+')':'rgba(16,39,33,'+-slope+')';ctx.fillRect(x,z,24,24);}
    ctx.fillStyle='#4c879b';for(const water of model?.water||[]){polygon(water);ctx.fill();ctx.strokeStyle='#a3c4bc';ctx.lineWidth=2;ctx.stroke();}
    ctx.strokeStyle='#5895a6';ctx.lineCap='round';for(const river of model?.rivers||[]){ctx.beginPath();river.points.forEach(([x,z],i)=>{x=(x-633)*64;z=(z-578)*64;i?ctx.lineTo(x,z):ctx.moveTo(x,z);});ctx.lineWidth=river.width;ctx.stroke();}
    // Building footprints and existing walkways use actual game coordinates.
    for(const r of catalog.regions){if(r.wilderness)continue;ctx.strokeStyle='#d3c497';ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(r.position.x-75,r.position.z);ctx.lineTo(r.position.x+75,r.position.z);ctx.moveTo(r.position.x,r.position.z-75);ctx.lineTo(r.position.x,r.position.z+75);ctx.stroke();}
    for(const harbor of model?.harbors||[]){const r=catalog.regions.find(r=>r.id===harbor.region);if(!r)continue;for(const b of harbor.platforms){ctx.fillStyle=b.kind==='ship'?'#8e7450':'#b9af8d';ctx.fillRect(r.position.x+b.x-b.width/2,r.position.z+b.z-b.depth/2,b.width,b.depth);}}
+   for(const r of catalog.regions){if(r.wilderness)continue;ctx.setLineDash([5/scale,4/scale]);ctx.strokeStyle='#72b9a7';ctx.lineWidth=1/scale;ctx.beginPath();ctx.arc(r.position.x,r.position.z,r.radius,0,Math.PI*2);ctx.stroke();ctx.strokeStyle='#f6dca2';ctx.lineWidth=1.5/scale;ctx.beginPath();ctx.arc(r.position.x,r.position.z,r.urbanRadius||r.radius,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);}
    for(const b of catalog.buildings){ctx.fillStyle='#263d3655';ctx.fillRect(b.position.x-b.width/2+3,b.position.z-b.depth/2+4,b.width,b.depth);ctx.fillStyle='#dbceb0';ctx.strokeStyle='#4b5d4b';ctx.lineWidth=1.5;ctx.fillRect(b.position.x-b.width/2,b.position.z-b.depth/2,b.width,b.depth);ctx.strokeRect(b.position.x-b.width/2,b.position.z-b.depth/2,b.width,b.depth);}
   }else if(p.scene!=='world'){ctx.fillStyle='#4d635d';ctx.fillRect(-25,-30,50,60);ctx.strokeStyle='#c5cfb1';ctx.lineWidth=3;ctx.strokeRect(-25,-30,50,60);}
   ctx.restore();

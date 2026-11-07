@@ -1,0 +1,8 @@
+import * as T from './vendor/three.module.js';
+const geometries=new Map();
+function primitive(shape){if(!geometries.has(shape)){const g=shape==='box'?new T.BoxGeometry(1,1,1):shape==='cylinder'?new T.CylinderGeometry(.5,.5,1,6):shape==='cone'?new T.ConeGeometry(.5,1,8):shape==='roof'?new T.ConeGeometry(Math.SQRT1_2,1,4):shape==='arc'?new T.TorusGeometry(.5,.035,4,12,Math.PI):new T.SphereGeometry(.5,8,6);if(shape==='roof')g.rotateY(Math.PI/4);geometries.set(shape,g.toNonIndexed());g.dispose();}return geometries.get(shape);}
+export function batchParts(parts,{glow=false}={}){const positions=[],normals=[],colors=[],matrix=new T.Matrix4(),normal=new T.Matrix3(),v=new T.Vector3(),n=new T.Vector3(),q=new T.Quaternion();
+ for(const p of parts){const g=primitive(p.shape),a=g.attributes.position.array,b=g.attributes.normal.array,c=new T.Color(p.color);matrix.compose(new T.Vector3(p.x,p.y,p.z),q,new T.Vector3(p.sx,p.sy,p.sz));normal.getNormalMatrix(matrix);for(let i=0;i<a.length;i+=3){v.set(a[i],a[i+1],a[i+2]).applyMatrix4(matrix);n.set(b[i],b[i+1],b[i+2]).applyMatrix3(normal).normalize();positions.push(v.x,v.y,v.z);normals.push(n.x,n.y,n.z);colors.push(c.r,c.g,c.b);}}
+ const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(positions,3));g.setAttribute('normal',new T.Float32BufferAttribute(normals,3));g.setAttribute('color',new T.Float32BufferAttribute(colors,3));g.computeBoundingSphere();
+ const material=new T.MeshStandardMaterial({vertexColors:true,roughness:.9,...(glow?{emissive:'#ffcd73',emissiveIntensity:.15}:{})});const mesh=new T.Mesh(g,material);mesh.castShadow=!glow;mesh.receiveShadow=!glow;return mesh;
+}

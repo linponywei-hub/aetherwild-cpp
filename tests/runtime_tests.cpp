@@ -371,6 +371,24 @@ int main() {
             cmd(g,a,"bow_draw");g.world().players.at(id).scene="another-scene";no([&]{cmd(g,a,"bow_release","bow-b");});CHECK(!g.snapshot(token).at("bow").flag("drawing"));
             g.world().players.at(id).scene="bow-test";cmd(g,a,"bow_cancel");cmd(g,a,"bow_draw");time(g,12.1);no([&]{cmd(g,a,"bow_release","bow-b");});
         });
+        test("urban layouts and NPC service plazas are collision-consistent",[]{
+            GameRuntime g;const auto& c=g.definitions();auto b=buildings(c);CHECK(b.size()>250);int cities=0;
+            for(const auto&[id,r]:c.regions)if(!r.wilderness){cities++;CHECK(urbanRadius(r)>0&&urbanRadius(r)<=r.radius);bool found=false,lamp=false;for(const auto& house:b)if(house.region==id){found=true;lamp|=house.style.ends_with("|lamp");CHECK(finite(house.position));}CHECK(found&&lamp);}
+            CHECK(cities>=10);bool palace=false,wall=false;for(const auto& house:b){palace|=house.style=="aw_crownreach|palace";wall|=house.style=="aw_crownreach|wall";}CHECK(palace&&wall);
+            for(const auto&[id,n]:c.npcs)if(!c.regions.at(n.region).wilderness)CHECK(!blocked(n.position,b,.2));
+        });
+        test("five skill slots validate ownership uniqueness privacy and survive restart",[]{
+            auto path=std::filesystem::temp_directory_path()/"aw_skill_slots_runtime.json";std::filesystem::remove(path);GameRuntime g(path,true);auto a=create(g,"Slots A"),b=create(g,"Slots B");auto token=a.str("token");auto initial=g.snapshot(token).at("player").at("skillSlots");CHECK(initial.arrayItems().size()==5);auto first=initial.arrayItems()[0].string();CHECK(!first.empty());int n=0;
+            auto equip=[&](int slot,Id skill){return g.command(token,Json{{"request","slot-"+std::to_string(++n)},{"type","skill_slot"},{"slot",slot},{"skill",skill}});};
+            no([&]{equip(5,first);});no([&]{equip(1,first);});no([&]{equip(0,"forged");});for(const auto&[skill,def]:g.definitions().skills)if(def.effect=="dash"){g.world().players.at(a.at("player").str("id")).learnedSkills.insert(skill);no([&]{equip(0,skill);});break;}
+            equip(0,"");equip(1,first);CHECK(g.snapshot(token).at("player").at("skillSlots").arrayItems()[0].string().empty());CHECK(g.snapshot(token).at("player").at("skillSlots").arrayItems()[1].string()==first);
+            auto other=g.snapshot(b.str("token"));CHECK(!other.at("players").arrayItems().empty());CHECK(!other.at("players").arrayItems()[0].contains("skillSlots"));
+            g.save();GameRuntime restored(path,true);CHECK(restored.snapshot(token).at("player").at("skillSlots").arrayItems()[1].string()==first);std::filesystem::remove(path);std::filesystem::remove(path.string()+".bak");
+        });
+        test("public player weapon appearance is equipped-only and nearby",[]{
+            GameRuntime g({},true);auto a=create(g,"Appearance A"),b=create(g,"Appearance B");auto aid=a.at("player").str("id"),bid=b.at("player").str("id");auto snap=g.snapshot(a.str("token"));CHECK(snap.at("players").arrayItems().size()==1);auto visible=snap.at("players").arrayItems()[0];CHECK(visible.str("name")=="Appearance B");CHECK(visible.str("weaponType")=="sword");CHECK(visible.at("weapon").contains("code"));CHECK(!visible.contains("inventory")&&!visible.contains("warehouseItems"));
+            auto item=g.world().players.at(bid).equipped.at(Slot::Weapon);cmd(g,b,"unequip",item);CHECK(g.snapshot(a.str("token")).at("players").arrayItems()[0].str("weaponType")=="unarmed");g.world().players.at(bid).position.x+=200;CHECK(g.snapshot(a.str("token")).at("players").arrayItems().empty());
+        });
         std::cout<<"OK "<<groups<<" workstation groups, "<<checks<<" checks\n";
         return 0;
     }

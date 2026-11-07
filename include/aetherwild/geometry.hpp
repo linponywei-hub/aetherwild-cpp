@@ -11,6 +11,8 @@ namespace aw {
     };
     double cityElevation(const Id&);
     Vec3 cityArrival(const RegionDefinition&);
+    double urbanRadius(const RegionDefinition&);
+    std::vector<Building> cityBuildings(const Catalog&);
     std::vector<Building> buildings(const Catalog&);
     bool blocked(Vec3,const std::vector<Building>&,double radius=.45);
     double groundBelow(Vec3 feet,const Catalog&);

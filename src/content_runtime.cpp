@@ -14,12 +14,12 @@ Json GameRuntime::adminMap(const Id& key)const{
  Json j{{"ok",true},{"expanded",contentState_.flag("expanded")},{"release",contentState_.num("release",1)},{"planned",Json::array()},{"current",Json::array()},{"roads",Json::array()}};
  j["atlas"]=contentBundle().at("atlas_layout");
  for(const auto&[id,r]:contentBundle().at("regions").objectItems()){
-  j["planned"].push(Json{{"id",id},{"name",r.str("name")},{"center",r.at("center")},{"radius",r.num("radius_m",850)},{"layer",r.str("layer")},{"release",r.num("release",1)},{"open",contentState_.flag("expanded")&&r.num("release",1)<=contentState_.num("release",1)}});
+  j["planned"].push(Json{{"id",id},{"name",r.str("name")},{"center",r.at("center")},{"radius",r.num("radius_m",850)},{"city",catalog_.regions.contains(id)&&!catalog_.regions.at(id).wilderness},{"urbanRadius",catalog_.regions.contains(id)?urbanRadius(catalog_.regions.at(id)):0},{"layer",r.str("layer")},{"release",r.num("release",1)},{"open",contentState_.flag("expanded")&&r.num("release",1)<=contentState_.num("release",1)}});
  }
  for(const auto&[id,r]:catalog_.regions){
   auto definition=contentEntry("regions",id);
   bool open=!contentState_.flag("expanded")||(definition&&definition->num("release",1)<=contentState_.num("release",1));
-  j["current"].push(Json{{"id",id},{"name",r.name},{"center",vec(r.center)},{"radius",r.radius},{"open",open}});
+  j["current"].push(Json{{"id",id},{"name",r.name},{"center",vec(r.center)},{"radius",r.radius},{"city",!r.wilderness},{"urbanRadius",urbanRadius(r)},{"open",open}});
  }
  for(const auto&[id,r]:contentBundle().at("roads").objectItems())j["roads"].push(Json{{"a",r.str("a")},{"b",r.str("b")}});
  return j;
@@ -46,12 +46,12 @@ void GameRuntime::applyWorldPatch(){
 void GameRuntime::configureContent(bool expanded){
  if(!contentState_.contains("expanded"))contentState_=initialContent();
  catalog_=makeCatalog();installContent(catalog_);if(expanded){expandContentWorld(catalog_);catalog_.contentRelease=static_cast<int>(contentState_.num("release",1));}buildings_=buildings(catalog_);
- int i=0;for(auto&[id,n]:catalog_.npcs){
+ std::map<Id,int> residents;for(auto&[id,n]:catalog_.npcs){
   const auto& r=catalog_.regions.at(n.region);auto p=cityArrival(r);
   if(n.role=="guild")p.z-=5;else if(n.role=="merchant")p.x+=5;else if(n.role=="smith")p.x-=5;else if(n.role=="healer")p.z+=5;else if(n.role=="cartographer"){p.x+=5;p.z+=5;}
-  else{double angle=i++*2.399963;p.x+=std::cos(angle)*37;p.z+=std::sin(angle)*37;}
+  else{int i=residents[n.region]++;static const double xs[]={-18,-12,-6,6,12,18};p.x+=xs[i%6];p.z+=(i/6%2?1:-1)*(14+8*(i/12));}
   p.y=groundBelow(p,catalog_);n.position=p;
-  if(contentState_.contains("npcPoses")&&contentState_.at("npcPoses").contains(id)){auto saved=unvec(contentState_.at("npcPoses").at(id));if(distance(saved,p)<=100)n.position=saved;}
+  if(contentState_.contains("npcPoses")&&contentState_.at("npcPoses").contains(id)){auto saved=unvec(contentState_.at("npcPoses").at(id));if(distance(saved,p)<=100&&!blocked(saved,buildings_))n.position=saved;}
  }
 }
 void GameRuntime::checkContentRegion(const Id& region)const{
@@ -114,6 +114,14 @@ void GameRuntime::startExpandedWorld(){
 }
 bool GameRuntime::contentCommand(Player& p,const Json& j){
  auto type=j.str("type"),target=j.str("target"),request=j.str("request");
+ if(type=="skill_slot"){
+  require(p.vitals.alive(),"倒下時無法調整技能欄");auto index=j.at("slot").integer();require(index>=0&&index<5,"技能欄僅有五格");auto skill=j.str("skill");
+  require(skill.empty()||(p.learnedSkills.contains(skill)&&catalog_.skills.contains(skill)&&catalog_.skills.at(skill).effect!="dash"&&(!catalog_.skillOwners.contains(skill)||catalog_.skillOwners.at(skill)==p.profession)),"尚未學會或不屬於目前職業的技能");
+  auto slots=equippedSkills(p);for(int i=0;i<5;i++)if(i!=index&&!skill.empty())require(slots.arrayItems()[i].string()!=skill,"同一技能不能重複裝備");Json updated=Json::array();for(int i=0;i<5;i++)updated.push(i==index?skill:slots.arrayItems()[i].string());slots=updated;
+  if(!contentState_.contains("skillLoadout"))contentState_["skillLoadout"]=Json::object();
+  contentState_["skillLoadout"][p.id]=slots;return true;
+ }
+
  auto admin=[&]{auto role=social_.accounts.at(p.accountId).role;require(role==Role::Owner||role==Role::Admin,"需要管理員權限");};
  if(type=="expansion_start"){admin();startExpandedWorld();return true;}
  if(type=="content_release"){
@@ -186,6 +194,15 @@ bool GameRuntime::contentCommand(Player& p,const Json& j){
   require(a.flag("repair")&&now>=a.num("lockUntil"),"仍在安全限制期間");InventorySystem::pay(p.materials,{{"wood",2}});NpcSystem::event(a,*profile,"repair",request,now);return true;
  }
  throw RuleError("未知NPC操作");
+}
+Json GameRuntime::equippedSkills(const Player& p)const{
+ Json slots=Json::array();
+ if(contentState_.contains("skillLoadout")&&contentState_.at("skillLoadout").contains(p.id)){
+  const auto& saved=contentState_.at("skillLoadout").at(p.id).arrayItems();for(int i=0;i<5;i++){Id id=i<static_cast<int>(saved.size())?saved[i].string():Id{};if(!p.learnedSkills.contains(id)||!catalog_.skills.contains(id)||catalog_.skills.at(id).effect=="dash"||(catalog_.skillOwners.contains(id)&&catalog_.skillOwners.at(id)!=p.profession))id.clear();slots.push(id);}return slots;
+ }
+ for(const auto& id:p.learnedSkills)if(catalog_.skills.contains(id)&&catalog_.skills.at(id).effect!="dash"&&(!catalog_.skillOwners.contains(id)||catalog_.skillOwners.at(id)==p.profession)&&slots.arrayItems().size()<5)slots.push(id);
+ while(slots.arrayItems().size()<5)slots.push("");
+ return slots;
 }
 Json GameRuntime::contentSnapshot(const Player& p)const{
  auto now=NpcSystem::clock();Json out{{"expanded",contentState_.flag("expanded")},{"release",contentState_.num("release",1)},{"worldLimit",catalog_.worldLimit},{"relations",Json::object()},{"npcs",Json::array()},{"books",Json::array()},{"collections",Json::object()},{"blockers",Json::array()}};

@@ -15,7 +15,7 @@ export function updateContentScene(scene,state){
  const patch=c.terrainPatch;
  if(patch&&scene.patchKey!==patch.x+':'+patch.z){
   scene.sceneryCell='';scene.patchKey=patch.x+':'+patch.z;if(scene.terrainPatch){scene.contentRoot.remove(scene.terrainPatch);scene.terrainPatch.geometry.dispose();scene.terrainPatch.material.dispose();}
-  scene.terrainPatch=terrainMesh(patch,'#708766',scene.catalog.landscape);scene.contentRoot.add(scene.terrainPatch);
+  scene.terrainPatch=terrainMesh(patch,'#708766',scene.catalog.landscape);scene.terrainPatch.userData.localTerrain=true;scene.contentRoot.add(scene.terrainPatch);
   if(scene.globalTerrain){const material=scene.globalTerrain.material;
    if(!material.userData.patchBounds){material.userData.patchBounds=new T.Vector4();material.onBeforeCompile=shader=>{shader.uniforms.patchBounds={value:material.userData.patchBounds};shader.vertexShader='varying vec2 patchWorld;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\npatchWorld=(modelMatrix*vec4(position,1.0)).xz;');shader.fragmentShader='uniform vec4 patchBounds; varying vec2 patchWorld;\n'+shader.fragmentShader.replace('#include <clipping_planes_fragment>','#include <clipping_planes_fragment>\nif(patchWorld.x>patchBounds.x && patchWorld.y>patchBounds.y && patchWorld.x<patchBounds.z && patchWorld.y<patchBounds.w) discard;');};material.customProgramCacheKey=()=> 'terrain-patch-clip-v1';material.needsUpdate=true;}
    material.userData.patchBounds.set(patch.x+1,patch.z+1,patch.x+(patch.side-1)*patch.step-1,patch.z+(patch.side-1)*patch.step-1);
