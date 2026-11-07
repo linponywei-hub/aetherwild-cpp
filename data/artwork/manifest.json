@@ -22,8 +22,15 @@
       "name": "留名・星核權杖",
       "category": "equipment",
       "type": "staff",
-      "status": "pending",
-      "path": "assets/reference/items/astralstaff.png"
+      "status": "ready",
+      "path": "assets/reference/items/astralstaff.png",
+      "sha256": "43ac94fa7f3fd8aeb49f2bad883b0922e8ca9f59165cf429dbf6054c1c126348",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 164335,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・星核權杖, exact game ID astralstaff. A slender silver star core scepter holding a floating deep blue crystal within elegant crescent prongs and tiny star inlays. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "aw_equip_astral_1": {
       "id": "aw_equip_astral_1",
@@ -4262,8 +4269,15 @@
       "name": "留名・古樹護衣",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/barkarmor.png"
+      "status": "ready",
+      "path": "assets/reference/items/barkarmor.png",
+      "sha256": "797b8e92640040ea72ac823fc50727eed2fac471931f73acb65d2551eb05b125",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 100097,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・古樹護衣, exact ID barkarmor. A wearable ancient tree bark chest armor, layered dark bark scales over forest green leather with mossy edges and brass clasps, empty garment, no person. Detailed semi-realistic painted fantasy art, realistic metal, wood or leather textures as appropriate, elegant clear readable silhouette. One centered isolated item, complete object with generous padding, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, labels, border, circular badge, scene, person, checkerboard or solid background."
     },
     "boots": {
       "id": "boots",
@@ -4285,24 +4299,45 @@
       "name": "伊瑟的星墜戰甲",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_astral_armor.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_astral_armor.png",
+      "sha256": "ffe7459c190b8b69c0b5cdccc9cc0c2656f301310acac3ccd1bedbf2948365e9",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 105567,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 伊瑟的星墜戰甲, exact game ID boss_astral_armor. Create one empty wearable chest armor, no body or mannequin. Unified set theme: Fallen star Iser: midnight blue steel, polished silver, violet star crystals and celestial geometric inlays. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_astral_boots": {
       "id": "boss_astral_boots",
       "name": "伊瑟的星墜足鎧",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_astral_boots.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_astral_boots.png",
+      "sha256": "d55d836fd509db4b0755cc31f5684ae11d133bc10c5bf399b81c7824e54c39bb",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 121969,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 伊瑟的星墜足鎧, exact game ID boss_astral_boots. Create one matched pair of armored boots. Unified set theme: Fallen star Iser: midnight blue steel, polished silver, violet star crystals and celestial geometric inlays. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_astral_bow": {
       "id": "boss_astral_bow",
       "name": "伊瑟的星墜獵弓",
       "category": "equipment",
       "type": "bow",
-      "status": "pending",
-      "path": "assets/reference/items/boss_astral_bow.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_astral_bow.png",
+      "sha256": "898795671eee32fcc8e5b80b6e7b18c02f46bc026e25ecfe4ae1360d2328e22d",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 130525,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 伊瑟的星墜獵弓, exact game ID boss_astral_bow. Create one complete recurved hunting bow with a taut clearly visible bowstring. Unified set theme: Fallen star Iser: midnight blue steel, polished silver, violet star crystals and celestial geometric inlays. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_astral_cannon": {
       "id": "boss_astral_cannon",
@@ -4325,8 +4360,15 @@
       "name": "伊瑟的星墜印記",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_astral_charm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_astral_charm.png",
+      "sha256": "957cea18e95411c03d4be456e1961e0e7bf0894bedb3a8584d6262c6e7b37ac4",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 147317,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 伊瑟的星墜印記, exact game ID boss_astral_charm. Create one small wearable emblem pendant with short chain. Unified set theme: Fallen star Iser: midnight blue steel, polished silver, violet star crystals and celestial geometric inlays. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_astral_daggers": {
       "id": "boss_astral_daggers",
@@ -4373,8 +4415,15 @@
       "name": "伊瑟的星墜冠冕",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_astral_helm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_astral_helm.png",
+      "sha256": "8ecd2da0b1380ec7210f231a17954d7f4327397765bce43302a13faf7498d344",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 117654,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 伊瑟的星墜冠冕, exact game ID boss_astral_helm. Create one protective crown helmet, no head or face. Unified set theme: Fallen star Iser: midnight blue steel, polished silver, violet star crystals and celestial geometric inlays. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_astral_instrument": {
       "id": "boss_astral_instrument",
@@ -4405,16 +4454,30 @@
       "name": "伊瑟的星墜權杖",
       "category": "equipment",
       "type": "staff",
-      "status": "pending",
-      "path": "assets/reference/items/boss_astral_staff.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_astral_staff.png",
+      "sha256": "527097cf1f21d909f00fb104a2e47728f31790dba5ed826322ed3aa0a06e9fb4",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 161283,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 伊瑟的星墜權杖, exact game ID boss_astral_staff. Create one complete tall magical staff with an ornate focus at its tip. Unified set theme: Fallen star Iser: midnight blue steel, polished silver, violet star crystals and celestial geometric inlays. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_astral_sword": {
       "id": "boss_astral_sword",
       "name": "伊瑟的星墜裂刃",
       "category": "equipment",
       "type": "sword",
-      "status": "pending",
-      "path": "assets/reference/items/boss_astral_sword.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_astral_sword.png",
+      "sha256": "773bf0d762524fd4e6171c88835f30437b9fe672722e0d41ad6dd97da57e7cd5",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 146289,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 伊瑟的星墜裂刃, exact game ID boss_astral_sword. Create one complete formidable bladed sword with clear blade, guard and grip. Unified set theme: Fallen star Iser: midnight blue steel, polished silver, violet star crystals and celestial geometric inlays. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_astral_toolgun": {
       "id": "boss_astral_toolgun",
@@ -4437,24 +4500,45 @@
       "name": "卡恩的熔核戰甲",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_cinder_armor.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_cinder_armor.png",
+      "sha256": "7a0dbd1a9477de51bc6390f1285ac12141c35f0aaa36a366c6675c24390a9301",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 96089,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 卡恩的熔核戰甲, exact game ID boss_cinder_armor. Create one empty wearable chest armor, no body or mannequin. Unified set theme: Molten forge Kaan: massive black iron, copper rivets, glowing orange lava cracks and angular mechanical shapes. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_cinder_boots": {
       "id": "boss_cinder_boots",
       "name": "卡恩的熔核足鎧",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_cinder_boots.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_cinder_boots.png",
+      "sha256": "9ae38da97b623b3f0c434d3625ad0a8dd9d270a21996582058121392fcf543b0",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 98569,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 卡恩的熔核足鎧, exact game ID boss_cinder_boots. Create one matched pair of armored boots. Unified set theme: Molten forge Kaan: massive black iron, copper rivets, glowing orange lava cracks and angular mechanical shapes. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_cinder_bow": {
       "id": "boss_cinder_bow",
       "name": "卡恩的熔核獵弓",
       "category": "equipment",
       "type": "bow",
-      "status": "pending",
-      "path": "assets/reference/items/boss_cinder_bow.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_cinder_bow.png",
+      "sha256": "e0380b0ff16df31b5b718840c32e0d6feb82da7a38cd54e3daa76c024b2aaec7",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 145068,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 卡恩的熔核獵弓, exact game ID boss_cinder_bow. Create one complete recurved hunting bow with a taut clearly visible bowstring. Unified set theme: Molten forge Kaan: massive black iron, copper rivets, glowing orange lava cracks and angular mechanical shapes. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_cinder_cannon": {
       "id": "boss_cinder_cannon",
@@ -4477,8 +4561,15 @@
       "name": "卡恩的熔核印記",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_cinder_charm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_cinder_charm.png",
+      "sha256": "6e86697b29b991959c0be34e186f88fad809ba6e381535bf94bd7b7a793feff2",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 137063,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 卡恩的熔核印記, exact game ID boss_cinder_charm. Create one small wearable emblem pendant with short chain. Unified set theme: Molten forge Kaan: massive black iron, copper rivets, glowing orange lava cracks and angular mechanical shapes. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_cinder_daggers": {
       "id": "boss_cinder_daggers",
@@ -4525,8 +4616,15 @@
       "name": "卡恩的熔核冠冕",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_cinder_helm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_cinder_helm.png",
+      "sha256": "4df9283c50b6271ec0215ac0224a2eb9e1602f66524dfb54883e6c0621a7a396",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 101563,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 卡恩的熔核冠冕, exact game ID boss_cinder_helm. Create one protective crown helmet, no head or face. Unified set theme: Molten forge Kaan: massive black iron, copper rivets, glowing orange lava cracks and angular mechanical shapes. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_cinder_instrument": {
       "id": "boss_cinder_instrument",
@@ -4557,16 +4655,30 @@
       "name": "卡恩的熔核權杖",
       "category": "equipment",
       "type": "staff",
-      "status": "pending",
-      "path": "assets/reference/items/boss_cinder_staff.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_cinder_staff.png",
+      "sha256": "d1df9409bb975ed8275273fba204aef88c91042d2b3fbba37f06e1f91bf9f607",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 161358,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 卡恩的熔核權杖, exact game ID boss_cinder_staff. Create one complete tall magical staff with an ornate focus at its tip. Unified set theme: Molten forge Kaan: massive black iron, copper rivets, glowing orange lava cracks and angular mechanical shapes. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_cinder_sword": {
       "id": "boss_cinder_sword",
       "name": "卡恩的熔核裂刃",
       "category": "equipment",
       "type": "sword",
-      "status": "pending",
-      "path": "assets/reference/items/boss_cinder_sword.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_cinder_sword.png",
+      "sha256": "add06b27edb71792fc8b90f7a89d547f88eb6ccfbaea8c0b8a9caf303fd47c0a",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 134115,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 卡恩的熔核裂刃, exact game ID boss_cinder_sword. Create one complete formidable bladed sword with clear blade, guard and grip. Unified set theme: Molten forge Kaan: massive black iron, copper rivets, glowing orange lava cracks and angular mechanical shapes. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_cinder_toolgun": {
       "id": "boss_cinder_toolgun",
@@ -4589,24 +4701,45 @@
       "name": "莫爾戈的黑棘戰甲",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_darkforest_armor.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_darkforest_armor.png",
+      "sha256": "faba1c1f9b16c6bbbb833d1207002a3133344b9896ccd3a001a393b4164b20a4",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 101416,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 莫爾戈的黑棘戰甲, exact game ID boss_darkforest_armor. Create one empty wearable chest armor, no body or mannequin. Unified set theme: Blackthorn Molgo: dark twisted iron, jagged thorn vines, deep purple gems and subtle corrupt violet light. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_darkforest_boots": {
       "id": "boss_darkforest_boots",
       "name": "莫爾戈的黑棘足鎧",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_darkforest_boots.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_darkforest_boots.png",
+      "sha256": "d58ea8a7f9e4e293078a69156beeda5c7a9aa14674c4ee06ea6cb14de87a40fa",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 110418,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 莫爾戈的黑棘足鎧, exact game ID boss_darkforest_boots. Create one matched pair of armored boots. Unified set theme: Blackthorn Molgo: dark twisted iron, jagged thorn vines, deep purple gems and subtle corrupt violet light. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_darkforest_bow": {
       "id": "boss_darkforest_bow",
       "name": "莫爾戈的黑棘獵弓",
       "category": "equipment",
       "type": "bow",
-      "status": "pending",
-      "path": "assets/reference/items/boss_darkforest_bow.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_darkforest_bow.png",
+      "sha256": "ebf29b153ad5bf044bd77d84e3397fbb9433cfeae46a7de9c3bbc4e6951a0075",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 92221,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 莫爾戈的黑棘獵弓, exact game ID boss_darkforest_bow. Create one complete recurved hunting bow with a taut clearly visible bowstring. Unified set theme: Blackthorn Molgo: dark twisted iron, jagged thorn vines, deep purple gems and subtle corrupt violet light. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_darkforest_cannon": {
       "id": "boss_darkforest_cannon",
@@ -4629,8 +4762,15 @@
       "name": "莫爾戈的黑棘印記",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_darkforest_charm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_darkforest_charm.png",
+      "sha256": "c0e13801e46a59186e4be8e497f016c47d5868fe2ad00f86bdb4fc0543c9b43e",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 133172,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 莫爾戈的黑棘印記, exact game ID boss_darkforest_charm. Create one small wearable emblem pendant with short chain. Unified set theme: Blackthorn Molgo: dark twisted iron, jagged thorn vines, deep purple gems and subtle corrupt violet light. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_darkforest_daggers": {
       "id": "boss_darkforest_daggers",
@@ -4677,8 +4817,15 @@
       "name": "莫爾戈的黑棘冠冕",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_darkforest_helm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_darkforest_helm.png",
+      "sha256": "e786f2ce55df4ff6e0c765704ed442c4dc1cb706c91ac071b20f48828605ac6c",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 118788,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 莫爾戈的黑棘冠冕, exact game ID boss_darkforest_helm. Create one protective crown helmet, no head or face. Unified set theme: Blackthorn Molgo: dark twisted iron, jagged thorn vines, deep purple gems and subtle corrupt violet light. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_darkforest_instrument": {
       "id": "boss_darkforest_instrument",
@@ -4709,16 +4856,30 @@
       "name": "莫爾戈的黑棘權杖",
       "category": "equipment",
       "type": "staff",
-      "status": "pending",
-      "path": "assets/reference/items/boss_darkforest_staff.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_darkforest_staff.png",
+      "sha256": "7bb9ff6bc476dbcd1db35672c24cef546f392f386ae76b5b37335401989c0eb8",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 161933,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 莫爾戈的黑棘權杖, exact game ID boss_darkforest_staff. Create one complete tall magical staff with an ornate focus at its tip. Unified set theme: Blackthorn Molgo: dark twisted iron, jagged thorn vines, deep purple gems and subtle corrupt violet light. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_darkforest_sword": {
       "id": "boss_darkforest_sword",
       "name": "莫爾戈的黑棘裂刃",
       "category": "equipment",
       "type": "sword",
-      "status": "pending",
-      "path": "assets/reference/items/boss_darkforest_sword.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_darkforest_sword.png",
+      "sha256": "688f4af05f5c9dc6c52cd6af6167122d543aff6d657cf681173e49f7064ea6d4",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 136061,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 莫爾戈的黑棘裂刃, exact game ID boss_darkforest_sword. Create one complete formidable bladed sword with clear blade, guard and grip. Unified set theme: Blackthorn Molgo: dark twisted iron, jagged thorn vines, deep purple gems and subtle corrupt violet light. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_darkforest_toolgun": {
       "id": "boss_darkforest_toolgun",
@@ -4741,24 +4902,45 @@
       "name": "希瓦恩的霜翼戰甲",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_frosthold_armor.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_frosthold_armor.png",
+      "sha256": "6829c3496021095a3cd4650d4d9be755f17a195c1db419828c83695dfa41bb75",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 95692,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 希瓦恩的霜翼戰甲, exact game ID boss_frosthold_armor. Create one empty wearable chest armor, no body or mannequin. Unified set theme: Frost wing Shivan: pale silver steel, translucent icy blue crystals, swept feather like blades and delicate frost patterns. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_frosthold_boots": {
       "id": "boss_frosthold_boots",
       "name": "希瓦恩的霜翼足鎧",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_frosthold_boots.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_frosthold_boots.png",
+      "sha256": "e4fe301cf38b70a5561ab7664aedb795d111a4033b6591eeb05ea3ce75216fa9",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 116879,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 希瓦恩的霜翼足鎧, exact game ID boss_frosthold_boots. Create one matched pair of armored boots. Unified set theme: Frost wing Shivan: pale silver steel, translucent icy blue crystals, swept feather like blades and delicate frost patterns. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_frosthold_bow": {
       "id": "boss_frosthold_bow",
       "name": "希瓦恩的霜翼獵弓",
       "category": "equipment",
       "type": "bow",
-      "status": "pending",
-      "path": "assets/reference/items/boss_frosthold_bow.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_frosthold_bow.png",
+      "sha256": "d568016bf14be2e8f7e10d7c9fed8cfe1e13d0171601ed7fc24ac40e127d5dac",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 147527,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 希瓦恩的霜翼獵弓, exact game ID boss_frosthold_bow. Create one complete recurved hunting bow with a taut clearly visible bowstring. Unified set theme: Frost wing Shivan: pale silver steel, translucent icy blue crystals, swept feather like blades and delicate frost patterns. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_frosthold_cannon": {
       "id": "boss_frosthold_cannon",
@@ -4781,8 +4963,15 @@
       "name": "希瓦恩的霜翼印記",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_frosthold_charm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_frosthold_charm.png",
+      "sha256": "7126984898ae104c392aff82ea966bf41d74226e9b9cacee2edb1c2194b4028a",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 123809,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 希瓦恩的霜翼印記, exact game ID boss_frosthold_charm. Create one small wearable emblem pendant with short chain. Unified set theme: Frost wing Shivan: pale silver steel, translucent icy blue crystals, swept feather like blades and delicate frost patterns. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_frosthold_daggers": {
       "id": "boss_frosthold_daggers",
@@ -4829,8 +5018,15 @@
       "name": "希瓦恩的霜翼冠冕",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_frosthold_helm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_frosthold_helm.png",
+      "sha256": "b5c79589ff204a7ec29351e45f2e46cb60c0cbeafd82834ec25114ca76c0ffa7",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 99133,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 希瓦恩的霜翼冠冕, exact game ID boss_frosthold_helm. Create one protective crown helmet, no head or face. Unified set theme: Frost wing Shivan: pale silver steel, translucent icy blue crystals, swept feather like blades and delicate frost patterns. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_frosthold_instrument": {
       "id": "boss_frosthold_instrument",
@@ -4861,16 +5057,30 @@
       "name": "希瓦恩的霜翼權杖",
       "category": "equipment",
       "type": "staff",
-      "status": "pending",
-      "path": "assets/reference/items/boss_frosthold_staff.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_frosthold_staff.png",
+      "sha256": "6b049a601e6e2f2e05a31db398b5446f924b28e9508fd35959833abc6b1aab04",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 155852,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 希瓦恩的霜翼權杖, exact game ID boss_frosthold_staff. Create one complete tall magical staff with an ornate focus at its tip. Unified set theme: Frost wing Shivan: pale silver steel, translucent icy blue crystals, swept feather like blades and delicate frost patterns. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_frosthold_sword": {
       "id": "boss_frosthold_sword",
       "name": "希瓦恩的霜翼裂刃",
       "category": "equipment",
       "type": "sword",
-      "status": "pending",
-      "path": "assets/reference/items/boss_frosthold_sword.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_frosthold_sword.png",
+      "sha256": "196866cf252446567ae721960d71dc5d8ed6d420296a64633dfb57792872e958",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 133944,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 希瓦恩的霜翼裂刃, exact game ID boss_frosthold_sword. Create one complete formidable bladed sword with clear blade, guard and grip. Unified set theme: Frost wing Shivan: pale silver steel, translucent icy blue crystals, swept feather like blades and delicate frost patterns. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_frosthold_toolgun": {
       "id": "boss_frosthold_toolgun",
@@ -4893,24 +5103,45 @@
       "name": "賽赫拉的曜砂戰甲",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_sundune_armor.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_sundune_armor.png",
+      "sha256": "98fbb49953dba2265b16e8a07bac6e6fe89d3f6080061882a0ee7aaf1e191517",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 99015,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 賽赫拉的曜砂戰甲, exact game ID boss_sundune_armor. Create one empty wearable chest armor, no body or mannequin. Unified set theme: Solar sand Sehra: antique gold and bronze, turquoise gems, flowing sand swirls and solar crescent motifs. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_sundune_boots": {
       "id": "boss_sundune_boots",
       "name": "賽赫拉的曜砂足鎧",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_sundune_boots.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_sundune_boots.png",
+      "sha256": "1228cd15c40454acd02354aa0a91c427cc9202db2bfcd3700e6b948771e37dc9",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 106903,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 賽赫拉的曜砂足鎧, exact game ID boss_sundune_boots. Create one matched pair of armored boots. Unified set theme: Solar sand Sehra: antique gold and bronze, turquoise gems, flowing sand swirls and solar crescent motifs. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_sundune_bow": {
       "id": "boss_sundune_bow",
       "name": "賽赫拉的曜砂獵弓",
       "category": "equipment",
       "type": "bow",
-      "status": "pending",
-      "path": "assets/reference/items/boss_sundune_bow.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_sundune_bow.png",
+      "sha256": "f5e6d4fb65926abd747bb217cd80a7ae0cfd081f4f78f5d6b54765e48a17e917",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 144077,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 賽赫拉的曜砂獵弓, exact game ID boss_sundune_bow. Create one complete recurved hunting bow with a taut clearly visible bowstring. Unified set theme: Solar sand Sehra: antique gold and bronze, turquoise gems, flowing sand swirls and solar crescent motifs. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_sundune_cannon": {
       "id": "boss_sundune_cannon",
@@ -4933,8 +5164,15 @@
       "name": "賽赫拉的曜砂印記",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_sundune_charm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_sundune_charm.png",
+      "sha256": "fe1e40d246312f4a0fa4d147d1aa141015b7006f0b668f84b4ffd1cd556311ee",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 144119,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 賽赫拉的曜砂印記, exact game ID boss_sundune_charm. Create one small wearable emblem pendant with short chain. Unified set theme: Solar sand Sehra: antique gold and bronze, turquoise gems, flowing sand swirls and solar crescent motifs. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_sundune_daggers": {
       "id": "boss_sundune_daggers",
@@ -4981,8 +5219,15 @@
       "name": "賽赫拉的曜砂冠冕",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_sundune_helm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_sundune_helm.png",
+      "sha256": "83fd12a23574e1fd52f92d22a938c03ecf89f1ef939db3da10eb75e3dd4a1da1",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 103380,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 賽赫拉的曜砂冠冕, exact game ID boss_sundune_helm. Create one protective crown helmet, no head or face. Unified set theme: Solar sand Sehra: antique gold and bronze, turquoise gems, flowing sand swirls and solar crescent motifs. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_sundune_instrument": {
       "id": "boss_sundune_instrument",
@@ -5013,16 +5258,30 @@
       "name": "賽赫拉的曜砂權杖",
       "category": "equipment",
       "type": "staff",
-      "status": "pending",
-      "path": "assets/reference/items/boss_sundune_staff.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_sundune_staff.png",
+      "sha256": "7f9d34c734aa6037bcddc82ac7da1e87377c4388d0be386209dbdfecce2e3bf1",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 159726,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 賽赫拉的曜砂權杖, exact game ID boss_sundune_staff. Create one complete tall magical staff with an ornate focus at its tip. Unified set theme: Solar sand Sehra: antique gold and bronze, turquoise gems, flowing sand swirls and solar crescent motifs. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_sundune_sword": {
       "id": "boss_sundune_sword",
       "name": "賽赫拉的曜砂裂刃",
       "category": "equipment",
       "type": "sword",
-      "status": "pending",
-      "path": "assets/reference/items/boss_sundune_sword.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_sundune_sword.png",
+      "sha256": "a04ed3bcf7842ca5a472c70ccef32c0a7c21c038c1de9bbd5b1e1a7ab3133e90",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 100416,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 賽赫拉的曜砂裂刃, exact game ID boss_sundune_sword. Create one complete formidable bladed sword with clear blade, guard and grip. Unified set theme: Solar sand Sehra: antique gold and bronze, turquoise gems, flowing sand swirls and solar crescent motifs. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_sundune_toolgun": {
       "id": "boss_sundune_toolgun",
@@ -5045,24 +5304,45 @@
       "name": "奈羅斯的深潮戰甲",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_tidehaven_armor.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_tidehaven_armor.png",
+      "sha256": "ffbc575250e54cfe36e45bf64044d1b77cf3a7ed890167a3a474be7a59d254a0",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 52050,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 奈羅斯的深潮戰甲, exact game ID boss_tidehaven_armor. Create one empty wearable chest armor, no body or mannequin. Unified set theme: Deep tide giant crab Naros: blue black shell armor, silver wave patterns, pearl details and curved crab claw shapes. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_tidehaven_boots": {
       "id": "boss_tidehaven_boots",
       "name": "奈羅斯的深潮足鎧",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_tidehaven_boots.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_tidehaven_boots.png",
+      "sha256": "962576aed5effa22f27981633aa6fbb4740d366620bc655386d046f511650cee",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 112947,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 奈羅斯的深潮足鎧, exact game ID boss_tidehaven_boots. Create one matched pair of armored boots. Unified set theme: Deep tide giant crab Naros: blue black shell armor, silver wave patterns, pearl details and curved crab claw shapes. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_tidehaven_bow": {
       "id": "boss_tidehaven_bow",
       "name": "奈羅斯的深潮獵弓",
       "category": "equipment",
       "type": "bow",
-      "status": "pending",
-      "path": "assets/reference/items/boss_tidehaven_bow.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_tidehaven_bow.png",
+      "sha256": "dcb3312548a28267a2945eab712d84c28bb65382e74d108c04bfbfe2838133eb",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 80737,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 奈羅斯的深潮獵弓, exact game ID boss_tidehaven_bow. Create one complete recurved hunting bow with a taut clearly visible bowstring. Unified set theme: Deep tide giant crab Naros: blue black shell armor, silver wave patterns, pearl details and curved crab claw shapes. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_tidehaven_cannon": {
       "id": "boss_tidehaven_cannon",
@@ -5085,8 +5365,15 @@
       "name": "奈羅斯的深潮印記",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_tidehaven_charm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_tidehaven_charm.png",
+      "sha256": "dfe270e33a733a836c3dd2737ce8e1d008101506871846dc0214d8e2b0611010",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 122767,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 奈羅斯的深潮印記, exact game ID boss_tidehaven_charm. Create one small wearable emblem pendant with short chain. Unified set theme: Deep tide giant crab Naros: blue black shell armor, silver wave patterns, pearl details and curved crab claw shapes. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_tidehaven_daggers": {
       "id": "boss_tidehaven_daggers",
@@ -5133,8 +5420,15 @@
       "name": "奈羅斯的深潮冠冕",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_tidehaven_helm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_tidehaven_helm.png",
+      "sha256": "e7b7788a69850911bebe1adaad295a4c3c0c88132d4b6b45d5b426eb9ddaf28c",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 102369,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 奈羅斯的深潮冠冕, exact game ID boss_tidehaven_helm. Create one protective crown helmet, no head or face. Unified set theme: Deep tide giant crab Naros: blue black shell armor, silver wave patterns, pearl details and curved crab claw shapes. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_tidehaven_instrument": {
       "id": "boss_tidehaven_instrument",
@@ -5165,16 +5459,30 @@
       "name": "奈羅斯的深潮權杖",
       "category": "equipment",
       "type": "staff",
-      "status": "pending",
-      "path": "assets/reference/items/boss_tidehaven_staff.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_tidehaven_staff.png",
+      "sha256": "ea8e771cdefd1049fd8ab4a51acbeb0204226c11a969dfa6175a2c58d7033fbd",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 144497,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 奈羅斯的深潮權杖, exact game ID boss_tidehaven_staff. Create one complete tall magical staff with an ornate focus at its tip. Unified set theme: Deep tide giant crab Naros: blue black shell armor, silver wave patterns, pearl details and curved crab claw shapes. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_tidehaven_sword": {
       "id": "boss_tidehaven_sword",
       "name": "奈羅斯的深潮裂刃",
       "category": "equipment",
       "type": "sword",
-      "status": "pending",
-      "path": "assets/reference/items/boss_tidehaven_sword.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_tidehaven_sword.png",
+      "sha256": "541af3793d0269254a8678a9b6abf4aef4a2a2317eea4bdfcae42a197e82fb71",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 137586,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 奈羅斯的深潮裂刃, exact game ID boss_tidehaven_sword. Create one complete formidable bladed sword with clear blade, guard and grip. Unified set theme: Deep tide giant crab Naros: blue black shell armor, silver wave patterns, pearl details and curved crab claw shapes. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_tidehaven_toolgun": {
       "id": "boss_tidehaven_toolgun",
@@ -5197,24 +5505,45 @@
       "name": "薩爾的荊誓戰甲",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_verdant_armor.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_verdant_armor.png",
+      "sha256": "6e9c6454b41f826d495d48ae9a5c91f4e08bfa1fec67fa06759c873f5808e837",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 109169,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 薩爾的荊誓戰甲, exact game ID boss_verdant_armor. Create one empty wearable chest armor, no body or mannequin. Unified set theme: Ancient forest deer Saar: elegant living wood, silver antler branches, emerald gems and thorn vine oath motifs. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_verdant_boots": {
       "id": "boss_verdant_boots",
       "name": "薩爾的荊誓足鎧",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_verdant_boots.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_verdant_boots.png",
+      "sha256": "0eb4a9650bacb0fcedea88e10c6fb5efef3eeed74fe0eab4a7a446c5efb86cf2",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 120345,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 薩爾的荊誓足鎧, exact game ID boss_verdant_boots. Create one matched pair of armored boots. Unified set theme: Ancient forest deer Saar: elegant living wood, silver antler branches, emerald gems and thorn vine oath motifs. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_verdant_bow": {
       "id": "boss_verdant_bow",
       "name": "薩爾的荊誓獵弓",
       "category": "equipment",
       "type": "bow",
-      "status": "pending",
-      "path": "assets/reference/items/boss_verdant_bow.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_verdant_bow.png",
+      "sha256": "a28907c032861ebf957b3dfa830ccd09739d2c10d411d6405d1b993eb322f5c6",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 148731,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 薩爾的荊誓獵弓, exact game ID boss_verdant_bow. Create one complete recurved hunting bow with a taut clearly visible bowstring. Unified set theme: Ancient forest deer Saar: elegant living wood, silver antler branches, emerald gems and thorn vine oath motifs. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_verdant_cannon": {
       "id": "boss_verdant_cannon",
@@ -5237,8 +5566,15 @@
       "name": "薩爾的荊誓印記",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_verdant_charm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_verdant_charm.png",
+      "sha256": "bfefe58ca5c4bfa63b940b88d7429dd04072937eeb3fb611efa2e63801dd6c4b",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 117363,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 薩爾的荊誓印記, exact game ID boss_verdant_charm. Create one small wearable emblem pendant with short chain. Unified set theme: Ancient forest deer Saar: elegant living wood, silver antler branches, emerald gems and thorn vine oath motifs. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_verdant_daggers": {
       "id": "boss_verdant_daggers",
@@ -5285,8 +5621,15 @@
       "name": "薩爾的荊誓冠冕",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_verdant_helm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_verdant_helm.png",
+      "sha256": "37a62549cfb6679cdf253049605d562e4a1698b35d8187dfd2a1f60f60594269",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 107183,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 薩爾的荊誓冠冕, exact game ID boss_verdant_helm. Create one protective crown helmet, no head or face. Unified set theme: Ancient forest deer Saar: elegant living wood, silver antler branches, emerald gems and thorn vine oath motifs. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_verdant_instrument": {
       "id": "boss_verdant_instrument",
@@ -5317,16 +5660,30 @@
       "name": "薩爾的荊誓權杖",
       "category": "equipment",
       "type": "staff",
-      "status": "pending",
-      "path": "assets/reference/items/boss_verdant_staff.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_verdant_staff.png",
+      "sha256": "f3b6cd4cd56f31b526e6e2d0d101a2346f6779a8f3fe7f8349a40e658e36d8ad",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 117165,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 薩爾的荊誓權杖, exact game ID boss_verdant_staff. Create one complete tall magical staff with an ornate focus at its tip. Unified set theme: Ancient forest deer Saar: elegant living wood, silver antler branches, emerald gems and thorn vine oath motifs. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_verdant_sword": {
       "id": "boss_verdant_sword",
       "name": "薩爾的荊誓裂刃",
       "category": "equipment",
       "type": "sword",
-      "status": "pending",
-      "path": "assets/reference/items/boss_verdant_sword.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_verdant_sword.png",
+      "sha256": "a55f9c7a2956d6504756166a3e810327bf75a172bf23c923351bfeb6272e2d40",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 142009,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 薩爾的荊誓裂刃, exact game ID boss_verdant_sword. Create one complete formidable bladed sword with clear blade, guard and grip. Unified set theme: Ancient forest deer Saar: elegant living wood, silver antler branches, emerald gems and thorn vine oath motifs. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_verdant_toolgun": {
       "id": "boss_verdant_toolgun",
@@ -5349,24 +5706,45 @@
       "name": "奧爾芬的苔冠戰甲",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_windchime_armor.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_windchime_armor.png",
+      "sha256": "688d364f38acc03eee6b0e4c7aacfcb2b6d782773102f96fa2f293004d3fd248",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 99284,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 奧爾芬的苔冠戰甲, exact game ID boss_windchime_armor. Create one empty wearable chest armor, no body or mannequin. Unified set theme: Moss Crown giant wolf Orfen: rugged weathered steel, moss green accents, wolf fang shapes and bark details. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_windchime_boots": {
       "id": "boss_windchime_boots",
       "name": "奧爾芬的苔冠足鎧",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_windchime_boots.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_windchime_boots.png",
+      "sha256": "66b86043dac1b732a468c05173328b58057e60dd80d95016d4404456013a0ca6",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 103723,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 奧爾芬的苔冠足鎧, exact game ID boss_windchime_boots. Create one matched pair of armored boots. Unified set theme: Moss Crown giant wolf Orfen: rugged weathered steel, moss green accents, wolf fang shapes and bark details. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_windchime_bow": {
       "id": "boss_windchime_bow",
       "name": "奧爾芬的苔冠獵弓",
       "category": "equipment",
       "type": "bow",
-      "status": "pending",
-      "path": "assets/reference/items/boss_windchime_bow.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_windchime_bow.png",
+      "sha256": "00aa5e2ce4baeeb13cdc4dcdf0bc2311cd8ef4b60b10776e501b666d5b47bae6",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 144347,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 奧爾芬的苔冠獵弓, exact game ID boss_windchime_bow. Create one complete recurved hunting bow with a taut clearly visible bowstring. Unified set theme: Moss Crown giant wolf Orfen: rugged weathered steel, moss green accents, wolf fang shapes and bark details. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_windchime_cannon": {
       "id": "boss_windchime_cannon",
@@ -5389,8 +5767,15 @@
       "name": "奧爾芬的苔冠印記",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_windchime_charm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_windchime_charm.png",
+      "sha256": "3e0b066dd7a0a5851f3bea652ec4b42e230ac196fc8f79d9b01dcda2e1ee0b7f",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 133046,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 奧爾芬的苔冠印記, exact game ID boss_windchime_charm. Create one small wearable emblem pendant with short chain. Unified set theme: Moss Crown giant wolf Orfen: rugged weathered steel, moss green accents, wolf fang shapes and bark details. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_windchime_daggers": {
       "id": "boss_windchime_daggers",
@@ -5437,8 +5822,15 @@
       "name": "奧爾芬的苔冠冠冕",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/boss_windchime_helm.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_windchime_helm.png",
+      "sha256": "570ecc2c1914fdf1b7e85f56fcc56902bb7c191afb70b6d74909595c5f98c110",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 91609,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 奧爾芬的苔冠冠冕, exact game ID boss_windchime_helm. Create one protective crown helmet, no head or face. Unified set theme: Moss Crown giant wolf Orfen: rugged weathered steel, moss green accents, wolf fang shapes and bark details. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_windchime_instrument": {
       "id": "boss_windchime_instrument",
@@ -5469,16 +5861,30 @@
       "name": "奧爾芬的苔冠權杖",
       "category": "equipment",
       "type": "staff",
-      "status": "pending",
-      "path": "assets/reference/items/boss_windchime_staff.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_windchime_staff.png",
+      "sha256": "e83d21da6ba36fb2f274d99d5be463820baa11d739a05d94a8d9eaa705443c3d",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 160904,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 奧爾芬的苔冠權杖, exact game ID boss_windchime_staff. Create one complete tall magical staff with an ornate focus at its tip. Unified set theme: Moss Crown giant wolf Orfen: rugged weathered steel, moss green accents, wolf fang shapes and bark details. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_windchime_sword": {
       "id": "boss_windchime_sword",
       "name": "奧爾芬的苔冠裂刃",
       "category": "equipment",
       "type": "sword",
-      "status": "pending",
-      "path": "assets/reference/items/boss_windchime_sword.png"
+      "status": "ready",
+      "path": "assets/reference/items/boss_windchime_sword.png",
+      "sha256": "f44e394f180d85ac06829e9186b10e7f19c54ade23209e2c7a8417e199d755ac",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 140833,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 奧爾芬的苔冠裂刃, exact game ID boss_windchime_sword. Create one complete formidable bladed sword with clear blade, guard and grip. Unified set theme: Moss Crown giant wolf Orfen: rugged weathered steel, moss green accents, wolf fang shapes and bark details. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "boss_windchime_toolgun": {
       "id": "boss_windchime_toolgun",
@@ -5516,64 +5922,120 @@
       "name": "留名・燼鐵重劍",
       "category": "equipment",
       "type": "sword",
-      "status": "pending",
-      "path": "assets/reference/items/cindergreatsword.png"
+      "status": "ready",
+      "path": "assets/reference/items/cindergreatsword.png",
+      "sha256": "6f514da6e524c2720d06a34b9b32d5c7ac33bd4070889bc4859aa96694e533be",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 139911,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・燼鐵重劍, exact ID cindergreatsword. A massive cinder iron greatsword with a broad dark steel blade, subtle glowing ember seams, mechanical bronze guard and worn leather grip, complete sword visible. Detailed semi-realistic painted fantasy art, realistic metal, wood or leather textures as appropriate, elegant clear readable silhouette. One centered isolated item, complete object with generous padding, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, labels, border, circular badge, scene, person, checkerboard or solid background."
     },
     "corsairboots": {
       "id": "corsairboots",
       "name": "留名・逐浪長靴",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/corsairboots.png"
+      "status": "ready",
+      "path": "assets/reference/items/corsairboots.png",
+      "sha256": "9b1c5c63eb13ada482792820d6d8bd7513d77e1dfe4f196feff44f6d5ca55063",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 106907,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・逐浪長靴, exact game ID corsairboots. A matched pair of dark teal leather corsair boots, brass buckles, folded cuffs, salt worn textured leather, wave engraved toe guards. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "duneguard": {
       "id": "duneguard",
       "name": "留名・沙行輕甲",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/duneguard.png"
+      "status": "ready",
+      "path": "assets/reference/items/duneguard.png",
+      "sha256": "ad24d85595b008fd523f3923bfac332cc3cf797ce3c5482a1bc60bb0c3236af6",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 122588,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・沙行輕甲, exact game ID duneguard. An empty lightweight desert chest armor of sand colored leather and bronze scales, indigo sash, breathable layered fabric. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "emberhelm": {
       "id": "emberhelm",
       "name": "留名・灰焰頭盔",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/emberhelm.png"
+      "status": "ready",
+      "path": "assets/reference/items/emberhelm.png",
+      "sha256": "e6947d36f6f7831bee584ac162bc09170b861ca7987aeb670663aae6fc735201",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 126227,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・灰焰頭盔, exact game ID emberhelm. A soot gray steel closed helmet with ember red narrow eye slit, dark flame crest and copper rivets. No head inside. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "feathercharm": {
       "id": "feathercharm",
       "name": "留名・第七陣東風羽扇",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/feathercharm.png"
+      "status": "ready",
+      "path": "assets/reference/items/feathercharm.png",
+      "sha256": "44771291ecf33e46aab00fee53dedff0f5df0681f1ba3d37dbc73cc062f1f337",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 111224,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・第七陣東風羽扇, exact game ID feathercharm. A ritual folding feather fan with seven pale green and ivory feathers, fine gold ribs, jade grip, soft flowing silk tassel. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "forgeplate": {
       "id": "forgeplate",
       "name": "留名・熔鍛板甲",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/forgeplate.png"
+      "status": "ready",
+      "path": "assets/reference/items/forgeplate.png",
+      "sha256": "e8b5d66bca4cbca159dc41a9238ef6e83d345f932d85aa7a85cfd82540fb78ea",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 97993,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・熔鍛板甲, exact game ID forgeplate. A heavy forged black iron breastplate with brass rivets, layered steel panels, orange furnace vents and leather straps. Empty armor. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "froststaff": {
       "id": "froststaff",
       "name": "留名・霜語法杖",
       "category": "equipment",
       "type": "staff",
-      "status": "pending",
-      "path": "assets/reference/items/froststaff.png"
+      "status": "ready",
+      "path": "assets/reference/items/froststaff.png",
+      "sha256": "a87540edcf8aea4d0f7d45a8d9bd950ded30a3f3fc10a4caf99dec3611e01e03",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 154682,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・霜語法杖, exact game ID froststaff. An icy white wooden magic staff tipped with a branching blue crystal, silver frost filigree and wrapped white leather grip. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "glassboots": {
       "id": "glassboots",
       "name": "留名・午夜玻璃步履",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/glassboots.png"
+      "status": "ready",
+      "path": "assets/reference/items/glassboots.png",
+      "sha256": "c501f6208442d6dd1447e28fc8089079214f1532e6f662b7626d1de45154d19b",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 115126,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・午夜玻璃步履, exact game ID glassboots. A matched pair of midnight glass boots, translucent smoky blue crystal, silver reinforcement, tiny prismatic edge highlights. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "helm": {
       "id": "helm",
@@ -5610,8 +6072,15 @@
       "name": "留名・翠枝獵弓",
       "category": "equipment",
       "type": "bow",
-      "status": "pending",
-      "path": "assets/reference/items/leafbow.png"
+      "status": "ready",
+      "path": "assets/reference/items/leafbow.png",
+      "sha256": "133d7cfbb19975f761c403a6c14db389f01583a4a9f3f1c06fd185b8b51f42ed",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 121647,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・翠枝獵弓, exact ID leafbow. A finely crafted emerald leafwood hunting bow, curved living-wood limbs, delicate green leaves and silver vine fittings, taut visible bowstring, entire bow shown. Detailed semi-realistic painted fantasy art, realistic metal, wood or leather textures as appropriate, elegant clear readable silhouette. One centered isolated item, complete object with generous padding, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, labels, border, circular badge, scene, person, checkerboard or solid background."
     },
     "oakstaff": {
       "id": "oakstaff",
@@ -5633,72 +6102,135 @@
       "name": "留名・深潮珍珠",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/pearlcharm.png"
+      "status": "ready",
+      "path": "assets/reference/items/pearlcharm.png",
+      "sha256": "f7675dd4bddabeaba8c4fa4184dd45d0cbfb33e04352cfcfd2a560195ab36a56",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 100620,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・深潮珍珠, exact game ID pearlcharm. A luminous deep sea pearl in a silver shell pendant, dark blue ocean gemstone accents and fine chain. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "scarabcharm": {
       "id": "scarabcharm",
       "name": "留名・金翅護符",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/scarabcharm.png"
+      "status": "ready",
+      "path": "assets/reference/items/scarabcharm.png",
+      "sha256": "1d90e05daa7d8422c1a2b4430fa7f06f089993f7e5e0b11e520152d448b34d50",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 99430,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・金翅護符, exact game ID scarabcharm. A gold winged scarab amulet with turquoise body jewel, delicately articulated golden wings and short chain. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "seedcharm": {
       "id": "seedcharm",
       "name": "留名・萌芽護符",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/seedcharm.png"
+      "status": "ready",
+      "path": "assets/reference/items/seedcharm.png",
+      "sha256": "a75fba7e3dad9a77e605f9c82e4699422d1f1e5ccd2aff3fe89b4a81feaa2b20",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 137509,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・萌芽護符, exact ID seedcharm. A small pendant made from a polished amber seed cradled by two fresh green leaves and carved pale wood, a simple woven cord. Detailed semi-realistic painted fantasy art, realistic metal, wood or leather textures as appropriate, elegant clear readable silhouette. One centered isolated item, complete object with generous padding, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, labels, border, circular badge, scene, person, checkerboard or solid background."
     },
     "snowmantle": {
       "id": "snowmantle",
       "name": "留名・雪境長袍",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/snowmantle.png"
+      "status": "ready",
+      "path": "assets/reference/items/snowmantle.png",
+      "sha256": "2710d20394072fe98555d24f8493d5c0555d59dd64c938882bddb8f6525e605f",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 109092,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・雪境長袍, exact game ID snowmantle. An empty white and pale blue winter mage robe with fur lined shoulders, snowflake embroidery and silver fasteners, visible fabric drape. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "starcrown": {
       "id": "starcrown",
       "name": "留名・星穹法冠",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/starcrown.png"
+      "status": "ready",
+      "path": "assets/reference/items/starcrown.png",
+      "sha256": "7d8f893f325b16062a586c6f36bef707cf3c80daba70d196e5f484dcbf76a7f9",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 113470,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・星穹法冠, exact game ID starcrown. An ornate silver astral mage circlet, dark sapphire center gemstone, rising star shaped prongs, fine blue enamel. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "steamheart": {
       "id": "steamheart",
       "name": "留名・零號蒸氣心臟",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/steamheart.png"
+      "status": "ready",
+      "path": "assets/reference/items/steamheart.png",
+      "sha256": "bebe2552b8e7fc88ee45b96c40e52c41fa9fc990ac3b743e00ee63cc83140796",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 109455,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・零號蒸氣心臟, exact game ID steamheart. A wearable steampunk chest armor housing the prototype number zero steam heart: exposed brass gear housing, copper pipes, compact orange core and dark steel plates. No written numbers, empty armor. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "sunblade": {
       "id": "sunblade",
       "name": "留名・曜砂彎刃",
       "category": "equipment",
       "type": "sword",
-      "status": "pending",
-      "path": "assets/reference/items/sunblade.png"
+      "status": "ready",
+      "path": "assets/reference/items/sunblade.png",
+      "sha256": "1f0826941321afd0bc8cef4a400614ea73ba65b8e3d6f7c417447a5f49cf14e6",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 103658,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・曜砂彎刃, exact game ID sunblade. A single golden sand scimitar with a curved polished blade, sun etched bronze guard and warm tan leather grip. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "tidebow": {
       "id": "tidebow",
       "name": "留名・海鳴長弓",
       "category": "equipment",
       "type": "bow",
-      "status": "pending",
-      "path": "assets/reference/items/tidebow.png"
+      "status": "ready",
+      "path": "assets/reference/items/tidebow.png",
+      "sha256": "14adeb1f6e61ce74671415e7215a57385ce5a96ae1896314b190a20632afdfcd",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 154223,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・海鳴長弓, exact game ID tidebow. A sea blue recurved longbow with polished driftwood, silver wave carvings, shell fittings, taut bowstring. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "voidcharm": {
       "id": "voidcharm",
       "name": "留名・虛空星墜",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/voidcharm.png"
+      "status": "ready",
+      "path": "assets/reference/items/voidcharm.png",
+      "sha256": "51486ba3ba367bd739b150b68b8002a591bffb5a4adf981e9791ff47632755d3",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 145996,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・虛空星墜, exact game ID voidcharm. A dark violet void star pendant suspended inside a silver crescent lattice, subtle purple glow and fine dark chain. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "windbow": {
       "id": "windbow",
@@ -5720,8 +6252,15 @@
       "name": "留名・白嶺行靴",
       "category": "equipment",
       "type": "none",
-      "status": "pending",
-      "path": "assets/reference/items/winterboots.png"
+      "status": "ready",
+      "path": "assets/reference/items/winterboots.png",
+      "sha256": "41b0a0f6d2199d0f9b168d23da2b9971115d661e11633195ba13426355b80d5c",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 91400,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG item icon for 留名・白嶺行靴, exact game ID winterboots. A matched pair of white ridge hiking boots, cream fur cuffs, pale gray leather, ice gripping steel soles and blue straps. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "aw_classskill_archmage_1": {
       "id": "aw_classskill_archmage_1",
@@ -8111,64 +8650,120 @@
       "name": "停針領域",
       "category": "skill",
       "type": "skill",
-      "status": "pending",
-      "path": "assets/reference/items/clockveil.png"
+      "status": "ready",
+      "path": "assets/reference/items/clockveil.png",
+      "sha256": "adb5ea66e09755207bed9c79d067a9e5c8a9f8ea142cecfd3c9734f459b0a205",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 79213,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG skill illustration for 停針領域, exact game ID clockveil. Skill illustration: suspended bronze clock hands and frozen blue magical shards inside a translucent time stopping dome, stopped pendulum motif, absolutely no numerals or letters. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "ember": {
       "id": "ember",
       "name": "熾焰爆流",
       "category": "skill",
       "type": "skill",
-      "status": "pending",
-      "path": "assets/reference/items/ember.png"
+      "status": "ready",
+      "path": "assets/reference/items/ember.png",
+      "sha256": "52c80f190b4d9abf9d4529b89ac74ed8194df7411e7eabe79baba996521ff000",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 103247,
+      "prompt": "Use case: stylized-concept. One production fantasy RPG skill illustration for 熾焰爆流, Blazing Eruption, exact game ID ember. A spectacular explosive jet of molten orange red fire blasting diagonally upward from a concentrated burst, twisting tongues of flame and glowing cinders with a white hot core, energetic directional attack silhouette. Refined semi-realistic fantasy game painting, detailed flame structure, isolated magical effect, centered landscape 3:2 framing, all flames contained with transparent padding. Actual RGBA transparent background. No circular badge, no frame, no text, no watermark, no scenery, no opaque background and no painted checkerboard."
     },
     "frost": {
       "id": "frost",
       "name": "霜語禁錮",
       "category": "skill",
       "type": "skill",
-      "status": "pending",
-      "path": "assets/reference/items/frost.png"
+      "status": "ready",
+      "path": "assets/reference/items/frost.png",
+      "sha256": "01e1ebd7c9963655c176014a4178ff1f1bac40a3051602f23df35d8d4a384386",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 79783,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG skill illustration for 霜語禁錮, exact game ID frost. Skill illustration: sharp blue white frost chains spiraling inward to immobilize a translucent enemy silhouette, crystalline ice shards and cold mist, readable binding motion. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "hearthsong": {
       "id": "hearthsong",
       "name": "不熄爐歌",
       "category": "skill",
       "type": "skill",
-      "status": "pending",
-      "path": "assets/reference/items/hearthsong.png"
+      "status": "ready",
+      "path": "assets/reference/items/hearthsong.png",
+      "sha256": "359fba11ffa94d18f1073780a0fb5c0be053a0f8bbf1559204b4c17754fa3e52",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 101106,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG skill illustration for 不熄爐歌, exact game ID hearthsong. Skill illustration: a warm orange hearth flame woven with flowing golden musical ribbons, healing green sparks spiraling outward, no ground or scenery, no written music. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "nightthorn": {
       "id": "nightthorn",
       "name": "黑棘侵蝕",
       "category": "skill",
       "type": "skill",
-      "status": "pending",
-      "path": "assets/reference/items/nightthorn.png"
+      "status": "ready",
+      "path": "assets/reference/items/nightthorn.png",
+      "sha256": "ba93b7824822440a009d28295b8ddeac632ee8eb77469654993aed5aa410a502",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 96152,
+      "prompt": "Use case: stylized-concept. Create one production fantasy RPG skill illustration for 黑棘侵蝕 (Blackthorn Corruption), exact game ID nightthorn. A dramatic twisting eruption of sharp black thorn vines, entangling a translucent spectral limb while violet corrosive magic eats through it, vivid readable silhouette and expressive attack motion. Detailed semi-realistic painted fantasy game art, refined thorns and purple energy, centered isolated visual effect, landscape 3:2 framing, all effect inside frame with generous transparent padding. Actual transparent RGBA background. No circular badge, no frame, no text, no letters, no scenery, no black background, no checkerboard."
     },
     "oathguard": {
       "id": "oathguard",
       "name": "桃園守誓",
       "category": "skill",
       "type": "skill",
-      "status": "pending",
-      "path": "assets/reference/items/oathguard.png"
+      "status": "ready",
+      "path": "assets/reference/items/oathguard.png",
+      "sha256": "1f036f275a4e43f93b637cb8a8b8bf07fbc0cfce02c8ae3a4f25834c6f0c6b35",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 53538,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG skill illustration for 桃園守誓, exact game ID oathguard. Skill illustration: three spectral raised blades joined by a warm golden protective canopy and pink peach blossom petals, brotherhood oath and shared defense. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "starlight": {
       "id": "starlight",
       "name": "星穹回響",
       "category": "skill",
       "type": "skill",
-      "status": "pending",
-      "path": "assets/reference/items/starlight.png"
+      "status": "ready",
+      "path": "assets/reference/items/starlight.png",
+      "sha256": "4f4eb21e5d4af3c25d3032da6ae0faa8b43f6bc7d3a6cf989f4b93dcc56081dc",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 61616,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG skill illustration for 星穹回響, exact game ID starlight. Skill illustration: a radiant silver blue star releasing concentric luminous echoes around a small raised spellcasting hand, delicate astral particles. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     },
     "wind": {
       "id": "wind",
       "name": "風息護幕",
       "category": "skill",
       "type": "skill",
-      "status": "pending",
-      "path": "assets/reference/items/wind.png"
+      "status": "ready",
+      "path": "assets/reference/items/wind.png",
+      "sha256": "9b8ba31fe5968d460867c27d2c94152cae4772034477fede760882af5a33a7de",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 54857,
+      "prompt": "Use case: stylized-concept. One production fantasy RPG skill illustration: 風息護幕, Wind Shelter, game ID wind. An elegant curved translucent turquoise wind barrier swirling protectively around a small central adventurer silhouette, flowing pale green air ribbons and few delicate leaves showing shelter and wind motion, no environment. Detailed semi-realistic fantasy game painting, dramatic clean readable isolated silhouette, subtle luminous wind with solid visible edges, landscape 3:2 composition, centered, generous transparent padding, actual RGBA transparent background. No circular badge, no border, no text, no symbols resembling letters, no scenery, no checkerboard, no opaque background."
     },
     "cotton": {
       "id": "cotton",
@@ -8919,6 +9514,21 @@
       ],
       "transparentPixels": 131696,
       "prompt": "Generate ONE original, separate, premium fantasy RPG game icon for item/skill named 「傳送水晶」 (ID return_crystal, category consumable, type return_crystal). The Chinese name is the design brief: accurately depict its subject and theme. CATEGORY RULES: equipment must be a single complete recognizable item, its shape dictated by the name (sword, staff, bow, armor, crown, boots, pendant, shield, daggers, gauntlets, cannon, instrument etc); tools must be practical axe/pickaxe/sickle matching name and tier; materials must show the named raw material as a small compact natural cluster; potions a sealed glass vial, healing red and energy blue; SKILLS must be a vivid readable standalone magical action/emblem visualizing the skill's meaning, e.g. flame for fire, icy shards for frost, shielding barrier for defense, directional weapon slash for attacks, no unrelated objects. Semi-realistic sculpted 3D-painted high fantasy, fine physically credible textures, jewel details only when appropriate, metallic edge highlights, match approved Star-gold Pickaxe's premium quality. Basic gear modest; named celestial/royal/legendary gear ornate. Entire silhouette visible, generous 8% margins, centered landscape 3:2. TRUE TRANSPARENT PNG ALPHA BACKGROUND. Solid opaque subject, sharp clean antialiased edges. No backdrop, no background haze, no rectangular glow, no ground plane or cast shadow, no checkerboard, no labels, no text, no watermark, no UI."
+    },
+    "shadowstep": {
+      "id": "shadowstep",
+      "name": "影躍突襲",
+      "category": "skill",
+      "type": "skill",
+      "status": "ready",
+      "path": "assets/reference/items/shadowstep.png",
+      "sha256": "96a22b4f6ef3566c8fd188034261ca80868d9d0581dfb1cf1cc1022a80524215",
+      "size": [
+        512,
+        341
+      ],
+      "transparentPixels": 93776,
+      "prompt": "Use case: stylized-concept. Production fantasy RPG skill illustration for 影躍突襲, exact game ID shadowstep. Skill illustration: a cloaked adventurer dashing through a short violet shadow rift with two fading afterimages and a narrow directional trail, dynamic escape motion. Detailed semi-realistic painted fantasy art, refined materials and a strong readable silhouette. Centered isolated subject, complete form, generous transparent padding on all sides, landscape 3:2 framing. Genuine RGBA transparent background. No text, letters, numerals, watermark, border, circular badge, environment, ground, checkerboard or solid background."
     }
   }
 }
