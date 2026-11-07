@@ -7,8 +7,8 @@ export class CityScene {
   const batches=new Map();let starterHouseIndex=0;for(const b of scene.catalog.buildings){if(!b.style.includes('|'))continue;
    // The starter town uses pipe-style buildings rendered by CityScene, not RealmScene's simple buildings.
    // Replace up to five town buildings with the user's optimized GLBs, keeping their original geometry until loading succeeds.
-   if(b.region==='windchime'&&starterHouseIndex<5){
-    const fallback=new T.Group();fallback.position.set(b.position.x,b.position.y,b.position.z);
+   if(b.region==='windchime'&&b.style.split('|')[1]==='house'&&starterHouseIndex<5){
+    const fallback=new T.Group();fallback.position.set(b.position.x,scene.landHeight(b.position.x,b.position.z),b.position.z);
     const parts=buildingParts(b);if(parts.length)fallback.add(batchParts(parts));
     scene.root.add(fallback);scene.loadVillageHouse(fallback,++starterHouseIndex,b);
     continue;
