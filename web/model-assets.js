@@ -64,18 +64,20 @@ export class ModelAssets {
       );
       target.bind(skeleton, source.bindMatrix.clone());
     }
-    // Normalize Eileen to player eye level, regardless of the source GLB's units.
+    // Size the imported character in world units without touching its bone transforms.
+    // A neutral pose is used for bounds; GLB authoring units may be centimetres.
     if (id === 'HUM_EILEEN_TEST_001') {
       instance.updateMatrixWorld(true);
-      const bounds = new T.Box3().setFromObject(instance);
-      const height = bounds.max.y - bounds.min.y;
-      if (Number.isFinite(height) && height > 0.001) {
-        const factor = Math.min(1000, Math.max(0.001, 1.8 / height));
-        instance.scale.multiplyScalar(factor);
+      const box = new T.Box3().setFromObject(instance);
+      const height = box.max.y - box.min.y;
+      if (Number.isFinite(height) && height > 0.0001) {
+        const targetHeight = 2.15; // player camera is at 1.68 world units
+        const scale = Math.min(10000, Math.max(0.0001, targetHeight / height));
+        instance.scale.multiplyScalar(scale);
         instance.updateMatrixWorld(true);
         const grounded = new T.Box3().setFromObject(instance);
         instance.position.y -= grounded.min.y;
-      }
+      } else console.warn('[Aetherwild] Eileen has invalid bounds; retaining original size');
     }
     instance.scale.multiplyScalar(asset.scale ?? 1);
     instance.rotation.y += asset.yaw ?? 0;
@@ -95,23 +97,18 @@ export class ModelAssets {
       if (previous) group.remove(previous);
       group.add(instance);
       group.userData.modelInstance = instance;
-      // TRIPO rest pose is T-shaped; retain natural lowered arms when idle.
-      const arms=[];
-      instance.traverse(node=>{
-        if (!node.isBone) return;
-        if (/Eileen_LeftUpperArm$/i.test(node.name)) arms.push({bone:node,angle:0.95});
-        if (/Eileen_RightUpperArm$/i.test(node.name)) arms.push({bone:node,angle:-0.95});
-      });
-      group.userData.restPoseArms=arms;
       if (group.userData.modelMixer) group.userData.modelMixer.stopAllAction();
       group.userData.modelMixer = null;
-      if (animations.length) {
+      // Do not play unverified proxy-rig animation on Eileen: skin deformation
+      // must be validated before animation can be safely enabled.
+      if (animations.length && id !== 'HUM_EILEEN_TEST_001') {
         const mixer = new T.AnimationMixer(instance);
         const idle = animations.find(clip => /idle|breathe|待機/i.test(clip.name)) || animations[0];
         mixer.clipAction(idle).play();
         group.userData.modelMixer = mixer;
         group.userData.modelClips = animations;
       }
+      group.userData.modelHealth = {status: id === 'HUM_EILEEN_TEST_001' ? 'rig-review-required' : 'loaded', animationCount: animations.length};
       // Hide only the procedural body. Preserve labels, collision proxies and weapons.
       for (const part of group.userData.proceduralParts || []) part.visible = false;
       return true;
