@@ -1,3 +1,4 @@
+#include "aetherwild/talents.hpp"
 #include "aetherwild/services.hpp"
 #include <limits>
 namespace aw {
@@ -59,6 +60,7 @@ namespace aw {
             if(n>=2)s+=v.two;
             if(n>=4)s+=v.four;
         }
+        for(const auto& d:talentDefinitions())if(p.talents.contains(d.id))s+=d.bonus;
         return s;
     }
     void InventorySystem::equip(Player& p,const Id& id,const Catalog& c) {
@@ -86,8 +88,8 @@ namespace aw {
         pay(p.materials, {
             {id,1}
         });
-        if(id=="potion")p.vitals.restore(70,0);
-        else p.vitals.restore(0,60);
+        if(id=="potion")p.vitals.restore(p.talents.contains("renewal")?87.5:70,0);
+        else p.vitals.restore(0,p.talents.contains("renewal")?75:60);
     }
     void InventorySystem::storeItem(Player& p,const Id& id,const Id& npc,const Catalog& c,bool withdraw) {
         nearbyNpc(p,npc,"merchant",c);

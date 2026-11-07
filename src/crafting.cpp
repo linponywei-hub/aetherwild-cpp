@@ -23,7 +23,9 @@ namespace aw {
             auto&t=c.tools.at(r.output);
             next.tools[t.kind]=std::max(next.tools[t.kind],t.tier);
         }
-        else InventorySystem::add(next.materials,r.output,r.count);
+        else InventorySystem::add(next.materials,r.output,r.count+(r.output=="potion"&&p.talents.contains("alchemy")?1:0));
+        ProgressionSystem::grantXp(next,p.talents.contains("insight")?15:10);
+        ProgressionSystem::refresh(next,c);
         p=std::move(next);
         w.events.push_back( {
             "Crafted",p.id,id,static_cast<double>(r.count), {}

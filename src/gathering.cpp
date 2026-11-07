@@ -1,4 +1,5 @@
 #include "aetherwild/services.hpp"
+#include <random>
 namespace aw {
     namespace {
         void check(World& w,Player& p,ResourceNode& n,const Catalog& c) {
@@ -27,7 +28,9 @@ namespace aw {
         require(w.now>=n.completeAt&&w.now<=n.completeAt+15,"採集尚未完成或已逾時");
         auto&d=c.resources.at(n.definition);
         Player next=p;
-        InventorySystem::add(next.materials,n.definition,1);
+        static thread_local std::mt19937 random{std::random_device{}()};
+        int amount=1+(p.talents.contains("forage")&&std::uniform_int_distribution<int>(0,3)(random)==0?1:0);
+        InventorySystem::add(next.materials,n.definition,amount);
         require(next.gatherXp<=INT64_MAX-d.xp,"熟練度溢位");
         next.gatherXp+=d.xp;
         QuestSystem::record(next,"gather",n.definition,c);
@@ -35,7 +38,7 @@ namespace aw {
         n.reservedBy.reset();
         n.readyAt=w.now+30;
         w.events.push_back( {
-            "GatherCompleted",p.id,node,1,d.family=="wood"?"砍伐":"採集"
+            "GatherCompleted",p.id,node,static_cast<double>(amount),d.family=="wood"?"砍伐":"採集"
         });
     }
     void GatheringSystem::cancel(World& w,Player& p,const Id& node) {

@@ -1,3 +1,4 @@
+#include "aetherwild/talents.hpp"
 #include "aetherwild/runtime.hpp"
 #include <fstream>
 #include <random>
@@ -393,6 +394,7 @@ namespace aw {
                 "type",kindName(c.weapon)
             }
         });
+        j["talents"]=Json::array();for(const auto& d:talentDefinitions())j["talents"].push(Json{{"id",d.id},{"name",d.name},{"branch",d.branch},{"parent",d.parent},{"description",d.description},{"level",d.level}});
         for(auto&[id,s]:catalog_.skills)if(s.effect!="dash")j["skills"].push(Json {
             {
                 "id",id
@@ -508,6 +510,7 @@ namespace aw {
             }
         }
         for(const auto& item:p.warehouseItems)j["equipmentStats"][item.id]=describe(item);
+        j["player"]["talentPoints"]=talentPoints(p);
         j["player"]["skillSlots"]=equippedSkills(p);j["player"]["skillOptions"]=Json::array();for(const auto& skill:p.learnedSkills)if(catalog_.skills.contains(skill)&&catalog_.skills.at(skill).effect!="dash"&&(!catalog_.skillOwners.contains(skill)||catalog_.skillOwners.at(skill)==p.profession))j["player"]["skillOptions"].push(skill);
         j["player"]["weaponType"]=weaponName(catalog_.classes.at(p.profession).weapon);
         const double epoch=std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count();
@@ -972,6 +975,7 @@ namespace aw {
             motion.x=motion.z=0;
             motion.lift.clear();motion.bowDrawAt=-1;
         };
+        if(type=="learn_talent"){learnTalent(p,j.str("target"),catalog_);return;}
         bool releasingBow=type=="bow_release";double bowPower=1;
         auto validDraw=[&]{return motion.bowDrawAt>=0&&motion.bowScene==p.scene&&motion.bowClass==p.profession&&world_.now-motion.bowDrawAt<=12;};
         if(type=="bow_cancel"){motion.bowDrawAt=-1;return;}
