@@ -11,7 +11,7 @@ export const BASE_MODELS = Object.freeze({
     upAxis: '+Y',
     forwardAxis: '+Z',
     version: 1,
-    status: 'static-unrigged',
+    status: 'rigged-animation-test',
     scale: 1,
     yaw: 0
   })
