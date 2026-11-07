@@ -20,6 +20,7 @@ export const MODEL_VARIANTS = Object.freeze({
   HUM_WARRIOR_001: { baseId: 'HUMANOID_BASE_001', displayName: '戰士', tint: '#ffffff', scale: 1 },
   HUM_MAGE_001: { baseId: 'HUMANOID_BASE_001', displayName: '法師', tint: '#cbd9ff', scale: 1 },
   HUM_RANGER_001: { baseId: 'HUMANOID_BASE_001', displayName: '遊俠', tint: '#d1e9cb', scale: 1 },
+  HUM_EILEEN_TEST_001: { baseId: 'HUMANOID_BASE_001', displayName: '艾琳測試母皮膚', tint: '#ffffff', scale: 1 },
   HUM_NPC_001: { baseId: 'HUMANOID_BASE_001', displayName: '村民', tint: '#f1e3d2', scale: 1 },
   HUM_GUARD_001: { baseId: 'HUMANOID_BASE_001', displayName: '守衛', tint: '#d9e2e8', scale: 1 },
   HUM_MERCHANT_001: { baseId: 'HUMANOID_BASE_001', displayName: '商人', tint: '#f4ddb4', scale: 1 }
