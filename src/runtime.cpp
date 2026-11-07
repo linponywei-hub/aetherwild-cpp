@@ -475,6 +475,13 @@ namespace aw {
         };
         j["player"]["yaw"]=m==motion_.end()?0:m->second.yaw;
         j["player"]["grounded"]=m==motion_.end()||m->second.grounded;
+        j["_motion"]=Json{{"sequence",m==motion_.end()?0:m->second.sequence},
+            {"velocityY",m==motion_.end()?0:m->second.velocityY},
+            {"jumpPending",m!=motion_.end()&&m->second.jump},
+            {"lift",m==motion_.end()?Id{}:m->second.lift},
+            {"speed",5+InventorySystem::bonuses(p,catalog_).speed},
+            {"sprintAllowed",!p.sprintLocked&&p.vitals.stamina>=.9},
+            {"gravity",22},{"jumpSpeed",8}};
         j["xpNext"]=ProgressionSystem::levelXp(p.level);
         for(auto k: {
             "players","monsters","resources","events","objectives","online"
@@ -940,6 +947,7 @@ namespace aw {
             CraftingSystem::craft(world_,p,target,npc.empty()&&catalog_.recipes.at(target).station=="smith"?nearService("smith"):npc,catalog_);
         }
         else if(type=="equip")InventorySystem::equip(p,target,catalog_);
+        else if(type=="unequip")InventorySystem::unequip(p,target,catalog_);
         else if(type=="potion")InventorySystem::usePotion(p,target.empty()?"potion":target,catalog_);
         else if(type=="accept")QuestSystem::accept(p,target,npc.empty()?catalog_.quests.at(target).npc:npc,catalog_);
         else if(type=="quest"){
@@ -955,6 +963,7 @@ namespace aw {
                 auto view=NpcSystem::view(rel[seller],*prof,NpcSystem::clock());auto spent=before-p.coins;auto discount=static_cast<Quantity>(std::floor(spent*view.num("discount")/100));p.coins+=discount;
                 NpcSystem::event(rel[seller],*prof,"purchase",j.str("request"),NpcSystem::clock(),static_cast<int>(std::min<Quantity>(200,spent-discount)));}
         }
+        else if(type=="store_item"||type=="withdraw_item")InventorySystem::storeItem(p,target,npc.empty()?nearService("merchant"):npc,catalog_,type=="withdraw_item");
         else if(type=="store"||type=="withdraw")InventorySystem::store(p,target,j.contains("count")?j.at("count").integer():1,npc.empty()?nearService("merchant"):npc,catalog_,type=="withdraw");
         else if(type=="heal") {
             nearService("healer");

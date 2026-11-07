@@ -15,9 +15,11 @@ def compile_one(p):
 jobs=max(1,min(4,int(os.environ.get('AW_BUILD_JOBS','2' if '--sanitize' in sys.argv else '4'))))
 with ThreadPoolExecutor(max_workers=jobs) as pool:
     objects=list(pool.map(compile_one,sources))
-for name,p in [('aetherwild',root/'src/main.cpp'),('aetherwild_tests',root/'tests/core_tests.cpp'),('aetherwild_runtime_tests',root/'tests/runtime_tests.cpp'),('aetherwild_workstation',root/'apps/workstation.cpp')]:
+for name,p in [('aetherwild',root/'src/main.cpp'),('aetherwild_tests',root/'tests/core_tests.cpp'),('aetherwild_runtime_tests',root/'tests/runtime_tests.cpp'),('aetherwild_content_tests',root/'tests/content_tests.cpp'),('aetherwild_workstation',root/'apps/workstation.cpp')]:
     output=build/(name+('.exe' if os.name=='nt' else ''))
     subprocess.run([compiler,*flags,str(p),*objects,*(['-lws2_32'] if os.name=='nt' and name=='aetherwild_workstation' else []),'-o',str(output)],check=True)
 subprocess.run([str(build/('aetherwild_tests.exe' if os.name=='nt' else 'aetherwild_tests'))],check=True,cwd=build)
 
 subprocess.run([str(build/('aetherwild_runtime_tests.exe' if os.name=='nt' else 'aetherwild_runtime_tests'))],check=True,cwd=build)
+
+subprocess.run([str(build/('aetherwild_content_tests.exe' if os.name=='nt' else 'aetherwild_content_tests'))],check=True,cwd=build)
