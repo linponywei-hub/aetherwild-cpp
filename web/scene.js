@@ -94,10 +94,11 @@ export class RealmScene {
        if(!Number.isFinite(h)||h<=0)continue;
        copy.scale.setScalar(.5*v.scale/h);copy.updateMatrixWorld(true);
        const ground=new T.Box3().setFromObject(copy);
-       copy.position.y-=ground.min.y;copy.position.y+=.12;
+       // The GLB pivot is not at the feet. Keep the lowest skinned mesh above terrain.
+       copy.position.y-=ground.min.y;copy.position.y+=.22;
        g.add(copy);g.userData.placeholder.visible=false;
        g.userData.animatedModel=copy;g.userData.baseModelY=copy.position.y;g.userData.baseModelYaw=copy.rotation.y;
-       g.userData.groundClearance=.12;
+       g.userData.groundClearance=.22;
        // Role equipment is attached to the variant, not baked into the shared GLB.
        const gear=new T.Group();g.add(gear);
        const armor=this.mat(v.weapon==='axe'?'#8a542d':v.weapon==='staff'?'#594a80':v.weapon==='bow'?'#5e7040':'#71533c');
@@ -145,7 +146,7 @@ export class RealmScene {
    if(this.goblinPreview && p?.scene==='world' && !this.goblinPreview.userData.spawnPlaced){
      const forward=new T.Vector3(0,0,-1).applyAxisAngle(new T.Vector3(0,1,0),this.yaw);
      const x=p.position.x+forward.x*5,z=p.position.z+forward.z*5;
-     this.goblinPackRoot.position.set(x,this.landHeight(x,z)+.04,z);
+     this.goblinPackRoot.position.set(x,this.landHeight(x,z),z);
      this.goblinPreview.userData.spawnPlaced=true;
      console.info('[Aetherwild] Goblin test placed near player',x,z);
    }
@@ -179,7 +180,7 @@ export class RealmScene {
      if(d>.3){vx=px/d*.65;vz=pz/d*.65;g.rotation.y=Math.atan2(vx,vz);}
    }
    g.position.x+=vx*dt;g.position.z+=vz*dt;
-   g.position.y=this.landHeight(g.position.x+this.goblinPackRoot.position.x,g.position.z+this.goblinPackRoot.position.z)-this.goblinPackRoot.position.y+.16;
+   g.position.y=this.landHeight(g.position.x+this.goblinPackRoot.position.x,g.position.z+this.goblinPackRoot.position.z)-this.goblinPackRoot.position.y;
    const model=g.userData.animatedModel;
    ai.moving=Math.hypot(vx,vz)>.1;
    if(model){model.rotation.z=Math.sin(this.time*(ai.moving?11:1.35))*(ai.moving?.07:.02);}
@@ -225,7 +226,7 @@ export class RealmScene {
      const ai=preview.userData.ai,walking=!!ai?.moving;
      const stride=Math.sin(this.time*11);
      const throwing=ai?.throwUntil>this.time,gathering=ai?.gatherUntil>this.time;
-     model.position.y=preview.userData.baseModelY+(walking?Math.abs(stride)*.035:Math.sin(this.time*2.2)*.008)+(gathering?-.07:0);
+     model.position.y=preview.userData.baseModelY+(walking?Math.abs(stride)*.025:Math.sin(this.time*2.2)*.008)+(gathering?-.025:0);
      model.rotation.y=preview.userData.baseModelYaw+(walking?Math.sin(this.time*5.5)*.075:Math.sin(this.time*.8)*.035);
      model.rotation.x=throwing?-.1+release*.22:gathering?.2:walking?stride*.06:0;
      model.rotation.z=walking?Math.sin(this.time*5.5)*.06:Math.sin(this.time*1.35)*.012;
