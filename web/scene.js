@@ -74,8 +74,19 @@ export class RealmScene {
      if(!Number.isFinite(h)||h<=0)throw Error('Invalid goblin bounds');
      scene.scale.setScalar(0.5/h);
      scene.updateMatrixWorld(true);
-     scene.position.y-=new T.Box3().setFromObject(scene).min.y;
-     scene.position.y+=.08;
+     // Align the visible mesh's lowest vertex to the ground, not the rig's
+     // bounding box (which may contain joints or hidden geometry below feet).
+     scene.updateMatrixWorld(true);
+     const meshBounds=new T.Box3();
+     scene.traverse(node=>{
+       if(!node.isMesh||!node.visible||!node.geometry?.attributes?.position)return;
+       node.updateWorldMatrix(true,false);
+       const geometryBounds=node.geometry.boundingBox||new T.Box3().setFromBufferAttribute(node.geometry.attributes.position);
+       meshBounds.union(geometryBounds.clone().applyMatrix4(node.matrixWorld));
+     });
+     if(!meshBounds.isEmpty())scene.position.y-=meshBounds.min.y;
+     else scene.position.y-=new T.Box3().setFromObject(scene).min.y;
+     scene.position.y+=.04;
      for(const part of [...goblin.children])if(part!==name)part.visible=false;
      goblin.add(scene);
      goblin.userData.animatedModel=scene;
@@ -112,7 +123,7 @@ export class RealmScene {
    if(this.goblinPreview && p?.scene==='world' && !this.goblinPreview.userData.spawnPlaced){
      const forward=new T.Vector3(0,0,-1).applyAxisAngle(new T.Vector3(0,1,0),this.yaw);
      const x=p.position.x+forward.x*5,z=p.position.z+forward.z*5;
-     this.goblinPreview.position.set(x,this.landHeight(x,z)+.42,z);
+     this.goblinPreview.position.set(x,this.landHeight(x,z)+.04,z);
      this.goblinPreview.userData.spawnPlaced=true;
      console.info('[Aetherwild] Goblin test placed near player',x,z);
    }
@@ -140,7 +151,7 @@ export class RealmScene {
      if(d>.3){vx=px/d*.65;vz=pz/d*.65;g.rotation.y=Math.atan2(vx,vz);}
    }
    g.position.x+=vx*dt;g.position.z+=vz*dt;
-   g.position.y=this.landHeight(g.position.x,g.position.z)+.42;
+   g.position.y=this.landHeight(g.position.x,g.position.z)+.04;
    const model=g.userData.animatedModel;
    if(model){const moving=Math.hypot(vx,vz)>.1;model.rotation.z=Math.sin(this.time*(moving?9:1.35))*(moving?.075:.025);}
    if(dist<10&&ai.attackCooldown<=0){
