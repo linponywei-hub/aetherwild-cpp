@@ -75,6 +75,7 @@ export class RealmScene {
      scene.scale.setScalar(0.5/h);
      scene.updateMatrixWorld(true);
      scene.position.y-=new T.Box3().setFromObject(scene).min.y;
+     scene.position.y+=.08;
      for(const part of [...goblin.children])if(part!==name)part.visible=false;
      goblin.add(scene);
      goblin.userData.animatedModel=scene;
@@ -111,7 +112,7 @@ export class RealmScene {
    if(this.goblinPreview && p?.scene==='world' && !this.goblinPreview.userData.spawnPlaced){
      const forward=new T.Vector3(0,0,-1).applyAxisAngle(new T.Vector3(0,1,0),this.yaw);
      const x=p.position.x+forward.x*5,z=p.position.z+forward.z*5;
-     this.goblinPreview.position.set(x,this.landHeight(x,z)+.2,z);
+     this.goblinPreview.position.set(x,this.landHeight(x,z)+.42,z);
      this.goblinPreview.userData.spawnPlaced=true;
      console.info('[Aetherwild] Goblin test placed near player',x,z);
    }
