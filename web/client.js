@@ -179,7 +179,7 @@ function installMobileControls(){
  look.addEventListener('pointerdown',e=>{e.preventDefault();lookId=e.pointerId;lastX=e.clientX;lastY=e.clientY;look.setPointerCapture(e.pointerId);});
  look.addEventListener('pointermove',e=>{if(e.pointerId!==lookId||!view)return;const sens=Number(localStorage.getItem('aw-sensitivity')||1);view.yaw-=(e.clientX-lastX)*.004*sens;view.pitch=Math.max(-1.3,Math.min(1.3,view.pitch-(e.clientY-lastY)*.004*sens));lastX=e.clientX;lastY=e.clientY;});
  for(const ev of ['pointerup','pointercancel','lostpointercapture'])look.addEventListener(ev,e=>{if(e.pointerId===lookId)lookId=null;});
- ui.querySelectorAll('[data-aw]').forEach(button=>button.addEventListener('pointerdown',e=>{e.preventDefault();if(!view||!state)return;const a=button.dataset.aw;if(a==='jump'){view.jump=true;sendInput();}else if(a==='interact')action('interact');else if(a==='attack')action('attack');}));
+ ui.querySelectorAll('[data-aw]').forEach(button=>button.addEventListener('pointerdown',e=>{e.preventDefault();if(!view||!state)return;const a=button.dataset.aw;if(a==='jump'){view.jump=true;sendInput();}else if(a==='interact')interact();else if(a==='attack')action('attack');}));
  window.addEventListener('blur',clearMove);
 }
 installMobileControls();
