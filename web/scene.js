@@ -282,17 +282,27 @@ export class RealmScene {
      // Avoid full skinned-mesh bounding-box recalculation on every frame.
      // Foot grounding is in WORLD coordinates, not model-local coordinates.
      // Previous code mixed the two spaces, so it could not correct terrain penetration.
-     const feet=[joints.LeftFoot,joints.RightFoot].filter(Boolean);
-     if(feet.length){
-       model.updateWorldMatrix(true,true);
-       let lift=0;
-       for(const foot of feet){
-         const w=new T.Vector3();foot.getWorldPosition(w);
-         const floor=this.landHeight(w.x,w.z);
-         // The ankle joint is above the sole; reserve a small sole offset.
-         lift=Math.max(lift,floor+.13-w.y);
-       }
-       if(lift>0)model.position.y+=Math.min(.35,lift);
+     // Ground against the DEFORMED skinned geometry, not ankle bone positions.
+     // Reset to the original calibrated height each frame to avoid accumulated lift.
+     model.position.y=preview.userData.baseModelY;
+     model.updateWorldMatrix(true,true);
+     const bounds=new T.Box3();
+     let hasSkin=false;
+     model.traverse(node=>{
+       if(!node.isSkinnedMesh)return;
+       node.computeBoundingBox();
+       if(!node.boundingBox||node.boundingBox.isEmpty())return;
+       const worldBox=node.boundingBox.clone().applyMatrix4(node.matrixWorld);
+       bounds.union(worldBox);
+       hasSkin=true;
+     });
+     if(hasSkin && Number.isFinite(bounds.min.y)){
+       const center=new T.Vector3();
+       preview.getWorldPosition(center);
+       const floor=this.landHeight(center.x,center.z);
+       // Ground clearance of 2cm; raise the entire skinned model, never the skeleton alone.
+       const lift=floor+.02-bounds.min.y;
+       if(Math.abs(lift)<3)model.position.y+=lift;
      }
 
    }
