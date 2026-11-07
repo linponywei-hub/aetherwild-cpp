@@ -11,7 +11,7 @@ export function terrainMesh(data,color,landscape){
 export function updateContentScene(scene,state){
  const c=state.content;if(!c)return;
  if(!scene.contentRoot){scene.contentRoot=new T.Group();scene.root.add(scene.contentRoot);scene.contentProps=new T.Group();scene.root.add(scene.contentProps);}
- for(const live of c.npcs||[]){const obj=scene.root.children.find(o=>o.userData?.kind==='npc'&&o.userData.data?.id===live.id);if(obj)obj.position.set(live.position.x,live.position.y,live.position.z);}
+ for(const live of c.npcs||[]){const obj=scene.npcObjects.get(live.id);if(obj)obj.userData.track.push(live.position,state.now);}
  const patch=c.terrainPatch;
  if(patch&&scene.patchKey!==patch.x+':'+patch.z){
   scene.sceneryCell='';scene.patchKey=patch.x+':'+patch.z;if(scene.terrainPatch){scene.contentRoot.remove(scene.terrainPatch);scene.terrainPatch.geometry.dispose();scene.terrainPatch.material.dispose();}

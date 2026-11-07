@@ -69,6 +69,8 @@ namespace aw {
         Json snapshot(const Id& token)const;
         Json catalog()const;
         Json adminMap(const Id& token)const;
+        Json exportBackup(const Id& token)const;
+        Json importBackup(const Id& token,const Json& body);
         Json command(const Id& token,const Json&);
         void input(const Id& token,const Json&);
         void tick(double);

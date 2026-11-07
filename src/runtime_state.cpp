@@ -521,6 +521,7 @@ namespace aw {
         for(auto&[id,p]:w.players)require(p.scene=="world"||w.runs.contains(p.scene),"角色副本不存在");
         s.pvpEnabled=j.flag("pvp");
         world_=std::move(w);
+        motion_.clear();
         social_=std::move(s);
         profiles_=std::move(profiles);
         homes_=std::move(homes);

@@ -5,3 +5,7 @@
 
 /* Content panels contain presentation only; C++ owns every consequence. */
 .book-text{white-space:pre-line;line-height:1.9}.story-card{border:1px solid #78917b55;padding:16px;margin:16px 0;border-radius:10px}.story-card button{margin:5px}.class-options{display:grid;max-height:180px;overflow:auto;grid-template-columns:repeat(3,1fr)}.create-card{max-height:calc(78vh - 20px);overflow-y:auto}#panel details{padding:12px 0;border-bottom:1px solid #78917b33}#panel details summary{cursor:pointer}
+
+.combat-damage{position:fixed;top:43%;z-index:15;pointer-events:none;color:#ffe3a0;font:bold 30px system-ui;text-shadow:0 2px 4px #17130c;animation:combat-damage .65s ease-out forwards}@keyframes combat-damage{to{transform:translateY(-65px) scale(.8);opacity:0}}
+
+.compass{width:280px}.compass-window{width:280px;height:42px;position:relative;overflow:hidden}#compass-ticks{display:flex;width:max-content;will-change:transform;transform:translateX(-268px)}#compass-ticks b{display:inline-block;flex:0 0 48px;letter-spacing:1px;font-size:11px;font-weight:500}.compass-window i{position:absolute;top:10px;left:135px;font-size:12px;color:#f2cf85}.compass-window small{position:absolute;top:25px;left:0;width:280px;text-align:center;letter-spacing:1px}

@@ -14,12 +14,15 @@ RUN mkdir -p /runtime-libs && cp -L "$(g++ -print-file-name=libstdc++.so.6)" /ru
 
 FROM debian:bookworm-slim AS runtime
 WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends util-linux && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /runtime-libs/ /opt/aetherwild/lib/
 COPY --from=builder /src/build/aetherwild_workstation /app/aetherwild_workstation
 COPY web/ /app/web/
 COPY assets/reference/ /app/assets/reference/
 RUN mkdir -p /app/runtime-data && chown -R 10001:10001 /app/runtime-data
 ENV LD_LIBRARY_PATH=/opt/aetherwild/lib AETHERWILD_PUBLIC=1 AETHERWILD_DATA_DIR=/app/runtime-data
-USER 10001:10001
+COPY tools/docker-entrypoint.sh /app/docker-entrypoint.sh
+RUN chmod 755 /app/docker-entrypoint.sh
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
 EXPOSE 10000
 CMD ["/app/aetherwild_workstation", "--root", "/app"]

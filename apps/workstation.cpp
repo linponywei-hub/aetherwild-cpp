@@ -87,7 +87,7 @@ namespace {
             require(!s.empty()&&s.find_first_not_of("0123456789")==std::string::npos,"長度標頭錯誤");
             length=std::stoull(s);
         }
-        require(length<=16384,"內容過大");
+        require(length<=(r.path=="/api/admin/restore"?2*1024*1024:16384),"內容過大");
         r.body=data.substr(end+4);
         if(r.body.size()<length)return std::nullopt;
         r.body.resize(length);
@@ -145,7 +145,7 @@ int main(int argc,char**argv) {
         std::cout<<"Aetherwild C++ workstation ready\n  Local: http://localhost:"<<port<<"/\n"<<std::flush;
         auto last=std::chrono::steady_clock::now();
         double pending=0;
-        const auto syncEpoch=std::to_string(std::chrono::system_clock::now().time_since_epoch().count());
+        auto syncEpoch=std::to_string(std::chrono::system_clock::now().time_since_epoch().count());
         std::uint64_t syncSequence=0;
         auto handle=[&](Request request) {
             std::string wire;
@@ -164,6 +164,7 @@ int main(int argc,char**argv) {
                         },
                         {"inviteRequired",bool(std::getenv("GAME_OWNER_CODE")||std::getenv("GAME_INVITE_CODE"))
                         },
+                        {"storageMode",std::getenv("AETHERWILD_PERSISTENT_STORAGE")&&std::string(std::getenv("AETHERWILD_PERSISTENT_STORAGE"))=="1"?"persistent-disk":"ephemeral"},
                         {"cloudTest",bool(std::getenv("AETHERWILD_PUBLIC")&&std::string(std::getenv("AETHERWILD_PUBLIC"))=="1")
                         }
                     };
@@ -172,12 +173,14 @@ int main(int argc,char**argv) {
                         auto auth=request.headers.contains("authorization")?request.headers.at("authorization"):"";
                         auto token=auth.starts_with("Bearer ")?auth.substr(7):"";
                         if(request.method=="GET"&&request.path=="/api/state")result=runtime.snapshot(token);
+                        else if(request.method=="GET"&&request.path=="/api/admin/backup")result=runtime.exportBackup(token);
                         else if(request.method=="GET"&&request.path=="/api/admin/map")result=runtime.adminMap(token);
                         else {
                             require(request.method=="POST"&&request.headers["x-aetherwild-client"]=="1","不接受跨站操作");
                             require(request.headers["content-type"].starts_with("application/json"),"需要JSON內容");
                             auto body=Json::parse(request.body);
-                            if(request.path=="/api/session")result=runtime.createSession(body);
+                            if(request.path=="/api/admin/restore"){result=runtime.importBackup(token,body);syncEpoch+="-r"+std::to_string(++syncSequence);}
+                            else if(request.path=="/api/session")result=runtime.createSession(body);
                             else if(request.path=="/api/input") {
                                 runtime.input(token,body);
                                 result=Json {
@@ -266,7 +269,7 @@ int main(int argc,char**argv) {
                             const int n=recv(client.socket,buffer,sizeof(buffer),0);
                             if(n>0) {
                                 client.input.append(buffer,n);client.progress=now;
-                                require(client.input.size()<=49152,"請求過大");
+                                require(client.input.size()<=(client.input.starts_with("POST /api/admin/restore ")?2*1024*1024+32768:49152),"請求過大");
                                 if(client.websocket)break;
                                 if(auto request=receive(client.input)) {
                                     if(request->path=="/api/socket") {

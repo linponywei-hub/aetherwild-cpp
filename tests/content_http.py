@@ -42,6 +42,17 @@ with tempfile.TemporaryDirectory(prefix='aw_content_http_') as folder:
   check(req('state',token=tb)[1]['content']['relations']['windchime_merchant']['score']==0)
   check(cmd(ta,'npc_chat',target='windchime_merchant',topic='forged',score=100)[0]==400)
   check(cmd(tb,'content_release',release=2)[0]==400);check(cmd(ta,'npc_gift',target='windchime_merchant')[0]==400)
+  check(req('admin/backup',token=tb)[0]!=200)
+  code,backup=req('admin/backup',token=ta);check(code==200);check(backup['format']=='aetherwild-world-backup')
+  check(req('admin/restore',{'backup':backup,'confirm':'RESTORE_WORLD'},tb)[0]!=200)
+  check(req('admin/restore',{'backup':{'format':'wrong'},'confirm':'RESTORE_WORLD'},ta)[0]!=200)
+  broken=json.loads(json.dumps(backup))
+  for profile in broken['world']['profiles']:profile['role']=0
+  check(req('admin/restore',{'backup':broken,'confirm':'RESTORE_WORLD'},ta)[0]!=200)
+  check(req('state',token=ta)[1]['role']=='owner')
+  check(req('state',token=ta)[0]==200)
+  epoch=req('state',token=ta)[1]['_sync']['epoch']
+  code,recovered=req('admin/restore',{'backup':backup,'confirm':'RESTORE_WORLD'},ta);check(code==200);check(recovered['token']==ta);check(req('state',token=ta)[1]['_sync']['epoch']!=epoch)
   # A new-class weapon must survive warehouse storage and the expanded-world migration.
   stored_id=a['player']['inventory'][0]['id']
   check(cmd(ta,'unequip',target=stored_id)[0]==200)

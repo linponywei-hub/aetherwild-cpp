@@ -42,3 +42,7 @@ Release與ASan/UBSan均通過341項C++（核心171／runtime67／content103）�
 ASan使用detect_leaks=0。7.1MiB編譯內容的儀器化啟動超過舊cloud_access fixture的5秒窗口；該fixture比照其他內容測試改成30秒readiness窗口並加上提早退出／逾時明確錯誤，之後一般與ASan權限12項皆通過。這只影響隔離測試等待，不放寬遊戲輸入／存取權限或正式服務限制。
 
 Windows、macOS、正式容量與使用者端幀率仍未實機驗證；容器與公開換版仍須以Render該整合commit的live狀態及公開HTTPS/WSS檢查為準。
+
+## 待批准：打擊感與復原補丁
+
+分支ai/combat-save-recovery；保留線上785443b，禁止自動發布此分支。已觀察到現有6個測試角色，舊版無合法匯出途徑，免費服務亦無Shell。需要使用者批准一次性測試角色重置或提供舊世界備份；付費持久磁碟另需費用同意。新API/資料範圍見docs/16_打擊感與資料復原.md。
