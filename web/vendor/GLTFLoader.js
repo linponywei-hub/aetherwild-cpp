@@ -34,7 +34,7 @@ export class GLTFLoader {
     }
     if(!json||!bin)throw Error('GLB missing JSON or BIN');
     if(json.extensionsRequired?.length)throw Error('Unsupported required GLB extensions: '+json.extensionsRequired.join(','));
-    if(json.skins?.length||json.animations?.length)throw Error('Rigged GLB requires animation importer');
+    // Skinning and transform animation are supported for embedded GLB assets.
     const objectUrls=[];
     const textures=await Promise.all((json.textures||[]).map(async tex=>{
       const image=json.images?.[tex.source];
@@ -65,28 +65,54 @@ export class GLTFLoader {
       if(m.emissiveFactor)mat.emissive.setRGB(...m.emissiveFactor);
       return mat;
     });
-    const nodes=(json.nodes||[]).map(n=>{
-      const group=new T.Group();group.name=n.name||'';nodeTransform(group,n);
+    const jointIds=new Set((json.skins||[]).flatMap(s=>s.joints));
+    const nodes=[];(json.nodes||[]).forEach((n,index)=>{
+      const group=jointIds.has(index)?new T.Bone():new T.Group();group.name=n.name||('glb_node_'+nodes.length);nodeTransform(group,n);
       if(n.mesh!==undefined){
         for(const primitive of json.meshes[n.mesh].primitives){
           if(primitive.mode!==undefined&&primitive.mode!==4)throw Error('Only GLB triangle primitives supported');
           const g=new T.BufferGeometry();
-          const attrs={POSITION:'position',NORMAL:'normal',TEXCOORD_0:'uv',COLOR_0:'color',TANGENT:'tangent'};
+          const attrs={POSITION:'position',NORMAL:'normal',TEXCOORD_0:'uv',COLOR_0:'color',TANGENT:'tangent',JOINTS_0:'skinIndex',WEIGHTS_0:'skinWeight'};
           for(const [key,name] of Object.entries(attrs))if(primitive.attributes[key]!==undefined){
             const a=accessor(json,bin,primitive.attributes[key]);
             g.setAttribute(name,new T.BufferAttribute(a.array,a.itemSize,a.normalized));
           }
           if(primitive.indices!==undefined){const a=accessor(json,bin,primitive.indices);g.setIndex(new T.BufferAttribute(a.array,1));}
           if(!g.getAttribute('normal'))g.computeVertexNormals();
-          const mesh=new T.Mesh(g,materials[primitive.material]||new T.MeshStandardMaterial());
+          const mesh=n.skin!==undefined?new T.SkinnedMesh(g,materials[primitive.material]||new T.MeshStandardMaterial()):new T.Mesh(g,materials[primitive.material]||new T.MeshStandardMaterial());
           mesh.castShadow=true;mesh.receiveShadow=true;group.add(mesh);
         }
       }
-      return group;
+      nodes.push(group);
     });
     (json.nodes||[]).forEach((n,i)=>(n.children||[]).forEach(j=>nodes[i].add(nodes[j])));
     const scene=new T.Group(),selected=json.scenes?.[json.scene??0];
     for(const index of selected?.nodes||[])scene.add(nodes[index]);
-    return {scene,animations:[]};
+    for(let i=0;i<(json.nodes||[]).length;i++){
+      const skinId=json.nodes[i].skin;if(skinId===undefined)continue;
+      const skin=json.skins[skinId],bones=skin.joints.map(j=>nodes[j]);
+      const matrices=skin.inverseBindMatrices===undefined?null:accessor(json,bin,skin.inverseBindMatrices).array;
+      const inverses=bones.map((_,j)=>matrices?new T.Matrix4().fromArray(matrices,j*16):new T.Matrix4());
+      const skeleton=new T.Skeleton(bones,inverses);
+      nodes[i].traverse(child=>{if(child.isSkinnedMesh)child.bind(skeleton,new T.Matrix4());});
+    }
+    const clips=(json.animations||[]).map((animation,index)=>{
+      const tracks=[];
+      for(const channel of animation.channels||[]){
+        const sampler=animation.samplers[channel.sampler],target=nodes[channel.target.node];
+        if(!target)continue;
+        const times=accessor(json,bin,sampler.input).array,values=accessor(json,bin,sampler.output).array;
+        if(sampler.interpolation==='CUBICSPLINE')throw Error('CUBICSPLINE animation unsupported');
+        const path=channel.target.path,prop=path==='translation'?'position':path==='rotation'?'quaternion':path==='scale'?'scale':null;
+        if(!prop)continue;
+        const name=target.name+'.'+prop;
+        const Track=path==='rotation'?T.QuaternionKeyframeTrack:T.VectorKeyframeTrack;
+        const track=new Track(name,times,values);
+        if(sampler.interpolation==='STEP')track.setInterpolation(T.InterpolateDiscrete);
+        tracks.push(track);
+      }
+      return new T.AnimationClip(animation.name||'Animation_'+index,-1,tracks);
+    });
+    return {scene,animations:clips};
   }
 }
