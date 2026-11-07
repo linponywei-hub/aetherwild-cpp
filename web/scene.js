@@ -46,53 +46,55 @@ export class RealmScene {
  makeScenery(){}
  human(role='warrior',id='',assetOverride=null){const g=humanoid(role,id||role);g.userData.proceduralParts=[...g.children];const assetId=({warrior:'HUM_WARRIOR_001',mage:'HUM_MAGE_001',ranger:'HUM_RANGER_001',merchant:'HUM_MERCHANT_001',guard:'HUM_GUARD_001'})[role]||'HUM_NPC_001';g.userData.modelAssetId=assetOverride||assetId;if(this.renderer.software)this.contactShadow(g,.45,.35);else if(this.modelAssets.registry[g.userData.modelAssetId])queueMicrotask(()=>this.modelAssets.attach(g,g.userData.modelAssetId));return g;}
  makeGoblinPreview(){
-   // A local visual test outside the safe village perimeter (not a server monster).
-   const goblin=new T.Group();
-   // Readable procedural goblin until the uploaded GLB is available in GitHub.
-   const skin='#679b43',cloth='#66513a';
-   this.sphere(goblin,.34,skin,0,1.15,0,[.85,1.1,.72]);
-   this.sphere(goblin,.28,skin,0,1.78,0,[1,.95,.85]);
-   for(const side of [-1,1]){
-     this.mesh(new T.ConeGeometry(.17,.58,6),this.mat(skin),[side*.46,1.85,0],goblin).rotation.z=side*1.22;
-     this.sphere(goblin,.12,'#f5d45d',side*.12,1.8,.24);
-     this.sphere(goblin,.13,skin,side*.43,1.12,0,[.8,2,.8]);
-     this.sphere(goblin,.13,skin,side*.19,.52,0,[.9,2,.9]);
+   // Shared mother mesh with lightweight variants; these are visual-only test mobs.
+   const variants=[
+     {name:'哥布林斥候',scale:.85,tint:0x9cc976,weapon:'dagger',offset:[-3,0]},
+     {name:'哥布林投石兵',scale:1,tint:0xc0d99a,weapon:'stone',offset:[0,0]},
+     {name:'哥布林戰士',scale:1.08,tint:0x89b77b,weapon:'sword',offset:[3,0]},
+     {name:'哥布林弓手',scale:.94,tint:0xb3bc7a,weapon:'bow',offset:[-2,3]},
+     {name:'哥布林薩滿',scale:1.04,tint:0xa4b5c6,weapon:'staff',offset:[2,3]},
+     {name:'哥布林隊長',scale:1.3,tint:0xb9a071,weapon:'axe',offset:[0,6]}
+   ];
+   this.goblinPack=[];
+   const base=new T.Group();base.position.set(0,this.landHeight(0,48)+.04,48);
+   this.root.add(base);this.goblinPackRoot=base;
+   for(let i=0;i<variants.length;i++){
+     const v=variants[i],g=new T.Group();g.position.set(v.offset[0],0,v.offset[1]);base.add(g);
+     g.userData={kind:'goblin-preview',nonCombat:true,aiVisualOnly:true,variant:v,packIndex:i};
+     const label=this.label(v.name,'#c9e4a2',.85);label.position.y=.95;g.add(label);
+     const placeholder=this.sphere(g,.24,'#73994a',0,.38,0,[.8,1.4,.8]);
+     g.userData.placeholder=placeholder;
+     this.goblinPack.push(g);
    }
-   this.sphere(goblin,.14,skin,0,1.64,.28,[.9,.7,1.6]);
-   this.box(goblin,.6,.43,.35,cloth,0,.88,0);
-   goblin.position.set(0,this.landHeight(0,48)+.12,48);
-   goblin.name='Goblin_Visual_Test';
-   goblin.userData={kind:'goblin-preview',nonCombat:true,aiVisualOnly:true};
-   this.root.add(goblin);
-   this.goblinPreview=goblin;
-   const name=this.label('哥布林 · 模型測試','#a8e69b',1);
-   name.position.y=.95;
-   goblin.add(name);
+   this.goblinPreview=this.goblinPack[1];
    import('/vendor/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync('/assets/models/characters/monsters/goblin-test.glb')).then(({scene})=>{
-     if(!goblin.parent)return;
-     const box=new T.Box3().setFromObject(scene),h=box.max.y-box.min.y;
-     if(!Number.isFinite(h)||h<=0)throw Error('Invalid goblin bounds');
-     scene.scale.setScalar(0.5/h);
-     scene.updateMatrixWorld(true);
-     // Align the visible mesh's lowest vertex to the ground, not the rig's
-     // bounding box (which may contain joints or hidden geometry below feet).
-     scene.updateMatrixWorld(true);
-     const meshBounds=new T.Box3();
-     scene.traverse(node=>{
-       if(!node.isMesh||!node.visible||!node.geometry?.attributes?.position)return;
-       node.updateWorldMatrix(true,false);
-       const geometryBounds=node.geometry.boundingBox||new T.Box3().setFromBufferAttribute(node.geometry.attributes.position);
-       meshBounds.union(geometryBounds.clone().applyMatrix4(node.matrixWorld));
-     });
-     if(!meshBounds.isEmpty())scene.position.y-=meshBounds.min.y;
-     else scene.position.y-=new T.Box3().setFromObject(scene).min.y;
-     scene.position.y+=.04;
-     for(const part of [...goblin.children])if(part!==name)part.visible=false;
-     goblin.add(scene);
-     goblin.userData.animatedModel=scene;
-     goblin.userData.baseModelY=scene.position.y;
-     goblin.userData.baseModelYaw=scene.rotation.y;
-   }).catch(error=>console.warn('[Aetherwild] Goblin GLB not uploaded; preview remains procedural',error));
+     for(const g of this.goblinPack){
+       const v=g.userData.variant,copy=scene.clone(true);
+       copy.traverse(node=>{
+         if(!node.isMesh)return;
+         node.material=Array.isArray(node.material)?node.material.map(m=>m.clone()):node.material?.clone();
+         const mats=Array.isArray(node.material)?node.material:[node.material];
+         for(const mat of mats)if(mat?.color)mat.color.multiply(new T.Color(v.tint));
+         node.castShadow=true;
+       });
+       const bounds=new T.Box3().setFromObject(copy),h=bounds.max.y-bounds.min.y;
+       if(!Number.isFinite(h)||h<=0)continue;
+       copy.scale.setScalar(.5*v.scale/h);copy.updateMatrixWorld(true);
+       const ground=new T.Box3().setFromObject(copy);
+       copy.position.y-=ground.min.y;copy.position.y+=.04;
+       g.add(copy);g.userData.placeholder.visible=false;
+       g.userData.animatedModel=copy;g.userData.baseModelY=copy.position.y;g.userData.baseModelYaw=copy.rotation.y;
+       // Role equipment is attached to the variant, not baked into the shared GLB.
+       const gear=new T.Group();g.add(gear);
+       const steel=this.mat('#8b8d83'),wood=this.mat('#69533a');
+       if(v.weapon==='stone')this.sphere(gear,.09,'#777870',.33,.5,.1);
+       if(v.weapon==='dagger'||v.weapon==='sword')this.box(gear,.055,v.weapon==='dagger'?.28:.44,.06,steel,.32,.48,.05);
+       if(v.weapon==='staff')this.cylinder(gear,.035,.035,.8,wood,.3,.55,0,6);
+       if(v.weapon==='axe'){this.cylinder(gear,.035,.035,.7,wood,.32,.52,0,6);this.box(gear,.3,.2,.08,steel,.32,.83,0);}
+       if(v.weapon==='bow'){const bow=this.mesh(new T.TorusGeometry(.25,.025,5,14,Math.PI),wood,[.3,.52,.05],gear);bow.rotation.z=Math.PI/2;}
+       g.userData.gear=gear;
+     }
+   }).catch(error=>console.warn('[Aetherwild] Goblin pack GLB failed; placeholders retained',error));
  }
  goblinTest(e){
    const g=this.wolf(false,e.definition?.replace('boss_','')||'windchime');
@@ -123,7 +125,7 @@ export class RealmScene {
    if(this.goblinPreview && p?.scene==='world' && !this.goblinPreview.userData.spawnPlaced){
      const forward=new T.Vector3(0,0,-1).applyAxisAngle(new T.Vector3(0,1,0),this.yaw);
      const x=p.position.x+forward.x*5,z=p.position.z+forward.z*5;
-     this.goblinPreview.position.set(x,this.landHeight(x,z)+.04,z);
+     this.goblinPackRoot.position.set(x,this.landHeight(x,z)+.04,z);
      this.goblinPreview.userData.spawnPlaced=true;
      console.info('[Aetherwild] Goblin test placed near player',x,z);
    }
@@ -133,18 +135,22 @@ export class RealmScene {
  aim(){this.ray.setFromCamera(this.mouse,this.camera);this.ray.far=45;const roots=[...this.entityRoot.children.filter(o=>o.visible)];if(this.root.visible)roots.push(...this.root.children.filter(o=>o.visible&&o.userData.kind&&o.position.distanceTo(this.camera.position)<55));if(this.dungeon.visible)roots.push(...this.dungeon.children.filter(o=>o.userData.kind));const hits=this.ray.intersectObjects(roots,true);let found=null;for(const hit of hits){let o=hit.object;while(o&&!o.userData.kind)o=o.parent;if(o&&o.visible&&hit.distance<45){found={kind:o.userData.kind,data:o.userData.data,distance:hit.distance,object:o};break;}if(hit.distance<4)break;}this.target=found;this.cb.target?.(found);}
 
  updateGoblinAI(dt){
-   const g=this.goblinPreview,p=this.state?.player;
-   if(!g||!p||p.scene!=='world')return;
-   const ai=g.userData.ai ||= {mode:'patrol',timer:0,attackCooldown:1.5,stones:0,projectiles:[],home:g.position.clone(),seed:0};
+   const p=this.state?.player;
+   if(!p||p.scene!=='world')return;
+   for(const g of this.goblinPack||[]){
+   const ai=g.userData.ai ||= {mode:'patrol',timer:0,attackCooldown:1.5,stones:0,projectiles:[],home:g.position.clone(),seed:g.userData.packIndex};
    ai.timer+=dt;ai.attackCooldown-=dt;
-   const dx=p.position.x-g.position.x,dz=p.position.z-g.position.z,dist=Math.hypot(dx,dz);
-   if(dist<13)ai.mode=dist<2.5?'retreat':dist<7?'strafe':'chase';
+   const worldPos=new T.Vector3();g.getWorldPosition(worldPos);
+   const dx=p.position.x-worldPos.x,dz=p.position.z-worldPos.z,dist=Math.hypot(dx,dz);
+   const leader=this.goblinPack[1];const leaderPos=new T.Vector3();leader.getWorldPosition(leaderPos);
+   const alerted=Math.hypot(p.position.x-leaderPos.x,p.position.z-leaderPos.z)<15;
+   if(alerted&&dist<17)ai.mode=dist<2.5?'retreat':dist<7?'strafe':'chase';
    else if(dist>19)ai.mode='patrol';
    const heading=dist>.01?Math.atan2(dx,dz):g.rotation.y;
    if(ai.mode!=='patrol')g.rotation.y+=Math.atan2(Math.sin(heading-g.rotation.y),Math.cos(heading-g.rotation.y))*Math.min(1,dt*4);
    let vx=0,vz=0;
    if(ai.mode==='chase'&&dist>5){vx=dx/dist*2;vz=dz/dist*2;}
-   if(ai.mode==='strafe'&&dist>0.1){const dir=Math.sin(ai.timer*.8)>0?1:-1;vx=dz/dist*1.15*dir;vz=-dx/dist*1.15*dir;}
+   if(ai.mode==='strafe'&&dist>0.1){const dir=Math.sin(ai.timer*.8+ai.seed)>0?1:-1;vx=dz/dist*1.15*dir;vz=-dx/dist*1.15*dir;}
    if(ai.mode==='retreat'&&dist<2.8){vx=-dx/dist*1.1;vz=-dz/dist*1.1;}
    if(ai.mode==='patrol'){
      const a=ai.timer*.6;const tx=ai.home.x+Math.cos(a)*4,tz=ai.home.z+Math.sin(a)*4;
@@ -152,7 +158,7 @@ export class RealmScene {
      if(d>.3){vx=px/d*.65;vz=pz/d*.65;g.rotation.y=Math.atan2(vx,vz);}
    }
    g.position.x+=vx*dt;g.position.z+=vz*dt;
-   g.position.y=this.landHeight(g.position.x,g.position.z)+.04;
+   g.position.y=this.landHeight(g.position.x+this.goblinPackRoot.position.x,g.position.z+this.goblinPackRoot.position.z)-this.goblinPackRoot.position.y+.04;
    const model=g.userData.animatedModel;
    ai.moving=Math.hypot(vx,vz)>.1;
    if(model){model.rotation.z=Math.sin(this.time*(ai.moving?11:1.35))*(ai.moving?.07:.02);}
@@ -160,7 +166,7 @@ export class RealmScene {
      if(ai.stones<=0){ai.stones=3;ai.gatherUntil=this.time+.7;ai.attackCooldown=1.2;}
      else {
        ai.stones--;ai.throwUntil=this.time+.55;ai.attackCooldown=2.2+Math.random()*.8;
-       const stone=this.mesh(new T.DodecahedronGeometry(.085,0),this.mat('#88857c'),[g.position.x,g.position.y+1.0,g.position.z],this.world);
+       const stone=this.mesh(new T.DodecahedronGeometry(.085,0),this.mat('#88857c'),[worldPos.x,worldPos.y+.6,worldPos.z],this.world);
        const target=new T.Vector3(p.position.x,p.position.y+1.1,p.position.z);
        const origin=stone.position.clone();const velocity=target.sub(origin).normalize().multiplyScalar(8);
        velocity.y+=1.5;ai.projectiles.push({mesh:stone,velocity,life:2.4});
@@ -171,12 +177,14 @@ export class RealmScene {
      const ground=this.landHeight(shot.mesh.position.x,shot.mesh.position.z);
      if(shot.life<=0||shot.mesh.position.y<ground){this.world.remove(shot.mesh);shot.mesh.geometry.dispose();shot.mesh.material.dispose();ai.projectiles.splice(ai.projectiles.indexOf(shot),1);}
    }
+   }
  }
  animate(){requestAnimationFrame(()=>this.animate());if(this.renderer.software&&performance.now()-(this.lastRender||0)<33)return;this.lastRender=performance.now();let dt=Math.min(.1,this.clock.getDelta());this.time+=dt;
    this.updateGoblinAI(dt);
    // Goblin test has no embedded clips: animate its rigid model safely.
-   if(this.goblinPreview?.userData.animatedModel){
-     const preview=this.goblinPreview,model=preview.userData.animatedModel;
+   for(const preview of this.goblinPack||[]){
+     if(!preview.userData.animatedModel)continue;
+     const model=preview.userData.animatedModel;
      const ai=preview.userData.ai,walking=!!ai?.moving;
      const stride=Math.sin(this.time*11);
      const throwing=ai?.throwUntil>this.time,gathering=ai?.gatherUntil>this.time;
