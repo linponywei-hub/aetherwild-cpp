@@ -24,7 +24,7 @@ namespace aw {
         static void leave(SessionState&,const Id& player);
     };
     class PvpSystem {
-        public: static double attack(World&,const Catalog&,const SessionState&,const Id& from,const Id& to);
+        public: static double attack(World&,const Catalog&,const SessionState&,const Id& from,const Id& to,double bowPower=1);
     };
     class AdministrationSystem {
         public: static void setPvp(World&,SessionState&,const Id& actorAccount,bool enabled);

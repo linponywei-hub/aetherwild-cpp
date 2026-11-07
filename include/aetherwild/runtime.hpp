@@ -20,6 +20,8 @@ namespace aw {
         lastSeen {};
         std::uint64_t sequence {};
         Id lift;
+        double bowDrawAt {-1};
+        Id bowScene, bowClass;
     };
     struct LocalProfile {
         Id player;

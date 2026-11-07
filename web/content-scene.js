@@ -6,7 +6,7 @@ export function terrainMesh(data,color,landscape){
  for(let z=0;z<n-1;z++)for(let x=0;x<n-1;x++){const a=z*n+x;indices.push(a,a+n,a+1,a+1,a+n,a+n+1);}
  const colors=[];if(landscape){const palette={plain:'#79925f',water:'#3c889c',snow:'#d7e2e5',volcanic:'#68574b',forest:'#355f3a',desert:'#d5b57e',mesa:'#b78054',marsh:'#6f9468'};for(let i=0;i<vertices.length;i+=3){const kind=surfaceAt(vertices[i],vertices[i+2],landscape),color=new T.Color(palette[kind]||palette.plain);colors.push(color.r,color.g,color.b);}}
  const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geometry.setIndex(indices);if(colors.length)geometry.setAttribute('color',new T.Float32BufferAttribute(colors,3));geometry.computeVertexNormals();
- const mesh=new T.Mesh(geometry,new T.MeshStandardMaterial({color:landscape?'#ffffff':color,vertexColors:!!landscape,roughness:1}));mesh.receiveShadow=false;mesh.userData.fullIndices=indices;return mesh;
+ const mesh=new T.Mesh(geometry,new T.MeshStandardMaterial({color:landscape?'#ffffff':color,vertexColors:!!landscape,roughness:1}));mesh.receiveShadow=true;mesh.userData.fullIndices=indices;return mesh;
 }
 export function updateContentScene(scene,state){
  const c=state.content;if(!c)return;
