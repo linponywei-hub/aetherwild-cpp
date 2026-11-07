@@ -1,3 +1,4 @@
+#include "aetherwild/talents.hpp"
 #include "aetherwild/runtime.hpp"
 #include <fstream>
 namespace aw {
@@ -130,6 +131,7 @@ namespace aw {
         j["jobs"]=strings(p.jobs);
         j["secrets"]=strings(p.secrets);
         j["skills"]=strings(p.learnedSkills);
+        j["talents"]=strings(p.talents);
         j["maps"]=strings(p.unlockedMaps);
         j["processed"]=strings(p.processedRewards);
         j["gatherXp"]=p.gatherXp;
@@ -191,6 +193,8 @@ namespace aw {
         p.jobs=unstrings(j.at("jobs"));
         p.secrets=unstrings(j.at("secrets"));
         p.learnedSkills=unstrings(j.at("skills"));
+        if(j.contains("talents"))p.talents=unstrings(j.at("talents"));
+        validateTalents(p);
         p.unlockedMaps=unstrings(j.at("maps"));
         p.processedRewards=unstrings(j.at("processed"));
         p.gatherXp=j.at("gatherXp").integer();

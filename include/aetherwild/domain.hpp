@@ -207,6 +207,7 @@ namespace aw {
             "warrior"
         },
         secrets, learnedSkills, unlockedMaps;
+        std::set<Id> talents;
         std::map<Id,QuestProgress> quests;
         std::set<Id> processedRewards;
         Quantity gatherXp {};

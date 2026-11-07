@@ -1,3 +1,4 @@
+#include "aetherwild/talents.hpp"
 #include "aetherwild/persistence.hpp"
 #include <fstream>
 #include <iomanip>
@@ -23,6 +24,7 @@ namespace aw {
             for(auto&[id,v]:p.quests)require(c.quests.contains(id)&&v.count>=0&&v.count<=c.quests.at(id).count,"存檔任務錯誤");
             for(auto&id:p.jobs)require(c.classes.contains(id),"存檔職業錯誤");
             require(p.jobs.contains(p.profession),"未取得目前職業");
+            validateTalents(p);
             for(auto&id:p.learnedSkills)require(c.skills.contains(id),"存檔技能錯誤");
             for(auto&id:p.unlockedMaps)require(c.regions.contains(id),"存檔地圖錯誤");
         }
@@ -66,7 +68,7 @@ namespace aw {
         tmp+=".tmp";
         std::ofstream o(tmp,std::ios::binary|std::ios::trunc);
         require(bool(o),"無法開啟存檔");
-        o<<std::setprecision(17)<<"AWCHAR 2\n"<<std::quoted(p.id)<<' '<<std::quoted(p.accountId)<<' '<<std::quoted(p.name)<<' '<<std::quoted(p.profession)<<'\n'<<p.level<<' '<<p.xp<<' '<<p.coins<<' '<<p.bankCoins<<' '<<p.gatherXp<<'\n'<<p.vitals.hp<<' '<<p.vitals.mp<<' '<<p.vitals.stamina<<' '<<p.sprintLocked<<'\n'<<p.position.x<<' '<<p.position.y<<' '<<p.position.z<<' '<<std::quoted(p.lastCity)<<'\n';
+        o<<std::setprecision(17)<<"AWCHAR 3\n"<<std::quoted(p.id)<<' '<<std::quoted(p.accountId)<<' '<<std::quoted(p.name)<<' '<<std::quoted(p.profession)<<'\n'<<p.level<<' '<<p.xp<<' '<<p.coins<<' '<<p.bankCoins<<' '<<p.gatherXp<<'\n'<<p.vitals.hp<<' '<<p.vitals.mp<<' '<<p.vitals.stamina<<' '<<p.sprintLocked<<'\n'<<p.position.x<<' '<<p.position.y<<' '<<p.position.z<<' '<<std::quoted(p.lastCity)<<'\n';
         writeMap(o,p.materials);
         writeMap(o,p.warehouse);
         Materials tools;
@@ -77,6 +79,7 @@ namespace aw {
         o<<p.equipped.size()<<'\n';
         for(auto&[s,id]:p.equipped)o<<static_cast<int>(s)<<' '<<std::quoted(id)<<'\n';
         for(auto*s: {&p.jobs,&p.secrets,&p.learnedSkills,&p.unlockedMaps,&p.processedRewards})writeSet(o,*s);
+        writeSet(o,p.talents);
         o<<p.quests.size()<<'\n';
         for(auto&[id,q]:p.quests)o<<std::quoted(id)<<' '<<q.count<<' '<<q.claimed<<'\n';
         o<<p.warehouseItems.size()<<'\n';
@@ -106,7 +109,7 @@ namespace aw {
         std::string magic;
         int version=0;
         i>>magic>>version;
-        require(magic=="AWCHAR"&&(version==1||version==2),"存檔格式或版本不符");
+        require(magic=="AWCHAR"&&(version>=1&&version<=3),"存檔格式或版本不符");
         Player p;
         p.jobs.clear();
         i>>std::quoted(p.id)>>std::quoted(p.accountId)>>std::quoted(p.name)>>std::quoted(p.profession)>>p.level>>p.xp>>p.coins>>p.bankCoins>>p.gatherXp>>p.vitals.hp>>p.vitals.mp>>p.vitals.stamina>>p.sprintLocked>>p.position.x>>p.position.y>>p.position.z>>std::quoted(p.lastCity);
@@ -134,6 +137,8 @@ namespace aw {
             require(slot>=0&&slot<=4&&p.equipped.emplace(static_cast<Slot>(slot),id).second,"裝備欄錯誤");
         }
         for(auto*s: {&p.jobs,&p.secrets,&p.learnedSkills,&p.unlockedMaps,&p.processedRewards})readSet(i,*s);
+        if(version>=3)readSet(i,p.talents);
+        validateTalents(p);
         n=count(i);
         for(std::size_t j=0;j<n;j++) {
             Id id;

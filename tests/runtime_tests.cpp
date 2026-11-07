@@ -412,6 +412,21 @@ int main() {
             operation["expected"]=1;operation["request"]="other-forge";no([&]{g.command(b.str("token"),operation);});auto other=g.snapshot(b.str("token"));CHECK(!other.at("equipmentStats").contains(item));
             g.save();GameRuntime restored(path,true);CHECK(restored.world().players.at(pid).inventory.front().upgrade==1);CHECK(restored.snapshot(key).at("player").at("coins").integer()==coins);CHECK(restored.command(key,Json{{"type","enhance"},{"target",item},{"npc","windchime_smith"},{"expected",0},{"request","forge-once"}}).at("player").at("coins").integer()==coins);std::filesystem::remove(path);std::filesystem::remove(path.string()+".bak");
         });
+        test("talent progression authority receipts and restart",[]{
+            auto path=std::filesystem::temp_directory_path()/"aw_talent_qa.json";std::filesystem::remove(path);std::filesystem::remove(path.string()+".bak");
+            GameRuntime g(path,true);auto a=create(g),b=create(g,"Other");auto key=a.str("token"),pid=a.at("player").str("id");
+            CHECK(g.catalog().at("talents").arrayItems().size()==36);
+            no([&]{cmd(g,a,"learn_talent","edge");});
+            auto& p=g.world().players.at(pid);p.level=20;
+            no([&]{cmd(g,a,"learn_talent","execution");});CHECK(!g.world().players.at(pid).talents.contains("execution"));
+            auto first=cmd(g,a,"learn_talent","edge","talent-once");CHECK(first.at("player").at("talentPoints").integer()==18);CHECK(first.at("bonus").num("attack")>=4);
+            auto repeat=cmd(g,a,"learn_talent","edge","talent-once");CHECK(repeat.at("player").at("talentPoints").integer()==18);
+            no([&]{cmd(g,a,"learn_talent","edge");});no([&]{cmd(g,b,"learn_talent","edge");});no([&]{cmd(g,a,"learn_talent","invented");});
+            cmd(g,a,"learn_talent","execution");auto hp=g.snapshot(key).at("player").num("maxHp");cmd(g,a,"learn_talent","vigor");CHECK(g.snapshot(key).at("player").num("maxHp")==hp+30);
+            g.save();GameRuntime restored(path,true);CHECK(restored.world().players.at(pid).talents.size()==3);CHECK(restored.snapshot(key).at("player").at("talentPoints").integer()==16);
+            restored.world().players.at(pid).vitals.hp=0;no([&]{cmd(restored,a,"learn_talent","bulwark");});CHECK(restored.world().players.at(pid).talents.size()==3);
+            std::filesystem::remove(path);std::filesystem::remove(path.string()+".bak");
+        });
         std::cout<<"OK "<<groups<<" workstation groups, "<<checks<<" checks\n";
         return 0;
     }

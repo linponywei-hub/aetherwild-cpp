@@ -19,6 +19,7 @@ namespace aw {
             }
         }
         void hit(World& w,const Catalog& c,Player& p,Monster& m,double damage) {
+            if(p.talents.contains("execution")&&m.vitals.hp<m.vitals.maxHp*.3)damage*=1.2;
             double actual=m.receiveDamage(damage);
             m.contribution[p.id]+=actual;
             w.events.push_back( {
@@ -117,7 +118,7 @@ namespace aw {
         }
         require(main||s.heal>0||s.shield>0||s.effect=="taunt","此技能需要目標");
         p.vitals.mp-=s.mana;
-        p.skillReady[skill]=w.now+s.cooldown;
+        p.skillReady[skill]=w.now+std::max(0.5,s.cooldown-(p.talents.contains("focus")&&c.skillOwners.contains(skill)?2:0));
         p.vitals.restore(s.heal,0);
         if(s.shield>0) {
             p.shield=std::max(p.shield,s.shield);
@@ -152,14 +153,14 @@ namespace aw {
         if(job.weapon==WeaponKind::Bow) {
             p.arrowHasteUntil=w.now+8;
             p.vitals.mp-=mana;
-            p.skillReady["weapon"]=w.now+14;
+            p.skillReady["weapon"]=w.now+(p.talents.contains("focus")?12:14);
             return;
         }
         require(w.monsters.contains(target),"請瞄準怪物");
         auto& main=w.monsters.at(target);
         checkTarget(w,c,p,main,job.range);
         p.vitals.mp-=mana;
-        p.skillReady["weapon"]=w.now+8;
+        p.skillReady["weapon"]=w.now+(p.talents.contains("focus")?6:8);
         auto center=!rangedWeapon(job.weapon)?p.position:main.position;
         for(auto&[mid,m]:w.monsters)if(m.scene==p.scene&&m.vitals.alive()&&!MovementSystem::safe(m.position,m.scene,c)&&distance(m.position,center)<=7) {
             if(m.definition=="dungeon_boss") {

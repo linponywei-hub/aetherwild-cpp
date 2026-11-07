@@ -63,6 +63,7 @@ namespace aw {
         }
         double damage=job.base.attack+(a.level-1)*3+InventorySystem::bonuses(a,c).attack-InventorySystem::bonuses(b,c).defense;
         damage=std::max(1.0,std::round(damage*(job.weapon==WeaponKind::Staff?.32:job.weapon==WeaponKind::Bow?std::clamp(bowPower,.55,1.6):1)));
+        if(a.talents.contains("execution")&&b.vitals.hp<b.vitals.maxHp*.3)damage*=1.2;
         if(w.now<b.shieldUntil) {
             double shield=std::min(damage,b.shield);
             b.shield-=shield;

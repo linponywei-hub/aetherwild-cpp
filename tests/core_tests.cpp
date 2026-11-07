@@ -1,4 +1,5 @@
 #include "aetherwild/persistence.hpp"
+#include "aetherwild/talents.hpp"
 #include "aetherwild/social.hpp"
 #include "aetherwild/ports.hpp"
 #include <fstream>
@@ -394,6 +395,10 @@ int main() {
             const auto tail=data.rfind("0\nEND\n");
             CHECK(tail!=std::string::npos);
             data.erase(tail,2);
+            // This fixture has no talents or quests: remove the v3 empty talent section too.
+            const auto emptyTalent=data.rfind("0\nEND\n");
+            CHECK(emptyTalent!=std::string::npos);
+            data.erase(emptyTalent,2);
             std::ofstream("warehouse-v1.awc")<<data;
             CHECK(CharacterFile::load("warehouse-v1.awc",c).warehouseItems.empty());
             std::filesystem::remove("warehouse.awc");
@@ -618,6 +623,18 @@ int main() {
             CHECK(!w.events.empty());
             AdministrationSystem::teleportToCity(w,c,state,"normal",q.id,"astral");
             CHECK(q.position.x==c.regions.at("astral").center.x);
+        });
+        group("talent effects original mechanics and character roundtrip",[]{
+            Simulation sim;auto& p=sim.addPlayer("talent-test","Talent");const auto& c=sim.catalog();auto& w=sim.world();p.level=100;
+            auto base=InventorySystem::bonuses(p,c);learnTalent(p,"edge",c);CHECK(InventorySystem::bonuses(p,c).attack==base.attack+4);
+            learnTalent(p,"execution",c);learnTalent(p,"focus",c);learnTalent(p,"vigor",c);learnTalent(p,"bulwark",c);learnTalent(p,"renewal",c);
+            p.vitals.hp=1;p.materials["potion"]=2;InventorySystem::usePotion(p,"potion",c);CHECK(p.vitals.hp==88.5);
+            wild(p);CombatSystem::spawn(w,"talent-target",p.position,100,"windchime");auto& m=w.monsters.at("talent-target");m.vitals.maxHp=100000;m.vitals.hp=29000;m.defense=0;
+            auto before=m.vitals.hp;CombatSystem::attack(w,c,p.id,m.id);auto damage=before-m.vitals.hp;const double expected=std::round(c.classes.at(p.profession).base.attack+99*3+InventorySystem::bonuses(p,c).attack)*1.2;CHECK(std::abs(damage-expected)<.001||std::abs(w.events.back().value-expected)<.001);
+            learnTalent(p,"forage",c);learnTalent(p,"insight",c);learnTalent(p,"alchemy",c);
+            for(const auto& [id,r]:c.recipes)if(r.output=="potion"&&r.station!="smith") { for(const auto& [mat,n]:r.cost)p.materials[mat]=n*2;auto count=p.materials["potion"];auto xp=p.xp;CraftingSystem::craft(w,p,id,"",c);CHECK(p.materials["potion"]==count+r.count+1);CHECK(p.xp==xp+15);break; }
+            for(const auto& d:talentDefinitions())if(!p.talents.contains(d.id))learnTalent(p,d.id,c);
+            CHECK(p.talents.size()==36);CHECK(talentPoints(p)==63);validateTalents(p);CharacterFile::save(p,"talent-roundtrip.awc",c);auto loaded=CharacterFile::load("talent-roundtrip.awc",c);CHECK(loaded.talents==p.talents);CHECK(loaded.vitals.maxHp==p.vitals.maxHp);std::filesystem::remove("talent-roundtrip.awc");
         });
         std::cout<<"OK "<<groups<<" groups, "<<checks<<" checks\n";
         return 0;
