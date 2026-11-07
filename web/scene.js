@@ -94,9 +94,10 @@ export class RealmScene {
        if(!Number.isFinite(h)||h<=0)continue;
        copy.scale.setScalar(.5*v.scale/h);copy.updateMatrixWorld(true);
        const ground=new T.Box3().setFromObject(copy);
-       copy.position.y-=ground.min.y;copy.position.y+=.04;
+       copy.position.y-=ground.min.y;copy.position.y+=.12;
        g.add(copy);g.userData.placeholder.visible=false;
        g.userData.animatedModel=copy;g.userData.baseModelY=copy.position.y;g.userData.baseModelYaw=copy.rotation.y;
+       g.userData.groundClearance=.12;
        // Role equipment is attached to the variant, not baked into the shared GLB.
        const gear=new T.Group();g.add(gear);
        const steel=this.mat('#8b8d83'),wood=this.mat('#69533a');
@@ -171,7 +172,7 @@ export class RealmScene {
      if(d>.3){vx=px/d*.65;vz=pz/d*.65;g.rotation.y=Math.atan2(vx,vz);}
    }
    g.position.x+=vx*dt;g.position.z+=vz*dt;
-   g.position.y=this.landHeight(g.position.x+this.goblinPackRoot.position.x,g.position.z+this.goblinPackRoot.position.z)-this.goblinPackRoot.position.y+.04;
+   g.position.y=this.landHeight(g.position.x+this.goblinPackRoot.position.x,g.position.z+this.goblinPackRoot.position.z)-this.goblinPackRoot.position.y+.16;
    const model=g.userData.animatedModel;
    ai.moving=Math.hypot(vx,vz)>.1;
    if(model){model.rotation.z=Math.sin(this.time*(ai.moving?11:1.35))*(ai.moving?.07:.02);}
@@ -179,7 +180,7 @@ export class RealmScene {
      if(ai.stones<=0){ai.stones=3;ai.gatherUntil=this.time+.7;ai.attackCooldown=1.2;}
      else {
        ai.stones--;ai.throwUntil=this.time+.55;ai.attackCooldown=2.2+Math.random()*.8;
-       const stone=this.mesh(new T.DodecahedronGeometry(.085,0),this.mat('#88857c'),[worldPos.x,worldPos.y+.6,worldPos.z],this.world);
+       const stone=this.mesh(new T.DodecahedronGeometry(.085,0),this.mat('#88857c'),[worldPos.x+Math.sin(g.rotation.y)*.28,worldPos.y+.48,worldPos.z+Math.cos(g.rotation.y)*.28],this.world);
        const target=new T.Vector3(p.position.x,p.position.y+1.1,p.position.z);
        const origin=stone.position.clone();const velocity=target.sub(origin).normalize().multiplyScalar(8);
        velocity.y+=1.5;ai.projectiles.push({mesh:stone,velocity,life:2.4});
@@ -203,22 +204,24 @@ export class RealmScene {
      const throwing=ai?.throwUntil>this.time,gathering=ai?.gatherUntil>this.time;
      model.position.y=preview.userData.baseModelY+(walking?Math.abs(stride)*.035:Math.sin(this.time*2.2)*.008)+(gathering?-.07:0);
      model.rotation.y=preview.userData.baseModelYaw+(walking?Math.sin(this.time*5.5)*.075:Math.sin(this.time*.8)*.035);
-     model.rotation.x=throwing?-.3+Math.sin(this.time*19)*.12:gathering?.25:walking?stride*.075:0;
+     model.rotation.x=throwing?-.1+release*.22:gathering?.2:walking?stride*.06:0;
      model.rotation.z=walking?Math.sin(this.time*5.5)*.06:Math.sin(this.time*1.35)*.012;
      // Real skeletal animation: drive both legs, knees, arms and elbows.
      const joints=preview.userData.joints||{},rest=preview.userData.restPose||{};
      const phase=this.time*10+preview.userData.packIndex*.7;
      const swing=walking?Math.sin(phase)*.55:0;
      const bend=walking?Math.max(0,Math.sin(phase))*.48:0;
-     const throwPhase=throwing?Math.sin((ai.throwUntil-this.time)/.55*Math.PI):0;
+     const throwProgress=throwing?Math.max(0,Math.min(1,1-(ai.throwUntil-this.time)/.55)):0;
+     const windup=throwing?Math.sin(Math.min(1,throwProgress*2)*Math.PI/2):0;
+     const release=throwing?Math.max(0,Math.sin((throwProgress-.35)*Math.PI/ .65)):0;
      const gatherPhase=gathering?Math.sin((ai.gatherUntil-this.time)/.7*Math.PI):0;
      const pose=(name,x=0,y=0,z=0)=>{const bone=joints[name],base=rest[name];if(!bone||!base)return;bone.quaternion.copy(base).multiply(new T.Quaternion().setFromEuler(new T.Euler(x,y,z)));};
      pose('LeftUpLeg',swing+gatherPhase*.45);pose('RightUpLeg',-swing+gatherPhase*.45);
      pose('LeftLeg',-bend);pose('RightLeg',walking?-Math.max(0,-Math.sin(phase))*.48:0);
      pose('LeftFoot',walking?Math.sin(phase)*.15:0);pose('RightFoot',walking?-Math.sin(phase)*.15:0);
-     pose('LeftArm',-swing*.75+gatherPhase*.35);pose('RightArm',swing*.75-throwPhase*1.15+gatherPhase*.4);
-     pose('LeftForeArm',-.12-gatherPhase*.5);pose('RightForeArm',-.15-throwPhase*.85-gatherPhase*.6);
-     pose('Spine',gatherPhase*.2-throwPhase*.16);
+     pose('LeftArm',-swing*.75+gatherPhase*.35+windup*.12);pose('RightArm',swing*.75+windup*.35-release*.9+gatherPhase*.4,0,-windup*.25);
+     pose('LeftForeArm',-.12-gatherPhase*.5);pose('RightForeArm',-.15-windup*.9+release*.65-gatherPhase*.6);
+     pose('Spine',gatherPhase*.15+windup*.12-release*.22,windup*-.22+release*.32);
    }
    for(const npc of this.npcObjects.values()){if(npc.userData.eileenTest){
         const player=this.state?.player;
