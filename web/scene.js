@@ -78,10 +78,11 @@ export class RealmScene {
             npc.userData.activeClip=next;
           }
           mixer.update(dt);
-          // The imported idle clip lacks arm tracks: lower arms from T-pose.
+          // Set the missing idle arm pose absolutely to avoid accumulating rotation.
+          // During walk/talk the clip owns animated arms; keep unanimated arms relaxed.
           for(const arm of npc.userData.restPoseArms||[]){
-            const correction=new T.Quaternion().setFromAxisAngle(new T.Vector3(0,0,1),arm.angle);
-            arm.bone.quaternion.premultiply(correction);
+            const animated=next?.tracks?.some(track=>track.name===arm.bone.name+'.quaternion');
+            if(!animated)arm.bone.quaternion.setFromAxisAngle(new T.Vector3(0,0,1),arm.angle);
           }
         }
         if(model&&!mixer){model.position.y=Math.sin(this.time*1.65)*.025;model.rotation.y=Math.sin(this.time*.55)*.07;}
