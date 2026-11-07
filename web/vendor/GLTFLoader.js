@@ -65,8 +65,9 @@ export class GLTFLoader {
       if(m.emissiveFactor)mat.emissive.setRGB(...m.emissiveFactor);
       return mat;
     });
-    const nodes=[];(json.nodes||[]).forEach(n=>{
-      const group=new T.Group();group.name=n.name||('glb_node_'+nodes.length);nodeTransform(group,n);
+    const jointIds=new Set((json.skins||[]).flatMap(s=>s.joints));
+    const nodes=[];(json.nodes||[]).forEach((n,index)=>{
+      const group=jointIds.has(index)?new T.Bone():new T.Group();group.name=n.name||('glb_node_'+nodes.length);nodeTransform(group,n);
       if(n.mesh!==undefined){
         for(const primitive of json.meshes[n.mesh].primitives){
           if(primitive.mode!==undefined&&primitive.mode!==4)throw Error('Only GLB triangle primitives supported');
