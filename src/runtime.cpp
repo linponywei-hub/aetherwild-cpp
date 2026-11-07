@@ -480,6 +480,34 @@ namespace aw {
                 "chat",chat_
             }
         };
+        j["equipmentStats"]=Json::object();
+        j["enhancement"]=Json{{"maxLevel",20},{"npc",""},{"enabled",features_.at("crafting")},{"quotes",Json::object()}};
+        if(p.scene=="world"&&p.vitals.alive())for(const auto&[id,n]:catalog_.npcs) {
+            if(n.role=="smith"&&contentRegionOpen(catalog_,n.region)&&distance(p.position,n.position)<=8&&clearSight(p.position,n.position,buildings_)) {
+                j["enhancement"]["npc"]=id;break;
+            }
+        }
+        auto describe=[&](const ItemInstance& item) {
+            auto st=InventorySystem::itemStats(item,catalog_);
+            Json v{{"stats",statsJson(st)},{"delta",statsJson(st)}};
+            auto slot=catalog_.items.at(item.definition).slot;
+            if(p.equipped.contains(slot)) {
+                for(const auto& worn:p.inventory)if(worn.id==p.equipped.at(slot)) {
+                    auto current=InventorySystem::itemStats(worn,catalog_);
+                    Stats delta{st.hp-current.hp,st.mp-current.mp,st.attack-current.attack,st.defense-current.defense,st.crit-current.crit,st.speed-current.speed};
+                    v["delta"]=statsJson(delta);break;
+                }
+            }
+            return v;
+        };
+        for(const auto& item:p.inventory) {
+            j["equipmentStats"][item.id]=describe(item);
+            if(item.upgrade<20) {
+                auto q=EnhancementSystem::quote(item.upgrade);auto next=item;next.upgrade=q.nextLevel;
+                j["enhancement"]["quotes"][item.id]=Json{{"expected",item.upgrade},{"nextLevel",q.nextLevel},{"coins",q.coins},{"ore",2},{"chance",q.chance},{"affordable",p.coins>=q.coins&&InventorySystem::canPay(p.materials,q.materials)},{"nextStats",statsJson(InventorySystem::itemStats(next,catalog_))}};
+            }
+        }
+        for(const auto& item:p.warehouseItems)j["equipmentStats"][item.id]=describe(item);
         j["player"]["skillSlots"]=equippedSkills(p);j["player"]["skillOptions"]=Json::array();for(const auto& skill:p.learnedSkills)if(catalog_.skills.contains(skill)&&catalog_.skills.at(skill).effect!="dash"&&(!catalog_.skillOwners.contains(skill)||catalog_.skillOwners.at(skill)==p.profession))j["player"]["skillOptions"].push(skill);
         j["player"]["weaponType"]=weaponName(catalog_.classes.at(p.profession).weapon);
         const double epoch=std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count();
@@ -1005,6 +1033,13 @@ namespace aw {
         else if(type=="craft") {
             require(features_["crafting"],"製作已暫停");
             CraftingSystem::craft(world_,p,target,npc.empty()&&catalog_.recipes.at(target).station=="smith"?nearService("smith"):npc,catalog_);
+        }
+        else if(type=="enhance") {
+            require(features_["crafting"],"製作與強化已暫停");
+            auto smith=npc.empty()?nearService("smith"):npc;auto n=catalog_.npcs.find(smith);require(n!=catalog_.npcs.end()&&clearSight(p.position,n->second.position,buildings_),"鐵匠被建築物遮擋");
+            const auto level=j.at("expected").integer();require(level>=0&&level<=20,"強化報價錯誤");
+            static std::mt19937 engine(std::random_device{}());
+            EnhancementSystem::enhance(world_,p,target,smith,static_cast<int>(level),catalog_,std::generate_canonical<double,32>(engine));
         }
         else if(type=="equip")InventorySystem::equip(p,target,catalog_);
         else if(type=="unequip")InventorySystem::unequip(p,target,catalog_);
