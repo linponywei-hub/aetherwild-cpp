@@ -95,6 +95,14 @@ export class ModelAssets {
       if (previous) group.remove(previous);
       group.add(instance);
       group.userData.modelInstance = instance;
+      // TRIPO rest pose is T-shaped; retain natural lowered arms when idle.
+      const arms=[];
+      instance.traverse(node=>{
+        if (!node.isBone) return;
+        if (/Eileen_LeftUpperArm$/i.test(node.name)) arms.push({bone:node,angle:0.95});
+        if (/Eileen_RightUpperArm$/i.test(node.name)) arms.push({bone:node,angle:-0.95});
+      });
+      group.userData.restPoseArms=arms;
       if (group.userData.modelMixer) group.userData.modelMixer.stopAllAction();
       group.userData.modelMixer = null;
       if (animations.length) {
