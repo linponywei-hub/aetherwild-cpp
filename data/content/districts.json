@@ -1,0 +1,1546 @@
+[
+  {
+    "id": "aw_crownreach",
+    "name": "曙冠王城",
+    "districts": [
+      {
+        "id": "aw_district_aw_crownreach_01",
+        "name": "水鐘王庭",
+        "buildings": [
+          "aw_build_aw_crownreach_01_01",
+          "aw_build_aw_crownreach_01_02",
+          "aw_build_aw_crownreach_01_03",
+          "aw_build_aw_crownreach_01_04",
+          "aw_build_aw_crownreach_01_05",
+          "aw_build_aw_crownreach_01_06",
+          "aw_build_aw_crownreach_01_07",
+          "aw_build_aw_crownreach_01_08"
+        ],
+        "street_name": "水鐘王庭通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "王城平原風格，以水鐘王庭作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_crownreach_02",
+        "name": "七地使館街",
+        "buildings": [
+          "aw_build_aw_crownreach_02_01",
+          "aw_build_aw_crownreach_02_02",
+          "aw_build_aw_crownreach_02_03",
+          "aw_build_aw_crownreach_02_04",
+          "aw_build_aw_crownreach_02_05",
+          "aw_build_aw_crownreach_02_06",
+          "aw_build_aw_crownreach_02_07",
+          "aw_build_aw_crownreach_02_08"
+        ],
+        "street_name": "七地使館街通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "王城平原風格，以七地使館作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_crownreach_03",
+        "name": "外環安置區",
+        "buildings": [
+          "aw_build_aw_crownreach_03_01",
+          "aw_build_aw_crownreach_03_02",
+          "aw_build_aw_crownreach_03_03",
+          "aw_build_aw_crownreach_03_04",
+          "aw_build_aw_crownreach_03_05",
+          "aw_build_aw_crownreach_03_06",
+          "aw_build_aw_crownreach_03_07",
+          "aw_build_aw_crownreach_03_08"
+        ],
+        "street_name": "外環安置區通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "王城平原風格，以放射大道作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_crownreach_04",
+        "name": "復鳴工務坊",
+        "buildings": [
+          "aw_build_aw_crownreach_04_01",
+          "aw_build_aw_crownreach_04_02",
+          "aw_build_aw_crownreach_04_03",
+          "aw_build_aw_crownreach_04_04",
+          "aw_build_aw_crownreach_04_05",
+          "aw_build_aw_crownreach_04_06",
+          "aw_build_aw_crownreach_04_07",
+          "aw_build_aw_crownreach_04_08"
+        ],
+        "street_name": "復鳴工務坊通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "王城平原風格，以水鐘王庭作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_crownreach_05",
+        "name": "萬象書庫區",
+        "buildings": [
+          "aw_build_aw_crownreach_05_01",
+          "aw_build_aw_crownreach_05_02",
+          "aw_build_aw_crownreach_05_03",
+          "aw_build_aw_crownreach_05_04",
+          "aw_build_aw_crownreach_05_05",
+          "aw_build_aw_crownreach_05_06",
+          "aw_build_aw_crownreach_05_07",
+          "aw_build_aw_crownreach_05_08"
+        ],
+        "street_name": "萬象書庫區通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "王城平原風格，以七地使館作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_crownreach_06",
+        "name": "王城競技苑",
+        "buildings": [
+          "aw_build_aw_crownreach_06_01",
+          "aw_build_aw_crownreach_06_02",
+          "aw_build_aw_crownreach_06_03",
+          "aw_build_aw_crownreach_06_04",
+          "aw_build_aw_crownreach_06_05",
+          "aw_build_aw_crownreach_06_06",
+          "aw_build_aw_crownreach_06_07",
+          "aw_build_aw_crownreach_06_08"
+        ],
+        "street_name": "王城競技苑通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "王城平原風格，以放射大道作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_crownreach_07",
+        "name": "晨光住宅坊",
+        "buildings": [
+          "aw_build_aw_crownreach_07_01",
+          "aw_build_aw_crownreach_07_02",
+          "aw_build_aw_crownreach_07_03",
+          "aw_build_aw_crownreach_07_04",
+          "aw_build_aw_crownreach_07_05",
+          "aw_build_aw_crownreach_07_06",
+          "aw_build_aw_crownreach_07_07",
+          "aw_build_aw_crownreach_07_08"
+        ],
+        "street_name": "晨光住宅坊通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "王城平原風格，以水鐘王庭作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_crownreach_08",
+        "name": "地下往返站",
+        "buildings": [
+          "aw_build_aw_crownreach_08_01",
+          "aw_build_aw_crownreach_08_02",
+          "aw_build_aw_crownreach_08_03",
+          "aw_build_aw_crownreach_08_04",
+          "aw_build_aw_crownreach_08_05",
+          "aw_build_aw_crownreach_08_06",
+          "aw_build_aw_crownreach_08_07",
+          "aw_build_aw_crownreach_08_08"
+        ],
+        "street_name": "地下往返站通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "王城平原風格，以七地使館作視覺定位"
+      }
+    ],
+    "city_radius_m": 850,
+    "note": "王城必須位於全圖幾何中心，不以舊村當中心。"
+  },
+  {
+    "id": "windchime",
+    "name": "風鈴新手村",
+    "districts": [
+      {
+        "id": "aw_district_windchime_01",
+        "name": "風鈴廣場",
+        "buildings": [
+          "aw_build_windchime_01_01",
+          "aw_build_windchime_01_02",
+          "aw_build_windchime_01_03",
+          "aw_build_windchime_01_04",
+          "aw_build_windchime_01_05",
+          "aw_build_windchime_01_06",
+          "aw_build_windchime_01_07",
+          "aw_build_windchime_01_08"
+        ],
+        "street_name": "風鈴廣場通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "田園河谷風格，以老磨坊作視覺定位"
+      },
+      {
+        "id": "aw_district_windchime_02",
+        "name": "磨坊溪畔",
+        "buildings": [
+          "aw_build_windchime_02_01",
+          "aw_build_windchime_02_02",
+          "aw_build_windchime_02_03",
+          "aw_build_windchime_02_04",
+          "aw_build_windchime_02_05",
+          "aw_build_windchime_02_06",
+          "aw_build_windchime_02_07",
+          "aw_build_windchime_02_08"
+        ],
+        "street_name": "磨坊溪畔通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "田園河谷風格，以風鈴田作視覺定位"
+      },
+      {
+        "id": "aw_district_windchime_03",
+        "name": "旅人驛街",
+        "buildings": [
+          "aw_build_windchime_03_01",
+          "aw_build_windchime_03_02",
+          "aw_build_windchime_03_03",
+          "aw_build_windchime_03_04",
+          "aw_build_windchime_03_05",
+          "aw_build_windchime_03_06",
+          "aw_build_windchime_03_07",
+          "aw_build_windchime_03_08"
+        ],
+        "street_name": "旅人驛街通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "田園河谷風格，以舊驛道作視覺定位"
+      },
+      {
+        "id": "aw_district_windchime_04",
+        "name": "田間住宅巷",
+        "buildings": [
+          "aw_build_windchime_04_01",
+          "aw_build_windchime_04_02",
+          "aw_build_windchime_04_03",
+          "aw_build_windchime_04_04",
+          "aw_build_windchime_04_05",
+          "aw_build_windchime_04_06",
+          "aw_build_windchime_04_07",
+          "aw_build_windchime_04_08"
+        ],
+        "street_name": "田間住宅巷通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "田園河谷風格，以老磨坊作視覺定位"
+      },
+      {
+        "id": "aw_district_windchime_05",
+        "name": "採集教學林",
+        "buildings": [
+          "aw_build_windchime_05_01",
+          "aw_build_windchime_05_02",
+          "aw_build_windchime_05_03",
+          "aw_build_windchime_05_04",
+          "aw_build_windchime_05_05",
+          "aw_build_windchime_05_06",
+          "aw_build_windchime_05_07",
+          "aw_build_windchime_05_08"
+        ],
+        "street_name": "採集教學林通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "田園河谷風格，以風鈴田作視覺定位"
+      },
+      {
+        "id": "aw_district_windchime_06",
+        "name": "舊避難入口",
+        "buildings": [
+          "aw_build_windchime_06_01",
+          "aw_build_windchime_06_02",
+          "aw_build_windchime_06_03",
+          "aw_build_windchime_06_04",
+          "aw_build_windchime_06_05",
+          "aw_build_windchime_06_06",
+          "aw_build_windchime_06_07",
+          "aw_build_windchime_06_08"
+        ],
+        "street_name": "舊避難入口通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "田園河谷風格，以舊驛道作視覺定位"
+      }
+    ],
+    "city_radius_m": 450,
+    "note": "保留新手安全圈，至王城走完整驛道約7公里。"
+  },
+  {
+    "id": "verdant",
+    "name": "翠冠城",
+    "districts": [
+      {
+        "id": "aw_district_verdant_01",
+        "name": "根橋集市",
+        "buildings": [
+          "aw_build_verdant_01_01",
+          "aw_build_verdant_01_02",
+          "aw_build_verdant_01_03",
+          "aw_build_verdant_01_04",
+          "aw_build_verdant_01_05",
+          "aw_build_verdant_01_06",
+          "aw_build_verdant_01_07",
+          "aw_build_verdant_01_08"
+        ],
+        "street_name": "根橋集市通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "巨樹森林風格，以多層樹冠作視覺定位"
+      },
+      {
+        "id": "aw_district_verdant_02",
+        "name": "樹心聖庭",
+        "buildings": [
+          "aw_build_verdant_02_01",
+          "aw_build_verdant_02_02",
+          "aw_build_verdant_02_03",
+          "aw_build_verdant_02_04",
+          "aw_build_verdant_02_05",
+          "aw_build_verdant_02_06",
+          "aw_build_verdant_02_07",
+          "aw_build_verdant_02_08"
+        ],
+        "street_name": "樹心聖庭通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "巨樹森林風格，以藤橋作視覺定位"
+      },
+      {
+        "id": "aw_district_verdant_03",
+        "name": "高枝弓坊",
+        "buildings": [
+          "aw_build_verdant_03_01",
+          "aw_build_verdant_03_02",
+          "aw_build_verdant_03_03",
+          "aw_build_verdant_03_04",
+          "aw_build_verdant_03_05",
+          "aw_build_verdant_03_06",
+          "aw_build_verdant_03_07",
+          "aw_build_verdant_03_08"
+        ],
+        "street_name": "高枝弓坊通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "巨樹森林風格，以根脈濕地作視覺定位"
+      },
+      {
+        "id": "aw_district_verdant_04",
+        "name": "月葉療舍",
+        "buildings": [
+          "aw_build_verdant_04_01",
+          "aw_build_verdant_04_02",
+          "aw_build_verdant_04_03",
+          "aw_build_verdant_04_04",
+          "aw_build_verdant_04_05",
+          "aw_build_verdant_04_06",
+          "aw_build_verdant_04_07",
+          "aw_build_verdant_04_08"
+        ],
+        "street_name": "月葉療舍通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "巨樹森林風格，以多層樹冠作視覺定位"
+      },
+      {
+        "id": "aw_district_verdant_05",
+        "name": "育苗平台",
+        "buildings": [
+          "aw_build_verdant_05_01",
+          "aw_build_verdant_05_02",
+          "aw_build_verdant_05_03",
+          "aw_build_verdant_05_04",
+          "aw_build_verdant_05_05",
+          "aw_build_verdant_05_06",
+          "aw_build_verdant_05_07",
+          "aw_build_verdant_05_08"
+        ],
+        "street_name": "育苗平台通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "巨樹森林風格，以藤橋作視覺定位"
+      },
+      {
+        "id": "aw_district_verdant_06",
+        "name": "外枝住宅環",
+        "buildings": [
+          "aw_build_verdant_06_01",
+          "aw_build_verdant_06_02",
+          "aw_build_verdant_06_03",
+          "aw_build_verdant_06_04",
+          "aw_build_verdant_06_05",
+          "aw_build_verdant_06_06",
+          "aw_build_verdant_06_07",
+          "aw_build_verdant_06_08"
+        ],
+        "street_name": "外枝住宅環通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "巨樹森林風格，以根脈濕地作視覺定位"
+      }
+    ],
+    "city_radius_m": 850,
+    "note": "房屋位於巨樹上；林下仍保留自然地面。"
+  },
+  {
+    "id": "cinder",
+    "name": "燼鐵城",
+    "districts": [
+      {
+        "id": "aw_district_cinder_01",
+        "name": "熔脈主爐區",
+        "buildings": [
+          "aw_build_cinder_01_01",
+          "aw_build_cinder_01_02",
+          "aw_build_cinder_01_03",
+          "aw_build_cinder_01_04",
+          "aw_build_cinder_01_05",
+          "aw_build_cinder_01_06",
+          "aw_build_cinder_01_07",
+          "aw_build_cinder_01_08"
+        ],
+        "street_name": "熔脈主爐區通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "火山工業風格，以熔爐作視覺定位"
+      },
+      {
+        "id": "aw_district_cinder_02",
+        "name": "七班卸礦場",
+        "buildings": [
+          "aw_build_cinder_02_01",
+          "aw_build_cinder_02_02",
+          "aw_build_cinder_02_03",
+          "aw_build_cinder_02_04",
+          "aw_build_cinder_02_05",
+          "aw_build_cinder_02_06",
+          "aw_build_cinder_02_07",
+          "aw_build_cinder_02_08"
+        ],
+        "street_name": "七班卸礦場通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "火山工業風格，以工業運河作視覺定位"
+      },
+      {
+        "id": "aw_district_cinder_03",
+        "name": "銅橋市場",
+        "buildings": [
+          "aw_build_cinder_03_01",
+          "aw_build_cinder_03_02",
+          "aw_build_cinder_03_03",
+          "aw_build_cinder_03_04",
+          "aw_build_cinder_03_05",
+          "aw_build_cinder_03_06",
+          "aw_build_cinder_03_07",
+          "aw_build_cinder_03_08"
+        ],
+        "street_name": "銅橋市場通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "火山工業風格，以鐵路作視覺定位"
+      },
+      {
+        "id": "aw_district_cinder_04",
+        "name": "斷鏈紀念巷",
+        "buildings": [
+          "aw_build_cinder_04_01",
+          "aw_build_cinder_04_02",
+          "aw_build_cinder_04_03",
+          "aw_build_cinder_04_04",
+          "aw_build_cinder_04_05",
+          "aw_build_cinder_04_06",
+          "aw_build_cinder_04_07",
+          "aw_build_cinder_04_08"
+        ],
+        "street_name": "斷鏈紀念巷通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "火山工業風格，以高架天橋作視覺定位"
+      },
+      {
+        "id": "aw_district_cinder_05",
+        "name": "機械學院",
+        "buildings": [
+          "aw_build_cinder_05_01",
+          "aw_build_cinder_05_02",
+          "aw_build_cinder_05_03",
+          "aw_build_cinder_05_04",
+          "aw_build_cinder_05_05",
+          "aw_build_cinder_05_06",
+          "aw_build_cinder_05_07",
+          "aw_build_cinder_05_08"
+        ],
+        "street_name": "機械學院通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "火山工業風格，以熔爐作視覺定位"
+      },
+      {
+        "id": "aw_district_cinder_06",
+        "name": "冷爐住宅坊",
+        "buildings": [
+          "aw_build_cinder_06_01",
+          "aw_build_cinder_06_02",
+          "aw_build_cinder_06_03",
+          "aw_build_cinder_06_04",
+          "aw_build_cinder_06_05",
+          "aw_build_cinder_06_06",
+          "aw_build_cinder_06_07",
+          "aw_build_cinder_06_08"
+        ],
+        "street_name": "冷爐住宅坊通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "火山工業風格，以工業運河作視覺定位"
+      }
+    ],
+    "city_radius_m": 850,
+    "note": "蒸氣機械城市，工業與居住區分流。"
+  },
+  {
+    "id": "tidehaven",
+    "name": "潮汐港城",
+    "districts": [
+      {
+        "id": "aw_district_tidehaven_01",
+        "name": "星帆主甲板",
+        "buildings": [
+          "aw_build_tidehaven_01_01",
+          "aw_build_tidehaven_01_02",
+          "aw_build_tidehaven_01_03",
+          "aw_build_tidehaven_01_04",
+          "aw_build_tidehaven_01_05",
+          "aw_build_tidehaven_01_06",
+          "aw_build_tidehaven_01_07",
+          "aw_build_tidehaven_01_08"
+        ],
+        "street_name": "星帆主甲板通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "海上船城風格，以繫泊巨船作視覺定位"
+      },
+      {
+        "id": "aw_district_tidehaven_02",
+        "name": "醫船暖艙",
+        "buildings": [
+          "aw_build_tidehaven_02_01",
+          "aw_build_tidehaven_02_02",
+          "aw_build_tidehaven_02_03",
+          "aw_build_tidehaven_02_04",
+          "aw_build_tidehaven_02_05",
+          "aw_build_tidehaven_02_06",
+          "aw_build_tidehaven_02_07",
+          "aw_build_tidehaven_02_08"
+        ],
+        "street_name": "醫船暖艙通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "海上船城風格，以跨船木橋作視覺定位"
+      },
+      {
+        "id": "aw_district_tidehaven_03",
+        "name": "繫船市集",
+        "buildings": [
+          "aw_build_tidehaven_03_01",
+          "aw_build_tidehaven_03_02",
+          "aw_build_tidehaven_03_03",
+          "aw_build_tidehaven_03_04",
+          "aw_build_tidehaven_03_05",
+          "aw_build_tidehaven_03_06",
+          "aw_build_tidehaven_03_07",
+          "aw_build_tidehaven_03_08"
+        ],
+        "street_name": "繫船市集通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "海上船城風格，以燈塔作視覺定位"
+      },
+      {
+        "id": "aw_district_tidehaven_04",
+        "name": "舊海關船",
+        "buildings": [
+          "aw_build_tidehaven_04_01",
+          "aw_build_tidehaven_04_02",
+          "aw_build_tidehaven_04_03",
+          "aw_build_tidehaven_04_04",
+          "aw_build_tidehaven_04_05",
+          "aw_build_tidehaven_04_06",
+          "aw_build_tidehaven_04_07",
+          "aw_build_tidehaven_04_08"
+        ],
+        "street_name": "舊海關船通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "海上船城風格，以防波堤作視覺定位"
+      },
+      {
+        "id": "aw_district_tidehaven_05",
+        "name": "淡水配給艙",
+        "buildings": [
+          "aw_build_tidehaven_05_01",
+          "aw_build_tidehaven_05_02",
+          "aw_build_tidehaven_05_03",
+          "aw_build_tidehaven_05_04",
+          "aw_build_tidehaven_05_05",
+          "aw_build_tidehaven_05_06",
+          "aw_build_tidehaven_05_07",
+          "aw_build_tidehaven_05_08"
+        ],
+        "street_name": "淡水配給艙通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "海上船城風格，以繫泊巨船作視覺定位"
+      },
+      {
+        "id": "aw_district_tidehaven_06",
+        "name": "船尾住宅列",
+        "buildings": [
+          "aw_build_tidehaven_06_01",
+          "aw_build_tidehaven_06_02",
+          "aw_build_tidehaven_06_03",
+          "aw_build_tidehaven_06_04",
+          "aw_build_tidehaven_06_05",
+          "aw_build_tidehaven_06_06",
+          "aw_build_tidehaven_06_07",
+          "aw_build_tidehaven_06_08"
+        ],
+        "street_name": "船尾住宅列通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "海上船城風格，以跨船木橋作視覺定位"
+      }
+    ],
+    "city_radius_m": 850,
+    "note": "城市建立在停泊海上的船上，不能畫成空中島嶼。"
+  },
+  {
+    "id": "frosthold",
+    "name": "霜白城",
+    "districts": [
+      {
+        "id": "aw_district_frosthold_01",
+        "name": "共爐坡村",
+        "buildings": [
+          "aw_build_frosthold_01_01",
+          "aw_build_frosthold_01_02",
+          "aw_build_frosthold_01_03",
+          "aw_build_frosthold_01_04",
+          "aw_build_frosthold_01_05",
+          "aw_build_frosthold_01_06",
+          "aw_build_frosthold_01_07",
+          "aw_build_frosthold_01_08"
+        ],
+        "street_name": "共爐坡村通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "巨大雪山風格，以山坡村屋作視覺定位"
+      },
+      {
+        "id": "aw_district_frosthold_02",
+        "name": "雪檐湯屋",
+        "buildings": [
+          "aw_build_frosthold_02_01",
+          "aw_build_frosthold_02_02",
+          "aw_build_frosthold_02_03",
+          "aw_build_frosthold_02_04",
+          "aw_build_frosthold_02_05",
+          "aw_build_frosthold_02_06",
+          "aw_build_frosthold_02_07",
+          "aw_build_frosthold_02_08"
+        ],
+        "street_name": "雪檐湯屋通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "巨大雪山風格，以暖棚作視覺定位"
+      },
+      {
+        "id": "aw_district_frosthold_03",
+        "name": "避雪棚街",
+        "buildings": [
+          "aw_build_frosthold_03_01",
+          "aw_build_frosthold_03_02",
+          "aw_build_frosthold_03_03",
+          "aw_build_frosthold_03_04",
+          "aw_build_frosthold_03_05",
+          "aw_build_frosthold_03_06",
+          "aw_build_frosthold_03_07",
+          "aw_build_frosthold_03_08"
+        ],
+        "street_name": "避雪棚街通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "巨大雪山風格，以雪崩溝作視覺定位"
+      },
+      {
+        "id": "aw_district_frosthold_04",
+        "name": "封鐘石階",
+        "buildings": [
+          "aw_build_frosthold_04_01",
+          "aw_build_frosthold_04_02",
+          "aw_build_frosthold_04_03",
+          "aw_build_frosthold_04_04",
+          "aw_build_frosthold_04_05",
+          "aw_build_frosthold_04_06",
+          "aw_build_frosthold_04_07",
+          "aw_build_frosthold_04_08"
+        ],
+        "street_name": "封鐘石階通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "巨大雪山風格，以埋鐘作視覺定位"
+      },
+      {
+        "id": "aw_district_frosthold_05",
+        "name": "冰礦修繕營",
+        "buildings": [
+          "aw_build_frosthold_05_01",
+          "aw_build_frosthold_05_02",
+          "aw_build_frosthold_05_03",
+          "aw_build_frosthold_05_04",
+          "aw_build_frosthold_05_05",
+          "aw_build_frosthold_05_06",
+          "aw_build_frosthold_05_07",
+          "aw_build_frosthold_05_08"
+        ],
+        "street_name": "冰礦修繕營通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "巨大雪山風格，以山坡村屋作視覺定位"
+      },
+      {
+        "id": "aw_district_frosthold_06",
+        "name": "暖石住宅坡",
+        "buildings": [
+          "aw_build_frosthold_06_01",
+          "aw_build_frosthold_06_02",
+          "aw_build_frosthold_06_03",
+          "aw_build_frosthold_06_04",
+          "aw_build_frosthold_06_05",
+          "aw_build_frosthold_06_06",
+          "aw_build_frosthold_06_07",
+          "aw_build_frosthold_06_08"
+        ],
+        "street_name": "暖石住宅坡通路",
+        "street_width_m": 6,
+        "footpath_width_m": 3,
+        "scene": "巨大雪山風格，以暖棚作視覺定位"
+      }
+    ],
+    "city_radius_m": 850,
+    "note": "保持雪山村莊外觀，非平地冰雪大都會。"
+  },
+  {
+    "id": "sundune",
+    "name": "曜砂城",
+    "districts": [
+      {
+        "id": "aw_district_sundune_01",
+        "name": "日輪水庭",
+        "buildings": [
+          "aw_build_sundune_01_01",
+          "aw_build_sundune_01_02",
+          "aw_build_sundune_01_03",
+          "aw_build_sundune_01_04",
+          "aw_build_sundune_01_05",
+          "aw_build_sundune_01_06",
+          "aw_build_sundune_01_07",
+          "aw_build_sundune_01_08"
+        ],
+        "street_name": "日輪水庭通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "綠洲沙漠風格，以日輪庭作視覺定位"
+      },
+      {
+        "id": "aw_district_sundune_02",
+        "name": "量水官街",
+        "buildings": [
+          "aw_build_sundune_02_01",
+          "aw_build_sundune_02_02",
+          "aw_build_sundune_02_03",
+          "aw_build_sundune_02_04",
+          "aw_build_sundune_02_05",
+          "aw_build_sundune_02_06",
+          "aw_build_sundune_02_07",
+          "aw_build_sundune_02_08"
+        ],
+        "street_name": "量水官街通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "綠洲沙漠風格，以商隊帳市作視覺定位"
+      },
+      {
+        "id": "aw_district_sundune_03",
+        "name": "九碗帳市",
+        "buildings": [
+          "aw_build_sundune_03_01",
+          "aw_build_sundune_03_02",
+          "aw_build_sundune_03_03",
+          "aw_build_sundune_03_04",
+          "aw_build_sundune_03_05",
+          "aw_build_sundune_03_06",
+          "aw_build_sundune_03_07",
+          "aw_build_sundune_03_08"
+        ],
+        "street_name": "九碗帳市通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "綠洲沙漠風格，以水渠作視覺定位"
+      },
+      {
+        "id": "aw_district_sundune_04",
+        "name": "砂玻璃工坊",
+        "buildings": [
+          "aw_build_sundune_04_01",
+          "aw_build_sundune_04_02",
+          "aw_build_sundune_04_03",
+          "aw_build_sundune_04_04",
+          "aw_build_sundune_04_05",
+          "aw_build_sundune_04_06",
+          "aw_build_sundune_04_07",
+          "aw_build_sundune_04_08"
+        ],
+        "street_name": "砂玻璃工坊通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "綠洲沙漠風格，以砂岩街作視覺定位"
+      },
+      {
+        "id": "aw_district_sundune_05",
+        "name": "駝鈴驛場",
+        "buildings": [
+          "aw_build_sundune_05_01",
+          "aw_build_sundune_05_02",
+          "aw_build_sundune_05_03",
+          "aw_build_sundune_05_04",
+          "aw_build_sundune_05_05",
+          "aw_build_sundune_05_06",
+          "aw_build_sundune_05_07",
+          "aw_build_sundune_05_08"
+        ],
+        "street_name": "駝鈴驛場通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "綠洲沙漠風格，以日輪庭作視覺定位"
+      },
+      {
+        "id": "aw_district_sundune_06",
+        "name": "蔭渠住宅巷",
+        "buildings": [
+          "aw_build_sundune_06_01",
+          "aw_build_sundune_06_02",
+          "aw_build_sundune_06_03",
+          "aw_build_sundune_06_04",
+          "aw_build_sundune_06_05",
+          "aw_build_sundune_06_06",
+          "aw_build_sundune_06_07",
+          "aw_build_sundune_06_08"
+        ],
+        "street_name": "蔭渠住宅巷通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "綠洲沙漠風格，以商隊帳市作視覺定位"
+      }
+    ],
+    "city_radius_m": 850,
+    "note": "水道控制街區成長，沙海留足旅行尺度。"
+  },
+  {
+    "id": "astral",
+    "name": "星穹城",
+    "districts": [
+      {
+        "id": "aw_district_astral_01",
+        "name": "星環講堂",
+        "buildings": [
+          "aw_build_astral_01_01",
+          "aw_build_astral_01_02",
+          "aw_build_astral_01_03",
+          "aw_build_astral_01_04",
+          "aw_build_astral_01_05",
+          "aw_build_astral_01_06",
+          "aw_build_astral_01_07",
+          "aw_build_astral_01_08"
+        ],
+        "street_name": "星環講堂通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "浮空星島風格，以浮島作視覺定位"
+      },
+      {
+        "id": "aw_district_astral_02",
+        "name": "零號觀測臺",
+        "buildings": [
+          "aw_build_astral_02_01",
+          "aw_build_astral_02_02",
+          "aw_build_astral_02_03",
+          "aw_build_astral_02_04",
+          "aw_build_astral_02_05",
+          "aw_build_astral_02_06",
+          "aw_build_astral_02_07",
+          "aw_build_astral_02_08"
+        ],
+        "street_name": "零號觀測臺通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "浮空星島風格，以星環作視覺定位"
+      },
+      {
+        "id": "aw_district_astral_03",
+        "name": "升降候站",
+        "buildings": [
+          "aw_build_astral_03_01",
+          "aw_build_astral_03_02",
+          "aw_build_astral_03_03",
+          "aw_build_astral_03_04",
+          "aw_build_astral_03_05",
+          "aw_build_astral_03_06",
+          "aw_build_astral_03_07",
+          "aw_build_astral_03_08"
+        ],
+        "street_name": "升降候站通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "浮空星島風格，以升降站作視覺定位"
+      },
+      {
+        "id": "aw_district_astral_04",
+        "name": "星核杖坊",
+        "buildings": [
+          "aw_build_astral_04_01",
+          "aw_build_astral_04_02",
+          "aw_build_astral_04_03",
+          "aw_build_astral_04_04",
+          "aw_build_astral_04_05",
+          "aw_build_astral_04_06",
+          "aw_build_astral_04_07",
+          "aw_build_astral_04_08"
+        ],
+        "street_name": "星核杖坊通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "浮空星島風格，以城下遺構作視覺定位"
+      },
+      {
+        "id": "aw_district_astral_05",
+        "name": "失重療院",
+        "buildings": [
+          "aw_build_astral_05_01",
+          "aw_build_astral_05_02",
+          "aw_build_astral_05_03",
+          "aw_build_astral_05_04",
+          "aw_build_astral_05_05",
+          "aw_build_astral_05_06",
+          "aw_build_astral_05_07",
+          "aw_build_astral_05_08"
+        ],
+        "street_name": "失重療院通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "浮空星島風格，以浮島作視覺定位"
+      },
+      {
+        "id": "aw_district_astral_06",
+        "name": "環島住宅階",
+        "buildings": [
+          "aw_build_astral_06_01",
+          "aw_build_astral_06_02",
+          "aw_build_astral_06_03",
+          "aw_build_astral_06_04",
+          "aw_build_astral_06_05",
+          "aw_build_astral_06_06",
+          "aw_build_astral_06_07",
+          "aw_build_astral_06_08"
+        ],
+        "street_name": "環島住宅階通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "浮空星島風格，以星環作視覺定位"
+      }
+    ],
+    "city_radius_m": 850,
+    "note": "原本約76m浮島高度不因平面擴圖自動放大。"
+  },
+  {
+    "id": "aw_northwatch",
+    "name": "北境長垣城",
+    "districts": [
+      {
+        "id": "aw_district_aw_northwatch_01",
+        "name": "長垣關城",
+        "buildings": [
+          "aw_build_aw_northwatch_01_01",
+          "aw_build_aw_northwatch_01_02",
+          "aw_build_aw_northwatch_01_03",
+          "aw_build_aw_northwatch_01_04",
+          "aw_build_aw_northwatch_01_05",
+          "aw_build_aw_northwatch_01_06",
+          "aw_build_aw_northwatch_01_07",
+          "aw_build_aw_northwatch_01_08"
+        ],
+        "street_name": "長垣關城通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "寒原邊城風格，以長垣關作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_northwatch_02",
+        "name": "馴行營地",
+        "buildings": [
+          "aw_build_aw_northwatch_02_01",
+          "aw_build_aw_northwatch_02_02",
+          "aw_build_aw_northwatch_02_03",
+          "aw_build_aw_northwatch_02_04",
+          "aw_build_aw_northwatch_02_05",
+          "aw_build_aw_northwatch_02_06",
+          "aw_build_aw_northwatch_02_07",
+          "aw_build_aw_northwatch_02_08"
+        ],
+        "street_name": "馴行營地通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "寒原邊城風格，以馴獸營作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_northwatch_03",
+        "name": "凍河商街",
+        "buildings": [
+          "aw_build_aw_northwatch_03_01",
+          "aw_build_aw_northwatch_03_02",
+          "aw_build_aw_northwatch_03_03",
+          "aw_build_aw_northwatch_03_04",
+          "aw_build_aw_northwatch_03_05",
+          "aw_build_aw_northwatch_03_06",
+          "aw_build_aw_northwatch_03_07",
+          "aw_build_aw_northwatch_03_08"
+        ],
+        "street_name": "凍河商街通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "寒原邊城風格，以凍河橋作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_northwatch_04",
+        "name": "軍民共爐院",
+        "buildings": [
+          "aw_build_aw_northwatch_04_01",
+          "aw_build_aw_northwatch_04_02",
+          "aw_build_aw_northwatch_04_03",
+          "aw_build_aw_northwatch_04_04",
+          "aw_build_aw_northwatch_04_05",
+          "aw_build_aw_northwatch_04_06",
+          "aw_build_aw_northwatch_04_07",
+          "aw_build_aw_northwatch_04_08"
+        ],
+        "street_name": "軍民共爐院通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "寒原邊城風格，以長垣關作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_northwatch_05",
+        "name": "邊境檔案所",
+        "buildings": [
+          "aw_build_aw_northwatch_05_01",
+          "aw_build_aw_northwatch_05_02",
+          "aw_build_aw_northwatch_05_03",
+          "aw_build_aw_northwatch_05_04",
+          "aw_build_aw_northwatch_05_05",
+          "aw_build_aw_northwatch_05_06",
+          "aw_build_aw_northwatch_05_07",
+          "aw_build_aw_northwatch_05_08"
+        ],
+        "street_name": "邊境檔案所通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "寒原邊城風格，以馴獸營作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_northwatch_06",
+        "name": "巡防家屬坊",
+        "buildings": [
+          "aw_build_aw_northwatch_06_01",
+          "aw_build_aw_northwatch_06_02",
+          "aw_build_aw_northwatch_06_03",
+          "aw_build_aw_northwatch_06_04",
+          "aw_build_aw_northwatch_06_05",
+          "aw_build_aw_northwatch_06_06",
+          "aw_build_aw_northwatch_06_07",
+          "aw_build_aw_northwatch_06_08"
+        ],
+        "street_name": "巡防家屬坊通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "寒原邊城風格，以凍河橋作視覺定位"
+      }
+    ],
+    "city_radius_m": 850,
+    "note": "軍鎮之外保有牧民與市集生活，不等於敵國。"
+  },
+  {
+    "id": "aw_westport",
+    "name": "西岸霧港城",
+    "districts": [
+      {
+        "id": "aw_district_aw_westport_01",
+        "name": "潮石碼頭",
+        "buildings": [
+          "aw_build_aw_westport_01_01",
+          "aw_build_aw_westport_01_02",
+          "aw_build_aw_westport_01_03",
+          "aw_build_aw_westport_01_04",
+          "aw_build_aw_westport_01_05",
+          "aw_build_aw_westport_01_06",
+          "aw_build_aw_westport_01_07",
+          "aw_build_aw_westport_01_08"
+        ],
+        "street_name": "潮石碼頭通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "海霧港灣風格，以潮石碼頭作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_westport_02",
+        "name": "霧鐘高街",
+        "buildings": [
+          "aw_build_aw_westport_02_01",
+          "aw_build_aw_westport_02_02",
+          "aw_build_aw_westport_02_03",
+          "aw_build_aw_westport_02_04",
+          "aw_build_aw_westport_02_05",
+          "aw_build_aw_westport_02_06",
+          "aw_build_aw_westport_02_07",
+          "aw_build_aw_westport_02_08"
+        ],
+        "street_name": "霧鐘高街通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "海霧港灣風格，以白牆坡屋作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_westport_03",
+        "name": "海圖工坊",
+        "buildings": [
+          "aw_build_aw_westport_03_01",
+          "aw_build_aw_westport_03_02",
+          "aw_build_aw_westport_03_03",
+          "aw_build_aw_westport_03_04",
+          "aw_build_aw_westport_03_05",
+          "aw_build_aw_westport_03_06",
+          "aw_build_aw_westport_03_07",
+          "aw_build_aw_westport_03_08"
+        ],
+        "street_name": "海圖工坊通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "海霧港灣風格，以霧鐘作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_westport_04",
+        "name": "船塢市場",
+        "buildings": [
+          "aw_build_aw_westport_04_01",
+          "aw_build_aw_westport_04_02",
+          "aw_build_aw_westport_04_03",
+          "aw_build_aw_westport_04_04",
+          "aw_build_aw_westport_04_05",
+          "aw_build_aw_westport_04_06",
+          "aw_build_aw_westport_04_07",
+          "aw_build_aw_westport_04_08"
+        ],
+        "street_name": "船塢市場通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "海霧港灣風格，以潮石碼頭作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_westport_05",
+        "name": "海霧療養坡",
+        "buildings": [
+          "aw_build_aw_westport_05_01",
+          "aw_build_aw_westport_05_02",
+          "aw_build_aw_westport_05_03",
+          "aw_build_aw_westport_05_04",
+          "aw_build_aw_westport_05_05",
+          "aw_build_aw_westport_05_06",
+          "aw_build_aw_westport_05_07",
+          "aw_build_aw_westport_05_08"
+        ],
+        "street_name": "海霧療養坡通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "海霧港灣風格，以白牆坡屋作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_westport_06",
+        "name": "白牆住宅灣",
+        "buildings": [
+          "aw_build_aw_westport_06_01",
+          "aw_build_aw_westport_06_02",
+          "aw_build_aw_westport_06_03",
+          "aw_build_aw_westport_06_04",
+          "aw_build_aw_westport_06_05",
+          "aw_build_aw_westport_06_06",
+          "aw_build_aw_westport_06_07",
+          "aw_build_aw_westport_06_08"
+        ],
+        "street_name": "白牆住宅灣通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "海霧港灣風格，以霧鐘作視覺定位"
+      }
+    ],
+    "city_radius_m": 850,
+    "note": "沿海陸上港城，與海上船城功能不同。"
+  },
+  {
+    "id": "aw_southmill",
+    "name": "南川豐穗城",
+    "districts": [
+      {
+        "id": "aw_district_aw_southmill_01",
+        "name": "水輪糧坊",
+        "buildings": [
+          "aw_build_aw_southmill_01_01",
+          "aw_build_aw_southmill_01_02",
+          "aw_build_aw_southmill_01_03",
+          "aw_build_aw_southmill_01_04",
+          "aw_build_aw_southmill_01_05",
+          "aw_build_aw_southmill_01_06",
+          "aw_build_aw_southmill_01_07",
+          "aw_build_aw_southmill_01_08"
+        ],
+        "street_name": "水輪糧坊通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "河網農城風格，以水輪磨坊作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_southmill_02",
+        "name": "分洪閘街",
+        "buildings": [
+          "aw_build_aw_southmill_02_01",
+          "aw_build_aw_southmill_02_02",
+          "aw_build_aw_southmill_02_03",
+          "aw_build_aw_southmill_02_04",
+          "aw_build_aw_southmill_02_05",
+          "aw_build_aw_southmill_02_06",
+          "aw_build_aw_southmill_02_07",
+          "aw_build_aw_southmill_02_08"
+        ],
+        "street_name": "分洪閘街通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "河網農城風格，以糧倉作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_southmill_03",
+        "name": "豐穗市集",
+        "buildings": [
+          "aw_build_aw_southmill_03_01",
+          "aw_build_aw_southmill_03_02",
+          "aw_build_aw_southmill_03_03",
+          "aw_build_aw_southmill_03_04",
+          "aw_build_aw_southmill_03_05",
+          "aw_build_aw_southmill_03_06",
+          "aw_build_aw_southmill_03_07",
+          "aw_build_aw_southmill_03_08"
+        ],
+        "street_name": "豐穗市集通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "河網農城風格，以稻田作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_southmill_04",
+        "name": "工匠合作院",
+        "buildings": [
+          "aw_build_aw_southmill_04_01",
+          "aw_build_aw_southmill_04_02",
+          "aw_build_aw_southmill_04_03",
+          "aw_build_aw_southmill_04_04",
+          "aw_build_aw_southmill_04_05",
+          "aw_build_aw_southmill_04_06",
+          "aw_build_aw_southmill_04_07",
+          "aw_build_aw_southmill_04_08"
+        ],
+        "street_name": "工匠合作院通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "河網農城風格，以分洪閘作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_southmill_05",
+        "name": "河網渡口",
+        "buildings": [
+          "aw_build_aw_southmill_05_01",
+          "aw_build_aw_southmill_05_02",
+          "aw_build_aw_southmill_05_03",
+          "aw_build_aw_southmill_05_04",
+          "aw_build_aw_southmill_05_05",
+          "aw_build_aw_southmill_05_06",
+          "aw_build_aw_southmill_05_07",
+          "aw_build_aw_southmill_05_08"
+        ],
+        "street_name": "河網渡口通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "河網農城風格，以水輪磨坊作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_southmill_06",
+        "name": "稻香住宅埠",
+        "buildings": [
+          "aw_build_aw_southmill_06_01",
+          "aw_build_aw_southmill_06_02",
+          "aw_build_aw_southmill_06_03",
+          "aw_build_aw_southmill_06_04",
+          "aw_build_aw_southmill_06_05",
+          "aw_build_aw_southmill_06_06",
+          "aw_build_aw_southmill_06_07",
+          "aw_build_aw_southmill_06_08"
+        ],
+        "street_name": "稻香住宅埠通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "河網農城風格，以糧倉作視覺定位"
+      }
+    ],
+    "city_radius_m": 850,
+    "note": "供應全境糧食，也是玩家住宅與生活技能中心。"
+  },
+  {
+    "id": "aw_eastglass",
+    "name": "東境琉光城",
+    "districts": [
+      {
+        "id": "aw_district_aw_eastglass_01",
+        "name": "琉光拱廊",
+        "buildings": [
+          "aw_build_aw_eastglass_01_01",
+          "aw_build_aw_eastglass_01_02",
+          "aw_build_aw_eastglass_01_03",
+          "aw_build_aw_eastglass_01_04",
+          "aw_build_aw_eastglass_01_05",
+          "aw_build_aw_eastglass_01_06",
+          "aw_build_aw_eastglass_01_07",
+          "aw_build_aw_eastglass_01_08"
+        ],
+        "street_name": "琉光拱廊通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "鹽晶高地風格，以彩玻璃廊作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_eastglass_02",
+        "name": "鹽晶曬場",
+        "buildings": [
+          "aw_build_aw_eastglass_02_01",
+          "aw_build_aw_eastglass_02_02",
+          "aw_build_aw_eastglass_02_03",
+          "aw_build_aw_eastglass_02_04",
+          "aw_build_aw_eastglass_02_05",
+          "aw_build_aw_eastglass_02_06",
+          "aw_build_aw_eastglass_02_07",
+          "aw_build_aw_eastglass_02_08"
+        ],
+        "street_name": "鹽晶曬場通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "鹽晶高地風格，以鹽田作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_eastglass_03",
+        "name": "折光研究院",
+        "buildings": [
+          "aw_build_aw_eastglass_03_01",
+          "aw_build_aw_eastglass_03_02",
+          "aw_build_aw_eastglass_03_03",
+          "aw_build_aw_eastglass_03_04",
+          "aw_build_aw_eastglass_03_05",
+          "aw_build_aw_eastglass_03_06",
+          "aw_build_aw_eastglass_03_07",
+          "aw_build_aw_eastglass_03_08"
+        ],
+        "street_name": "折光研究院通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "鹽晶高地風格，以晶鏡塔作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_eastglass_04",
+        "name": "遠征補給市",
+        "buildings": [
+          "aw_build_aw_eastglass_04_01",
+          "aw_build_aw_eastglass_04_02",
+          "aw_build_aw_eastglass_04_03",
+          "aw_build_aw_eastglass_04_04",
+          "aw_build_aw_eastglass_04_05",
+          "aw_build_aw_eastglass_04_06",
+          "aw_build_aw_eastglass_04_07",
+          "aw_build_aw_eastglass_04_08"
+        ],
+        "street_name": "遠征補給市通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "鹽晶高地風格，以彩玻璃廊作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_eastglass_05",
+        "name": "鏡塔守望區",
+        "buildings": [
+          "aw_build_aw_eastglass_05_01",
+          "aw_build_aw_eastglass_05_02",
+          "aw_build_aw_eastglass_05_03",
+          "aw_build_aw_eastglass_05_04",
+          "aw_build_aw_eastglass_05_05",
+          "aw_build_aw_eastglass_05_06",
+          "aw_build_aw_eastglass_05_07",
+          "aw_build_aw_eastglass_05_08"
+        ],
+        "street_name": "鏡塔守望區通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "鹽晶高地風格，以鹽田作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_eastglass_06",
+        "name": "彩窗住宅階",
+        "buildings": [
+          "aw_build_aw_eastglass_06_01",
+          "aw_build_aw_eastglass_06_02",
+          "aw_build_aw_eastglass_06_03",
+          "aw_build_aw_eastglass_06_04",
+          "aw_build_aw_eastglass_06_05",
+          "aw_build_aw_eastglass_06_06",
+          "aw_build_aw_eastglass_06_07",
+          "aw_build_aw_eastglass_06_08"
+        ],
+        "street_name": "彩窗住宅階通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "鹽晶高地風格，以晶鏡塔作視覺定位"
+      }
+    ],
+    "city_radius_m": 850,
+    "note": "以光學、玻璃與遠征補給區別於星術城。"
+  },
+  {
+    "id": "aw_underlost",
+    "name": "失落之城・迴燈",
+    "districts": [
+      {
+        "id": "aw_district_aw_underlost_01",
+        "name": "換氣外層",
+        "buildings": [
+          "aw_build_aw_underlost_01_01",
+          "aw_build_aw_underlost_01_02",
+          "aw_build_aw_underlost_01_03",
+          "aw_build_aw_underlost_01_04",
+          "aw_build_aw_underlost_01_05",
+          "aw_build_aw_underlost_01_06",
+          "aw_build_aw_underlost_01_07",
+          "aw_build_aw_underlost_01_08"
+        ],
+        "street_name": "換氣外層通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "地下界域風格，以菌光街作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_underlost_02",
+        "name": "回收水市集",
+        "buildings": [
+          "aw_build_aw_underlost_02_01",
+          "aw_build_aw_underlost_02_02",
+          "aw_build_aw_underlost_02_03",
+          "aw_build_aw_underlost_02_04",
+          "aw_build_aw_underlost_02_05",
+          "aw_build_aw_underlost_02_06",
+          "aw_build_aw_underlost_02_07",
+          "aw_build_aw_underlost_02_08"
+        ],
+        "street_name": "回收水市集通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "地下界域風格，以水市作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_underlost_03",
+        "name": "菌光農場",
+        "buildings": [
+          "aw_build_aw_underlost_03_01",
+          "aw_build_aw_underlost_03_02",
+          "aw_build_aw_underlost_03_03",
+          "aw_build_aw_underlost_03_04",
+          "aw_build_aw_underlost_03_05",
+          "aw_build_aw_underlost_03_06",
+          "aw_build_aw_underlost_03_07",
+          "aw_build_aw_underlost_03_08"
+        ],
+        "street_name": "菌光農場通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "地下界域風格，以無名者議席作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_underlost_04",
+        "name": "無名者議席",
+        "buildings": [
+          "aw_build_aw_underlost_04_01",
+          "aw_build_aw_underlost_04_02",
+          "aw_build_aw_underlost_04_03",
+          "aw_build_aw_underlost_04_04",
+          "aw_build_aw_underlost_04_05",
+          "aw_build_aw_underlost_04_06",
+          "aw_build_aw_underlost_04_07",
+          "aw_build_aw_underlost_04_08"
+        ],
+        "street_name": "無名者議席通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "地下界域風格，以零鐘庭作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_underlost_05",
+        "name": "第零鐘庭",
+        "buildings": [
+          "aw_build_aw_underlost_05_01",
+          "aw_build_aw_underlost_05_02",
+          "aw_build_aw_underlost_05_03",
+          "aw_build_aw_underlost_05_04",
+          "aw_build_aw_underlost_05_05",
+          "aw_build_aw_underlost_05_06",
+          "aw_build_aw_underlost_05_07",
+          "aw_build_aw_underlost_05_08"
+        ],
+        "street_name": "第零鐘庭通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "地下界域風格，以菌光街作視覺定位"
+      },
+      {
+        "id": "aw_district_aw_underlost_06",
+        "name": "迴燈住宅廊",
+        "buildings": [
+          "aw_build_aw_underlost_06_01",
+          "aw_build_aw_underlost_06_02",
+          "aw_build_aw_underlost_06_03",
+          "aw_build_aw_underlost_06_04",
+          "aw_build_aw_underlost_06_05",
+          "aw_build_aw_underlost_06_06",
+          "aw_build_aw_underlost_06_07",
+          "aw_build_aw_underlost_06_08"
+        ],
+        "street_name": "迴燈住宅廊通路",
+        "street_width_m": 12,
+        "footpath_width_m": 3,
+        "scene": "地下界域風格，以水市作視覺定位"
+      }
+    ],
+    "city_radius_m": 450,
+    "note": "平面中心坐標僅表示示意投影；獨立世界層，不與王城同一樓板。"
+  }
+]

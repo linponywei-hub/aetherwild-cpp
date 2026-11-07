@@ -59,3 +59,8 @@ AETHERWILD_PUBLIC=1 時必須設定至少24字元的 GAME_OWNER_CODE 與 GAME_IN
 runtime-data/world-v2.json 及備份含角色與 session 登入映射，永不提交、公開或放交接 ZIP；不得以測試 Owner 作為正式站權限證據。密碼、環境變數真值、原玩家資料均不在本包。
 
 下載交接包另保留完整原始 reference/original_v0.30.1.zip 與本機完整來源素材；GitHub 部署倉庫只包含執行所需素材，歷史 ZIP 不在 Git。原版 ZIP 是查核來源，不可恢復其舊架構。下載包有 MANIFEST.sha256 可核對內容。
+
+
+## 內容整合分支交接
+
+第一階段世界／職業／NPC內容整合請讀 [docs/content/INTEGRATION.md](docs/content/INTEGRATION.md) 與 [驗證紀錄](docs/content/VALIDATION.md)。設計資料的筆數不等於獨立已完成機制或美術資產數；合併部署前先檢查此處列出的原型限制與共用檔案。

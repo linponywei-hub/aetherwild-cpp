@@ -1,8 +1,10 @@
 #include "aetherwild/services.hpp"
+#include "aetherwild/content.hpp"
 namespace aw {
     const NpcDefinition& nearbyNpc(const Player& p,const Id& id,std::string_view role,const Catalog& c) {
         require(p.vitals.alive()&&p.scene=="world"&&c.npcs.contains(id),"NPC 不存在或無法互動");
         auto&n=c.npcs.at(id);
+        require(contentRegionOpen(c,n.region),"此區服務尚未開放");
         require(n.role==role&&distance(p.position,n.position)<=8,"NPC 職責或互動距離不符");
         return n;
     }
@@ -19,7 +21,7 @@ namespace aw {
         ProgressionSystem::refresh(p,catalog_);
         p.vitals.hp=p.vitals.maxHp;
         p.vitals.mp=p.vitals.maxMp;
-        auto code=catalog_.classes.at(profession).weapon==WeaponKind::Staff?"oakstaff":catalog_.classes.at(profession).weapon==WeaponKind::Bow?"windbow":"ironblade";
+        auto code=startingWeapon(catalog_,profession);
         p.inventory.push_back(InventorySystem::create(world_,catalog_,code));
         InventorySystem::equip(p,p.inventory.front().id,catalog_);
         if(catalog_.classes.at(profession).weapon==WeaponKind::Bow)p.materials["woodarrow"]=20;
@@ -31,3 +33,4 @@ namespace aw {
         for(auto&[id,p]:world_.players)MovementSystem::tickStamina(p,dt,false,world_.now);
     }
 }
+

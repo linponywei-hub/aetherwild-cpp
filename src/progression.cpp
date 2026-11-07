@@ -1,4 +1,5 @@
 #include "aetherwild/services.hpp"
+#include "aetherwild/content.hpp"
 namespace aw {
     Quantity ProgressionSystem::levelXp(int n) {
         require(n>=1&&n<=100,"等級範圍 1–100");
@@ -13,6 +14,7 @@ namespace aw {
         }
     }
     void ProgressionSystem::refresh(Player& p,const Catalog& c) {
+        if(c.classSkills.contains(p.profession))for(auto& id:c.classSkills.at(p.profession))if(c.skills.contains(id))p.learnedSkills.insert(id);
         auto b=c.classes.at(p.profession).base;
         b+=InventorySystem::bonuses(p,c);
         p.vitals.maxHp=b.hp+(p.level-1)*12;
@@ -42,3 +44,4 @@ namespace aw {
         refresh(p,c);
     }
 }
+

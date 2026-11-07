@@ -1,4 +1,5 @@
 #include "aetherwild/services.hpp"
+#include "aetherwild/content.hpp"
 namespace aw {
     namespace {
         double power(const Player& p,const Catalog& c) {
@@ -63,15 +64,19 @@ namespace aw {
             damage*=(1+c.arrowBonus.at(arrow))*(w.now<p.arrowHasteUntil?1.35:1);
             cooldown=w.now<p.arrowHasteUntil?.5:.8;
         }
-        if(job.weapon==WeaponKind::Staff) {
+        if(magicWeapon(job.weapon)) {
             require(p.vitals.mp>=2,"魔力不足");
             p.vitals.mp-=2;
             damage*=.32;
             cooldown=.55;
         }
+        if(job.weapon==WeaponKind::Cannon||job.weapon==WeaponKind::Toolgun){require(p.vitals.mp>=3,"機械熱量緩衝不足");p.vitals.mp-=3;cooldown=job.weapon==WeaponKind::Cannon?1.1:.65;}
+        if(job.weapon==WeaponKind::Daggers)cooldown=.42;
+        if(p.profession=="shadow"&&m.vitals.hp<m.vitals.maxHp*.4)damage*=1.35;
         damage=std::max(1.0,std::round(damage-m.defense));
         p.attackReady=w.now+cooldown;
         hit(w,c,p,m,damage);
+        if(p.profession=="shadow")p.vitals.restore(damage*.08,0);
         return {damage,!m.vitals.alive()};
     }
     double CombatSystem::monsterAttack(World& w,const Catalog& c,const Id& monster,const Id& player) {
@@ -86,6 +91,7 @@ namespace aw {
             double absorb=std::min(n,p.shield);
             p.shield-=absorb;
             n-=absorb;
+            m.contribution[p.id]+=absorb*.5;
         }
         double actual=p.receiveDamage(n);
         m.nextAttack=w.now+1.5;
@@ -100,6 +106,7 @@ namespace aw {
         p.attackIntent();
         require(p.learnedSkills.contains(skill)&&c.skills.contains(skill),"尚未學會技能");
         auto&s=c.skills.at(skill);
+        require(!c.skillOwners.contains(skill)||c.skillOwners.at(skill)==p.profession,"此戰技屬於其他職業");
         require(s.effect!="dash","位移技能等待碰撞模組，暫不執行");
         require(w.now>=p.skillReady[skill],"技能冷卻中");
         require(p.vitals.mp>=s.mana,"魔力不足");
@@ -108,13 +115,16 @@ namespace aw {
             main=&w.monsters.at(target);
             checkTarget(w,c,p,*main,s.range>0?s.range:24);
         }
-        require(main||s.heal>0||s.shield>0,"此技能需要目標");
+        require(main||s.heal>0||s.shield>0||s.effect=="taunt","此技能需要目標");
         p.vitals.mp-=s.mana;
         p.skillReady[skill]=w.now+s.cooldown;
         p.vitals.restore(s.heal,0);
         if(s.shield>0) {
             p.shield=std::max(p.shield,s.shield);
             p.shieldUntil=w.now+(s.duration>0?s.duration:8);
+        }
+        if(s.effect=="taunt")for(auto&[id,m]:w.monsters)if(m.scene==p.scene&&m.vitals.alive()&&distance(p.position,m.position)<=s.radius&&!MovementSystem::safe(m.position,m.scene,c)){
+            m.tauntedBy=p.id;m.tauntUntil=w.now+s.duration;m.contribution[p.id]+=1;
         }
         if(main) {
             Vec3 center=main->position;
@@ -133,7 +143,11 @@ namespace aw {
         auto& p=w.players.at(id);
         p.attackIntent();
         auto&job=c.classes.at(p.profession);
-        double mana=job.weapon==WeaponKind::Staff?28:18;
+        double mana=magicWeapon(job.weapon)?28:18;
+        if(p.profession.rfind("aw_class_",0)==0&&c.classSkills.contains(p.profession)){
+            auto index=c.classRoles.at(p.profession)=="tank"?1:0;
+            auto skill=c.classSkills.at(p.profession).at(index);cast(w,c,id,skill,target);p.skillReady["weapon"]=p.skillReady.at(skill);return;
+        }
         require(w.now>=p.skillReady["weapon"]&&p.vitals.mp>=mana,"武器技冷卻中或魔力不足");
         if(job.weapon==WeaponKind::Bow) {
             p.arrowHasteUntil=w.now+8;
@@ -146,7 +160,7 @@ namespace aw {
         checkTarget(w,c,p,main,job.range);
         p.vitals.mp-=mana;
         p.skillReady["weapon"]=w.now+8;
-        auto center=job.weapon==WeaponKind::Sword?p.position:main.position;
+        auto center=!rangedWeapon(job.weapon)?p.position:main.position;
         for(auto&[mid,m]:w.monsters)if(m.scene==p.scene&&m.vitals.alive()&&!MovementSystem::safe(m.position,m.scene,c)&&distance(m.position,center)<=7) {
             if(m.definition=="dungeon_boss") {
                 auto&r=w.runs.at(m.scene);
@@ -174,3 +188,4 @@ namespace aw {
         p.vitals.mp=p.vitals.maxMp;
     }
 }
+

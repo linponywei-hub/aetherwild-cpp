@@ -2,6 +2,7 @@
 #include "geometry.hpp"
 #include "json.hpp"
 #include "social.hpp"
+#include "content.hpp"
 #include <filesystem>
 namespace aw {
     struct Motion {
@@ -42,6 +43,15 @@ namespace aw {
         std::map<Id,Lift> lifts_;
         std::map<Id,bool> features_;
         Json chat_ {Json::array()};
+        Json contentState_ {Json::object()};
+        void configureContent(bool expanded);
+        bool contentCommand(Player&,const Json&);
+        void contentTick(double);
+        bool monsterAbility(Monster&,Player*);
+        Json contentSnapshot(const Player&)const;
+        bool contentAllowed(Vec3)const;
+        void checkContentRegion(const Id&)const;
+        void startExpandedWorld();
         std::filesystem::path savePath_;
         double savedAt_ {};
         Id token();
@@ -80,3 +90,4 @@ namespace aw {
     Json playerJson(const Player&,bool privateData=true);
     Player playerFromJson(const Json&,const Catalog&);
 }
+

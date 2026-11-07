@@ -1,11 +1,12 @@
 #include "aetherwild/geometry.hpp"
+#include "aetherwild/content.hpp"
 namespace aw {
     double cityElevation(const Id&id) {
         return id=="astral"?62:id=="verdant"?32:0;
     }
     Vec3 cityArrival(const RegionDefinition&r) {
         auto p=r.center;
-        p.y=cityElevation(r.id);
+        p.y=r.center.y+cityElevation(r.id);
         return p;
     }
     std::vector<Building> buildings(const Catalog&c) {
@@ -15,7 +16,7 @@ namespace aw {
             for(int i=0;i<(r.city?12:8);i++) {
                 double a=i*6.283185307/(r.city?12:8),rad=r.city?48:28;
                 v.push_back( {
-                    id+"_house_"+std::to_string(i),id, {r.center.x+std::cos(a)*rad,cityElevation(id),r.center.z+std::sin(a)*rad},
+                    id+"_house_"+std::to_string(i),id, {r.center.x+std::cos(a)*rad,r.center.y+cityElevation(id),r.center.z+std::sin(a)*rad},
                     r.city?12.0:8.0,r.city?10.0:7.0,r.city?12.0:7.0,id
                 });
             }
@@ -37,7 +38,7 @@ namespace aw {
         return r.id=="astral"&&std::abs(dx)<7&&dz>=85&&dz<=116;
     }
     double groundBelow(Vec3 p,const Catalog&c) {
-        double y=0;
+        double y=worldLandHeight(p,c);
         for(auto&[id,r]:c.regions) {
             double dx=p.x-r.center.x,dz=p.z-r.center.z,h=cityElevation(id);
             if(!h)continue;
@@ -61,3 +62,4 @@ namespace aw {
         return true;
     }
 }
+

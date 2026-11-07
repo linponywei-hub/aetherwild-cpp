@@ -1,0 +1,1264 @@
+[
+  {
+    "id": "aw_book_dungeon_ruins",
+    "title": "風息遺跡值守紀錄",
+    "region": "windchime",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "ruins",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "門楣上留著風車刻痕，屋內的地板似乎被人掀開過。\n\n最後值守者離開前把同伴的名字藏在器物底部，怕名冊再被改寫。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_ruins"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_embers",
+    "title": "灰燼地窟值守紀錄",
+    "region": "windchime",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "embers",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "一座荒廢採石場，封板後仍有焦木氣味。\n\n一名學徒照著舊指令維修裝置，卻不知道指令原本有一頁安全附註。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_embers"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_frost",
+    "title": "霜語神殿值守紀錄",
+    "region": "windchime",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "frost",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "溪畔石龕的背面刻著一首未唱完的祈禱。\n\n守衛把所有靠近者視為入侵者，因為撤離令從來沒有送到。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_frost"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_shadow",
+    "title": "無聲之墓值守紀錄",
+    "region": "windchime",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "shadow",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "沒有刻名的墓碑下，落葉從不堆積。\n\n一群居民留下物資給下一批人，自己沿另一條出口尋找救援。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_shadow"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_stars",
+    "title": "星穹秘境值守紀錄",
+    "region": "windchime",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "stars",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "老橡樹內側有細小星點，白天幾乎看不見。\n\n記錄員故意留下兩種說法，希望後人能看出官方版本的缺口。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_stars"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_oldmill",
+    "title": "失落磨坊值守紀錄",
+    "region": "windchime",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "oldmill",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "水車停了，地窖裡卻傳來敲擊聲。\n\n最後值守者離開前把同伴的名字藏在器物底部，怕名冊再被改寫。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_oldmill"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_drywell",
+    "title": "迴聲古井值守紀錄",
+    "region": "windchime",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "drywell",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "把石頭丟進井裡，會先聽到回聲才聽到落地聲。\n\n一名學徒照著舊指令維修裝置，卻不知道指令原本有一頁安全附註。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_drywell"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_foxden",
+    "title": "苔下狐窟值守紀錄",
+    "region": "windchime",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "foxden",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "狐狸銜著銅幣鑽進樹根，卻沒有再出來。\n\n守衛把所有靠近者視為入侵者，因為撤離令從來沒有送到。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_foxden"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_green01",
+    "title": "根脈書庫值守紀錄",
+    "region": "verdant",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "green01",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "倒下的書櫃被新生樹根托住。\n\n一群居民留下物資給下一批人，自己沿另一條出口尋找救援。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_green01"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_green02",
+    "title": "螢火樹心值守紀錄",
+    "region": "verdant",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "green02",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "沒有月亮的夜裡，樹洞深處仍亮著螢光。\n\n記錄員故意留下兩種說法，希望後人能看出官方版本的缺口。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_green02"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_green03",
+    "title": "獵人舊居值守紀錄",
+    "region": "verdant",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "green03",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "門前的箭袋新得不像無人居住。\n\n最後值守者離開前把同伴的名字藏在器物底部，怕名冊再被改寫。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_green03"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_green04",
+    "title": "藤冠裂谷值守紀錄",
+    "region": "verdant",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "green04",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "纏滿藤蔓的石縫間，能聽見規律的心跳。\n\n一名學徒照著舊指令維修裝置，卻不知道指令原本有一頁安全附註。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_green04"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_green05",
+    "title": "鹿角墓園值守紀錄",
+    "region": "verdant",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "green05",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "並排的鹿角指向同一片林地。\n\n守衛把所有靠近者視為入侵者，因為撤離令從來沒有送到。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_green05"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_green06",
+    "title": "沉根祭壇值守紀錄",
+    "region": "verdant",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "green06",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "水面下的祭壇石階，仍然乾燥。\n\n一群居民留下物資給下一批人，自己沿另一條出口尋找救援。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_green06"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_green07",
+    "title": "松針鐘塔值守紀錄",
+    "region": "verdant",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "green07",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "風吹松針時，塔內的鐘會自行響起。\n\n記錄員故意留下兩種說法，希望後人能看出官方版本的缺口。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_green07"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_ash01",
+    "title": "第七號礦井值守紀錄",
+    "region": "cinder",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "ash01",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "礦牌只有六個編號，卻多出一條軌道。\n\n最後值守者離開前把同伴的名字藏在器物底部，怕名冊再被改寫。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_ash01"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_ash02",
+    "title": "黑爐心室值守紀錄",
+    "region": "cinder",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "ash02",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "廢棄鍛坊的煙囪，在雨天冒出熱氣。\n\n一名學徒照著舊指令維修裝置，卻不知道指令原本有一頁安全附註。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_ash02"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_ash03",
+    "title": "熔滴神龕值守紀錄",
+    "region": "cinder",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "ash03",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "石像的眼角凝著還未冷卻的鐵滴。\n\n守衛把所有靠近者視為入侵者，因為撤離令從來沒有送到。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_ash03"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_ash04",
+    "title": "鐵雨蓄井值守紀錄",
+    "region": "cinder",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "ash04",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "井口上方刻滿了不准取水的告示。\n\n一群居民留下物資給下一批人，自己沿另一條出口尋找救援。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_ash04"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_ash05",
+    "title": "斷鏈兵墓值守紀錄",
+    "region": "cinder",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "ash05",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "每塊石碑都纏著一段斷鏈。\n\n記錄員故意留下兩種說法，希望後人能看出官方版本的缺口。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_ash05"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_ash06",
+    "title": "爐渣裂隙值守紀錄",
+    "region": "cinder",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "ash06",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "微熱的石堆下，露出一截銅色門框。\n\n最後值守者離開前把同伴的名字藏在器物底部，怕名冊再被改寫。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_ash06"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_ash07",
+    "title": "灰鐘鑄造所值守紀錄",
+    "region": "cinder",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "ash07",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "最後一口鐘鑄好後，所有鐘匠都失蹤了。\n\n一名學徒照著舊指令維修裝置，卻不知道指令原本有一頁安全附註。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_ash07"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_sea01",
+    "title": "第九號船艙值守紀錄",
+    "region": "tidehaven",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "sea01",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "船尾寫著早已停用的港口編號。\n\n守衛把所有靠近者視為入侵者，因為撤離令從來沒有送到。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_sea01"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_sea02",
+    "title": "潮間舊井值守紀錄",
+    "region": "tidehaven",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "sea02",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "井水隨潮汐漲落，井壁卻有淡水魚的化石。\n\n一群居民留下物資給下一批人，自己沿另一條出口尋找救援。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_sea02"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_sea03",
+    "title": "無燈燈塔值守紀錄",
+    "region": "tidehaven",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "sea03",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "沒人點燈的燈塔，仍能引來陌生的船。\n\n記錄員故意留下兩種說法，希望後人能看出官方版本的缺口。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_sea03"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_sea04",
+    "title": "鹽蝕禮拜堂值守紀錄",
+    "region": "tidehaven",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "sea04",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "教堂牆上有七道水痕，海圖卻只記了六次潮災。\n\n最後值守者離開前把同伴的名字藏在器物底部，怕名冊再被改寫。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_sea04"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_sea05",
+    "title": "潮骨洞穴值守紀錄",
+    "region": "tidehaven",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "sea05",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "洞口掛著漁網，網眼中卡著白色骨珠。\n\n一名學徒照著舊指令維修裝置，卻不知道指令原本有一頁安全附註。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_sea05"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_sea06",
+    "title": "舊海關藏室值守紀錄",
+    "region": "tidehaven",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "sea06",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "報關簿裡，有一艘從未離港卻已結關的船。\n\n守衛把所有靠近者視為入侵者，因為撤離令從來沒有送到。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_sea06"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_sea07",
+    "title": "流亡者木屋值守紀錄",
+    "region": "tidehaven",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "sea07",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "門鎖由內側扣著，窗邊卻放著求救旗。\n\n一群居民留下物資給下一批人，自己沿另一條出口尋找救援。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_sea07"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_snow01",
+    "title": "霜鐘地下層值守紀錄",
+    "region": "frosthold",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "snow01",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "半座鐘塔被冰封住，鐘擺卻還在擺動。\n\n記錄員故意留下兩種說法，希望後人能看出官方版本的缺口。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_snow01"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_snow02",
+    "title": "雪盲小屋值守紀錄",
+    "region": "frosthold",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "snow02",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "雪地腳印只進不出，屋內有煮湯聲。\n\n最後值守者離開前把同伴的名字藏在器物底部，怕名冊再被改寫。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_snow02"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_snow03",
+    "title": "冰封採掘場值守紀錄",
+    "region": "frosthold",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "snow03",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "冰層後的礦車裡，放著一盞還沒熄的燈。\n\n一名學徒照著舊指令維修裝置，卻不知道指令原本有一頁安全附註。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_snow03"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_snow04",
+    "title": "鏡霜裂穴值守紀錄",
+    "region": "frosthold",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "snow04",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "冰壁上的倒影總比人慢半步。\n\n守衛把所有靠近者視為入侵者，因為撤離令從來沒有送到。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_snow04"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_snow05",
+    "title": "白鹿聖龕值守紀錄",
+    "region": "frosthold",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "snow05",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "白鹿雕像沒有腳印，卻每天換一個位置。\n\n一群居民留下物資給下一批人，自己沿另一條出口尋找救援。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_snow05"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_snow06",
+    "title": "極夜碑墓值守紀錄",
+    "region": "frosthold",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "snow06",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "碑文只在極夜的微光下顯現。\n\n記錄員故意留下兩種說法，希望後人能看出官方版本的缺口。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_snow06"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_snow07",
+    "title": "凍墨抄本室值守紀錄",
+    "region": "frosthold",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "snow07",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "凍住的墨水，正沿著紙頁慢慢往上爬。\n\n最後值守者離開前把同伴的名字藏在器物底部，怕名冊再被改寫。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_snow07"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_sand01",
+    "title": "埋日古井值守紀錄",
+    "region": "sundune",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "sand01",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "沙面上只露出一塊磨得發亮的井沿。\n\n一名學徒照著舊指令維修裝置，卻不知道指令原本有一頁安全附註。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_sand01"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_sand02",
+    "title": "商隊最後一夜值守紀錄",
+    "region": "sundune",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "sand02",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "帳屋裡擺了九副餐具，名冊卻只有八個人。\n\n守衛把所有靠近者視為入侵者，因為撤離令從來沒有送到。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_sand02"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_sand03",
+    "title": "聖甲蟲陵寢值守紀錄",
+    "region": "sundune",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "sand03",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "門外的甲蟲總是排成同一個符號。\n\n一群居民留下物資給下一批人，自己沿另一條出口尋找救援。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_sand03"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_sand04",
+    "title": "沙玻璃礦場值守紀錄",
+    "region": "sundune",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "sand04",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "沙裡長出透明的石柱，觸摸時會發熱。\n\n記錄員故意留下兩種說法，希望後人能看出官方版本的缺口。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_sand04"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_sand05",
+    "title": "無影方尖塔值守紀錄",
+    "region": "sundune",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "sand05",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "正午的塔影仍指向西方。\n\n最後值守者離開前把同伴的名字藏在器物底部，怕名冊再被改寫。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_sand05"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_sand06",
+    "title": "失水禱殿值守紀錄",
+    "region": "sundune",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "sand06",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "乾涸的水槽裡，能聽見雨落的聲音。\n\n一名學徒照著舊指令維修裝置，卻不知道指令原本有一頁安全附註。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_sand06"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_sand07",
+    "title": "星砂抄經庫值守紀錄",
+    "region": "sundune",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "sand07",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "每翻一頁，書脊裡就落出一點星砂。\n\n守衛把所有靠近者視為入侵者，因為撤離令從來沒有送到。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_sand07"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_star01",
+    "title": "零號觀測室值守紀錄",
+    "region": "astral",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "star01",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "觀測紀錄裡，零號房間一直被塗黑。\n\n一群居民留下物資給下一批人，自己沿另一條出口尋找救援。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_star01"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_star02",
+    "title": "懸空樹根值守紀錄",
+    "region": "astral",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "star02",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "沒有樹冠的根部，懸在離地一尺的地方。\n\n記錄員故意留下兩種說法，希望後人能看出官方版本的缺口。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_star02"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_star03",
+    "title": "返航船骸值守紀錄",
+    "region": "astral",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "star03",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "船身沒有海鹽，只覆著一層細微星塵。\n\n最後值守者離開前把同伴的名字藏在器物底部，怕名冊再被改寫。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_star03"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_star04",
+    "title": "缺月鐘塔值守紀錄",
+    "region": "astral",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "star04",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "塔頂圓盤少了一塊，月亮也跟著少了一角。\n\n一名學徒照著舊指令維修裝置，卻不知道指令原本有一頁安全附註。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_star04"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_star05",
+    "title": "無名誓約墓值守紀錄",
+    "region": "astral",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "star05",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "碑文會隨觀看者的名字而改變。\n\n守衛把所有靠近者視為入侵者，因為撤離令從來沒有送到。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_star05"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_star06",
+    "title": "逆流星井值守紀錄",
+    "region": "astral",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "star06",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "井中的石子不往下落，而是緩緩升起。\n\n一群居民留下物資給下一批人，自己沿另一條出口尋找救援。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_star06"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_star07",
+    "title": "末頁神龕值守紀錄",
+    "region": "astral",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "star07",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "最後一頁的預言，寫著旅人尚未做出的選擇。\n\n記錄員故意留下兩種說法，希望後人能看出官方版本的缺口。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_star07"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_blackroot",
+    "title": "黑根祭窟值守紀錄",
+    "region": "darkforest",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "blackroot",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "枯樹裡閃著紫色火光，樹皮上刻有三枚黑棘封印。\n\n最後值守者離開前把同伴的名字藏在器物底部，怕名冊再被改寫。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_blackroot"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_legacy_blades",
+    "title": "雙劍傳承試煉值守紀錄",
+    "region": "cinder",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "legacy_blades",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "廢棄劍塚的木屋裡，留著兩道交錯的劍痕。\n\n一名學徒照著舊指令維修裝置，卻不知道指令原本有一頁安全附註。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_legacy_blades"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_legacy_hex",
+    "title": "巫毒傳承試煉值守紀錄",
+    "region": "frosthold",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "legacy_hex",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "枯樹樹洞深處，藥香與低語交纏。\n\n守衛把所有靠近者視為入侵者，因為撤離令從來沒有送到。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_legacy_hex"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_legacy_dead",
+    "title": "亡靈傳承試煉值守紀錄",
+    "region": "astral",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "legacy_dead",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "孤立墓穴的碑文，只有靠近時才會浮現。\n\n一群居民留下物資給下一批人，自己沿另一條出口尋找救援。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_legacy_dead"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_dungeon_moonveil",
+    "title": "月紗水簾洞值守紀錄",
+    "region": "verdant",
+    "status": "new_text_existing_location",
+    "placement": {
+      "dungeon": "moonveil",
+      "anchor": "入口內安全檢查點，戰鬥外可閱讀"
+    },
+    "author": "未署名值守者",
+    "reliability": "當事人局部記錄",
+    "text": "瀑布東側有一條乾燥石徑，水簾背後傳來三聲低沉的鐘響。\n\n記錄員故意留下兩種說法，希望後人能看出官方版本的缺口。\n\n「若你能讀到這裡，不要只帶走能換錢的東西。請把我們來過的證據也帶回去。」",
+    "unlocks": [
+      "aw_dungeon_moonveil"
+    ],
+    "pickup": "永久收藏文字；重複拾取無金幣",
+    "spoiler_tier": 1
+  },
+  {
+    "id": "aw_book_road_001",
+    "title": "鈴聲之前",
+    "author": "孩子的練字本",
+    "text": "今天老師說，風鈴會替我們趕走狼。奶奶卻說不是。她說以前有人沒來得及回家，所以大家才學會在天黑前把名字念一遍。我問她，如果不知道名字怎麼辦。她把一枚空鈴放在我手裡，說先留著，有一天會有人需要。",
+    "region": "windchime",
+    "placement": {
+      "anchor": "村口長椅",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_npc_windchime_guild"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_002",
+    "title": "磨坊修繕須知",
+    "author": "無署名匠人",
+    "text": "第一，停水車再進地窖。第二，若地下傳來三下敲擊，請回敲兩下，不要拆除通風口。第三，門鎖已改成外開，裡面的人不能自行離開。最後一條用紅墨補寫：我不同意第三條，請下一位匠人把它改回來。",
+    "region": "windchime",
+    "placement": {
+      "anchor": "老磨坊路旁木箱",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_npc_windchime_smith"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_003",
+    "title": "藤橋契約第一稿",
+    "author": "第一代架橋人",
+    "text": "橋下的土地不歸我，橋上的風也不歸你。我們只是一起住在這裡。伐一段活木，補種三株幼苗；借一晚樹蔭，明日把水桶添滿。若有一天王庭說樹先選了王，請翻到這一頁，看看最初按在紙上的手掌有多少。",
+    "region": "verdant",
+    "placement": {
+      "anchor": "藤橋下維修籃",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_npc_verdant_guild"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_004",
+    "title": "樹的年齡不能這樣算",
+    "author": "學徒批註",
+    "text": "師父說數一圈是一年。我在根心看見同一年出現三次。那一年裡，有人被留下，有人被帶走，還有人被寫成從未出生。樹不是長錯了，它只是替三個人都留了位置。若要取樣，請只取落枝；我已經後悔切下第一刀。",
+    "region": "verdant",
+    "placement": {
+      "anchor": "弓匠工坊門邊",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_npc_verdant_smith"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_005",
+    "title": "第七工班的午餐單",
+    "author": "食堂記帳人",
+    "text": "今天三十七份。工頭說只要三十六份，因為有一人調往零號站。我仍留了那一份。他上週說，地下的孩子不吃辣。原來第七條軌道不是運礦。我把飯盒放在最末一節車上，希望明天有人帶空盒回來。",
+    "region": "cinder",
+    "placement": {
+      "anchor": "礦車道外休息區",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_npc_cinder_cartographer"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_006",
+    "title": "零號幫浦操作便箋",
+    "author": "初代工程師",
+    "text": "這不是讓城市永遠燃燒的心臟。它只是把空氣送到到不了風的地方。壓力表上端標著爐區，下端標著居住區；若有人要求你把下端刻度磨掉，請先問他要住在哪一邊。別相信沒有呼吸聲的效率報告。",
+    "region": "cinder",
+    "placement": {
+      "anchor": "冷爐工坊窗臺",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_npc_cinder_smith"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_007",
+    "title": "六次潮災之外",
+    "author": "船醫抄本",
+    "text": "海關給我的表只有六欄。我治過的病人卻記得第七晚：海水從井裡往上湧，裡面有不是海邊的黑色粉塵。後來我們搬上船，把甲板當街道。有人說終於離開陸地；我看著錨鏈，知道我們只是把陸地的秘密一起帶了出來。",
+    "region": "tidehaven",
+    "placement": {
+      "anchor": "醫船候診凳",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_npc_tidehaven_healer"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_008",
+    "title": "可解的繩結",
+    "author": "船城婚俗記",
+    "text": "船上成家，用兩段繩相接。外鄉人笑我們的結不夠牢，老人卻說，能解開才算約定。風暴時得能救人，平靜時也得能讓人選擇留下。誰把繩打成死結，誰就忘了當初我們為什麼把那麼多船繫在一起。",
+    "region": "tidehaven",
+    "placement": {
+      "anchor": "甲板花攤",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_npc_tidehaven_guild"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_009",
+    "title": "先給一杯水",
+    "author": "古水約殘頁",
+    "text": "來者先飲，不問姓名。爭議在第二杯之後處理。乾年按人口分配，濕年修補水槽，不把偶然的雨當成誰的功勞。掌井人只負責守護井口，不因此擁有井底。此頁若被撕去，請在下一張紙上重新抄一份。",
+    "region": "sundune",
+    "placement": {
+      "anchor": "量水庭陰影處",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_npc_sundune_guild"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_010",
+    "title": "第九個人不吃香料",
+    "author": "商隊廚師",
+    "text": "八個人的名冊，九個人的飯。我起初以為自己多煮了，直到那人替我們修好量水管。他說在下面聞不到星砂的味道，所以每一口都吃得很慢。翌日他走了。名冊少一個人，我的手卻還記得第九隻碗有多重。",
+    "region": "sundune",
+    "placement": {
+      "anchor": "商隊舊營地乾燥石臺",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_npc_sundune_merchant"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_011",
+    "title": "不要先問名字",
+    "author": "雪山湯屋規矩",
+    "text": "先讓他坐下，先把鞋裡的雪倒掉，先給一碗不燙口的湯。等手不再發抖，再問他從哪條路來。有些人要過很久才說得出自己的名字，那不是你拒絕第二碗的理由。門外的風不會查名冊，我們也不該比風更冷。",
+    "region": "frosthold",
+    "placement": {
+      "anchor": "湯屋入口木架",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_npc_frosthold_healer"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_012",
+    "title": "未敲響的鐘",
+    "author": "救援隊長遺札",
+    "text": "命令說等待確認，我們等到最後一條繩都結了冰。鐘在地下，能讓另一頭知道我們仍在這裡。我伸出手，副官卻拿出王城的封令。我不怪他怕。我只希望若有下一個人站在這裡，能先聽清鐘裡的人，再看紙上的印。",
+    "region": "frosthold",
+    "placement": {
+      "anchor": "封鐘石階上方安全棚",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_npc_frosthold_smith"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_013",
+    "title": "零號觀測的定義",
+    "author": "學院舊講義",
+    "text": "零號並不是不存在。計算從零開始，是為了記得還有尚未納入的東西。我們觀測天頂、島緣、城下和地底；四組資料缺一不可。後來的課本只剩前三張漂亮星圖。我不知道是誰刪去第四張，但我知道那不是一次排版錯誤。",
+    "region": "astral",
+    "placement": {
+      "anchor": "講堂廢紙回收架",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_npc_astral_cartographer"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_014",
+    "title": "失敗紀錄展",
+    "author": "畢業生自述",
+    "text": "我第一次把星位算錯，把一艘救援艇引向風暴。老師沒有叫我退學，只讓我把錯誤刻在石上，放在門口。如今門口全是得獎名單，我的石牌進了倉庫。漂亮的牆越砌越高，我卻越來越不知道該從哪裡進去認錯。",
+    "region": "astral",
+    "placement": {
+      "anchor": "升降站等待區",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_npc_astral_guild"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_015",
+    "title": "白繩使用方法",
+    "author": "遠征隊共筆",
+    "text": "每走一段，把繩繫在已確認穩固的死木上，不折活枝。若聽見親人呼喚，先詢問隊友，不獨自追聲。若有人回來後不肯說話，讓他坐在火邊；我們來救人，不是來替自己的冒險收集一段精彩故事。",
+    "region": "darkforest",
+    "placement": {
+      "anchor": "林緣補給箱",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_dungeon_blackroot"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  },
+  {
+    "id": "aw_book_road_016",
+    "title": "根網並不憎恨你",
+    "author": "古隔離站牆文",
+    "text": "它收起太多沒有地方去的痛，才長成我們不敢靠近的樣子。你可以切斷擋路的黑棘，但不要把勝利叫作痊癒。替它把破掉的水道接回去，替被藏起的人留一條能走的路。然後再回來，看它是否仍需要長出那麼多刺。",
+    "region": "darkforest",
+    "placement": {
+      "anchor": "黑根祭窟入口外",
+      "coordinates": "proposed_anchor_not_existing_spawn"
+    },
+    "unlocks": [
+      "aw_dungeon_blackroot"
+    ],
+    "reliability": "局部證詞，需與其他來源交叉查證",
+    "spoiler_tier": 1,
+    "pickup": "閱讀即收藏；可選接受相關任務，不強制接取"
+  }
+]

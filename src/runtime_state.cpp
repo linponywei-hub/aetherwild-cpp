@@ -273,6 +273,8 @@ namespace aw {
                     "frozen",m.frozenUntil
                 }
             };
+            v["castSkill"]=m.castSkill;v["castResolve"]=m.castResolve;v["abilityReady"]=m.abilityReady;v["castPoint"]=vec(m.castPoint);
+            v["tauntedBy"]=m.tauntedBy;v["tauntUntil"]=m.tauntUntil;
             v["contribution"]=Json::object();
             for(auto&[p,n]:m.contribution)v["contribution"][p]=n;
             j["monsters"].push(v);
@@ -407,10 +409,13 @@ namespace aw {
         j["features"]=Json::object();
         for(auto&[k,v]:features_)j["features"][k]=v;
         j["chat"]=chat_;
+        j["contentState"]=contentState_;
         return j;
     }
     void GameRuntime::restore(const Json&j) {
         require(j.num("version")==2,"工作站存檔版本不符");
+        contentState_=j.contains("contentState")?j.at("contentState"):Json::object();
+        configureContent(contentState_.flag("expanded"));
         World w;
         SessionState s;
         std::map<Id,LocalProfile> profiles;
@@ -425,6 +430,8 @@ namespace aw {
             Monster m;
             m.id=v.str("id");
             m.definition=v.str("definition");
+            m.castSkill=v.str("castSkill");m.castResolve=v.num("castResolve");m.abilityReady=v.num("abilityReady");if(v.contains("castPoint"))m.castPoint=unvec(v.at("castPoint"));
+            m.tauntedBy=v.str("tauntedBy");m.tauntUntil=v.num("tauntUntil");
             m.region=v.str("region");
             m.scene=v.str("scene");
             m.position=unvec(v.at("position"));
@@ -550,3 +557,4 @@ namespace aw {
         savedAt_=world_.now;
     }
 }
+

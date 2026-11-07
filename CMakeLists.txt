@@ -32,3 +32,10 @@ if(BUILD_TESTING)
  target_link_libraries(aetherwild_runtime_tests PRIVATE aetherwild_core)
  add_test(NAME workstation COMMAND aetherwild_runtime_tests)
 endif()
+
+
+if(BUILD_TESTING)
+ add_executable(aetherwild_content_tests tests/content_tests.cpp)
+ target_link_libraries(aetherwild_content_tests PRIVATE aetherwild_core)
+ add_test(NAME content COMMAND aetherwild_content_tests)
+endif()

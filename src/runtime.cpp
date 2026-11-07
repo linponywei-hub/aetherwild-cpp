@@ -50,10 +50,11 @@ namespace aw {
             return r==Role::Owner?"owner":r==Role::Admin?"admin":"player";
         }
         std::string kindName(WeaponKind k) {
-            return k==WeaponKind::Sword?"sword":k==WeaponKind::Staff?"staff":k==WeaponKind::Bow?"bow":"none";
+            return weaponName(k);
         }
     }
     GameRuntime::GameRuntime(std::filesystem::path path):catalog_(makeCatalog()),buildings_(buildings(catalog_)),savePath_(std::move(path)) {
+        configureContent(false);
         const char* publicMode=std::getenv("AETHERWILD_PUBLIC");
         if(publicMode&&std::string(publicMode)=="1") {
             const char* ownerCode=std::getenv("GAME_OWNER_CODE");
@@ -79,6 +80,7 @@ namespace aw {
         };
         for(auto&[id,n]:catalog_.npcs) {
             auto&r=catalog_.regions.at(n.region);
+            if(n.role=="resident")continue;
             n.position=cityArrival(r);
             if(n.role=="guild")n.position.z-=5;
             else if(n.role=="merchant")n.position.x+=5;
@@ -153,7 +155,7 @@ namespace aw {
         auto job=request.str("profession","warrior");
         require(!name.empty()&&name.size()<=60,"角色名稱需1至20個中文字");
         for(unsigned char ch:name)require(ch>=32,"名稱含控制字元");
-        require(job=="warrior"||job=="mage"||job=="ranger","請選擇基礎職業");
+        require(catalog_.classes.contains(job)&&catalog_.classes.at(job).level==1&&catalog_.classes.at(job).parent.empty(),"請選擇基礎職業");
         require(profiles_.size()<100,"此本機工作站角色數已達上限");
         auto id=world_.nextId("player");
         Player p;
@@ -166,11 +168,12 @@ namespace aw {
         p.vitals.hp=p.vitals.maxHp;
         p.vitals.mp=p.vitals.maxMp;
         auto type=catalog_.classes.at(job).weapon;
-        auto code=type==WeaponKind::Sword?"ironblade":type==WeaponKind::Staff?"oakstaff":"windbow";
+        auto code=startingWeapon(catalog_,job);
         p.inventory.push_back(InventorySystem::create(world_,catalog_,code));
         InventorySystem::equip(p,p.inventory.front().id,catalog_);
         p.materials["potion"]=3;
         if(type==WeaponKind::Bow)p.materials["woodarrow"]=40;
+        if(contentState_.flag("expanded"))p.position=cityArrival(catalog_.regions.at("windchime"));
         p.coins=60;
         world_.players.emplace(id,p);
         auto key=token();
@@ -213,7 +216,7 @@ namespace aw {
                 "position",vec(r.center)
             },
             {
-                "elevation",cityElevation(id)
+                "elevation",r.center.y+cityElevation(id)
             },
             {
                 "radius",r.radius
@@ -429,6 +432,14 @@ namespace aw {
                 "style",b.style
             }
         });
+        j["contentIndex"]=Json::object();
+        for(auto section:{"classes","monsters","equipment","skills","regions","releases","cityLore","storyRealms"})j["contentIndex"][section]=contentBundle().at(section);
+        if(catalog_.worldLimit>1800){
+            Json heights=Json::array();for(int z=0;z<=64;z++)for(int x=0;x<=64;x++)heights.push(worldLandHeight({-32000+x*1000.0,0,-32000+z*1000.0},catalog_));
+            j["terrain"]=Json{{"side",65},{"step",1000},{"x",-32000},{"z",-32000},{"heights",heights}};
+        }
+        j["worldVersion"]=contentState_.flag("expanded")?2:1;
+        j["release"]=contentState_.num("release",1);
         j["prices"]=costJson(catalog_.prices);
         return j;
     }
@@ -647,6 +658,15 @@ namespace aw {
                 }
             });
         }
+        j["content"]=contentSnapshot(p);
+        auto& list=std::get<Json::Array>(j["monsters"].value);
+        for(auto& v:list){
+            auto& mob=world_.monsters.at(v.str("id"));
+            if(mob.castResolve>world_.now){auto skill=contentEntry("skills",mob.castSkill);if(skill)v["cast"]=Json{{"id",mob.castSkill},{"name",skill->str("name")},{"shape",skill->str("shape")},{"position",vec(mob.castPoint)},{"origin",vec(mob.position)},{"resolveAt",mob.castResolve},{"radius",skill->str("shape")=="annulus"?20:skill->str("shape")=="cone"||skill->str("shape")=="melee_arc"?12:mob.boss?7:4},{"innerRadius",8},{"width",5}};}
+            if(contentState_.flag("expanded")&&!contentAllowed(mob.position)) {v["hp"]=0;continue;}
+            if(mob.definition=="dungeon_boss"&&world_.runs.contains(mob.scene)){auto d=contentEntry("monsters","aw_bestiary_dungeon_"+world_.runs.at(mob.scene).definition);if(d)v["name"]=d->str("name");}
+            else if(mob.definition.empty()){unsigned hash=0;for(unsigned char ch:mob.id)hash=hash*31+ch;auto m=contentEntry("monsters","aw_species_"+mob.region+"_"+std::to_string(1+hash%5));if(m)v["name"]=m->str("name");}
+        }
         return j;
     }
     void GameRuntime::input(const Id&key,const Json&j) {
@@ -692,11 +712,11 @@ namespace aw {
         double scale=speed*(sprint?1.6:1)*dt;
         Vec3 next=p.position;
         auto obstacle=[&](Vec3 v) {
-            return p.scene=="world"?blocked(v,buildings_):std::abs(v.x)>24||std::abs(v.z)>29;
+            return p.scene=="world"?(!contentAllowed(v)||blocked(v,buildings_)):std::abs(v.x)>24||std::abs(v.z)>29;
         };
-        next.x=std::clamp(next.x+vx*scale,-1790.0,1790.0);
+        next.x=std::clamp(next.x+vx*scale,-catalog_.worldLimit+10,catalog_.worldLimit-10);
         if(obstacle(next))next.x=p.position.x;
-        next.z=std::clamp(next.z+vz*scale,-1790.0,1790.0);
+        next.z=std::clamp(next.z+vz*scale,-catalog_.worldLimit+10,catalog_.worldLimit-10);
         if(obstacle(next))next.z=p.position.z;
         double ground=p.scene=="world"?groundBelow(next,catalog_):0;
         bool walking=std::hypot(vx,vz)>.01;
@@ -748,7 +768,8 @@ namespace aw {
                 }
                 continue;
             }
-            if(!features_["combat"]||world_.now<m.frozenUntil)continue;
+            if(contentState_.flag("expanded")&&m.scene=="world"&&!contentAllowed(m.position))continue;
+            if(!features_["combat"]||world_.now<m.frozenUntil){m.castResolve=0;m.castSkill.clear();continue;}
             Player* target=nullptr;
             double best=m.boss?28:20;
             for(auto&[pid,p]:world_.players)if(p.scene==m.scene&&p.vitals.alive()&&world_.now-motion_[pid].lastSeen<8&&!MovementSystem::safe(p.position,p.scene,catalog_)) {
@@ -758,12 +779,16 @@ namespace aw {
                     best=d;
                 }
             }
+            if(world_.now<m.tauntUntil&&world_.players.contains(m.tauntedBy)){
+                auto& t=world_.players.at(m.tauntedBy);if(t.vitals.alive()&&t.scene==m.scene&&!MovementSystem::safe(t.position,t.scene,catalog_)&&distance(t.position,m.position)<40){target=&t;best=distance(t.position,m.position);}
+            }
             if(m.definition=="dungeon_boss"&&world_.runs.contains(m.scene)) {
                 auto&r=world_.runs.at(m.scene);
                 auto&d=catalog_.dungeons.at(r.definition);
                 int need=d.objective=="hunt"?0:d.objective=="seals"||d.objective=="braziers"?3:1;
                 if(r.guardsRemaining>0||r.objectives<need)target=nullptr;
             }
+            if(monsterAbility(m,target))continue;
             Vec3 home=homes_.contains(id)?homes_.at(id):m.position;
             bool leash=distance(m.position,home)>65;
             Vec3 goal=target&&!leash?target->position:home;
@@ -773,7 +798,7 @@ namespace aw {
                 Vec3 n=m.position;
                 n.x+=(goal.x-n.x)/d*speed*dt;
                 n.z+=(goal.z-n.z)/d*speed*dt;
-                if(m.scene!="world"||!blocked(n,buildings_,.6))m.position=n;
+                if(m.scene!="world"||(!blocked(n,buildings_,.6)&&contentAllowed(n))){if(m.scene=="world")n.y=worldLandHeight(n,catalog_);m.position=n;}
             }
             if(target&&!leash&&best<=3.4&&world_.now>=m.nextAttack)try {
                 CombatSystem::monsterAttack(world_,catalog_,id,target->id);
@@ -817,6 +842,7 @@ namespace aw {
             }
             else n.reservedBy.reset();
         }
+        contentTick(dt);
         ai(dt);
         settleRewards();
         if(world_.events.size()>2000)world_.events.erase(world_.events.begin(),world_.events.begin()+1000);
@@ -852,13 +878,16 @@ namespace aw {
     }
     void GameRuntime::execute(Player&p,const Json&j) {
         auto type=j.str("type"),target=j.str("target"),npc=j.str("npc");
+        if(contentCommand(p,j))return;
+        if(type=="travel"||type=="admin_travel")checkContentRegion(target);
+        if((type=="enter"||type=="admin_entrance")&&catalog_.dungeons.contains(target))checkContentRegion(catalog_.dungeons.at(target).region);
         auto&motion=motion_[p.id];
         auto admin=[&] {
             auto role=social_.accounts.at(p.accountId).role;
             require(role==Role::Admin||role==Role::Owner,"需要管理員權限");
         };
         auto nearService=[&](const std::string&role) {
-            for(auto&[id,n]:catalog_.npcs)if(n.role==role&&p.scene=="world"&&distance(p.position,n.position)<=8)return id;
+            for(auto&[id,n]:catalog_.npcs)if(n.role==role&&p.scene=="world"&&distance(p.position,n.position)<=8&&contentRegionOpen(catalog_,n.region))return id;
             throw RuleError("請先走到對應NPC附近");
         };
         auto freshMotion=[&] {
@@ -913,9 +942,19 @@ namespace aw {
         else if(type=="equip")InventorySystem::equip(p,target,catalog_);
         else if(type=="potion")InventorySystem::usePotion(p,target.empty()?"potion":target,catalog_);
         else if(type=="accept")QuestSystem::accept(p,target,npc.empty()?catalog_.quests.at(target).npc:npc,catalog_);
-        else if(type=="quest")QuestSystem::claim(p,target,npc.empty()?catalog_.quests.at(target).npc:npc,catalog_);
+        else if(type=="quest"){
+            auto giver=npc.empty()?catalog_.quests.at(target).npc:npc;bool done=p.quests.contains(target)&&p.quests.at(target).claimed;
+            QuestSystem::claim(p,target,giver,catalog_);
+            auto prof=contentEntry("profiles",giver);if(!done&&prof){auto& rel=contentState_["relations"][p.id];if(!rel.contains(giver))rel[giver]=NpcSystem::initial();NpcSystem::event(rel[giver],*prof,"quest","quest:"+target,NpcSystem::clock());}
+        }
         else if(type=="job")ProgressionSystem::changeClass(p,target,npc.empty()?nearService("guild"):npc,catalog_);
-        else if(type=="buy")EconomySystem::buy(world_,p,target,j.contains("count")?j.at("count").integer():1,npc.empty()?nearService("merchant"):npc,catalog_);
+        else if(type=="buy"){
+            auto seller=npc.empty()?nearService("merchant"):npc;auto before=p.coins;
+            EconomySystem::buy(world_,p,target,j.contains("count")?j.at("count").integer():1,seller,catalog_);
+            auto prof=contentEntry("profiles",seller);if(prof){auto& rel=contentState_["relations"][p.id];if(!rel.contains(seller))rel[seller]=NpcSystem::initial();
+                auto view=NpcSystem::view(rel[seller],*prof,NpcSystem::clock());auto spent=before-p.coins;auto discount=static_cast<Quantity>(std::floor(spent*view.num("discount")/100));p.coins+=discount;
+                NpcSystem::event(rel[seller],*prof,"purchase",j.str("request"),NpcSystem::clock(),static_cast<int>(std::min<Quantity>(200,spent-discount)));}
+        }
         else if(type=="store"||type=="withdraw")InventorySystem::store(p,target,j.contains("count")?j.at("count").integer():1,npc.empty()?nearService("merchant"):npc,catalog_,type=="withdraw");
         else if(type=="heal") {
             nearService("healer");
@@ -1099,3 +1138,4 @@ namespace aw {
         else throw RuleError("不支援的操作："+type);
     }
 }
+
