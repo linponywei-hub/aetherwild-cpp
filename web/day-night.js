@@ -15,5 +15,5 @@ export class EnvironmentClock {
  constructor(){this.anchor=Date.now()/1000;this.at=performance.now();this.cycle=CYCLE_SECONDS;}
  sync(environment,at=performance.now()){if(!environment||!Number.isFinite(environment.unixSeconds))return;this.anchor=environment.unixSeconds;this.at=at;this.cycle=environment.cycleSeconds||CYCLE_SECONDS;}
  now(at=performance.now()){return this.anchor+Math.max(0,(at-this.at)/1000);}
- light(at=performance.now()){return lightingAt(this.now(at),this.cycle);}
+ light(at=performance.now()){return lightingAt(this.cycle*.5,this.cycle);}
 }
