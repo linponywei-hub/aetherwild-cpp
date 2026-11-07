@@ -1,3 +1,16 @@
+# 最新補丁入口（2026-11-07）
+
+後文為歷史交接，部署／世界尺寸等舊敘述請以本段及 docs/15_參考地圖與完整世界補丁.md 為準。
+
+- 共同修改與檔案清單：[PR #12](https://github.com/linponywei-hub/aetherwild-cpp/pull/12)，獨立分支 ai/reference-world-patch。
+- 既有 Render 測試站：https://aetherwild-cpp-test.onrender.com/；使用既有免費服務與驗證碼，不建立新付費資源。新補丁上線狀態以該服務實際部署為準。
+- 原圖25區、96km世界、全部現有內容直接載入，後續用程式補丁。不要恢復批次開放介面、全職業／隱藏入口／羈絆列表。
+- 角色仍用 world-v2.json；contentState.layoutVersion=2 負責一次性座標遷移。input/command/state HTTP／WebSocket 保持相容。
+- 原圖地形、海岸與港口模型：data/atlas_surface.json → tools/generate_atlas.py → src/atlas_data.cpp；請同步更新原生碰撞與呈現。
+- 設定：終端固定分頁，自訂按鍵、音量、渲染距離保存於瀏覽器，無資料庫變更。第一人稱武器使用獨立繪製層。
+
+---
+
 # 界域紀元 C++ 0.2.2：下一位 AI 接手入口
 
 交接日期：2026-11-07（台灣）。本次收尾與共同編輯入口；尚未部署公開遊戲服務。

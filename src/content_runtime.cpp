@@ -27,20 +27,21 @@ Json GameRuntime::adminMap(const Id& key)const{
 void GameRuntime::applyWorldPatch(){
  const bool expanded=contentState_.flag("expanded");
  const bool remap=expanded&&contentState_.num("layoutVersion")<2;
+ const bool terrainChanged=contentState_.num("terrainVersion")<1;
  contentState_["release"]=5;
  if(!expanded)startExpandedWorld();
  else if(remap){
   const auto& previous=contentBundle().at("atlas_layout").at("previousRegions");
-  auto shift=[&](Vec3 p,const Id& id){if(!previous.contains(id)||!catalog_.regions.contains(id))return p;const auto& old=previous.at(id).at("center");const auto& next=catalog_.regions.at(id).center;p.x+=next.x-old.num("x");p.z+=next.z-old.num("z");p.y=groundBelow(p,catalog_);return p;};
+  auto shift=[&](Vec3 p,const Id& id){if(!previous.contains(id)||!catalog_.regions.contains(id))return p;const auto& old=previous.at(id).at("center");const auto& next=catalog_.regions.at(id).center;p.x+=next.x-old.num("x");p.z+=next.z-old.num("z");p.y=std::max(p.y,next.y);p.y=groundBelow(p,catalog_);return p;};
   auto nearest=[&](Vec3 p){Id result="windchime";double best=1e30;for(const auto&[id,r]:previous.objectItems()){if(id=="aw_underlost")continue;const auto& c=r.at("center");double d=std::hypot(p.x-c.num("x"),p.z-c.num("z"));if(d<best){best=d;result=id;}}return result;};
   for(auto&[id,p]:world_.players)if(p.scene=="world")p.position=shift(p.position,nearest(p.position));
   for(auto&[id,m]:world_.monsters)if(m.scene=="world"){m.position=shift(m.position,m.region);homes_[id]=m.position;}
   for(auto&[id,r]:world_.resources)r.position=shift(r.position,nearest(r.position));
  }
- contentState_["layoutVersion"]=2;contentState_["expanded"]=true;catalog_.contentRelease=5;
+ contentState_["layoutVersion"]=2;contentState_["terrainVersion"]=1;contentState_["expanded"]=true;catalog_.contentRelease=5;
  for(const auto&[rid,r]:catalog_.regions)if(rid!="aw_underlost"){int index=0;for(const auto&[code,definition]:catalog_.resources){const auto id="resource_"+rid+"_"+code;if(world_.resources.contains(id))continue;double a=++index*2.399963;Vec3 pos{r.center.x+std::cos(a)*(r.radius+30),0,r.center.z+std::sin(a)*(r.radius+30)};pos.y=worldLandHeight(pos,catalog_);ResourceNode node;node.id=id;node.definition=code;node.position=pos;world_.resources.emplace(id,node);}}
 
- if(!expanded||remap){contentState_["npcPoses"]=Json::object();configureContent(true);for(auto&[id,p]:world_.players)if(p.scene=="world"){auto&m=motion_[id];m.velocityY=0;m.lift.clear();m.grounded=true;m.peak=p.position.y;p.position.y=groundBelow(p.position,catalog_);}}
+ if(!expanded||remap||terrainChanged){contentState_["npcPoses"]=Json::object();contentState_["npcHomes"]=Json::object();configureContent(true);for(auto&[id,p]:world_.players)if(p.scene=="world"){auto&m=motion_[id];m.velocityY=0;m.lift.clear();m.grounded=true;p.position.y=std::max(p.position.y,catalog_.regions.at(p.lastCity).center.y);p.position.y=groundBelow(p.position,catalog_);m.peak=p.position.y;}}
 }
 void GameRuntime::configureContent(bool expanded){
  if(!contentState_.contains("expanded"))contentState_=initialContent();
@@ -90,7 +91,7 @@ void GameRuntime::startExpandedWorld(){
  for(auto&[id,p]:world_.players){
   if(p.scene!="world")continue;
   auto region=old.regions.contains(p.lastCity)?p.lastCity:Id("windchime");auto a=old.regions.at(region).center,b=catalog_.regions.at(region).center;
-  p.position.x+=b.x-a.x;p.position.z+=b.z-a.z;
+  p.position.x+=b.x-a.x;p.position.z+=b.z-a.z;p.position.y+=b.y-a.y;
   if(!contentAllowed(p.position)){p.position=cityArrival(catalog_.regions.at("windchime"));p.lastCity="windchime";}
   auto& motion=motion_[id];motion.velocityY=0;motion.lift.clear();motion.peak=p.position.y;motion.grounded=true;
  }

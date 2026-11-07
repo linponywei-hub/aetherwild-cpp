@@ -436,9 +436,10 @@ namespace aw {
         j["contentIndex"]=Json::object();
         for(auto section:{"classes","monsters","equipment","skills","regions","releases","cityLore","storyRealms"})j["contentIndex"][section]=contentBundle().at(section);
         if(catalog_.worldLimit>1800){
-            Json heights=Json::array();for(int z=0;z<=64;z++)for(int x=0;x<=64;x++)heights.push(worldLandHeight({-catalog_.worldLimit+x*catalog_.worldLimit/32,0,-catalog_.worldLimit+z*catalog_.worldLimit/32},catalog_));
-            j["terrain"]=Json{{"side",65},{"step",catalog_.worldLimit/32},{"x",-catalog_.worldLimit},{"z",-catalog_.worldLimit},{"heights",heights}};
+            Json heights=Json::array();for(int z=0;z<=128;z++)for(int x=0;x<=128;x++)heights.push(worldLandHeight({-catalog_.worldLimit+x*catalog_.worldLimit/64,0,-catalog_.worldLimit+z*catalog_.worldLimit/64},catalog_));
+            j["terrain"]=Json{{"side",129},{"step",catalog_.worldLimit/64},{"x",-catalog_.worldLimit},{"z",-catalog_.worldLimit},{"heights",heights}};
         }
+        j["landscape"]=atlasSurface();
         j["atlas"]=contentBundle().at("atlas_layout");
         j["worldLimit"]=catalog_.worldLimit;
         j["worldVersion"]=contentState_.flag("expanded")?2:1;

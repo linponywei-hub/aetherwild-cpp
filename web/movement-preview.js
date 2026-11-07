@@ -1,3 +1,4 @@
+import {harborHeight} from './landscape-model.js';
 // Presentation only. Never writes to snapshots or sends a position to the server.
 export class MovementPreview {
  constructor(catalog){this.catalog=catalog;this.pose=null;this.history=[];this.offset={x:0,y:0,z:0};this.pendingJump=null;this.sent=new Map();}
@@ -18,7 +19,7 @@ export class MovementPreview {
    const bridge=r.id==='astral'&&Math.abs(dx)<7&&dz>=85&&dz<=116;
    if((disc||bridge)&&h<=p.y+1.4)y=Math.max(y,h);
   }
-  return y;
+  return Math.max(y,harborHeight(p,this.catalog));
  }
  blocked(p){
   if(this.scene!=='world')return Math.abs(p.x)>24||Math.abs(p.z)>29;

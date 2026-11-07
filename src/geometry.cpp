@@ -38,7 +38,7 @@ namespace aw {
         return r.id=="astral"&&std::abs(dx)<7&&dz>=85&&dz<=116;
     }
     double groundBelow(Vec3 p,const Catalog&c) {
-        double y=worldLandHeight(p,c);
+        double y=std::max(worldLandHeight(p,c),harborGround(p,c));
         for(auto&[id,r]:c.regions) {
             double dx=p.x-r.center.x,dz=p.z-r.center.z,h=cityElevation(id);
             if(!h)continue;

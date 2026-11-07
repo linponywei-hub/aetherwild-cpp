@@ -51,7 +51,8 @@ int main(){try{
  narrative.world().players.at(npid).position=narrative.definitions().npcs.at("windchime_guild").position;
  cmd(narrative,ns,"story_talk",Json{{"target",qid}});
  auto ending=cmd(narrative,ns,"story_choice",Json{{"target",qid},{"choice","community"}});bool found=false;
- for(auto& st:ending.at("content").at("stories").arrayItems())if(st.str("id")==qid)found=st.at("progress").flag("done");yes(found);
+ for(auto& st:ending.at("content").at("stories").arrayItems()){if(st.str("id")==qid)found=st.at("progress").flag("done");}
+ yes(found);
  no([&]{cmd(narrative,ns,"story_choice",Json{{"target",qid},{"choice","community"}});});
  // Player-supplied scores and gifts have no authority.
  auto beforeScore=ending.at("content").at("relations").at("windchime_guild").num("score");
@@ -73,6 +74,7 @@ int main(){try{
  double migratedX=0;
  {GameRuntime full(pathFile);auto state=full.snapshot(key);yes(state.at("player").num("coins")==777);yes(state.at("content").at("relations").at("windchime_merchant").num("score")==1);migratedX=state.at("player").at("position").num("x");yes(std::abs(migratedX-full.definitions().regions.at("windchime").center.x)<1);full.save();}
  {GameRuntime full(pathFile);yes(full.snapshot(key).at("player").at("position").num("x")==migratedX);}
+ {GameRuntime full;const auto& c=full.definitions();const auto& port=c.regions.at("tidehaven");yes(port.center.y==4);yes(groundBelow(cityArrival(port),c)==4);yes(atlasWater({(1180-633)*64.0,0,(550-578)*64.0}));yes(atlasHeight({(400-633)*64.0,0,(100-578)*64.0})>600);yes(atlasSurface().at("harbors").arrayItems().size()==3);}
  std::filesystem::remove_all(pathFile.parent_path());
  std::cout<<"OK content integration: "<<checks<<" checks\n";return 0;
 }catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 1;}}
