@@ -28,22 +28,3 @@
 @media(max-width:700px){#terminal{inset:8px;width:auto}.terminal-top{padding:20px}.terminal-profile{padding:10px 20px}#tabs{padding:10px 14px 0}#tabs button{flex-basis:52px;font-size:11px}#panel{padding:18px}.talent-tree{grid-template-columns:1fr}.talent-nodes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:12px}.talent-node{margin:0}.talent-node:not(:first-child):before{display:none}.player-card{top:90px;left:12px;width:260px;padding:12px;gap:10px}.avatar{width:46px;height:56px}.avatar img{width:42px;height:42px}.player-subline{font-size:8px}#skill-slot-bar button{width:55px;height:74px}#skill-slot-bar .item-icon{width:48px;height:40px}.hotbar{bottom:10px;padding:9px 10px}.hotbar-keys button{width:43px;height:34px}.bottom-left{bottom:238px}.bottom-right{bottom:240px}.minimap{top:225px}#explore-hint{bottom:270px}.controls{font-size:8px}.talent-heading .eyebrow{font-size:8px;letter-spacing:1px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 .talent-nodes{position:relative;padding-left:22px}.talent-node{z-index:1}.talent-node:not(:first-child):before{display:none}.talent-links{position:absolute;inset:0;pointer-events:none;overflow:visible}.talent-links path{fill:none;stroke:var(--aura);stroke-width:1;opacity:.25}.talent-links path.lit{stroke-width:2;opacity:.9;filter:drop-shadow(0 0 3px var(--aura))}@media(max-width:700px){.talent-nodes{display:block;padding:14px 14px 14px 28px}.talent-node{margin-bottom:14px}}
-
-/* Aetherwild traveler journal theme — 2026-11-08.
-   Pure CSS fallback until the supplied parchment/leather PNGs are published. */
-:root{--ui:"Noto Serif TC","Noto Serif CJK TC","PMingLiU","Microsoft JhengHei",serif;--ink:#f5e5c4;--dim:#d0bb91;--gold:#e7bd75;--line:#c59a5c55}
-#terminal{background:radial-gradient(ellipse at 20% 10%,#9d754126,transparent 55%),repeating-linear-gradient(92deg,#251a12 0px,#2d2017 3px,#261b14 7px),#241a13;border:3px double #c79c61;box-shadow:0 28px 100px #000c,inset 0 0 0 6px #2b1a11,inset 0 0 0 8px #a47b4b77}
-#panel{background:radial-gradient(ellipse at 40% 35%,#d6b87d16,transparent 75%),linear-gradient(120deg,#392919b8,#251a13dd);color:#f2e0bb}
-.terminal-top{background:linear-gradient(90deg,#6b4828b0,#3b281b88);border-bottom:1px solid #bd975f88}
-.terminal-top h2,.section-title h3{font-family:var(--ui);color:#f5d49b}
-#tabs button.active{background:linear-gradient(#a77c3c55,#68431e33);border-color:#dfb57488;color:#ffe1a6}
-#panel .row,.stat-grid>div,.talent-branch{background:linear-gradient(130deg,#5d402b66,#241a15aa);border-color:#b58a5266}
-.player-card{background:radial-gradient(ellipse at 0 0,#a37a4433,transparent 70%),linear-gradient(125deg,#34251cfa,#1d1a17f5);border:2px ridge #a78250;box-shadow:0 12px 30px #0008,inset 0 0 0 3px #332419}
-.hotbar{background:linear-gradient(#3d2c1df0,#1b1714f5);border:2px ridge #b38a53}
-#skill-slot-bar button{background:radial-gradient(circle at 50% 25%,#936f3c55,transparent 75%),linear-gradient(145deg,#47301d,#191716);border:2px ridge #b8935d}
-.talent-branch{border:2px ridge #b58a52}
-.talent-node{background:linear-gradient(130deg,#48311edc,#241c18ed);border-color:#b58a5277}
-.talent-node.available{outline:1px solid #e7bd75;outline-offset:2px}
-.talent-links path{stroke-width:2;opacity:.42}
-.talent-links path.lit{stroke-width:3;opacity:1}
-@media(max-width:700px){#terminal{width:calc(100vw - 12px);inset:6px;border-width:2px}#panel{padding:14px}#tabs{overflow-x:auto;flex-wrap:nowrap}#tabs button{flex:0 0 auto;min-width:60px}.player-card{max-width:calc(100vw - 24px)}}
