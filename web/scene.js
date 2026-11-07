@@ -99,6 +99,9 @@ export class RealmScene {
        g.add(copy);g.userData.placeholder.visible=false;
        g.userData.animatedModel=copy;g.userData.baseModelY=copy.position.y;g.userData.baseModelYaw=copy.rotation.y;
        g.userData.groundClearance=.22;
+       // Store the foot-bone baseline in local model coordinates for gait grounding.
+       const feet=[joints.LeftFoot,joints.RightFoot].filter(Boolean);
+       if(feet.length){copy.updateMatrixWorld(true);g.userData.footBaseline=Math.min(...feet.map(b=>{const w=new T.Vector3();b.getWorldPosition(w);return w.y;}));}
        // Role equipment is attached to the variant, not baked into the shared GLB.
        const gear=new T.Group();g.add(gear);
        const armor=this.mat(v.weapon==='axe'?'#8a542d':v.weapon==='staff'?'#594a80':v.weapon==='bow'?'#5e7040':'#71533c');
@@ -256,25 +259,34 @@ export class RealmScene {
      const stride=Math.sin(this.time*11);
      const throwing=ai?.throwUntil>this.time,gathering=ai?.gatherUntil>this.time;
      model.position.y=preview.userData.baseModelY+(walking?Math.abs(stride)*.025:Math.sin(this.time*2.2)*.008)+(gathering?-.025:0);
-     model.rotation.y=preview.userData.baseModelYaw+(walking?Math.sin(this.time*5.5)*.075:Math.sin(this.time*.8)*.035);
+     model.rotation.y=preview.userData.baseModelYaw+(walking?Math.sin(this.time*5.5)*.018:Math.sin(this.time*.8)*.018);
      model.rotation.x=throwing?-.1+release*.22:gathering?.2:walking?stride*.06:0;
-     model.rotation.z=walking?Math.sin(this.time*5.5)*.06:Math.sin(this.time*1.35)*.012;
+     model.rotation.z=walking?Math.sin(this.time*5.5)*.015:Math.sin(this.time*1.35)*.008;
      // Real skeletal animation: drive both legs, knees, arms and elbows.
      const joints=preview.userData.joints||{},rest=preview.userData.restPose||{};
      const phase=this.time*10+preview.userData.packIndex*.7;
-     const swing=walking?Math.sin(phase)*.55:0;
-     const bend=walking?Math.max(0,Math.sin(phase))*.48:0;
+     const swing=walking?Math.sin(phase)*.24:0;
+     const bend=walking?Math.max(0,Math.sin(phase))*.2:0;
      const throwProgress=throwing?Math.max(0,Math.min(1,1-(ai.throwUntil-this.time)/.55)):0;
      const windup=throwing?Math.sin(Math.min(1,throwProgress*2)*Math.PI/2):0;
      const release=throwing?Math.max(0,Math.sin((throwProgress-.35)*Math.PI/ .65)):0;
      const gatherPhase=gathering?Math.sin((ai.gatherUntil-this.time)/.7*Math.PI):0;
      const pose=(name,x=0,y=0,z=0)=>{const bone=joints[name],base=rest[name];if(!bone||!base)return;bone.quaternion.copy(base).multiply(new T.Quaternion().setFromEuler(new T.Euler(x,y,z)));};
      pose('LeftUpLeg',swing+gatherPhase*.45);pose('RightUpLeg',-swing+gatherPhase*.45);
-     pose('LeftLeg',-bend);pose('RightLeg',walking?-Math.max(0,-Math.sin(phase))*.48:0);
-     pose('LeftFoot',walking?Math.sin(phase)*.15:0);pose('RightFoot',walking?-Math.sin(phase)*.15:0);
+     pose('LeftLeg',-bend);pose('RightLeg',walking?-Math.max(0,-Math.sin(phase))*.2:0);
+     pose('LeftFoot',walking?Math.sin(phase)*.07:0);pose('RightFoot',walking?-Math.sin(phase)*.07:0);
      pose('LeftArm',-swing*.75+gatherPhase*.35+windup*.12);pose('RightArm',swing*.75+windup*.35-release*.9+gatherPhase*.4,0,-windup*.25);
      pose('LeftForeArm',-.12-gatherPhase*.5);pose('RightForeArm',-.15-windup*.9+release*.65-gatherPhase*.6);
      pose('Spine',gatherPhase*.15+windup*.12-release*.22,windup*-.22+release*.32);
+     // Keep the lowest animated foot at or above its original grounded position.
+     // Avoid full skinned-mesh bounding-box recalculation on every frame.
+     if(preview.userData.footBaseline!==undefined){
+       model.updateMatrixWorld(true);
+       const feet=[joints.LeftFoot,joints.RightFoot].filter(Boolean);
+       const footY=Math.min(...feet.map(b=>{const v=new T.Vector3();b.getWorldPosition(v);return v.y;}));
+       const target=preview.userData.baseModelY+Math.max(0,preview.userData.footBaseline-footY+.045);
+       model.position.y=Math.max(model.position.y,target);
+     }
    }
    for(const npc of this.npcObjects.values()){if(npc.userData.eileenTest){
         const player=this.state?.player;
