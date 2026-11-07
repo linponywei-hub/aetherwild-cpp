@@ -464,6 +464,13 @@ namespace aw {
         };
         j["player"]["yaw"]=m==motion_.end()?0:m->second.yaw;
         j["player"]["grounded"]=m==motion_.end()||m->second.grounded;
+        j["_motion"]=Json{{"sequence",m==motion_.end()?0:m->second.sequence},
+            {"velocityY",m==motion_.end()?0:m->second.velocityY},
+            {"jumpPending",m!=motion_.end()&&m->second.jump},
+            {"lift",m==motion_.end()?Id{}:m->second.lift},
+            {"speed",5+InventorySystem::bonuses(p,catalog_).speed},
+            {"sprintAllowed",!p.sprintLocked&&p.vitals.stamina>=.9},
+            {"gravity",22},{"jumpSpeed",8}};
         j["xpNext"]=ProgressionSystem::levelXp(p.level);
         for(auto k: {
             "players","monsters","resources","events","objectives","online"

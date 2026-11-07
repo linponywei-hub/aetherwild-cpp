@@ -160,6 +160,22 @@ int main() {
             }
             std::filesystem::remove_all(folder);
         });
+        test("movement presentation hints do not mutate authoritative state",[] {
+            GameRuntime g;
+            auto p=create(g);
+            auto key=p.str("token");
+            auto a=g.snapshot(key);
+            CHECK(a.at("_motion").num("speed")==5);
+            CHECK(a.at("_motion").num("gravity")==22);
+            g.input(key,Json{{"sequence",7},{"x",0},{"z",0},{"yaw",0},{"jump",true}});
+            auto b=g.snapshot(key);
+            CHECK(b.at("_motion").at("sequence").integer()==7);
+            CHECK(b.at("_motion").flag("jumpPending"));
+            CHECK(b.at("player").at("position").dump()==a.at("player").at("position").dump());
+            g.tick(.05);
+            CHECK(g.snapshot(key).at("_motion").num("velocityY")>0);
+            CHECK(!g.snapshot(key).at("_motion").flag("jumpPending"));
+        });
         test("authoritative normalized movement building collision",[] {
             GameRuntime g;
             auto p=create(g);
