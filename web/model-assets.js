@@ -1,9 +1,7 @@
+import {BASE_MODELS, MODEL_VARIANTS, resolveVariant} from '/model-catalog.js';
 // Visual-only registry. No authoritative game rules belong in this module.
 // Register GLB files here after placing them under web/assets/models/.
-export const MODEL_ASSETS = Object.freeze({
-  // Example (uncomment after uploading a real file):
-  // 'human:warrior': { path: '/assets/models/characters/TRIPO-001.glb', scale: 1, yaw: 0 },
-});
+export const MODEL_ASSETS = Object.freeze(Object.fromEntries(Object.entries(MODEL_VARIANTS).map(([id]) => [id, resolveVariant(id)])));
 
 export function validateModelAsset(asset) {
   if (!asset || typeof asset !== 'object') throw new Error('Invalid model descriptor');
@@ -31,7 +29,8 @@ export class ModelAssets {
   }
   async template(id) {
     const asset = validateModelAsset(this.registry[id]);
-    if (!this.cache.has(id)) {
+    const cacheKey = asset.baseId || id;
+    if (!this.cache.has(cacheKey)) {
       const task = this.loader().then(loader => loader.loadAsync(asset.path))
         .then(gltf => {
           const root = gltf.scene;
@@ -40,10 +39,10 @@ export class ModelAssets {
           });
           return { root, asset, animations: gltf.animations || [] };
         })
-        .catch(error => { this.cache.delete(id); throw error; });
-      this.cache.set(id, task);
+        .catch(error => { this.cache.delete(cacheKey); throw error; });
+      this.cache.set(cacheKey, task);
     }
-    return this.cache.get(id);
+    return this.cache.get(cacheKey);
   }
   async instantiate(id) {
     const { root, asset, animations } = await this.template(id);
@@ -56,6 +55,11 @@ export class ModelAssets {
     const instance = root.clone(true);
     instance.scale.multiplyScalar(asset.scale ?? 1);
     instance.rotation.y += asset.yaw ?? 0;
+    if (asset.tint && asset.tint !== '#ffffff') instance.traverse(node => {
+      if (!node.isMesh) return;
+      node.material = Array.isArray(node.material) ? node.material.map(m => m.clone()) : node.material.clone();
+      for (const material of Array.isArray(node.material) ? node.material : [node.material]) material.color?.multiply(new (material.color.constructor)(asset.tint));
+    });
     return { instance, animations };
   }
   async attach(group, id) {
