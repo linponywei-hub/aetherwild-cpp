@@ -64,6 +64,24 @@ export class ModelAssets {
       );
       target.bind(skeleton, source.bindMatrix.clone());
     }
+    // Emergency skinning fallback: retain the original textured geometry and
+    // bypass the broken proxy skeleton that produces extreme triangle spikes.
+    // The original mesh is rigid until a validated replacement rig is supplied.
+    if (id === 'HUM_EILEEN_TEST_001') {
+      const meshes = [];
+      instance.traverse(node => { if (node.isSkinnedMesh) meshes.push(node); });
+      for (const mesh of meshes) {
+        const replacement = new T.Mesh(mesh.geometry, mesh.material);
+        replacement.name = mesh.name + '_safe_static';
+        replacement.position.copy(mesh.position);
+        replacement.quaternion.copy(mesh.quaternion);
+        replacement.scale.copy(mesh.scale);
+        replacement.castShadow = mesh.castShadow;
+        replacement.receiveShadow = mesh.receiveShadow;
+        mesh.parent.add(replacement);
+        mesh.parent.remove(mesh);
+      }
+    }
     // Size the imported character in world units without touching its bone transforms.
     // A neutral pose is used for bounds; GLB authoring units may be centimetres.
     if (id === 'HUM_EILEEN_TEST_001') {
@@ -100,7 +118,7 @@ export class ModelAssets {
       if (group.userData.modelMixer) group.userData.modelMixer.stopAllAction();
       group.userData.modelMixer = null;
       // Drive the supplied GLB clips using the cloned skeleton, without forced joint offsets.
-      if (animations.length) {
+      if (animations.length && id !== 'HUM_EILEEN_TEST_001') {
         const mixer = new T.AnimationMixer(instance);
         const idle = animations.find(clip => /idle|breathe|待機/i.test(clip.name)) || animations[0];
         mixer.clipAction(idle).play();
@@ -117,7 +135,7 @@ export class ModelAssets {
           { bone: joints.Eileen_RightUpperArm, angle: -0.88 }
         ].filter(entry => !!entry.bone);
       }
-      group.userData.modelHealth = {status: id === 'HUM_EILEEN_TEST_001' ? 'proxy-rig-animation-test' : 'loaded', animationCount: animations.length};
+      group.userData.modelHealth = {status: id === 'HUM_EILEEN_TEST_001' ? 'static-mesh-safety-fallback' : 'loaded', animationCount: animations.length};
       // Hide only the procedural body. Preserve labels, collision proxies and weapons.
       for (const part of group.userData.proceduralParts || []) part.visible = false;
       return true;
