@@ -22,6 +22,7 @@ with tempfile.TemporaryDirectory(prefix='aw_http_') as folder:
  try:
   subprocess.run([sys.executable,str(root/'tests/network_latency.py'),base],check=True)
   subprocess.run([sys.executable,str(root/'tests/workstation_http.py'),base],check=True)
+  subprocess.run([sys.executable,str(root/'tests/websocket_http.py'),base],check=True)
  finally:p.terminate();p.communicate(timeout=5)
  data=json.loads((Path(folder)/'runtime-data/world-v2.json').read_text())
  profile=data['profiles'][0];saved=next(p for p in data['players'] if p['id']==profile['player']);expected=saved['coins'];token=profile['token']

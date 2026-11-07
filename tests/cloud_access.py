@@ -27,10 +27,12 @@ with tempfile.TemporaryDirectory(prefix='aw_cloud_access_') as folder:
   except urllib.error.HTTPError as e:return e.code,json.load(e)
  p=subprocess.Popen([str(exe),'--root',folder,'--port',str(port)],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
  try:
-  for _ in range(100):
+  for _ in range(600):
+   if p.poll() is not None:raise RuntimeError("Cloud fixture exited before readiness")
    try:
     if request('health')[0]==200:break
    except Exception:time.sleep(.05)
+  else:raise RuntimeError('Cloud fixture did not start within the 30-second readiness window')
   health=request('health')[1];check(health['inviteRequired'] and health['cloudTest'])
   check(request('session',{'name':'stranger','profession':'warrior'})[0]==400)
   check(request('session',{'name':'wrong','profession':'warrior','ownerCode':'x'*64})[0]==400)
