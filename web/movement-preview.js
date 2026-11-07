@@ -55,7 +55,8 @@ export class MovementPreview {
    this.pose=this.integrate(this.pose,h.input,end-start,jump);
   }
   if(this.pendingJump&&!unacked)this.pendingJump=null;
-  if(old&&Math.hypot(old.x-this.pose.x,old.y-this.pose.y,old.z-this.pose.z)<3&&this.enabled)this.offset={x:old.x-this.pose.x,y:old.y-this.pose.y,z:old.z-this.pose.z};
+  this.lastCorrection=old?Math.hypot(old.x-this.pose.x,old.y-this.pose.y,old.z-this.pose.z):0;if(this.lastCorrection>1)this.largeCorrections=(this.largeCorrections||0)+1;
+  if(old&&this.lastCorrection<3&&this.enabled)this.offset={x:old.x-this.pose.x,y:old.y-this.pose.y,z:old.z-this.pose.z};
   else this.offset={x:0,y:0,z:0};
  }
  advance(dt,now,input){
