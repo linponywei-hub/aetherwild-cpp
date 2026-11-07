@@ -62,7 +62,7 @@ export class RealmScene {
    this.box(goblin,.6,.43,.35,cloth,0,.88,0);
    goblin.position.set(0,this.landHeight(0,48)+.12,48);
    goblin.name='Goblin_Visual_Test';
-   goblin.userData={kind:'goblin-preview',nonCombat:true};
+   goblin.userData={kind:'goblin-preview',nonCombat:true,aiVisualOnly:true};
    this.root.add(goblin);
    this.goblinPreview=goblin;
    const name=this.label('哥布林 · 模型測試','#a8e69b',1);
@@ -120,7 +120,47 @@ export class RealmScene {
  for(const[key,g]of this.entities)if(!needed.has(key)){this.entityRoot.remove(g);g.traverse(o=>{o.geometry?.dispose();if(o.material&&!o.material.map)o.material.dispose();});this.entities.delete(key);this.nameplates.remove(key);}
  if(state.lifts?.[0])this.liftRoot.position.y=state.lifts[0].position.y;this.chest.visible=!!state.run&&!state.run.claimed;this.world.fog.density=p.scene==='world'?2.6/this.renderDistance:.013;this.renderer.toneMappingExposure=Number(localStorage.getItem('aw-brightness')||1.05)*(p.scene==='world'?1:1.4);this.makeScenery(p.position.x,p.position.z);updateContentScene(this,state);updateCastTelegraphs(this,state);}
  aim(){this.ray.setFromCamera(this.mouse,this.camera);this.ray.far=45;const roots=[...this.entityRoot.children.filter(o=>o.visible)];if(this.root.visible)roots.push(...this.root.children.filter(o=>o.visible&&o.userData.kind&&o.position.distanceTo(this.camera.position)<55));if(this.dungeon.visible)roots.push(...this.dungeon.children.filter(o=>o.userData.kind));const hits=this.ray.intersectObjects(roots,true);let found=null;for(const hit of hits){let o=hit.object;while(o&&!o.userData.kind)o=o.parent;if(o&&o.visible&&hit.distance<45){found={kind:o.userData.kind,data:o.userData.data,distance:hit.distance,object:o};break;}if(hit.distance<4)break;}this.target=found;this.cb.target?.(found);}
+
+ updateGoblinAI(dt){
+   const g=this.goblinPreview,p=this.state?.player;
+   if(!g||!p||p.scene!=='world')return;
+   const ai=g.userData.ai ||= {mode:'patrol',timer:0,attackCooldown:1.5,stones:0,projectiles:[],home:g.position.clone(),seed:0};
+   ai.timer+=dt;ai.attackCooldown-=dt;
+   const dx=p.position.x-g.position.x,dz=p.position.z-g.position.z,dist=Math.hypot(dx,dz);
+   if(dist<13)ai.mode=dist<3?'retreat':dist<7?'attack':'chase';
+   else if(dist>19)ai.mode='patrol';
+   const heading=dist>.01?Math.atan2(dx,dz):g.rotation.y;
+   if(ai.mode!=='patrol')g.rotation.y+=Math.atan2(Math.sin(heading-g.rotation.y),Math.cos(heading-g.rotation.y))*Math.min(1,dt*4);
+   let vx=0,vz=0;
+   if(ai.mode==='chase'&&dist>5){vx=dx/dist*1.5;vz=dz/dist*1.5;}
+   if(ai.mode==='retreat'&&dist<2.8){vx=-dx/dist*1.1;vz=-dz/dist*1.1;}
+   if(ai.mode==='patrol'){
+     const a=ai.timer*.45;const tx=ai.home.x+Math.cos(a)*2,tz=ai.home.z+Math.sin(a)*2;
+     const px=tx-g.position.x,pz=tz-g.position.z,d=Math.hypot(px,pz);
+     if(d>.3){vx=px/d*.65;vz=pz/d*.65;g.rotation.y=Math.atan2(vx,vz);}
+   }
+   g.position.x+=vx*dt;g.position.z+=vz*dt;
+   g.position.y=this.landHeight(g.position.x,g.position.z)+.42;
+   const model=g.userData.animatedModel;
+   if(model){const moving=Math.hypot(vx,vz)>.1;model.rotation.z=Math.sin(this.time*(moving?9:1.35))*(moving?.075:.025);}
+   if(dist<10&&ai.attackCooldown<=0){
+     if(ai.stones<=0){ai.mode='gather';ai.stones=3;ai.attackCooldown=1.2;}
+     else {
+       ai.stones--;ai.mode='throw';ai.attackCooldown=2.2+Math.random()*.8;
+       const stone=this.mesh(new T.DodecahedronGeometry(.085,0),this.mat('#88857c'),[g.position.x,g.position.y+1.0,g.position.z],this.world);
+       const target=new T.Vector3(p.position.x,p.position.y+1.1,p.position.z);
+       const origin=stone.position.clone();const velocity=target.sub(origin).normalize().multiplyScalar(8);
+       velocity.y+=1.5;ai.projectiles.push({mesh:stone,velocity,life:2.4});
+     }
+   }
+   for(const shot of [...ai.projectiles]){
+     shot.life-=dt;shot.velocity.y-=9.8*dt;shot.mesh.position.addScaledVector(shot.velocity,dt);
+     const ground=this.landHeight(shot.mesh.position.x,shot.mesh.position.z);
+     if(shot.life<=0||shot.mesh.position.y<ground){this.world.remove(shot.mesh);shot.mesh.geometry.dispose();shot.mesh.material.dispose();ai.projectiles.splice(ai.projectiles.indexOf(shot),1);}
+   }
+ }
  animate(){requestAnimationFrame(()=>this.animate());if(this.renderer.software&&performance.now()-(this.lastRender||0)<33)return;this.lastRender=performance.now();let dt=Math.min(.1,this.clock.getDelta());this.time+=dt;
+   this.updateGoblinAI(dt);
    // Goblin test has no embedded clips: animate its rigid model safely.
    if(this.goblinPreview?.userData.animatedModel){
      const preview=this.goblinPreview,model=preview.userData.animatedModel;
