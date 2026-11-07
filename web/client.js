@@ -156,6 +156,34 @@ document.addEventListener('keydown',e=>{
 });
 document.addEventListener('keyup',e=>{const a=controls.action(e.code);if(a)view?.keys.delete(DEFAULT_BINDINGS[a]);sendInput();});window.addEventListener('blur',()=>{view?.keys.clear();sendInput();});
 
+// Mobile controls are client-side input adapters; C++ remains authoritative for movement.
+function installMobileControls(){
+ if(!('ontouchstart' in window)&&!navigator.maxTouchPoints)return;
+ const css=document.createElement('style');css.textContent=`
+ #aw-mobile-controls{position:fixed;inset:0;pointer-events:none;z-index:35;touch-action:none}
+ #aw-mobile-stick{position:absolute;left:18px;bottom:92px;width:132px;height:132px;border:2px solid #ffffff88;border-radius:50%;background:#142c3977;pointer-events:auto;touch-action:none}
+ #aw-mobile-knob{position:absolute;width:54px;height:54px;left:39px;top:39px;border-radius:50%;background:#d8e7d6bb;pointer-events:none}
+ #aw-mobile-look{position:absolute;right:0;top:12%;width:52%;height:68%;pointer-events:auto;touch-action:none}
+ #aw-mobile-actions{position:absolute;right:18px;bottom:100px;display:flex;gap:10px;pointer-events:auto}
+ #aw-mobile-actions button{width:58px;height:58px;border-radius:50%;border:1px solid #ffffff99;background:#19343bd9;color:white;font-size:15px;touch-action:manipulation}
+ @media (pointer:fine){#aw-mobile-controls{display:none}}
+ `;document.head.append(css);
+ const ui=document.createElement('div');ui.id='aw-mobile-controls';ui.innerHTML='<div id="aw-mobile-stick"><div id="aw-mobile-knob"></div></div><div id="aw-mobile-look" aria-label="滑動調整鏡頭"></div><div id="aw-mobile-actions"><button data-aw="jump">跳躍</button><button data-aw="interact">互動</button><button data-aw="attack">攻擊</button></div>';document.body.append(ui);
+ const stick=ui.querySelector('#aw-mobile-stick'),knob=ui.querySelector('#aw-mobile-knob'),look=ui.querySelector('#aw-mobile-look');
+ let moveId=null,lookId=null,lastX=0,lastY=0;
+ const clearMove=()=>{moveId=null;knob.style.transform='';if(view){for(const key of ['KeyW','KeyS','KeyA','KeyD'])view.keys.delete(key);}sendInput();};
+ const setMove=e=>{if(!view)return;const r=stick.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,dx=e.clientX-cx,dy=e.clientY-cy,mag=Math.hypot(dx,dy),radius=42,factor=Math.min(1,radius/(mag||1)),x=dx*factor,y=dy*factor;knob.style.transform='translate('+x+'px,'+y+'px)';for(const key of ['KeyW','KeyS','KeyA','KeyD'])view.keys.delete(key);if(y< -13)view.keys.add('KeyW');if(y>13)view.keys.add('KeyS');if(x< -13)view.keys.add('KeyA');if(x>13)view.keys.add('KeyD');sendInput();};
+ stick.addEventListener('pointerdown',e=>{e.preventDefault();moveId=e.pointerId;stick.setPointerCapture(e.pointerId);setMove(e);});
+ stick.addEventListener('pointermove',e=>{if(e.pointerId===moveId)setMove(e);});
+ for(const ev of ['pointerup','pointercancel','lostpointercapture'])stick.addEventListener(ev,e=>{if(e.pointerId===moveId)clearMove();});
+ look.addEventListener('pointerdown',e=>{e.preventDefault();lookId=e.pointerId;lastX=e.clientX;lastY=e.clientY;look.setPointerCapture(e.pointerId);});
+ look.addEventListener('pointermove',e=>{if(e.pointerId!==lookId||!view)return;const sens=Number(localStorage.getItem('aw-sensitivity')||1);view.yaw-=(e.clientX-lastX)*.004*sens;view.pitch=Math.max(-1.3,Math.min(1.3,view.pitch-(e.clientY-lastY)*.004*sens));lastX=e.clientX;lastY=e.clientY;});
+ for(const ev of ['pointerup','pointercancel','lostpointercapture'])look.addEventListener(ev,e=>{if(e.pointerId===lookId)lookId=null;});
+ ui.querySelectorAll('[data-aw]').forEach(button=>button.addEventListener('pointerdown',e=>{e.preventDefault();if(!view||!state)return;const a=button.dataset.aw;if(a==='jump'){view.jump=true;sendInput();}else if(a==='interact')action('interact');else if(a==='attack')action('attack');}));
+ window.addEventListener('blur',clearMove);
+}
+installMobileControls();
+
 async function poll(){if(realtime?.ready||polling||sending||!session||!state||Date.now()-lastSnapshotAt<1000)return;polling=true;try{apply(await api('state'));}catch(e){toast(e.message);}finally{polling=false;}}
 let sending=false;async function sendInput(){if((sending&&!realtime?.ready)||!state||!session||document.hidden||$('#hud').classList.contains('hidden'))return;const k=view.keys,enabled=$('#terminal').classList.contains('hidden')&&$('#chat-panel').classList.contains('hidden'),x=enabled?Number(k.has('KeyD')||k.has('ArrowRight'))-Number(k.has('KeyA')||k.has('ArrowLeft')):0,z=enabled?Number(k.has('KeyW')||k.has('ArrowUp'))-Number(k.has('KeyS')||k.has('ArrowDown')):0;const jumping=view.jump;view.jump=false;const inputSequence=++seq;if(jumping)view.preview.jumpSent(inputSequence);const body={sequence:inputSequence,x,z,yaw:view.yaw,sprint:enabled&&k.has('ShiftLeft'),jump:enabled&&jumping,snapshot:true};if(realtime?.ready){if(realtime.sendInput(body))view.preview.noteInput(inputSequence,performance.now()/1000);else if(jumping)view.jump=true;return;}view.preview.noteInput(inputSequence,performance.now()/1000);sending=true;try{const j=await api('input',body);if(j.player)apply(j);}catch{}finally{sending=false;}}
 try{const health=await api('health');storagePersistent=health.storageMode==='persistent-disk';if(health.inviteRequired)$('#cloud-access').classList.remove('hidden');if(health.cloudTest){$('.local-note').textContent=storagePersistent?'持久磁碟模式；請定期匯出備份。':'免費雲端測試站：休眠、重啟或重新部署可能重設測試存檔。';$('.connection').innerHTML='<i></i> 雲端測試';}catalog=await api('catalog');for(const [list,index]of [[catalog.items,itemIndex],[catalog.resources,resourceIndex],[catalog.classes,classIndex],[catalog.quests,questIndex],[catalog.recipes,recipeIndex]])for(const e of list)index[e.id]=e;const choices=document.querySelector('.class-options');choices.replaceChildren();for(const c of catalog.classes.filter(c=>c.level===1&&!c.parent)){const b=document.createElement('button');b.type='button';b.dataset.class=c.id;b.textContent=c.name;b.classList.toggle('selected',c.id===chosenClass);b.onclick=()=>{chosenClass=c.id;for(const x of choices.children)x.classList.toggle('selected',x===b);};choices.append(b);}$('#loading-detail').textContent='建立光影與城市';view=new RealmScene($('#world'),catalog,{target:setTarget,toast,heading:updateCompass,lock:locked=>{if(state&&$('#terminal').classList.contains('hidden'))$('#explore-hint').classList.toggle('hidden',locked);}});$('#loading').classList.add('hidden');$('#welcome').classList.remove('hidden');if(session){try{await api('state');$('#continue').classList.remove('hidden');}catch{session='';localStorage.removeItem('aw-session');}}setInterval(poll,160);setInterval(sendInput,50);}catch(e){$('#loading-detail').textContent='無法啟動：'+e.message;console.error(e);}
