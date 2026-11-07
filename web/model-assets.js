@@ -59,7 +59,7 @@ export class ModelAssets {
       if (!source.isSkinnedMesh) continue;
       const target = lookup.get(source);
       const skeleton = new T.Skeleton(
-        source.skeleton.bones.map(bone => lookup.get(bone)),
+        source.skeleton.bones.map(bone => { const cloned = lookup.get(bone); if (!cloned) throw new Error('Missing cloned GLB joint'); return cloned; }),
         source.skeleton.boneInverses.map(matrix => matrix.clone())
       );
       target.bind(skeleton, source.bindMatrix.clone());
