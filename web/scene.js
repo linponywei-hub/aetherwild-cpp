@@ -67,7 +67,7 @@ export class RealmScene {
    const name=this.label('哥布林 · 模型測試','#a8e69b',1);
    name.position.y=2.35;
    goblin.add(name);
-   import('/vendor/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync('/assets/models/monsters/goblin-test.glb')).then(({scene})=>{
+   import('/vendor/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync('/assets/models/characters/monsters/goblin-test.glb')).then(({scene})=>{
      if(!goblin.parent)return;
      const box=new T.Box3().setFromObject(scene),h=box.max.y-box.min.y;
      if(!Number.isFinite(h)||h<=0)throw Error('Invalid goblin bounds');
@@ -81,7 +81,7 @@ export class RealmScene {
  goblinTest(e){
    const g=this.wolf(false,e.definition?.replace('boss_','')||'windchime');
    if(!this.renderer.software){
-     const asset='/assets/models/monsters/goblin-test.glb';
+     const asset='/assets/models/characters/monsters/goblin-test.glb';
      import('/vendor/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync(asset)).then(({scene})=>{
        if(!g.parent)return;
        const bounds=new T.Box3().setFromObject(scene),height=bounds.max.y-bounds.min.y;
