@@ -42,7 +42,7 @@ namespace aw {
         if(p.members.empty())s.parties.erase(id);
         else if(p.leader==player)p.leader=*p.members.begin();
     }
-    double PvpSystem::attack(World&w,const Catalog&c,const SessionState&s,const Id&from,const Id&to) {
+    double PvpSystem::attack(World&w,const Catalog&c,const SessionState&s,const Id&from,const Id&to,double bowPower) {
         require(s.pvpEnabled&&from!=to,"PvP 尚未開啟或目標錯誤");
         auto&a=w.players.at(from);
         auto&b=w.players.at(to);
@@ -62,7 +62,7 @@ namespace aw {
             a.vitals.mp-=2;
         }
         double damage=job.base.attack+(a.level-1)*3+InventorySystem::bonuses(a,c).attack-InventorySystem::bonuses(b,c).defense;
-        damage=std::max(1.0,std::round(damage*(job.weapon==WeaponKind::Staff?.32:1)));
+        damage=std::max(1.0,std::round(damage*(job.weapon==WeaponKind::Staff?.32:job.weapon==WeaponKind::Bow?std::clamp(bowPower,.55,1.6):1)));
         if(w.now<b.shieldUntil) {
             double shield=std::min(damage,b.shield);
             b.shield-=shield;

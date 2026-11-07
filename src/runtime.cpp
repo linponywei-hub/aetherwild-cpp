@@ -2,6 +2,7 @@
 #include <fstream>
 #include <random>
 #include <cstdlib>
+#include <chrono>
 namespace aw {
     namespace {
         constexpr double tau=6.283185307179586;
@@ -478,6 +479,10 @@ namespace aw {
             }
         };
         j["player"]["weaponType"]=weaponName(catalog_.classes.at(p.profession).weapon);
+        const double epoch=std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count();
+        j["environment"]=Json{{"unixSeconds",epoch},{"cycleSeconds",1800}};
+        const bool drawing=m!=motion_.end()&&m->second.bowDrawAt>=0&&p.vitals.alive()&&m->second.bowScene==p.scene&&m->second.bowClass==p.profession&&world_.now-m->second.bowDrawAt<=12;
+        j["bow"]=Json{{"drawing",drawing},{"charge",drawing?std::clamp((world_.now-m->second.bowDrawAt)/1.2,0.0,1.0):0},{"fullDrawSeconds",1.2}};
         j["player"]["yaw"]=m==motion_.end()?0:m->second.yaw;
         j["player"]["grounded"]=m==motion_.end()||m->second.grounded;
         j["_motion"]=Json{{"sequence",m==motion_.end()?0:m->second.sequence},
@@ -930,9 +935,23 @@ namespace aw {
             motion.airTime=0;
             motion.peak=p.position.y;
             motion.x=motion.z=0;
-            motion.lift.clear();
+            motion.lift.clear();motion.bowDrawAt=-1;
         };
+        bool releasingBow=type=="bow_release";double bowPower=1;
+        auto validDraw=[&]{return motion.bowDrawAt>=0&&motion.bowScene==p.scene&&motion.bowClass==p.profession&&world_.now-motion.bowDrawAt<=12;};
+        if(type=="bow_cancel"){motion.bowDrawAt=-1;return;}
+        if(type=="bow_draw"){
+            require(features_["combat"]&&p.vitals.alive()&&catalog_.classes.at(p.profession).weapon==WeaponKind::Bow,"目前無法拉弓");
+            require(world_.now>=p.attackReady,"射擊冷卻中");
+            if(!validDraw()){motion.bowDrawAt=world_.now;motion.bowScene=p.scene;motion.bowClass=p.profession;}
+            return;
+        }
+        if(releasingBow){
+            require(p.vitals.alive()&&catalog_.classes.at(p.profession).weapon==WeaponKind::Bow&&validDraw(),"請先按住拉弓，切換場景後需重新拉弓");
+            bowPower=.55+1.05*std::clamp((world_.now-motion.bowDrawAt)/1.2,0.0,1.0);type="attack";
+        }
         if(type=="attack"||type=="weapon_skill"||type=="skill") {
+            if(type=="attack"&&catalog_.classes.at(p.profession).weapon==WeaponKind::Bow)require(releasingBow,"弓箭需按住拉弓後放開射擊");
             require(features_["combat"],"管理員暫停了戰鬥");
             require(world_.now-motion.lastAction>=.08,"操作太快");
             if(target.empty()) {
@@ -954,14 +973,21 @@ namespace aw {
                 require(p.scene!="world"||clearSight(p.position,m.position,buildings_),"目標被建築物遮擋");
             }
             if(type=="attack") {
-                if(world_.players.contains(target))PvpSystem::attack(world_,catalog_,social_,p.id,target);
+                if(releasingBow&&target.empty()){
+                    require(!MovementSystem::safe(p.position,p.scene,catalog_)&&world_.now>=p.attackReady,"安全區或射擊冷卻中");
+                    const auto arrow=j.str("arrow","woodarrow");require(catalog_.arrowBonus.contains(arrow),"未知箭矢");
+                    InventorySystem::pay(p.materials,{{arrow,1}});p.attackReady=world_.now+.8;
+                }
+                else if(world_.players.contains(target))PvpSystem::attack(world_,catalog_,social_,p.id,target,bowPower);
                 else {
                     require(world_.monsters.contains(target),"瞄準前方怪物再攻擊");
-                    CombatSystem::attack(world_,catalog_,p.id,target,j.str("arrow","woodarrow"));
+                    CombatSystem::attack(world_,catalog_,p.id,target,j.str("arrow","woodarrow"),bowPower);
                 }
             }
             else if(type=="weapon_skill")CombatSystem::weaponSkill(world_,catalog_,p.id,target);
             else CombatSystem::cast(world_,catalog_,p.id,j.str("skill"),target);
+            if(releasingBow){motion.bowDrawAt=-1;world_.events.push_back({"ArrowReleased",p.id,target,bowPower,"蓄力射箭"});}
+            else if(type!="attack")motion.bowDrawAt=-1;
             motion.lastAction=world_.now;
         }
         else if(type=="gather") {
@@ -982,7 +1008,7 @@ namespace aw {
             QuestSystem::claim(p,target,giver,catalog_);
             auto prof=contentEntry("profiles",giver);if(!done&&prof){auto& rel=contentState_["relations"][p.id];if(!rel.contains(giver))rel[giver]=NpcSystem::initial();NpcSystem::event(rel[giver],*prof,"quest","quest:"+target,NpcSystem::clock());}
         }
-        else if(type=="job")ProgressionSystem::changeClass(p,target,npc.empty()?nearService("guild"):npc,catalog_);
+        else if(type=="job"){ProgressionSystem::changeClass(p,target,npc.empty()?nearService("guild"):npc,catalog_);motion.bowDrawAt=-1;}
         else if(type=="buy"){
             auto seller=npc.empty()?nearService("merchant"):npc;auto before=p.coins;
             EconomySystem::buy(world_,p,target,j.contains("count")?j.at("count").integer():1,seller,catalog_);

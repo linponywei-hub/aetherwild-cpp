@@ -48,7 +48,7 @@ namespace aw {
         w.monsters.emplace(id,m);
         return m;
     }
-    AttackResult CombatSystem::attack(World& w,const Catalog& c,const Id& player,const Id& monster,const Id& arrow) {
+    AttackResult CombatSystem::attack(World& w,const Catalog& c,const Id& player,const Id& monster,const Id& arrow,double bowPower) {
         auto&p=w.players.at(player);
         auto&m=w.monsters.at(monster);
         auto&job=c.classes.at(p.profession);
@@ -61,7 +61,7 @@ namespace aw {
             InventorySystem::pay(p.materials, {
                 {arrow,1}
             });
-            damage*=(1+c.arrowBonus.at(arrow))*(w.now<p.arrowHasteUntil?1.35:1);
+            damage*=std::clamp(bowPower,.55,1.6)*(1+c.arrowBonus.at(arrow))*(w.now<p.arrowHasteUntil?1.35:1);
             cooldown=w.now<p.arrowHasteUntil?.5:.8;
         }
         if(magicWeapon(job.weapon)) {
