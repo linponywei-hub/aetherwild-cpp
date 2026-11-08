@@ -46,14 +46,51 @@ export class RealmScene {
  loadVillageHouse(group,index,building){
   const filename='village_building_'+String(index).padStart(2,'0')+'_lod0.glb';
   import('/vendor/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync('/assets/models/buildings/village/'+filename)).then(({scene})=>{
+    // House 01: infer the base from broad near-planar underside faces.
+    // This fixes an incorrectly authored up axis without guessing a 90-degree yaw.
+    if(index===1){
+      scene.updateMatrixWorld(true);
+      const faces=[];
+      const a=new T.Vector3(),b=new T.Vector3(),c=new T.Vector3();
+      const ab=new T.Vector3(),ac=new T.Vector3(),normal=new T.Vector3();
+      scene.traverse(obj=>{
+        if(!obj.isMesh||!obj.geometry?.attributes?.position)return;
+        const geo=obj.geometry,pos=geo.attributes.position,idx=geo.index;
+        const count=idx?idx.count:pos.count,step=Math.max(3,Math.floor(count/24000/3)*3);
+        for(let j=0;j+2<count;j+=step){
+          a.fromBufferAttribute(pos,idx?idx.getX(j):j).applyMatrix4(obj.matrixWorld);
+          b.fromBufferAttribute(pos,idx?idx.getX(j+1):j+1).applyMatrix4(obj.matrixWorld);
+          c.fromBufferAttribute(pos,idx?idx.getX(j+2):j+2).applyMatrix4(obj.matrixWorld);
+          ab.subVectors(b,a);ac.subVectors(c,a);normal.crossVectors(ab,ac);
+          const area=normal.length()*.5;
+          if(area>1e-7){normal.normalize();faces.push({n:normal.clone(),center:a.clone().add(b).add(c).multiplyScalar(1/3),area});}
+        }
+      });
+      const axes=[new T.Vector3(0,1,0),new T.Vector3(0,-1,0),new T.Vector3(1,0,0),new T.Vector3(-1,0,0),new T.Vector3(0,0,1),new T.Vector3(0,0,-1)];
+      const candidates=axes.map(up=>{
+        const coords=faces.map(face=>face.center.dot(up));
+        const min=Math.min(...coords),max=Math.max(...coords),band=Math.max(.035,(max-min)*.075);
+        let score=0;
+        for(let j=0;j<faces.length;j++)if(coords[j]<min+band){
+          // Double-sided geometry can reverse winding; planar alignment is
+          // more reliable than face normal sign on imported Tripo assets.
+          const flat=Math.abs(faces[j].n.dot(up));
+          if(flat>.88)score+=faces[j].area*flat;
+        }
+        return {up,score};
+      }).sort((a,b)=>b.score-a.score);
+      // Only change the authored up axis when the detected foundation
+      // clearly dominates the next plausible face.
+      if(candidates[0]?.score>0&&candidates[0].score>candidates[1].score*1.4){
+        scene.quaternion.setFromUnitVectors(candidates[0].up,new T.Vector3(0,1,0));
+        console.info('[Aetherwild] House 01 foundation axis',candidates[0].up.toArray());
+      }
+    }
     const bounds=new T.Box3().setFromObject(scene);
     const size=bounds.getSize(new T.Vector3());
     if(!Number.isFinite(size.x)||Math.min(size.x,size.y,size.z)<=0)throw Error('Invalid village house bounds');
     const scale=Math.min(building.width/size.x,building.depth/size.z,building.height/size.y);
     scene.scale.setScalar(scale);
-    // House 01's authored forward axis differs from the village placement axis.
-    // Apply the yaw correction before fitting, grounding and collider extraction.
-    if(index===1)scene.rotation.y=Math.PI/2;
     const fitted=new T.Box3().setFromObject(scene);
     const center=fitted.getCenter(new T.Vector3());
     scene.position.set(-center.x,-fitted.min.y,-center.z);
