@@ -1,3 +1,4 @@
+import * as THREE from './vendor/three.module.js';
 import {harborHeight} from './landscape-model.js';
 // Presentation only. Never writes to snapshots or sends a position to the server.
 export class MovementPreview {
@@ -23,16 +24,36 @@ export class MovementPreview {
  }
  blocked(p){
   if(this.scene!=='world')return Math.abs(p.x)>24||Math.abs(p.z)>29;
-  return this.catalog.buildings.some(b=>p.y+1.7>b.position.y&&p.y<b.position.y+b.height&&Math.abs(p.x-b.position.x)<b.width/2+.45&&Math.abs(p.z-b.position.z)<b.depth/2+.45);
+  // Village collision is derived from the rendered GLB triangle surfaces.
+  // Test a short horizontal player sweep at feet, torso and head height;
+  // do not treat an entire building bounding box as solid.
+  if(this.villageCollisionMeshes?.length){
+   const start=this._collisionFrom||this.position()||p;
+   const dx=p.x-start.x,dz=p.z-start.z;
+   const distance=Math.hypot(dx,dz);
+   if(distance>0.00001&&distance<3){
+    const ray=new THREE.Raycaster();
+    const direction=new THREE.Vector3(dx/distance,0,dz/distance);
+    for(const h of [.25,.9,1.55]){
+     ray.set(new THREE.Vector3(start.x,start.y+h,start.z),direction);
+     ray.near=0;ray.far=distance+.35;
+     if(ray.intersectObjects(this.villageCollisionMeshes,false).some(hit=>hit.distance<=distance+.35))return true;
+    }
+   }
+  }
+  return this.catalog.buildings.some(b=>b.region!=='windchime'&&p.y+1.7>b.position.y&&p.y<b.position.y+b.height&&Math.abs(p.x-b.position.x)<b.width/2+.45&&Math.abs(p.z-b.position.z)<b.depth/2+.45);
  }
  integrate(p,input,dt,jump=false){
   const length=Math.max(1,Math.hypot(input.x,input.z));
   const speed=this.hints.speed*(input.sprint&&this.hints.sprintAllowed?1.6:1);
   const x=input.x/length,z=input.z/length,c=Math.cos(input.yaw),s=Math.sin(input.yaw);
   const next={...p,x:Math.max(-this.limit,Math.min(this.limit,p.x+(x*c-z*s)*speed*dt))};
+  this._collisionFrom=p;
   if(this.blocked(next))next.x=p.x;
   next.z=Math.max(-this.limit,Math.min(this.limit,p.z+(-x*s-z*c)*speed*dt));
+  this._collisionFrom={...p,x:next.x};
   if(this.blocked(next))next.z=p.z;
+  this._collisionFrom=null;
   const ground=this.ground(next);
   if(jump&&next.grounded){next.vy=this.hints.jumpSpeed;next.grounded=false;}
   if(next.grounded&&next.vy<=0&&Math.abs(p.y-ground)<=1.4)next.y=ground;
