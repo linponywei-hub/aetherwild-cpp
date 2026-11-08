@@ -44,6 +44,18 @@ export class RealmScene {
  this.liftRoot=new T.Group();this.root.add(this.liftRoot);const astral=this.catalog.regions.find(r=>r.id==='astral');this.liftRoot.position.set(astral.position.x,0,astral.position.z+110);this.cylinder(this.liftRoot,6,6,.6,'#b5b5a3',0,-.3,0,24);this.cylinder(this.liftRoot,5.8,5.8,.04,this.mat('#8e9cb4',{emissive:'#7d83a5',emissiveIntensity:.2}),0,.02,0,24);this.liftRoot.userData={kind:'lift',data:{id:'astral',name:'星穹升降台'}};for(const h of [0,62]){const post=this.box(this.root,.5,1.5,.5,'#b9c0aa',astral.position.x+5,h+.75,astral.position.z+110);post.userData={kind:'lift',data:{id:'astral',name:'星穹升降台'}};}
  this.makeScenery(0,24);
  }
+ refreshVillageCollision(group){
+  const model=group?.userData?.villageGLB,index=group?.userData?.villageIndex;
+  if(!model||!index)return;
+  group.updateMatrixWorld(true);
+  const bounds=new T.Box3().setFromObject(model);
+  if(bounds.isEmpty())return;
+  this.villageCollisionBounds??=[];
+  const proxy={index,min:bounds.min.clone(),max:bounds.max.clone()};
+  const at=this.villageCollisionBounds.findIndex(item=>item.index===index);
+  if(at>=0)this.villageCollisionBounds[at]=proxy;else this.villageCollisionBounds.push(proxy);
+  this.preview.villageCollisionBounds=this.villageCollisionBounds;
+ }
  loadVillageHouse(group,index,building){
   const filename='village_building_'+String(index).padStart(2,'0')+'_lod0.glb';
   import('/vendor/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync('/assets/models/buildings/village/'+filename)).then(({scene})=>{
