@@ -71,6 +71,20 @@ export class RealmScene {
     group.children.forEach(child=>child.visible=false);
     group.add(scene);
     group.userData.villageModel=filename;
+    // Temporary model identification marker for isolating the remaining cracked house.
+    const markerCanvas=document.createElement('canvas');
+    markerCanvas.width=256;markerCanvas.height=96;
+    const ctx=markerCanvas.getContext('2d');
+    ctx.fillStyle='rgba(17,29,28,0.86)';ctx.fillRect(12,10,232,76);
+    ctx.strokeStyle='#ffe8a6';ctx.lineWidth=4;ctx.strokeRect(12,10,232,76);
+    ctx.fillStyle='#fff2c7';ctx.font='bold 43px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('房屋 '+String(index).padStart(2,'0'),128,49);
+    const markerTexture=new T.CanvasTexture(markerCanvas);
+    const marker=new T.Sprite(new T.SpriteMaterial({map:markerTexture,depthTest:false,transparent:true}));
+    marker.position.set(0,Math.max(building.height, fitted.max.y-fitted.min.y)+1.5,0);
+    marker.scale.set(3.8,1.42,1);
+    marker.renderOrder=999;
+    group.add(marker);
   }).catch(error=>console.warn('[Aetherwild] Village GLB unavailable; keeping procedural house',filename,error));
  }
  makeScenery(){}
