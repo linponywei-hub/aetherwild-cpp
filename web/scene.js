@@ -66,24 +66,36 @@ export class RealmScene {
           if(area>1e-7){normal.normalize();faces.push({n:normal.clone(),center:a.clone().add(b).add(c).multiplyScalar(1/3),area});}
         }
       });
-      const axes=[new T.Vector3(0,1,0),new T.Vector3(0,-1,0),new T.Vector3(1,0,0),new T.Vector3(-1,0,0),new T.Vector3(0,0,1),new T.Vector3(0,0,-1)];
-      const candidates=axes.map(up=>{
-        const coords=faces.map(face=>face.center.dot(up));
-        const min=Math.min(...coords),max=Math.max(...coords),band=Math.max(.035,(max-min)*.075);
-        let score=0;
-        for(let j=0;j<faces.length;j++)if(coords[j]<min+band){
-          // Double-sided geometry can reverse winding; planar alignment is
-          // more reliable than face normal sign on imported Tripo assets.
-          const flat=Math.abs(faces[j].n.dot(up));
-          if(flat>.88)score+=faces[j].area*flat;
+      // Discover tilted foundation normals, not just the six world axes.
+      // Candidate normals come from the largest actual mesh triangles.
+      const directions=[new T.Vector3(0,1,0)];
+      for(const face of [...faces].sort((a,b)=>b.area-a.area).slice(0,500)){
+        for(const sign of [1,-1]){
+          const up=face.n.clone().multiplyScalar(sign);
+          // A building foundation should broadly point upwards; reject walls.
+          if(up.y<.25||directions.some(v=>v.dot(up)>.992))continue;
+          directions.push(up);
+          if(directions.length>=90)break;
         }
-        return {up,score};
+        if(directions.length>=90)break;
+      }
+      const candidates=directions.map(up=>{
+        let min=Infinity,max=-Infinity;
+        for(const face of faces){const h=face.center.dot(up);min=Math.min(min,h);max=Math.max(max,h);}
+        const band=Math.max(.025,(max-min)*.035);
+        let score=0;
+        for(const face of faces){
+          const h=face.center.dot(up);
+          if(h<=min+band&&Math.abs(face.n.dot(up))>.94)
+            score+=face.area*Math.abs(face.n.dot(up));
+        }
+        // Prefer plausible near-upright orientations when surface scores tie.
+        return {up,score:score*(.6+.4*up.y)};
       }).sort((a,b)=>b.score-a.score);
-      // Only change the authored up axis when the detected foundation
-      // clearly dominates the next plausible face.
-      if(candidates[0]?.score>0&&candidates[0].score>candidates[1].score*1.4){
-        scene.quaternion.setFromUnitVectors(candidates[0].up,new T.Vector3(0,1,0));
-        console.info('[Aetherwild] House 01 foundation axis',candidates[0].up.toArray());
+      if(candidates[0]?.score>0){
+        const up=candidates[0].up;
+        scene.quaternion.setFromUnitVectors(up,new T.Vector3(0,1,0));
+        console.info('[Aetherwild] House 01 detected foundation normal',up.toArray(),'score',candidates[0].score);
       }
     }
     const bounds=new T.Box3().setFromObject(scene);
