@@ -1,0 +1,25 @@
+name: Repair village GLB candidates
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Install Blender
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y blender
+      - name: Create candidate GLBs (never overwrite originals)
+        run: blender --background --factory-startup --python tools/repair_village_glb.py
+      - name: Upload repaired candidates and diagnostic report
+        uses: actions/upload-artifact@v4
+        with:
+          name: repaired-village-glb-candidates
+          path: repaired-village-glb/
+          retention-days: 14
