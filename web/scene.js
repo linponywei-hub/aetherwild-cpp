@@ -108,27 +108,31 @@ export class RealmScene {
     group.children.forEach(child=>child.visible=false);
     group.add(scene);
     group.userData.villageModel=filename;
-    // Generate cheap wall proxies once, from the lower/middle portion of the GLB.
-    // Full mesh bounds include roof overhangs and create invisible walls.
+    // Rebuild collision from the five visible GLB house footprints only.
+    // Four short wall strips per house, with a gap at the front entrance.
+    // No old procedural house collider and no per-frame triangle raycasts.
     this.villageCollisionBounds??=[];
     group.updateMatrixWorld(true);
-    const collisionBounds=new T.Box3().setFromObject(scene);
-    const bottom=collisionBounds.min.y, top=collisionBounds.max.y;
-    const wallBounds=new T.Box3();
-    const vertex=new T.Vector3();
-    const lower=bottom+(top-bottom)*.12,upper=bottom+(top-bottom)*.58;
-    scene.traverse(obj=>{
-      if(!obj.isMesh||!obj.geometry?.attributes?.position)return;
-      const positions=obj.geometry.attributes.position;
-      for(let i=0;i<positions.count;i++){
-        vertex.fromBufferAttribute(positions,i).applyMatrix4(obj.matrixWorld);
-        if(vertex.y>=lower&&vertex.y<=upper)wallBounds.expandByPoint(vertex);
-      }
-    });
-    // Fall back to the fitted model bounds if the mesh has no suitable wall vertices.
-    if(wallBounds.isEmpty())wallBounds.copy(collisionBounds);
+    const bounds=new T.Box3().setFromObject(scene);
+    const width=bounds.max.x-bounds.min.x,depth=bounds.max.z-bounds.min.z;
+    // Roof overhangs and ornamental protrusions must not reach the roadway.
+    const insetX=Math.min(.8,width*.12),insetZ=Math.min(.8,depth*.12);
+    const x0=bounds.min.x+insetX,x1=bounds.max.x-insetX;
+    const z0=bounds.min.z+insetZ,z1=bounds.max.z-insetZ;
+    const wall=Math.min(.24,(x1-x0)*.045,(z1-z0)*.045);
+    const doorHalf=Math.min(1.05,(x1-x0)*.17);
+    const mid=(x0+x1)/2;
+    const minY=group.position.y-.2,maxY=group.position.y+Math.max(2.2,building.height*.72);
+    const makeWall=(ax,bx,az,bz)=>({x0:ax,x1:bx,z0:az,z1:bz,minY,maxY});
+    const walls=[
+      makeWall(x0,x0+wall,z0,z1),
+      makeWall(x1-wall,x1,z0,z1),
+      makeWall(x0,x1,z0,z0+wall),
+      makeWall(x0,mid-doorHalf,z1-wall,z1),
+      makeWall(mid+doorHalf,x1,z1-wall,z1)
+    ];
     const existing=this.villageCollisionBounds.findIndex(item=>item.index===index);
-    const proxy={index,min:wallBounds.min.clone(),max:wallBounds.max.clone()};
+    const proxy={index,walls};
     if(existing>=0)this.villageCollisionBounds[existing]=proxy;
     else this.villageCollisionBounds.push(proxy);
     this.preview.villageCollisionBounds=this.villageCollisionBounds;
