@@ -22,7 +22,7 @@ NPC目前是每人獨立狀態的規則式AI，沒有外部語言模型呼叫。
 
 ## 操作與建置
 
-`python3 tools/generate_catalog.py` 保留原目錄生成方式；修改 `data/content` 後執行 `python3 tools/generate_content.py`，將JSON嵌入 `src/content_data.cpp` 與分片，部署不需要另外讀資料檔。
+`python3 tools/generate_catalog.py` 保留原目錄生成方式；修改 `data/content` 後執行 `python3 tools/generate_content.py`，將JSON嵌入 `src/generated/content_data.cpp` 與分片，部署不需要另外讀資料檔。
 
 `python3 tools/test_content.py` 用 g++ 建置並跑原核心、runtime及內容測試；`ASAN_OPTIONS=detect_leaks=0 python3 tools/test_content.py --sanitize` 跑ASan/UBSan。正常CMake也會包含分片及content測試。
 

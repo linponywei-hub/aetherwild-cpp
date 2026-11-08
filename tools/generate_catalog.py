@@ -60,5 +60,5 @@ for group,entries in groups.items():
 output+=['}', 'Catalog makeCatalog() { Catalog c;']
 output.extend('    load_'+group+'(c);' for group in groups)
 output+=['    c.validate(); return c;', '}', '}']
-(root/'src/catalog.cpp').write_text('\n'.join(output)+'\n',encoding='utf-8')
+(root/'src/generated/catalog.cpp').write_text('\n'.join(output)+'\n',encoding='utf-8')
 print('Catalog generated:',len(d['ITEMS']),'items,',len(d['DUNGEONS']),'dungeons')

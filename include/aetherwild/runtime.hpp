@@ -48,6 +48,9 @@ namespace aw {
         Json contentState_ {Json::object()};
         void configureContent(bool expanded);
         bool contentCommand(Player&,const Json&);
+        bool npcCommand(Player&,const Json&);
+        void tickNpcs();
+        void positionNpcs();
         void contentTick(double);
         bool monsterAbility(Monster&,Player*);
         Json contentSnapshot(const Player&)const;

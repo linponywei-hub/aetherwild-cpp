@@ -1,3 +1,5 @@
+> 功能模組入口與依賴請先讀 [模組架構](docs/architecture/README.md)。本次保留 C++ 規則與存檔格式，詳細搬移及刪除記錄見該目錄。
+
 # 界域紀元｜C++ 工作站測試版 0.2.2
 
 本版已由純文字核心，接成可操作的第一人稱遊戲工作站。C++20 原生程式執行角色、移動、碰撞、物理、戰鬥、AI、採集、製作、任務、共享副本、隊伍、PvP、權限與保存。瀏覽器只負責輸入、場景與UI，沒有恢復舊game.js或Worker遊戲規則。
@@ -62,15 +64,15 @@ python3 tools/run_workstation.py
 | 路徑 | 職責 |
 |---|---|
 | include/aetherwild/domain.hpp | 明確的角色、物品、怪物、任務、資源與副本資料模型 |
-| src/combat.cpp、inventory.cpp等 | 原生C++領域規則 |
-| src/geometry.cpp | 原生建物碰撞、分層樓板、翠冠斜坡與遮擋 |
-| src/runtime.cpp | 命令路由、固定tick、玩家輸入、怪物AI與共享世界 |
-| src/runtime_state.cpp | 世界、角色、隊伍、獎勵、請求去重及升降狀態的版本化保存 |
-| src/json.cpp | 有深度、長度、整數與Unicode檢查的JSON解析器 |
+| src/modules/combat/combat.cpp、inventory.cpp等 | 原生C++領域規則 |
+| src/modules/physics/geometry.cpp | 原生建物碰撞、分層樓板、翠冠斜坡與遮擋 |
+| src/modules/runtime/ | 固定tick、初始化與命令交易協調；物理、AI、登入、快照及備份已分離至各功能模組 |
+| src/modules/storage/runtime_state.cpp | 世界、角色、隊伍、獎勵、請求去重及升降狀態的版本化保存 |
+| src/modules/core/json.cpp | 有深度、長度、整數與Unicode檢查的JSON解析器 |
 | apps/workstation.cpp | C++ HTTP、靜態資產、請求限制與API介面 |
-| web/scene.js | 新的場景、模型、光影與鏡頭呈現 |
-| web/software-renderer.js | 無WebGL時使用相同場景與鏡頭的Canvas相容顯示 |
-| web/client.js | 新的UI、按鍵與命令送出；不計算權威傷害或發物品 |
+| web/modules/core/scene.js | 新的場景、模型、光影與鏡頭呈現 |
+| web/modules/rendering/software-renderer.js | 無WebGL時使用相同場景與鏡頭的Canvas相容顯示 |
+| web/modules/core/client.js | 新的UI、按鍵與命令送出；不計算權威傷害或發物品 |
 | data/legacy_catalog.json | 從原遊戲取出的內容資料，保留原ID |
 | tools/generate_catalog.py | 離線產生型別化C++目錄，執行時不讀舊JS模組 |
 | tests/ | 核心、工作站、HTTP、重啟與CLI驗證 |

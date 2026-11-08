@@ -1,0 +1,36 @@
+name: Validate game modules
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  modules:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify module paths and browser behavior
+        run: |
+          python3 tools/check_modules.py
+          node --test tests/*.test.mjs
+      - name: Build native feature modules
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -j2
+          ctest --test-dir build --output-on-failure
+      - name: Verify native HTTP, access, moved pages and panels
+        run: |
+          python3 tests/http_runner.py
+          python3 tests/content_http.py
+          python3 tests/cloud_access.py
+          python3 tests/module_http.py
+          python3 tests/bow_http.py build/aetherwild_workstation
+          python3 tests/enhancement_http.py build/aetherwild_workstation

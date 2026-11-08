@@ -22,14 +22,14 @@ for i,start in enumerate(range(0,len(text),120000)):
   assert ')AWCONTENT"' not in chunk
   lines.append('text+=R"AWCONTENT('+chunk+')AWCONTENT";')
  lines+=['return text; } }']
- output=root/'src'/('content_payload_'+str(i).zfill(3)+'.cpp'); compiled='\n'.join(lines)+'\n'
+ output=root/'src/generated'/('content_payload_'+str(i).zfill(3)+'.cpp'); compiled='\n'.join(lines)+'\n'
  if not output.exists() or output.read_text(encoding='utf-8')!=compiled:output.write_text(compiled,encoding='utf-8')
 lines=[header,'namespace aw {']+['std::string '+name+'();' for name in parts]
 lines+=['const Json& contentBundle(){ static const Json data=[] { std::string text;']
 lines+=['text+='+name+'();' for name in parts]
 lines+=['return Json::parse(text); }(); return data; } }']
-output=root/'src/content_data.cpp';compiled='\n'.join(lines)+'\n'
+output=root/'src/generated/content_data.cpp';compiled='\n'.join(lines)+'\n'
 if not output.exists() or output.read_text(encoding='utf-8')!=compiled:output.write_text(compiled,encoding='utf-8')
-for old in (root/'src').glob('content_payload_*.cpp'):
+for old in (root/'src/generated').glob('content_payload_*.cpp'):
  if int(old.stem.rsplit('_',1)[1])>=len(parts):old.unlink()
 print('Compiled content bytes:',len(text.encode('utf-8')),'fragments:',len(parts))

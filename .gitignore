@@ -9,3 +9,11 @@ runtime-data/
 !.env.example
 reference/*.zip
 *.log
+# Temporary modeling/CI products belong outside the source tree.
+output/
+village-lod-candidates/
+village-glb-repaired/
+house-001-patch-test/
+village_glb_audit.json
+repaired-village-glb/
+village-hole-fill-candidate/

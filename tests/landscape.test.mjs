@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {surfaceAt,gridHeight,harborHeight} from '../web/landscape-model.js';
+import {surfaceAt,gridHeight,harborHeight} from '../web/modules/world/landscape-model.js';
 const model=JSON.parse(fs.readFileSync(new URL('../data/atlas_surface.json',import.meta.url)));
 const world=([x,z])=>({x:(x-633)*64,z:(z-578)*64});
 test('reference coast, northwest snow, western forest and southeast desert stay in authored locations',()=>{for(const [pixel,kind] of [[[1180,550],'water'],[[400,100],'snow'],[[200,500],'forest'],[[1100,950],'desert']]){const p=world(pixel);assert.equal(surfaceAt(p.x,p.z,model),kind);}});

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {SnapshotOrder} from '../web/network-sync.js';
+import {SnapshotOrder} from '../web/modules/network/network-sync.js';
 const snap=(epoch,sequence,now=1)=>({player:{id:'p'},now,_sync:{epoch,sequence}});
 test('late poll cannot undo a newer command in the same simulation tick',()=>{
  const order=new SnapshotOrder();

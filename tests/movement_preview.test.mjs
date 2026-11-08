@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {MovementPreview} from '../web/movement-preview.js';
+import {MovementPreview} from '../web/modules/physics/movement-preview.js';
 const catalog={regions:[],buildings:[]};
 const motion={sequence:0,velocityY:0,jumpPending:false,lift:'',speed:5,sprintAllowed:true,gravity:22,jumpSpeed:8};
 const snapshot=(x=0,extra={})=>({player:{id:'p',hp:100,scene:'world',grounded:true,position:{x,y:0,z:0}},_sync:{epoch:'a'},_motion:{...motion},...extra});

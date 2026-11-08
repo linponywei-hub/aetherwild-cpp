@@ -1,6 +1,6 @@
 # Canvas相容繪圖降級與實測界線
 
-分支ai/canvas-render-performance。只修改web/software-renderer.js與web/client.js及本文件，不更動C++權威、API、角色存檔、資料庫或硬體WebGL場景。
+分支ai/canvas-render-performance。只修改web/modules/rendering/software-renderer.js與web/modules/core/client.js及本文件，不更動C++權威、API、角色存檔、資料庫或硬體WebGL場景。
 
 新增即時面板後，雲端測試瀏覽器在可見的建立角色畫面連續顯示約1FPS。這是雲端瀏覽器資料，不能宣稱使用者電腦也只有1FPS；但可證實fallback繪圖有需處理的路徑。
 

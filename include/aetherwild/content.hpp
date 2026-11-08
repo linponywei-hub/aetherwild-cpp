@@ -1,5 +1,6 @@
 #pragma once
 #include "json.hpp"
+#include "aetherwild/npc/system.hpp"
 namespace aw {
 const Json& contentBundle();
 const Json& atlasSurface();
@@ -16,12 +17,5 @@ std::string weaponName(WeaponKind);
 bool magicWeapon(WeaponKind);
 bool rangedWeapon(WeaponKind);
 Id startingWeapon(const Catalog&,const Id&);
-struct NpcSystem {
- static double clock();
- static Json initial();
- static int score(const Json&);
- static std::string tier(int);
- static void event(Json&,const Json& profile,const std::string& kind,const Id& receipt,double now,int amount=0);
- static Json view(const Json&,const Json& profile,double now);
-};
+
 }
