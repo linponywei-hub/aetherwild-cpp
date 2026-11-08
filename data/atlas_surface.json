@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "metersPerPixel": 64,
   "originPixel": [
     633,
@@ -844,5 +844,24 @@
       },
       "extent": 6860.8
     }
-  ]
+  ],
+  "relief": {
+    "algorithm": "ridged-atlas-v2",
+    "seed": 57291,
+    "coastBlendMeters": 560,
+    "riverBankMeters": 320,
+    "flatZones": [
+      {
+        "name": "darkforest",
+        "pixel": [
+          57,
+          694
+        ],
+        "radius": 75,
+        "feather": 25,
+        "base": 1.0,
+        "amplitude": 0.7
+      }
+    ]
+  }
 }
