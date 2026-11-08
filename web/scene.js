@@ -71,12 +71,29 @@ export class RealmScene {
     group.children.forEach(child=>child.visible=false);
     group.add(scene);
     group.userData.villageModel=filename;
-    // Cache only a fitted bounding proxy once on load, not triangles every frame.
-    // Building 001 uses its own proxy and leaves the other four GLBs unchanged.
+    // Generate cheap wall proxies once, from the lower/middle portion of the GLB.
+    // Full mesh bounds include roof overhangs and create invisible walls.
     this.villageCollisionBounds??=[];
-    scene.updateMatrixWorld(true);
+    group.updateMatrixWorld(true);
     const collisionBounds=new T.Box3().setFromObject(scene);
-    this.villageCollisionBounds.push({index,min:collisionBounds.min.clone(),max:collisionBounds.max.clone()});
+    const bottom=collisionBounds.min.y, top=collisionBounds.max.y;
+    const wallBounds=new T.Box3();
+    const vertex=new T.Vector3();
+    const lower=bottom+(top-bottom)*.12,upper=bottom+(top-bottom)*.58;
+    scene.traverse(obj=>{
+      if(!obj.isMesh||!obj.geometry?.attributes?.position)return;
+      const positions=obj.geometry.attributes.position;
+      for(let i=0;i<positions.count;i++){
+        vertex.fromBufferAttribute(positions,i).applyMatrix4(obj.matrixWorld);
+        if(vertex.y>=lower&&vertex.y<=upper)wallBounds.expandByPoint(vertex);
+      }
+    });
+    // Fall back to the fitted model bounds if the mesh has no suitable wall vertices.
+    if(wallBounds.isEmpty())wallBounds.copy(collisionBounds);
+    const existing=this.villageCollisionBounds.findIndex(item=>item.index===index);
+    const proxy={index,min:wallBounds.min.clone(),max:wallBounds.max.clone()};
+    if(existing>=0)this.villageCollisionBounds[existing]=proxy;
+    else this.villageCollisionBounds.push(proxy);
     this.preview.villageCollisionBounds=this.villageCollisionBounds;
     // Temporary model identification marker for isolating the remaining cracked house.
     const markerCanvas=document.createElement('canvas');
