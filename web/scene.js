@@ -67,7 +67,21 @@ export class RealmScene {
     // Sink the bottom trim into the terrain rather than allowing a visible air gap.
     // Clamp to avoid burying short houses or changing their overall proportions.
     scene.position.y-=Math.min(.45,Math.max(.16,building.height*.065));
-    scene.traverse(obj=>{if(obj.isMesh){obj.castShadow=true;obj.receiveShadow=true;}});
+    scene.traverse(obj=>{
+      if(!obj.isMesh)return;
+      obj.castShadow=true;obj.receiveShadow=true;
+      if(index===1){
+        // The 001 Tripo mesh has open seams and back-facing patches.
+        // Render both sides of its original textured surfaces to prevent
+        // back-face culling from revealing the sky along those joins.
+        const materials=Array.isArray(obj.material)?obj.material:[obj.material];
+        for(const material of materials){
+          if(!material)continue;
+          material.side=T.DoubleSide;
+          material.needsUpdate=true;
+        }
+      }
+    });
     group.children.forEach(child=>child.visible=false);
     group.add(scene);
     group.userData.villageModel=filename;
