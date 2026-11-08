@@ -58,9 +58,15 @@ export class RealmScene {
     // Using only the center height makes a house float above sloping terrain.
     const footprint=[[0,0],[-.4,-.4],[-.4,.4],[.4,-.4],[.4,.4]];
     const heights=footprint.map(([u,v])=>this.landHeight(group.position.x+u*building.width,group.position.z+v*building.depth)).filter(Number.isFinite);
-    if(heights.length)group.position.y=Math.min(...heights);
-    // Source meshes can contain low stray vertices; compensate a small remaining visual gap.
-    scene.position.y-=Math.min(.12,Math.max(0,building.height*.015));
+    // Anchor to the terrain at the house centre, then embed the foundation slightly.
+    // The old minimum-footprint anchor left the entire visible foundation hovering
+    // where the terrain renderer and catalog elevation did not coincide.
+    const centreHeight=this.landHeight(group.position.x,group.position.z);
+    if(Number.isFinite(centreHeight))group.position.y=centreHeight;
+    else if(heights.length)group.position.y=heights[Math.floor(heights.length/2)];
+    // Sink the bottom trim into the terrain rather than allowing a visible air gap.
+    // Clamp to avoid burying short houses or changing their overall proportions.
+    scene.position.y-=Math.min(.45,Math.max(.16,building.height*.065));
     scene.traverse(obj=>{if(obj.isMesh){obj.castShadow=true;obj.receiveShadow=true;}});
     group.children.forEach(child=>child.visible=false);
     group.add(scene);
