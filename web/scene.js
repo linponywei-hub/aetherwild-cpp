@@ -140,9 +140,16 @@ export class RealmScene {
         // Use the lowest terrain contact point to prevent any floating corner
         // while keeping the house upright. Do not change the detected rotation.
         const terrainY=heights.length?Math.min(...heights):group.position.y;
-        const targetY=terrainY-.12;
-        const shift=targetY-foundationY;
-        if(Number.isFinite(shift))scene.position.y+=Math.max(-3,Math.min(3,shift));
+        // The GLB is not parented to the house group yet, so its sampled
+        // vertex heights are in local space. Convert terrain world height to
+        // the same local space before calculating the correction.
+        const targetLocalY=terrainY-group.position.y-.12;
+        const shift=targetLocalY-foundationY;
+        if(Number.isFinite(shift))scene.position.y+=shift;
+        console.info('[Aetherwild] House 01 ground correction',{
+          foundationLocalY:foundationY,targetLocalY,shift,terrainY,
+          groupY:group.position.y,modelY:scene.position.y
+        });
       }
     }
     scene.traverse(obj=>{
