@@ -23,31 +23,11 @@ export class MovementPreview {
   return Math.max(y,harborHeight(p,this.catalog));
  }
  blocked(p){
+  // Collision-free exploration mode: ignore all building and GLB wall proxies.
+  // Keep only the existing non-world scene boundary so indoor previews
+  // cannot drift outside their loaded scene.
   if(this.scene!=='world')return Math.abs(p.x)>24||Math.abs(p.z)>29;
-  // Lightweight wall proxies: never raycast high-poly GLB triangles per frame.
-  for(const house of this.villageCollisionBounds||[]){
-   const {min,max}=house;
-   // House 001 has projecting trim that makes its coarse bounding proxy
-   // generate an invisible wall. Until its authored collision mesh is ready,
-   // disable only that proxy rather than blocking walkable space.
-   if(house.index===1)continue;
-   if(p.y+1.6<min.y||p.y>max.y)continue;
-   // Trim the visual GLB bounds: projecting beams and roof details are not walls.
-   // In particular, keep the road-facing space across from house 001 clear.
-   const w=max.x-min.x,d=max.z-min.z;
-   const insetX=Math.min(w*.17,.85),insetZ=Math.min(d*.17,.85);
-   const left=min.x+insetX,right=max.x-insetX;
-   const backEdge=min.z+insetZ,frontEdge=max.z-insetZ;
-   if(right<=left||frontEdge<=backEdge)continue;
-   const r=.30,t=Math.min(.30,(right-left)*.055,(frontEdge-backEdge)*.055);
-   const x=p.x,z=p.z;
-   if(x<left-r||x>right+r||z<backEdge-r||z>frontEdge+r)continue;
-   const side=x<left+t+r||x>right-t-r;
-   const back=z<backEdge+t+r,front=z>frontEdge-t-r;
-   const door=Math.abs(x-(left+right)/2)<Math.min(1.3,(right-left)*.18);
-   if(side||back||(front&&!door))return true;
-  }
-  return this.catalog.buildings.some(b=>b.region!=='windchime'&&p.y+1.7>b.position.y&&p.y<b.position.y+b.height&&Math.abs(p.x-b.position.x)<b.width/2+.45&&Math.abs(p.z-b.position.z)<b.depth/2+.45);
+  return false;
  }
  integrate(p,input,dt,jump=false){
   const length=Math.max(1,Math.hypot(input.x,input.z));
