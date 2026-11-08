@@ -109,3 +109,11 @@ body,button,input,select{font-family:var(--ui)}
  #welcome .create-card label{margin:12px 0 8px}
  #welcome .create-card .start{margin-top:16px}
 }
+
+/* Talent tree uses the full open journal spread, not just the right page. */
+#terminal:has(#panel .talent-tree) #panel{grid-column:1 / -1;grid-row:3;overflow:auto;min-width:0;max-width:100%;padding:8px 8px 24px}
+#terminal:has(#panel .talent-tree) #tabs{grid-column:1 / -1;grid-row:2;display:flex;flex-wrap:wrap;gap:4px;align-content:start}
+#terminal:has(#panel .talent-tree) .terminal-profile{grid-column:2;grid-row:1}
+#terminal:has(#panel .talent-tree) .talent-tree{width:100%;max-width:100%;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+#terminal:has(#panel .talent-tree) .talent-branch{min-width:0}
+@media(max-width:820px){#terminal:has(#panel .talent-tree){display:flex;flex-direction:column}#terminal:has(#panel .talent-tree) #tabs{display:flex;flex:0 0 auto}#terminal:has(#panel .talent-tree) #panel{flex:1 1 auto;min-height:0}#terminal:has(#panel .talent-tree) .talent-tree{grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))}}
