@@ -27,6 +27,10 @@ export class MovementPreview {
   // Lightweight wall proxies: never raycast high-poly GLB triangles per frame.
   for(const house of this.villageCollisionBounds||[]){
    const {min,max}=house;
+   // House 001 has projecting trim that makes its coarse bounding proxy
+   // generate an invisible wall. Until its authored collision mesh is ready,
+   // disable only that proxy rather than blocking walkable space.
+   if(house.index===1)continue;
    if(p.y+1.6<min.y||p.y>max.y)continue;
    const r=.35,t=Math.min(.38,(max.x-min.x)*.055,(max.z-min.z)*.055);
    const x=p.x,z=p.z;
