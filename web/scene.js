@@ -71,16 +71,13 @@ export class RealmScene {
     group.children.forEach(child=>child.visible=false);
     group.add(scene);
     group.userData.villageModel=filename;
-    // Use the actual fitted GLB triangles for local movement prediction instead of
-    // the catalog's full rectangular building footprint (which sealed doorways).
-    this.villageCollisionMeshes??=[];
+    // Cache only a fitted bounding proxy once on load, not triangles every frame.
+    // Building 001 uses its own proxy and leaves the other four GLBs unchanged.
+    this.villageCollisionBounds??=[];
     scene.updateMatrixWorld(true);
-    scene.traverse(obj=>{
-      if(!obj.isMesh||!obj.geometry?.attributes?.position)return;
-      // A mesh's existing visual triangles are the local collision surface.
-      this.villageCollisionMeshes.push(obj);
-    });
-    this.preview.villageCollisionMeshes=this.villageCollisionMeshes;
+    const collisionBounds=new T.Box3().setFromObject(scene);
+    this.villageCollisionBounds.push({index,min:collisionBounds.min.clone(),max:collisionBounds.max.clone()});
+    this.preview.villageCollisionBounds=this.villageCollisionBounds;
     // Temporary model identification marker for isolating the remaining cracked house.
     const markerCanvas=document.createElement('canvas');
     markerCanvas.width=256;markerCanvas.height=96;
