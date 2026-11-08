@@ -31,7 +31,7 @@ export function installVillageEditor(view){
  root.querySelector('#aw-edit-toggle').onclick=()=>{body.hidden=!body.hidden;if(!body.hidden){document.exitPointerLock?.();updateList()}};
  root.querySelector('#aw-edit-close').onclick=()=>body.hidden=true;
  select.onchange=refresh;
- root.querySelector('#aw-edit-reset').onclick=()=>{const g=current(),m=model(g);if(!m)return;const baseline=g.userData.villageBaseline;if(baseline){g.position.fromArray(baseline.position);m.rotation.set(...baseline.rotation);m.scale.fromArray(baseline.scale)}persist();refresh()};
+ root.querySelector('#aw-edit-reset').onclick=()=>{const g=current(),m=model(g);if(!m)return;const baseline=g.userData.villageBaseline;if(baseline){g.position.fromArray(baseline.position);m.rotation.set(...baseline.rotation);m.scale.fromArray(baseline.scale)}const data=read();delete data[g.userData.villageIndex];localStorage.setItem(KEY,JSON.stringify(data));view.refreshVillageCollision?.(g);status.textContent='已重設此棟房屋';refresh()};
  root.querySelector('#aw-edit-ground').onclick=()=>{const g=current(),m=model(g);if(!m)return;const box=new view.THREE.Box3().setFromObject(m);const h=view.landHeight(g.position.x,g.position.z);if(Number.isFinite(box.min.y)&&Number.isFinite(h)){g.position.y+=h-box.min.y-.08;persist();refresh()}};
  root.querySelector('#aw-edit-export').onclick=()=>{const blob=new Blob([JSON.stringify(read(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='aetherwild-village-model-transforms.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
  view.villageEditorRefresh=()=>{if(!body.hidden)updateList()};
