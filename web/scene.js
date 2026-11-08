@@ -146,6 +146,10 @@ export class RealmScene {
         const targetLocalY=terrainY-group.position.y-.12;
         const shift=targetLocalY-foundationY;
         if(Number.isFinite(shift))scene.position.y+=shift;
+        // House 01 uses a visible foundation above stray underside geometry.
+        // Seat the entire building slightly into the terrain to eliminate
+        // the persistent visible air gap without changing its rotation.
+        scene.position.y-=Math.min(1.25,Math.max(.35,building.height*.12));
         console.info('[Aetherwild] House 01 ground correction',{
           foundationLocalY:foundationY,targetLocalY,shift,terrainY,
           groupY:group.position.y,modelY:scene.position.y
