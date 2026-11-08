@@ -120,15 +120,15 @@ export class RealmScene {
     // Clamp to avoid burying short houses or changing their overall proportions.
     scene.position.y-=Math.min(.45,Math.max(.16,building.height*.065));
     if(index===1){
-      // Tripo 001 may contain stray vertices below its visible foundation.
-      // Re-anchor using a robust low percentile of transformed vertices,
-      // rather than treating the single lowest outlier as the ground plane.
-      scene.updateMatrixWorld(true);
+      // Recompute the actual underside AFTER correcting the GLB orientation.
+      // Use a low percentile to ignore isolated stray triangles and align
+      // the foundation with the terrain sampled under its whole footprint.
+      group.updateMatrixWorld(true);
       const levels=[],v=new T.Vector3();
       scene.traverse(obj=>{
         if(!obj.isMesh||!obj.geometry?.attributes?.position)return;
         const attr=obj.geometry.attributes.position;
-        const step=Math.max(1,Math.floor(attr.count/12000));
+        const step=Math.max(1,Math.floor(attr.count/15000));
         for(let j=0;j<attr.count;j+=step){
           v.fromBufferAttribute(attr,j).applyMatrix4(obj.matrixWorld);
           if(Number.isFinite(v.y))levels.push(v.y);
@@ -136,10 +136,13 @@ export class RealmScene {
       });
       if(levels.length>100){
         levels.sort((a,b)=>a-b);
-        const foundation=levels[Math.floor(levels.length*.015)];
-        // Only compensate a plausible outlier gap; avoid moving the entire roof underground.
-        const gap=foundation-group.position.y;
-        if(gap>.04)scene.position.y-=Math.min(gap,.75);
+        const foundationY=levels[Math.floor(levels.length*.02)];
+        // Use the lowest terrain contact point to prevent any floating corner
+        // while keeping the house upright. Do not change the detected rotation.
+        const terrainY=heights.length?Math.min(...heights):group.position.y;
+        const targetY=terrainY-.12;
+        const shift=targetY-foundationY;
+        if(Number.isFinite(shift))scene.position.y+=Math.max(-3,Math.min(3,shift));
       }
     }
     scene.traverse(obj=>{
