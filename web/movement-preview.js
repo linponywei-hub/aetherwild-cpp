@@ -24,22 +24,17 @@ export class MovementPreview {
  }
  blocked(p){
   if(this.scene!=='world')return Math.abs(p.x)>24||Math.abs(p.z)>29;
-  // Village collision is derived from the rendered GLB triangle surfaces.
-  // Test a short horizontal player sweep at feet, torso and head height;
-  // do not treat an entire building bounding box as solid.
-  if(this.villageCollisionMeshes?.length){
-   const start=this._collisionFrom||this.position()||p;
-   const dx=p.x-start.x,dz=p.z-start.z;
-   const distance=Math.hypot(dx,dz);
-   if(distance>0.00001&&distance<3){
-    const ray=new THREE.Raycaster();
-    const direction=new THREE.Vector3(dx/distance,0,dz/distance);
-    for(const h of [.25,.9,1.55]){
-     ray.set(new THREE.Vector3(start.x,start.y+h,start.z),direction);
-     ray.near=0;ray.far=distance+.35;
-     if(ray.intersectObjects(this.villageCollisionMeshes,false).some(hit=>hit.distance<=distance+.35))return true;
-    }
-   }
+  // Lightweight wall proxies: never raycast high-poly GLB triangles per frame.
+  for(const house of this.villageCollisionBounds||[]){
+   const {min,max}=house;
+   if(p.y+1.6<min.y||p.y>max.y)continue;
+   const r=.35,t=Math.min(.38,(max.x-min.x)*.055,(max.z-min.z)*.055);
+   const x=p.x,z=p.z;
+   if(x<min.x-r||x>max.x+r||z<min.z-r||z>max.z+r)continue;
+   const side=x<min.x+t+r||x>max.x-t-r;
+   const back=z<min.z+t+r,front=z>max.z-t-r;
+   const door=Math.abs(x-(min.x+max.x)/2)<Math.min(1.3,(max.x-min.x)*.18);
+   if(side||back||(front&&!door))return true;
   }
   return this.catalog.buildings.some(b=>b.region!=='windchime'&&p.y+1.7>b.position.y&&p.y<b.position.y+b.height&&Math.abs(p.x-b.position.x)<b.width/2+.45&&Math.abs(p.z-b.position.z)<b.depth/2+.45);
  }
