@@ -169,20 +169,27 @@ export class RealmScene {
         });
       }
     }
+    // GLB rendering repair pass: inconsistent triangle winding and thin
+    // overlapping surfaces are common in the imported village assets.
+    // Keep mesh positions untouched so manually saved transforms survive.
     scene.traverse(obj=>{
       if(!obj.isMesh)return;
-      obj.castShadow=true;obj.receiveShadow=true;
-      if(index===1){
-        // The 001 Tripo mesh has open seams and back-facing patches.
-        // Render both sides of its original textured surfaces to prevent
-        // back-face culling from revealing the sky along those joins.
-        const materials=Array.isArray(obj.material)?obj.material:[obj.material];
-        for(const material of materials){
-          if(!material)continue;
-          material.side=T.DoubleSide;
-          material.needsUpdate=true;
-        }
-      }
+      const fixMaterial=original=>{
+        if(!original)return original;
+        const material=original.clone();
+        material.side=T.DoubleSide;
+        material.shadowSide=T.DoubleSide;
+        // Avoid opaque cutout surfaces incorrectly depth-writing through
+        // neighboring pieces of the same imported house.
+        if(material.transparent)material.depthWrite=false;
+        material.needsUpdate=true;
+        return material;
+      };
+      obj.material=Array.isArray(obj.material)?obj.material.map(fixMaterial):fixMaterial(obj.material);
+      // Thin overlapping roofs/walls produce false diagonal tears when
+      // shadow-mapped. Disable their casting until the GLB is remeshed.
+      obj.castShadow=false;
+      obj.receiveShadow=false;
     });
     group.children.forEach(child=>child.visible=false);
     group.add(scene);
