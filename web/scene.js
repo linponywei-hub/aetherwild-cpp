@@ -51,6 +51,9 @@ export class RealmScene {
     if(!Number.isFinite(size.x)||Math.min(size.x,size.y,size.z)<=0)throw Error('Invalid village house bounds');
     const scale=Math.min(building.width/size.x,building.depth/size.z,building.height/size.y);
     scene.scale.setScalar(scale);
+    // House 01's authored forward axis differs from the village placement axis.
+    // Apply the yaw correction before fitting, grounding and collider extraction.
+    if(index===1)scene.rotation.y=Math.PI/2;
     const fitted=new T.Box3().setFromObject(scene);
     const center=fitted.getCenter(new T.Vector3());
     scene.position.set(-center.x,-fitted.min.y,-center.z);
