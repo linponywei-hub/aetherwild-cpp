@@ -67,6 +67,29 @@ export class RealmScene {
     // Sink the bottom trim into the terrain rather than allowing a visible air gap.
     // Clamp to avoid burying short houses or changing their overall proportions.
     scene.position.y-=Math.min(.45,Math.max(.16,building.height*.065));
+    if(index===1){
+      // Tripo 001 may contain stray vertices below its visible foundation.
+      // Re-anchor using a robust low percentile of transformed vertices,
+      // rather than treating the single lowest outlier as the ground plane.
+      scene.updateMatrixWorld(true);
+      const levels=[],v=new T.Vector3();
+      scene.traverse(obj=>{
+        if(!obj.isMesh||!obj.geometry?.attributes?.position)return;
+        const attr=obj.geometry.attributes.position;
+        const step=Math.max(1,Math.floor(attr.count/12000));
+        for(let j=0;j<attr.count;j+=step){
+          v.fromBufferAttribute(attr,j).applyMatrix4(obj.matrixWorld);
+          if(Number.isFinite(v.y))levels.push(v.y);
+        }
+      });
+      if(levels.length>100){
+        levels.sort((a,b)=>a-b);
+        const foundation=levels[Math.floor(levels.length*.015)];
+        // Only compensate a plausible outlier gap; avoid moving the entire roof underground.
+        const gap=foundation-group.position.y;
+        if(gap>.04)scene.position.y-=Math.min(gap,.75);
+      }
+    }
     scene.traverse(obj=>{
       if(!obj.isMesh)return;
       obj.castShadow=true;obj.receiveShadow=true;
