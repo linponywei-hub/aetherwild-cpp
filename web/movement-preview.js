@@ -32,12 +32,19 @@ export class MovementPreview {
    // disable only that proxy rather than blocking walkable space.
    if(house.index===1)continue;
    if(p.y+1.6<min.y||p.y>max.y)continue;
-   const r=.35,t=Math.min(.38,(max.x-min.x)*.055,(max.z-min.z)*.055);
+   // Trim the visual GLB bounds: projecting beams and roof details are not walls.
+   // In particular, keep the road-facing space across from house 001 clear.
+   const w=max.x-min.x,d=max.z-min.z;
+   const insetX=Math.min(w*.17,.85),insetZ=Math.min(d*.17,.85);
+   const left=min.x+insetX,right=max.x-insetX;
+   const backEdge=min.z+insetZ,frontEdge=max.z-insetZ;
+   if(right<=left||frontEdge<=backEdge)continue;
+   const r=.30,t=Math.min(.30,(right-left)*.055,(frontEdge-backEdge)*.055);
    const x=p.x,z=p.z;
-   if(x<min.x-r||x>max.x+r||z<min.z-r||z>max.z+r)continue;
-   const side=x<min.x+t+r||x>max.x-t-r;
-   const back=z<min.z+t+r,front=z>max.z-t-r;
-   const door=Math.abs(x-(min.x+max.x)/2)<Math.min(1.3,(max.x-min.x)*.18);
+   if(x<left-r||x>right+r||z<backEdge-r||z>frontEdge+r)continue;
+   const side=x<left+t+r||x>right-t-r;
+   const back=z<backEdge+t+r,front=z>frontEdge-t-r;
+   const door=Math.abs(x-(left+right)/2)<Math.min(1.3,(right-left)*.18);
    if(side||back||(front&&!door))return true;
   }
   return this.catalog.buildings.some(b=>b.region!=='windchime'&&p.y+1.7>b.position.y&&p.y<b.position.y+b.height&&Math.abs(p.x-b.position.x)<b.width/2+.45&&Math.abs(p.z-b.position.z)<b.depth/2+.45);
