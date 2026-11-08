@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {RealtimeLink} from '../web/realtime-link.js';
+import {RealtimeLink} from '../web/modules/network/realtime-link.js';
 class FakeSocket{constructor(url){this.url=url;this.bufferedAmount=0;this.sent=[];FakeSocket.last=this;}send(data){this.sent.push(JSON.parse(data));}close(){this.closed=true;this.onclose?.();}message(data){this.onmessage?.({data:JSON.stringify(data)});}}
 function fixture(){let now=0;const states=[];const link=new RealtimeLink({url:'wss://test/api/socket',token:'private-fixture',WebSocketImpl:FakeSocket,clock:()=>now,onState:(...args)=>states.push(args)});link.connect();const ws=FakeSocket.last;ws.onopen();ws.message({_reply:'auth',ok:true,player:{id:'p'}});return {link,ws,states,setTime:t=>now=t};}
 test('movement sends continue while previous replies are delayed',()=>{const {link,ws,setTime}=fixture();try{for(let i=0;i<20;i++){setTime(i*50);assert.equal(link.sendInput({sequence:i,x:1}),true);}assert.equal(ws.sent.filter(m=>m.channel==='input').length,20);assert.equal(ws.url.includes('private-fixture'),false);}finally{link.close();}});

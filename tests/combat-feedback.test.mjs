@@ -1,2 +1,2 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {CombatFeedback} from '../web/combat-feedback.js';
+import test from 'node:test';import assert from 'node:assert/strict';import {CombatFeedback} from '../web/modules/combat/combat-feedback.js';
 test('swing feedback starts immediately and hit pause requires positive confirmed damage',()=>{const f=new CombatFeedback();f.swing(1);assert.equal(f.sample(1).swing,1);assert.equal(f.sample(1).hold,false);assert.equal(f.hit(1.1,0),false);assert.equal(f.hit(1.2,30),true);assert.equal(f.sample(1.21).hold,true);assert.equal(f.sample(1.3).hold,false);assert.equal(f.sample(2).recoil,0);});

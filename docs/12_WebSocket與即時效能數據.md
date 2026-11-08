@@ -41,7 +41,7 @@ Canvas相容模式原本強制至少70ms才畫一次（理論上限約14FPS）�
 
 ## 修改檔案與整合
 
-apps/workstation.cpp；新增include/aetherwild/websocket.hpp（header-only，不新增C++套件依賴）；新增web/realtime-link.js；web/client.js；web/scene.js；web/software-renderer.js；web/movement-preview.js（增加校正統計）；tests/http_runner.py；新增tests/websocket_http.py與tests/realtime_link.test.mjs；本文件。
+apps/workstation.cpp；新增include/aetherwild/websocket.hpp（header-only，不新增C++套件依賴）；新增web/modules/network/realtime-link.js；web/modules/core/client.js；web/modules/core/scene.js；web/modules/rendering/software-renderer.js；web/modules/physics/movement-preview.js（增加校正統計）；tests/http_runner.py；新增tests/websocket_http.py與tests/realtime_link.test.mjs；本文件。
 
 API新增一個socket入口與JSON封套，存檔／資料庫變更為零。另一個遊戲AI請沿用runtime.input／runtime.command，不建立另一份玩家狀態；共享client.js／scene.js需逐段整合，不整檔覆蓋。
 

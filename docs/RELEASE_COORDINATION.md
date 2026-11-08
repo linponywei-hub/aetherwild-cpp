@@ -10,9 +10,9 @@
 
 ## 衝突處理
 
-web/client.js為實際衝突檔：同時保留contentPanel/contentFilter與RealtimeLink imports、快照順序／間隔量測與NPC位置更新、十種起始職業建立、WebSocket輸入／命令／重連與HTTP備援，以及FPS診斷。其餘git三方合併後仍需測試，不因自動合併就宣稱相容。
+web/modules/core/client.js為實際衝突檔：同時保留contentPanel/contentFilter與RealtimeLink imports、快照順序／間隔量測與NPC位置更新、十種起始職業建立、WebSocket輸入／命令／重連與HTTP備援，以及FPS診斷。其餘git三方合併後仍需測試，不因自動合併就宣稱相容。
 
-src/runtime.cpp保留內容指令、職業、怪物技能與_motion。src/runtime_state.cpp保留warehouseItems與contentState；未新增另一份玩家資料庫或清理舊玩家存檔。擴圖時保留內容分支對舊平地MovementPreview的停用，避免1790m邊界與錯誤平地預測；不自行自動啟用64公里世界或開放後續批次。
+src/modules/runtime/runtime.cpp保留內容指令、職業、怪物技能與_motion。src/modules/storage/runtime_state.cpp保留warehouseItems與contentState；未新增另一份玩家資料庫或清理舊玩家存檔。擴圖時保留內容分支對舊平地MovementPreview的停用，避免1790m邊界與錯誤平地預測；不自行自動啟用64公里世界或開放後續批次。
 
 apps/workstation.cpp保留最新受驗證的WebSocket與非阻塞HTTP。C++仍唯一權威；網頁內容按鈕走相同runtime.command，不繞過距離、NPC、權限或去重。傳輸契約見docs/12_WebSocket與即時效能數據.md，內容契約見docs/content/INTEGRATION.md。
 
@@ -51,6 +51,6 @@ Windows、macOS、正式容量與使用者端幀率仍未實機驗證；容器�
 
 新增 GET /api/admin/backup、POST /api/admin/restore；既有 command 增加 bow_draw/bow_release/bow_cancel。玩家快照增加 weaponType、environment、bow；world-v2.json沿用既有模型，沒有SQL遷移。瀏覽器IndexedDB是Owner在線期間的本機備援，Free伺服器仍為暫存磁碟。
 
-主要共同檔案：src/runtime.cpp、web/client.js、web/scene.js、web/style.css；逐段保留兩方功能後驗證。詳細接口見 docs/16_打擊感與資料復原.md 與 docs/16_小地圖晝夜與拉弓.md。之後的AI請從合併後main建立自己的分支，不覆蓋發布指標。
+主要共同檔案：src/modules/runtime/runtime.cpp、web/modules/core/client.js、web/modules/core/scene.js、web/style.css；逐段保留兩方功能後驗證。詳細接口見 docs/16_打擊感與資料復原.md 與 docs/16_小地圖晝夜與拉弓.md。之後的AI請從合併後main建立自己的分支，不覆蓋發布指標。
 
 本次整合驗證：Release與ASan/UBSan（detect_leaks=0）核心171、runtime83、content72項皆通過；Release HTTP32、WebSocket26、內容HTTP64、公開權限22；蓄力弓與備份還原共同回歸27；Node35項、所有web模組語法及git diff --check通過。ASan HTTP/WS、公開權限及27項弓／還原檢查亦通過。Windows/macOS與私人角色GPU畫面未實機驗證。Render是否已換版需另查該整合提交的live部署。

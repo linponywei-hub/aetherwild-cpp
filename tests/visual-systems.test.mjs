@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {lightingAt,EnvironmentClock,CYCLE_SECONDS} from '../web/day-night.js';
-import {mapPoint,headingTriangle} from '../web/minimap.js';
-import {weaponPose,BowInput} from '../web/weapon-pose.js';
+import {lightingAt,EnvironmentClock,CYCLE_SECONDS} from '../web/modules/world/day-night.js';
+import {mapPoint,headingTriangle} from '../web/modules/ui/minimap.js';
+import {weaponPose,BowInput} from '../web/modules/combat/weapon-pose.js';
 test('1800 real seconds is one cycle, noon and midnight differ, server sync is shared',()=>{
  assert.equal(CYCLE_SECONDS,1800);assert.equal(lightingAt(0).clock,'00:00');assert.equal(lightingAt(900).clock,'12:00');
  assert.equal(lightingAt(900).daylight,1);assert.equal(lightingAt(0).daylight,0);assert.equal(lightingAt(1800).phase,0);assert.equal(lightingAt(450).clock,'06:00');

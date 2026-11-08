@@ -1,8 +1,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {artwork} from '../web/artwork-index.js';
-import {artworkNames} from '../web/artwork-names.js';
+import {artwork} from '../web/modules/artwork/artwork-index.js';
+import {artworkNames} from '../web/modules/artwork/artwork-names.js';
 test('artwork registry only maps ready exact item IDs with their actual names',()=>{
  const m=JSON.parse(fs.readFileSync(new URL('../data/artwork/manifest.json',import.meta.url)));
  assert.ok(Object.keys(artwork).length);

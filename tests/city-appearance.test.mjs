@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {buildingParts,cityTheme,desiredCells} from '../web/city-architecture.js';
-import {weaponParts,humanoidParts,nameplateVisible} from '../web/actor-model.js';
+import {buildingParts,cityTheme,desiredCells} from '../web/modules/world/city-architecture.js';
+import {weaponParts,humanoidParts,nameplateVisible} from '../web/modules/actors/actor-model.js';
 test('city themes and palace/lamp recipes are distinct, finite and bounded',()=>{
  const themes=new Set(['windchime','verdant','cinder','frosthold','astral','sundune','tidehaven','aw_crownreach'].map(cityTheme));assert.equal(themes.size,8);
  for(const [kind,w,d,h]of [['palace',170,105,78],['house',14,14,16],['lamp',.45,.45,5],['tower',24,24,38]]){const parts=buildingParts({region:'aw_crownreach',style:'aw_crownreach|'+kind,width:w,depth:d,height:h});assert.ok(parts.length>1);assert.ok(parts.every(p=>['x','y','z','sx','sy','sz'].every(k=>Number.isFinite(p[k]))));if(kind==='lamp')assert.ok(parts.some(p=>p.glow));}

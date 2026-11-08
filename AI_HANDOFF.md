@@ -1,3 +1,7 @@
+# 最新程式結構：功能模組整理
+
+先讀 docs/architecture/README.md。C++ 實作依功能位於 src/modules，生成資料位於 src/generated；瀏覽器模組位於 web/modules。舊 src/runtime.cpp 已拆成物理、怪物 AI、網路投影、存檔備份與核心協調。build.py、CMake、資料生成器及網頁入口已同步新路徑。services.hpp 只保留向後相容的聚合 include，定義在各系統 system.hpp。以下舊交接的功能與版本狀態仍須依實際測試確認。
+
 # PR #14 / #15 整合：ai/combat-save-recovery
 
 2026-11-07 使用者要求「先把目前功能上線」、「PR15」、「直接合併」，已授權整合及現有免費站部署（已說明測試角色可能一次性重置）。PR #15 的小地圖／晝夜／拉弓／雙匕首與 PR #14 的羅盤／遠端平順播放／武器前景／打擊回饋／世界備份共同保留。付費磁碟仍未批准，不建立付費資源。新功能、接口與限制見docs/16_打擊感與資料復原.md；具體待批准方案見deploy/persistent-storage-proposal.json。
@@ -14,7 +18,7 @@
 - 既有 Render 測試站：https://aetherwild-cpp-test.onrender.com/；使用既有免費服務與驗證碼，不建立新付費資源。新補丁上線狀態以該服務實際部署為準。
 - 原圖25區、96km世界、全部現有內容直接載入，後續用程式補丁。不要恢復批次開放介面、全職業／隱藏入口／羈絆列表。
 - 角色仍用 world-v2.json；contentState.layoutVersion=2 負責一次性座標遷移。input/command/state HTTP／WebSocket 保持相容。
-- 原圖地形、海岸與港口模型：data/atlas_surface.json → tools/generate_atlas.py → src/atlas_data.cpp；請同步更新原生碰撞與呈現。
+- 原圖地形、海岸與港口模型：data/atlas_surface.json → tools/generate_atlas.py → src/generated/atlas_data.cpp；請同步更新原生碰撞與呈現。
 - 設定：終端固定分頁，自訂按鍵、音量、渲染距離保存於瀏覽器，無資料庫變更。第一人稱武器使用獨立繪製層。
 
 ---
@@ -49,7 +53,7 @@
 
 ## 程式入口
 
-include/aetherwild/domain.hpp 是領域模型，combat/inventory/gathering 等是各子系統；src/runtime.cpp 是應用協調與模擬，src/runtime_state.cpp 是世界保存，apps/workstation.cpp 是原生 HTTP，web/ 是呈現與輸入。ports.hpp 與 SQL schema 的正式外部整合仍是介面／設計，不可宣稱 Google OAuth 或正式 SQL 已完成。
+include/aetherwild/domain.hpp 是領域模型，combat/inventory/gathering 等是各子系統；src/modules/runtime/runtime.cpp 是應用協調與模擬，src/modules/storage/runtime_state.cpp 是世界保存，apps/workstation.cpp 是原生 HTTP，web/ 是呈現與輸入。ports.hpp 與 SQL schema 的正式外部整合仍是介面／設計，不可宣稱 Google OAuth 或正式 SQL 已完成。
 
 ## 建置與驗證
 
