@@ -25,7 +25,7 @@ namespace aw {
         return v;
     }
     bool blocked(Vec3 p,const std::vector<Building>& bs,double radius) {
-        for(auto&b:bs)if(p.y+1.7>b.position.y&&p.y<b.position.y+b.height&&std::abs(p.x-b.position.x)<b.width/2+radius&&std::abs(p.z-b.position.z)<b.depth/2+radius)return true;
+        for(auto&b:bs)if(b.region!="windchime"&&p.y+1.7>b.position.y&&p.y<b.position.y+b.height&&std::abs(p.x-b.position.x)<b.width/2+radius&&std::abs(p.z-b.position.z)<b.depth/2+radius)return true;
         return false;
     }
     bool onCityFloor(Vec3 p,const RegionDefinition&r) {
