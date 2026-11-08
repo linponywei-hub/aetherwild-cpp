@@ -32,9 +32,10 @@ export class MovementPreview {
    if(!min||!max||p.y+1.6<min.y||p.y>max.y)continue;
    const w=max.x-min.x,d=max.z-min.z;
    if(w<1||d<1)continue;
-   const ix=Math.min(.65,w*.1),iz=Math.min(.65,d*.1);
-   const x0=min.x+ix,x1=max.x-ix,z0=min.z+iz,z1=max.z-iz;
-   const r=.28,t=Math.min(.25,(x1-x0)*.045,(z1-z0)*.045);
+   // Keep the collision perimeter at the fitted GLB footprint rather than
+   // inset inside the walls, which previously allowed players to enter them.
+   const x0=min.x,x1=max.x,z0=min.z,z1=max.z;
+   const r=.38,t=Math.min(.45,(x1-x0)*.075,(z1-z0)*.075);
    if(p.x<x0-r||p.x>x1+r||p.z<z0-r||p.z>z1+r)continue;
    const side=p.x<=x0+t+r||p.x>=x1-t-r;
    const back=p.z<=z0+t+r,front=p.z>=z1-t-r;
