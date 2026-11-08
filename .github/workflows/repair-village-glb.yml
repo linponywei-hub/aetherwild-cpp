@@ -14,7 +14,10 @@ jobs:
       - name: Install Blender
         run: |
           sudo apt-get update
-          sudo apt-get install -y blender
+          sudo apt-get install -y blender python3-numpy
+      - name: Verify Blender Python can import NumPy
+        run: |
+          blender --background --factory-startup --python-exit-code 1 --python-expr "import numpy; print('Blender NumPy:', numpy.__version__)"
       - name: Create candidate GLBs (never overwrite originals)
         run: |
           set -e
