@@ -23,11 +23,29 @@ export class MovementPreview {
   return Math.max(y,harborHeight(p,this.catalog));
  }
  blocked(p){
-  // Collision-free exploration mode: ignore all building and GLB wall proxies.
-  // Keep only the existing non-world scene boundary so indoor previews
-  // cannot drift outside their loaded scene.
   if(this.scene!=='world')return Math.abs(p.x)>24||Math.abs(p.z)>29;
-  return false;
+  // Only the five loaded GLB houses collide in the starter village.
+  // Ignore all legacy building bounds. Test five lightweight perimeter strips
+  // per house, leaving the centre of the front wall open as an entrance.
+  for(const house of this.villageCollisionBounds||[]){
+   const {min,max}=house;
+   if(!min||!max||p.y+1.6<min.y||p.y>max.y)continue;
+   const w=max.x-min.x,d=max.z-min.z;
+   if(w<1||d<1)continue;
+   const ix=Math.min(.65,w*.1),iz=Math.min(.65,d*.1);
+   const x0=min.x+ix,x1=max.x-ix,z0=min.z+iz,z1=max.z-iz;
+   const r=.28,t=Math.min(.25,(x1-x0)*.045,(z1-z0)*.045);
+   if(p.x<x0-r||p.x>x1+r||p.z<z0-r||p.z>z1+r)continue;
+   const side=p.x<=x0+t+r||p.x>=x1-t-r;
+   const back=p.z<=z0+t+r,front=p.z>=z1-t-r;
+   const door=Math.abs(p.x-(x0+x1)/2)<Math.min(1.05,(x1-x0)*.16);
+   if(side||back||(front&&!door))return true;
+  }
+  // Non-village regions keep their previous catalog collision.
+  return this.catalog.buildings.some(b=>b.region!=='windchime'&&
+   p.y+1.7>b.position.y&&p.y<b.position.y+b.height&&
+   Math.abs(p.x-b.position.x)<b.width/2+.45&&
+   Math.abs(p.z-b.position.z)<b.depth/2+.45);
  }
  integrate(p,input,dt,jump=false){
   const length=Math.max(1,Math.hypot(input.x,input.z));
