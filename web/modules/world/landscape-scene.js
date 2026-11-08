@@ -1,4 +1,4 @@
-import * as T from '/vendor/three.module.js';
+import * as T from '../../vendor/three.module.js';
 export function makeLandscape(scene){const model=scene.catalog.landscape;if(!model)return;const point=([x,z])=>new T.Vector2((x-633)*64,-(z-578)*64);
  // Water is geometry along authored coastlines and rivers, never a city-sized billboard.
  for(const polygon of model.water){const shape=new T.Shape(polygon.map(point)),g=new T.ShapeGeometry(shape);g.rotateX(-Math.PI/2);const mesh=scene.mesh(g,scene.mat('#3c889c',{roughness:.35,side:T.DoubleSide}),[0,.08,0]);mesh.castShadow=mesh.receiveShadow=false;mesh.userData.cullRadius=100000;}

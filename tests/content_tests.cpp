@@ -75,6 +75,17 @@ int main(){try{
  {GameRuntime full(pathFile);auto state=full.snapshot(key);yes(state.at("player").num("coins")==777);yes(state.at("content").at("relations").at("windchime_merchant").num("score")==1);migratedX=state.at("player").at("position").num("x");yes(std::abs(migratedX-full.definitions().regions.at("windchime").center.x)<1);full.save();}
  {GameRuntime full(pathFile);yes(full.snapshot(key).at("player").at("position").num("x")==migratedX);}
  {GameRuntime full;const auto& c=full.definitions();const auto& port=c.regions.at("tidehaven");yes(port.center.y==4);yes(groundBelow(cityArrival(port),c)==4);yes(atlasWater({(1180-633)*64.0,0,(550-578)*64.0}));yes(atlasHeight({(400-633)*64.0,0,(100-578)*64.0})>600);yes(atlasSurface().at("harbors").arrayItems().size()==3);}
+ // Terrain v2 preserves reference anchors and shares native authoring tiles with gameplay.
+ {GameRuntime full;auto session=create(full);const auto p=full.world().players.at(session.at("player").str("id")).position;
+  const auto before=full.exportBackup(session.str("token")).dump();const auto tile=full.terrain(Json{{"x",p.x},{"z",p.z}}).at("terrain");
+  yes(tile.num("side")==65&&tile.num("step")==16&&tile.at("heights").arrayItems().size()==4225);yes(tile.num("version")==2);
+  yes(tile.dump()==full.snapshot(session.str("token")).at("content").at("terrainPatch").dump());yes(before==full.exportBackup(session.str("token")).dump());
+  for(int row:{0,32,64})for(int col:{0,32,64}){double expected=worldLandHeight({tile.num("x")+col*16,0,tile.num("z")+row*16},full.definitions());yes(std::abs(tile.at("heights").arrayItems()[row*65+col].number()-expected)<=.00051);}
+  no([&]{full.terrain(Json{{"x",48001},{"z",0}});});no([&]{full.terrain(Json{{"x","wrong"},{"z",0}});});
+  double low=1e9,high=-1e9;const auto center=full.definitions().regions.at("darkforest").center;
+  for(int z=-4000;z<=4000;z+=500)for(int x=-4000;x<=4000;x+=500)if(std::hypot(x,z)<=4000){double h=atlasHeight({center.x+x,0,center.z+z});yes(std::isfinite(h)&&h>=0);low=std::min(low,h);high=std::max(high,h);}
+  yes(high-low<=1.4001);const Vec3 ridge{(425-633)*64.0,0,(130-578)*64.0};yes(atlasHeight(ridge)>900);yes(atlasHeight(ridge)==atlasHeight(ridge));
+ }
  std::filesystem::remove_all(pathFile.parent_path());
  std::cout<<"OK content integration: "<<checks<<" checks\n";return 0;
 }catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 1;}}

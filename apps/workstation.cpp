@@ -181,6 +181,7 @@ int main(int argc,char**argv) {
                             auto body=Json::parse(request.body);
                             if(request.path=="/api/admin/restore"){result=runtime.importBackup(token,body);syncEpoch+="-r"+std::to_string(++syncSequence);}
                             else if(request.path=="/api/session")result=runtime.createSession(body);
+                            else if(request.path=="/api/terrain")result=runtime.terrain(body);
                             else if(request.path=="/api/input") {
                                 runtime.input(token,body);
                                 result=Json {

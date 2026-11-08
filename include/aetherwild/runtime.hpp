@@ -68,12 +68,14 @@ namespace aw {
         void execute(Player&,const Json&);
         void physics(Player&,Motion&,double);
         void ai(double);
+        Json terrainPatchAt(double x,double z)const;
         Json state()const;
         void restore(const Json&);
         public: explicit GameRuntime(std::filesystem::path savePath= {},bool legacyTestWorld=false);
         Json createSession(const Json&);
         Json snapshot(const Id& token)const;
         Json catalog()const;
+        Json terrain(const Json&)const;
         Json adminMap(const Id& token)const;
         Json exportBackup(const Id& token)const;
         Json importBackup(const Id& token,const Json& body);
