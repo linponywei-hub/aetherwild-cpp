@@ -1,0 +1,22 @@
+import * as T from '../../vendor/three.module.js';
+import {Water} from '../../vendor/Water2.js';
+import {GLTFLoader} from '../../vendor/GLTFLoader.js';
+let wallSource;
+export function creekGeometry(stream){
+ const positions=[],uv=[],indices=[];let row=0;
+ const rows=[];for(let z=stream.zMin;z<=stream.zMax;z+=3)rows.push(z);for(const z of [-stream.bridgeHalfDepth,stream.bridgeHalfDepth])if(z>stream.zMin&&z<stream.zMax&&!rows.includes(z))rows.push(z);rows.sort((a,b)=>a-b);
+ for(const z of rows){const x=stream.x+stream.meander*Math.sin(z/stream.period);positions.push(x-stream.halfWidth,-z,0,x+stream.halfWidth,-z,0);uv.push(0,(z-stream.zMin)/8,1,(z-stream.zMin)/8);if(row){const middle=(z+rows[row-1])/2;if(Math.abs(middle)>stream.bridgeHalfDepth){const i=(row-1)*2;indices.push(i,i+2,i+1,i+1,i+2,i+3);}}row++;}
+ const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));geometry.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geometry.setIndex(indices);geometry.computeVertexNormals();return geometry;
+}
+export function waterNormals(phase=0){const side=64,data=new Uint8Array(side*side*4);for(let z=0;z<side;z++)for(let x=0;x<side;x++){const a=x/side*Math.PI*2,b=z/side*Math.PI*2,dx=.23*Math.cos(a*5+b*2+phase)+.1*Math.sin(b*9),dy=.17*Math.sin(b*7+a+phase),len=Math.hypot(dx,dy,1),i=(z*side+x)*4;data[i]=Math.round((dx/len*.5+.5)*255);data[i+1]=Math.round((dy/len*.5+.5)*255);data[i+2]=Math.round((1/len*.5+.5)*255);data[i+3]=255;}const texture=new T.DataTexture(data,side,side);texture.wrapS=texture.wrapT=T.RepeatWrapping;texture.magFilter=texture.minFilter=T.LinearFilter;texture.needsUpdate=true;return texture;}
+export class VillageFeatures {
+ constructor(parent,catalog,{software=false}={}){
+  const config=catalog.landscape?.starterVillage;if(!config?.stream)return;this.config=config;this.center={x:(config.pixel[0]-633)*64,z:(config.pixel[1]-578)*64};this.root=new T.Group();this.root.name='village-walls-and-creek';parent.add(this.root);
+  const stream=config.stream,geometry=creekGeometry(stream),simple=new T.Mesh(geometry,new T.MeshStandardMaterial({color:'#447a7b',roughness:.3,side:T.DoubleSide}));simple.rotation.x=-Math.PI/2;simple.position.y=stream.waterY;simple.name='shallow-creek';this.root.add(simple);this.simple=simple;
+  if(!software){const full=new Water(geometry,{color:0xa7c4b7,textureWidth:256,textureHeight:256,flowDirection:new T.Vector2(0,-1),flowSpeed:.035,scale:1.5,reflectivity:.06,normalMap0:waterNormals(),normalMap1:waterNormals(1.7)});full.rotation.x=-Math.PI/2;full.position.y=stream.waterY;full.visible=false;full.name='official-water2-creek';this.root.add(full);this.water=full;}
+  const wood=new T.MeshStandardMaterial({color:'#82715a',roughness:.9,polygonOffset:true,polygonOffsetFactor:-2});for(let z=-4.5;z<5;z+=.75){const plank=new T.Mesh(new T.BoxGeometry(stream.bridgeHalfWidth*2,.12,.7),wood);plank.position.set(stream.x,-.059,z);plank.receiveShadow=true;this.root.add(plank);}
+  this.walls=[];for(const b of catalog.buildings||[]){if(!b.style?.endsWith('|starter_wall'))continue;const group=new T.Group();group.position.set(b.position.x-this.center.x,b.position.y,b.position.z-this.center.z);const fallback=new T.Mesh(new T.BoxGeometry(b.width,b.height,b.depth),new T.MeshStandardMaterial({color:'#8b8876',roughness:1}));fallback.position.y=b.height/2;fallback.castShadow=fallback.receiveShadow=true;group.add(fallback);this.root.add(group);this.walls.push({group,fallback,b});}
+  if(!software&&typeof document!=='undefined'){wallSource??=new GLTFLoader().loadAsync('/assets/models/environment/modular_fort_wall.glb');this.loading=wallSource.then(({scene})=>{for(const {group,fallback,b} of this.walls){const copy=scene.clone(true),bounds=new T.Box3().setFromObject(copy),size=bounds.getSize(new T.Vector3()),center=bounds.getCenter(new T.Vector3());if(Math.min(size.x,size.y,size.z)<=0)throw Error('Invalid wall model bounds');const fit=new T.Group();fit.add(copy);fit.scale.set(b.width/size.x,b.height/size.y,b.depth/size.z);fit.position.set(-center.x*fit.scale.x,-bounds.min.y*fit.scale.y,-center.z*fit.scale.z);group.add(fit);fallback.visible=false;}return true;}).catch(()=>false);}
+ }
+ update(camera){if(!this.water)return;const x=camera.x-this.center.x,z=camera.z-this.center.z,s=this.config.stream,near=z>s.zMin-70&&z<s.zMax+70&&Math.abs(x-s.x-s.meander*Math.sin(z/s.period))<120;this.water.visible=near;this.simple.visible=!near;}
+}

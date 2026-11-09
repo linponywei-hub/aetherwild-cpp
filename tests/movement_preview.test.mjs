@@ -62,3 +62,7 @@ test('600ms delayed acknowledged input replays both network legs without steady 
  for(let i=1;i<=180;i++){const now=i/60;p.noteInput(i,now);if(i>36&&i%6===0)p.reconcile(snapshot(5*(now-.6),{_motion:{...motion,sequence:i-36}}),now,.6);value=p.advance(1/60,now,right);}
  assert.ok(value.x>14.5,'three seconds of walking must stay close to local 15m path despite 600ms ACKs');
 });
+
+test('idle grounded prediction keeps authoritative height instead of snapping to approximate terrain',()=>{
+ const view=new MovementPreview({regions:[],buildings:[],worldLimit:1000});view.scene='world';view.limit=1000;view.hints={speed:5,gravity:22,jumpSpeed:8};view.terrain={side:2,step:8,x:0,z:0,heights:[0,0,0,0]};let pose={x:2,y:.3,z:2,vy:0,grounded:true};for(let i=0;i<60;i++)pose=view.integrate(pose,{x:0,z:0,yaw:0,sprint:false},1/60);assert.equal(pose.y,.3);
+});

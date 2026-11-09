@@ -1,3 +1,4 @@
+import {TerrainCache} from './terrain-cache.js';
 import {surfaceAt} from './landscape-model.js';
 // Meshes here only display server-authored terrain and access boundaries.
 import * as T from '../../vendor/three.module.js';
@@ -10,16 +11,29 @@ export function terrainMesh(data,color,landscape){
  const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geometry.setAttribute('awClimate',new T.Float32BufferAttribute(climate,1));geometry.setIndex(indices);if(colors.length)geometry.setAttribute('color',new T.Float32BufferAttribute(colors,3));geometry.computeVertexNormals();
  const mesh=new T.Mesh(geometry,terrainMaterial({color:landscape?'#ffffff':color,vertexColors:!!landscape,starter:landscape?.starterVillage}));mesh.receiveShadow=true;mesh.userData.fullIndices=indices;return mesh;
 }
+function installTerrainMesh(scene,patch){
+ if(scene.terrainPatch){scene.contentRoot.remove(scene.terrainPatch);scene.terrainPatch.geometry.dispose();scene.terrainPatch.material.dispose();}
+ scene.terrainPatch=terrainMesh(patch,'#708766',scene.catalog.landscape);scene.terrainPatch.userData.localTerrain=true;scene.contentRoot.add(scene.terrainPatch);if(scene.globalTerrain)clipTerrainPatch(scene.globalTerrain.material,patch);
+}
+function requestDetail(scene,patch){
+ if(typeof document==='undefined'||!scene.catalog.landscape?.tileSpec?.renderSide)return;
+ const id=scene.detailRequest=(scene.detailRequest||0)+1,key=scene.patchKey;scene.detailPending=true;
+ const limit=scene.catalog.worldLimit;const x=Math.max(-limit,Math.min(limit,patch.x+128)),z=Math.max(-limit,Math.min(limit,patch.z+128));
+ scene.detailPromise=fetch('/api/terrain',{method:'POST',headers:{'Content-Type':'application/json','X-Aetherwild-Client':'1'},body:JSON.stringify({x,z,detail:true})}).then(r=>{if(!r.ok)throw Error('terrain detail unavailable');return r.json();}).then(data=>{
+  if(id!==scene.detailRequest)return;const p=data.terrain;if(p?.side!==129||p.step!==8||p.version!==patch.version||p.x!==patch.x-256||p.z!==patch.z-256||p.heights?.length!==16641||!p.heights.every(Number.isFinite))throw Error('invalid terrain detail');
+  scene.detailCompleteKey=key;scene.terrainHistory.put(p);installTerrainMesh(scene,p);scene.starterLandscape?.rebuild();
+ }).catch(()=>{if(id===scene.detailRequest)scene.detailRetryAt=Date.now()+3000;}).finally(()=>{if(id===scene.detailRequest)scene.detailPending=false;});
+}
 export function updateContentScene(scene,state){
  const c=state.content;if(!c)return;
  if(!scene.contentRoot){scene.contentRoot=new T.Group();scene.root.add(scene.contentRoot);scene.contentProps=new T.Group();scene.root.add(scene.contentProps);}
  for(const live of c.npcs||[]){const obj=scene.npcObjects.get(live.id);if(obj)obj.userData.track.push(live.position,state.now);}
- const patch=c.terrainPatch;
- if(patch&&scene.patchKey!==patch.x+':'+patch.z){
-  scene.sceneryCell='';scene.patchKey=patch.x+':'+patch.z;scene.starterLandscape?.rebuild();if(scene.terrainPatch){scene.contentRoot.remove(scene.terrainPatch);scene.terrainPatch.geometry.dispose();scene.terrainPatch.material.dispose();}
-  scene.terrainPatch=terrainMesh(patch,'#708766',scene.catalog.landscape);scene.terrainPatch.userData.localTerrain=true;scene.contentRoot.add(scene.terrainPatch);
-  if(scene.globalTerrain)clipTerrainPatch(scene.globalTerrain.material,patch);
+ const patch=c.terrainPatch,patchKey=patch?[patch.version,patch.x,patch.z].join(':'):'';
+ if(patch&&scene.patchKey!==patchKey){
+  scene.terrainHistory??=new TerrainCache();scene.terrainHistory.put(patch);scene.sceneryCell='';scene.patchKey=patchKey;scene.starterLandscape?.rebuild();
+  if(!scene.terrainPatch||scene.terrainPatch.geometry.attributes.position.count<16641)installTerrainMesh(scene,patch);requestDetail(scene,patch);
  }
+ if(patch&&scene.detailCompleteKey!==patchKey&&!scene.detailPending&&Date.now()>=(scene.detailRetryAt||0))requestDetail(scene,patch);
  const propsKey=Math.floor(state.player.position.x/32)+':'+Math.floor(state.player.position.z/32)+':'+c.release;
  if(scene.propsKey!==propsKey){scene.propsKey=propsKey;for(const child of [...scene.contentProps.children]){scene.contentProps.remove(child);child.traverse(o=>{o.geometry?.dispose();o.material?.dispose?.();});}
   for(const b of c.blockers||[]){const pos=b.position;scene.box(scene.contentProps,10,8,3,'#69746c',pos.x,pos.y+4,pos.z);scene.cylinder(scene.contentProps,.25,.25,6,'#a6bda5',pos.x,pos.y+3,pos.z,6);const l=scene.label('前方封鎖 · 請循驛路','#ecd79c',2);l.position.set(pos.x,pos.y+9,pos.z);scene.contentProps.add(l);}

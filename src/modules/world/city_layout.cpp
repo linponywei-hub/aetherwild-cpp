@@ -57,6 +57,7 @@ std::vector<Building> cityBuildings(const Catalog& c){
    double along=32+i*std::min(45.,u*.075);if(along>u*.6)continue;
    add("lamp",side*12,along,.45,.45,5);add("lamp",side*12,-along,.45,.45,5);
   }
+  if(id=="windchime")for(const auto& w:atlasSurface().at("starterVillage").at("walls").arrayItems())add("starter_wall",w.num("x"),w.num("z"),w.num("width"),w.num("depth"),w.num("height"));
  }
  return out;
 }

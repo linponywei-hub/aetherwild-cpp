@@ -10,18 +10,18 @@ const landscape=JSON.parse(readFileSync(new URL('../data/atlas_surface.json',imp
 const houses=[{region:'windchime',style:'windchime|house',position:{x:center.x+24,z:center.z+24},width:16,depth:14}];
 const catalog={landscape,buildings:houses};
 test('village dressing is deterministic, bounded and excludes plaza, roads and actual house footprints',()=>{
- const points=starterScatter(catalog);assert.deepEqual(points,starterScatter(catalog));assert.ok(points.length>1200&&points.length<=3200);
+ const points=starterScatter(catalog);assert.deepEqual(points,starterScatter(catalog));assert.ok(points.length>1200&&points.length<=9000);
  for(const p of points){assert.ok(Math.hypot(p.x-center.x,p.z-center.z)<193);assert.ok(decorativePointAllowed(p.x,p.z,config,houses,center));}
  assert.equal(decorativePointAllowed(center.x,center.z,config,houses,center),false);
  assert.equal(decorativePointAllowed(center.x+24,center.z+24,config,houses,center),false);
 });
 test('groundcover rests on supplied native height, fits two draw calls and does not rebuild per frame',()=>{
  const root=new T.Group(),view=new StarterLandscape(root,catalog,()=>17.25);
- assert.equal(view.root.children.length,2);const grass=view.root.children.find(m=>m.name==='starter-grass');
+ assert.equal(view.root.children.filter(m=>m.isMesh).length,2);const grass=view.root.children.find(m=>m.name==='starter-grass');
  const pos=grass.geometry.attributes.position;let min=Infinity;for(let i=0;i<pos.count;i++)min=Math.min(min,pos.getY(i));assert.equal(min,17.25);
  assert.ok(pos.count<=3200*5*6);assert.equal(grass.castShadow,false);assert.ok(grass.geometry.boundingSphere.radius<230);
  const pebbles=view.root.children.find(m=>m.name==='starter-pebbles');const normals=pebbles.geometry.attributes.normal;for(let i=0;i<normals.count;i++)assert.ok(normals.getY(i)>0,'pebbles must face the camera above ground');
- const fallback=new StarterLandscape(new T.Group(),catalog,()=>0,{software:true});assert.equal(fallback.root.children.length,0);
+ const fallback=new StarterLandscape(new T.Group(),catalog,()=>0,{software:true});assert.equal(fallback.root.children.filter(m=>m.isMesh).length,0);
 });
 test('PBR terrain becomes active only when all six local maps succeed, and retains fallback after any failure',()=>{
  const pending=[];const loader={load:(path,ok,_progress,fail)=>{assert.ok(path.startsWith('/art/terrain/'));pending.push({ok,fail});return new T.Texture();}};

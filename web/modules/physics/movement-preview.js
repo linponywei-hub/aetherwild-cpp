@@ -12,6 +12,7 @@ export class MovementPreview {
   const patch=this.terrain;
   if(patch){const gx=(p.x-patch.x)/patch.step,gz=(p.z-patch.z)/patch.step,n=patch.side;if(gx>=0&&gz>=0&&gx<n-1&&gz<n-1){const x=Math.floor(gx),z=Math.floor(gz),tx=gx-x,tz=gz-z,h=patch.heights;const a=h[z*n+x]*(1-tx)+h[z*n+x+1]*tx,b=h[(z+1)*n+x]*(1-tx)+h[(z+1)*n+x+1]*tx;y=a*(1-tz)+b*tz;}}
 
+  for(const b of this.catalog.buildings)if(b.style?.endsWith("|starter_wall")&&Math.abs(p.x-b.position.x)<=b.width/2&&Math.abs(p.z-b.position.z)<=b.depth/2&&b.position.y+b.height<=p.y+1.4)y=Math.max(y,b.position.y+b.height);
   for(const r of this.catalog.regions){
    const h=r.elevation||0;if(h===(r.position.y||0))continue;if(!h)continue;
    const dx=p.x-r.position.x,dz=p.z-r.position.z;
@@ -43,7 +44,7 @@ export class MovementPreview {
    if(side||back||(front&&!door))return true;
   }
   // Non-village regions keep their previous catalog collision.
-  return this.catalog.buildings.some(b=>b.region!=='windchime'&&
+  return this.catalog.buildings.some(b=>(b.region!=='windchime'||b.style?.endsWith('|starter_wall'))&&
    p.y+1.7>b.position.y&&p.y<b.position.y+b.height&&
    Math.abs(p.x-b.position.x)<b.width/2+.45&&
    Math.abs(p.z-b.position.z)<b.depth/2+.45);
@@ -59,6 +60,7 @@ export class MovementPreview {
   this._collisionFrom={...p,x:next.x};
   if(this.blocked(next))next.z=p.z;
   this._collisionFrom=null;
+  if(next.x===p.x&&next.z===p.z&&p.grounded&&!jump){return next;}
   const ground=this.ground(next);
   if(jump&&next.grounded){next.vy=this.hints.jumpSpeed;next.grounded=false;}
   if(next.grounded&&next.vy<=0&&Math.abs(p.y-ground)<=1.4)next.y=ground;

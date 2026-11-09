@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as T from '../web/vendor/three.module.js';
 import {terrainMaterial,clipTerrainPatch} from '../web/modules/world/terrain-material.js';
-import {terrainMesh} from '../web/modules/world/content-scene.js';
+import {terrainMesh,updateContentScene} from '../web/modules/world/content-scene.js';
 import {EditorTerrain} from '../web/modules/modeling/editor-terrain.js';
 
 const patch=(x=0,z=0)=>({side:65,step:16,x:Math.floor(x/512)*512-256,z:Math.floor(z/512)*512-256,version:2,heights:Array.from({length:4225},(_,i)=>Math.floor(i/65)+i%65)});
@@ -28,4 +28,17 @@ test('outdated tile replies cannot replace terrain after the editor moves to ano
  pending[1].resolve({ok:true,json:async()=>({terrain:patch(1024,0)})});await b;
  pending[0].resolve({ok:true,json:async()=>({terrain:patch(0,0)})});await a;
  assert.equal(view.patch.x,768);assert.equal(view.local.geometry.attributes.position.getX(0),768);
+});
+test('game render tiles ignore older replies after movement while preserving native underfoot tiles',async()=>{
+ const previousDocument=globalThis.document,previousFetch=globalThis.fetch,pending=[];globalThis.document={};globalThis.fetch=(_url,opts)=>new Promise(resolve=>pending.push({resolve,body:JSON.parse(opts.body)}));
+ const scene={root:new T.Group(),npcObjects:new Map(),catalog:{worldLimit:48000,landscape:{version:4,tileSpec:{renderSide:129},biomes:[],rivers:[],water:[]}},propsKey:'0:0:5'};
+ const native=x=>({version:4,side:65,step:8,x,z:-128,heights:Array(4225).fill(1)}),detail=x=>({version:4,side:129,step:8,x,z:-384,heights:Array(16641).fill(1)});
+ const state=tile=>({player:{position:{x:0,y:1,z:0}},content:{release:5,terrainPatch:tile}});
+ try{
+  updateContentScene(scene,state(native(-128)));const old=scene.detailPromise;updateContentScene(scene,state(native(128)));const latest=scene.detailPromise;
+  assert.equal(pending.length,2);assert.equal(pending[1].body.detail,true);
+  pending[1].resolve({ok:true,json:async()=>({terrain:detail(-128)})});await latest;
+  pending[0].resolve({ok:true,json:async()=>({terrain:detail(-384)})});await old;
+  assert.equal(scene.terrainPatch.geometry.attributes.position.count,16641);assert.equal(scene.terrainPatch.geometry.attributes.position.getX(0),-128);assert.equal(scene.terrainHistory.height(150,0),1);
+ }finally{globalThis.fetch=previousFetch;if(previousDocument===undefined)delete globalThis.document;else globalThis.document=previousDocument;}
 });

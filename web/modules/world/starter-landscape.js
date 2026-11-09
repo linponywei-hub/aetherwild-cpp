@@ -1,3 +1,4 @@
+import {VillageFeatures} from './village-features.js';
 import {ScannedVegetation} from './scanned-vegetation.js';
 import * as T from '../../vendor/three.module.js';
 
@@ -6,11 +7,11 @@ export function starterCenter(config){return {x:(config.pixel[0]-633)*64,z:(conf
 export function villageRoadDistance(x,z){return Math.min(Math.abs(x+.3*Math.sin(z*.075)),Math.abs(z+.3*Math.sin(x*.075)));}
 export function starterHouses(catalog){return (catalog.buildings||[]).filter(b=>b.region==='windchime'&&b.style?.split('|')[1]==='house').slice(0,5);}
 export function decorativePointAllowed(x,z,config,houses,center){
- const dx=x-center.x,dz=z-center.z;
+ const dx=x-center.x,dz=z-center.z;const stream=config.stream;if(stream&&dz>stream.zMin-4&&dz<stream.zMax+4&&Math.abs(dx-stream.x-stream.meander*Math.sin(dz/stream.period))<stream.halfWidth+stream.bankWidth+1)return false;
  if(Math.hypot(dx,dz)<config.plazaRadius+2||villageRoadDistance(dx,dz)<config.roadHalfWidth+1.7)return false;
  return !houses.some(b=>Math.abs(x-b.position.x)<b.width/2+3&&Math.abs(z-b.position.z)<b.depth/2+3);
 }
-export function starterScatter(catalog,count=3200){
+export function starterScatter(catalog,count=9000){
  const config=starterConfig(catalog);if(!config)return [];
  const center=starterCenter(config),houses=starterHouses(catalog),points=[];let seed=0x51a7;
  const rand=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
@@ -24,21 +25,22 @@ export function starterScatter(catalog,count=3200){
  return points;
 }
 export class StarterLandscape {
- constructor(parent,catalog,height,{software=false,count=3200}={}){
+ constructor(parent,catalog,height,{software=false,count=9000}={}){
   this.catalog=catalog;this.height=height;this.root=new T.Group();this.root.name='starter-village-groundcover';this.config=starterConfig(catalog);
   if(!this.config)return;
   this.center=starterCenter(this.config);this.root.position.set(this.center.x,0,this.center.z);this.root.userData.cullRadius=220;parent.add(this.root);
+  this.features=new VillageFeatures(this.root,catalog,{software});
   this.points=software?[]:starterScatter(catalog,count);this.rebuild();if(!software&&typeof document!=='undefined')this.scanned=new ScannedVegetation(this.root,this.points,this.center,height,{onReady:()=>{const grass=this.root.children.find(m=>m.name==='starter-grass');if(grass)grass.visible=false;}});
  }
  rebuild(){
   if(!this.config)return;
-  for(const child of [...this.root.children]){if(child.isInstancedMesh)continue;this.root.remove(child);child.geometry.dispose();child.material.dispose();}
+  for(const child of [...this.root.children]){if(child.isInstancedMesh||child===this.features?.root)continue;this.root.remove(child);child.geometry.dispose();child.material.dispose();}
   const positions=[],colors=[],rockPositions=[],rockColors=[];const leaf=new T.Color(),stone=new T.Color();
   const triangle=(a,b,c,color,target=positions,tints=colors)=>{for(const p of [a,b,c]){target.push(...p);tints.push(color.r,color.g,color.b);}};
-  for(const p of this.points){
+  for(const p of this.points.slice(0,3200)){
    const y=this.height(p.x,p.z);if(!Number.isFinite(y))continue;const x=p.x-this.center.x,z=p.z-this.center.z;
    leaf.setHSL(.21+p.variation*.06,.25+p.variation*.16,.20+p.variation*.12);
-   for(let blade=0;blade<5;blade++){
+   for(let blade=0;blade<(this.scanned?.ready?0:5);blade++){
     const a=p.rotation+blade*2.39996,w=.028+p.variation*.035,h=.18+((p.variation+blade*.173)%1)*.42;
     const dx=Math.cos(a),dz=Math.sin(a),ox=x+Math.sin(a*3)*.16,oz=z+Math.cos(a*2)*.16;
     const l=[ox-dx*w,y,oz-dz*w],r=[ox+dx*w,y,oz+dz*w],m=[ox+dz*h*.18,y+h*.6,oz-dx*h*.18],tip=[ox+dz*h*.43,y+h,oz-dx*h*.43];

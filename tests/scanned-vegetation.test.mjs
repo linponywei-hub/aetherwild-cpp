@@ -27,3 +27,6 @@ test('existing house 001 also parses with the official glTF reader without editi
  globalThis.self={URL:globalThis.URL};globalThis.createImageBitmap=async()=>({width:512,height:512,close(){}});
  const raw=readFileSync(new URL('../web/assets/models/buildings/village/village_building_01_lod0.glb',import.meta.url));const loaded=await new GLTFLoader().parseAsync(raw.buffer.slice(raw.byteOffset,raw.byteOffset+raw.byteLength),'');const box=new T.Box3().setFromObject(loaded.scene);assert.ok(Number.isFinite(box.min.y)&&box.max.y>box.min.y);let meshes=0;loaded.scene.traverse(o=>{if(o.isMesh){meshes++;assert.ok(o.geometry.attributes.position.count>0);}});assert.ok(meshes>0);
 });
+test('dense vegetation selects nearby instances under explicit mobile draw budgets',async()=>{
+ const source=new T.Group();source.add(new T.Mesh(new T.BoxGeometry(1,1,1),new T.MeshStandardMaterial()));const points=Array.from({length:200},(_,i)=>({x:i,z:0,variation:.1,rotation:0}));const plants=new ScannedVegetation(new T.Group(),points,{x:0,z:0},()=>0,{loadModels:async()=>[{scene:source}],limits:{grass:20,shrub:5}});await plants.promise;assert.ok(plants.groups[0].count<=20);plants.updateFocus({x:1000,z:1000});assert.equal(plants.groups[0].count,0);plants.updateFocus({x:100,z:0});assert.equal(plants.groups[0].count,20);
+});

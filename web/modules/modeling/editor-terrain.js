@@ -23,14 +23,14 @@ export class EditorTerrain {
   view.cylinder=(parent,r1,r2,h,color,x=0,y=0,z=0,segments=12)=>view.mesh(new T.CylinderGeometry(r1,r2,h,segments),view.mat(color),[x,y,z],parent);
   makeLandscape(view);this.starterLandscape=new StarterLandscape(this.root,catalog,(x,z)=>this.height(x,z));this.onStatus('已載入原世界地圖與地形。');return catalog;
  }
- key(x,z){return Math.floor(x/512)+':'+Math.floor(z/512);}
+ key(x,z){const cell=this.catalog?.landscape?.tileSpec?.cell||512;return Math.floor(x/cell)+':'+Math.floor(z/cell);}
  async tile(x,z){
   if(!this.catalog)return null;const limit=this.catalog.worldLimit;
   if(!Number.isFinite(x)||!Number.isFinite(z)||Math.abs(x)>limit||Math.abs(z)>limit)throw Error('位置超出世界範圍');
   const key=this.key(x,z);if(this.cache.has(key))return this.cache.get(key);
-  const response=await this.fetcher('/api/terrain',{method:'POST',headers:{'Content-Type':'application/json','X-Aetherwild-Client':'1'},body:JSON.stringify({x,z})});
+  const response=await this.fetcher('/api/terrain',{method:'POST',headers:{'Content-Type':'application/json','X-Aetherwild-Client':'1'},body:JSON.stringify({x,z,...(this.catalog.landscape.tileSpec?.renderSide?{detail:true}:{})})});
   if(!response.ok)throw Error('無法讀取地形高度');const data=await response.json(),patch=data.terrain;
-  if(patch?.side!==65||patch.step!==16||patch.version!==this.catalog.landscape.version||!Array.isArray(patch.heights)||patch.heights.length!==4225||!patch.heights.every(Number.isFinite)||!Number.isFinite(patch.x)||!Number.isFinite(patch.z)||gridHeight(patch,x,z)===null)throw Error('地形資料不完整或版本不符');
+  if(patch?.side!==(this.catalog.landscape.tileSpec?.renderSide||65)||patch.step!==(this.catalog.landscape.tileSpec?.step||16)||patch.version!==this.catalog.landscape.version||!Array.isArray(patch.heights)||patch.heights.length!==patch.side*patch.side||!patch.heights.every(Number.isFinite)||!Number.isFinite(patch.x)||!Number.isFinite(patch.z)||gridHeight(patch,x,z)===null)throw Error('地形資料不完整或版本不符');
   if(this.cache.size>=16)this.cache.delete(this.cache.keys().next().value);this.cache.set(key,patch);return patch;
  }
  async ensurePatch(x,z){
@@ -39,7 +39,7 @@ export class EditorTerrain {
   this.patch=patch;this.local=terrainMesh(patch,'#718866',this.catalog.landscape);this.local.userData.localTerrain=true;this.root.add(this.local);clipTerrainPatch(this.global.material,patch);this.starterLandscape?.rebuild();return patch;
  }
  async sampleHeight(x,z){if(!this.catalog)return 0;const patch=await this.tile(x,z);return gridHeight(patch,x,z);}
- height(x,z){if(!this.catalog)return 0;return gridHeight(this.patch,x,z)??gridHeight(this.catalog.terrain,x,z)??0;}
+ height(x,z){if(!this.catalog)return 0;const current=gridHeight(this.patch,x,z);if(current!==null)return current;for(const tile of this.cache.values()){const h=gridHeight(tile,x,z);if(h!==null)return h;}return gridHeight(this.catalog.terrain,x,z)??0;}
  async jumpToRegion(id){const r=this.catalog?.regions.find(r=>r.id===id);if(!r)return;await this.jumpAt(r.position.x,r.position.z,r.name);}
  async jumpAt(x,z,label='地圖位置'){
   const id=++this.jumpId;this.jumping=true;this.lastRequest=this.key(x,z);

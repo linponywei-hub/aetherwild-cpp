@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "metersPerPixel": 64,
   "originPixel": [
     633,
@@ -874,6 +874,135 @@
     "blendMeters": 650,
     "detailRadius": 320,
     "roadHalfWidth": 2.8,
-    "plazaRadius": 14
+    "plazaRadius": 14,
+    "safeRadius": 36,
+    "mounds": [
+      {
+        "x": -58,
+        "z": -48,
+        "height": 2.8,
+        "radius": 24
+      },
+      {
+        "x": 48,
+        "z": -62,
+        "height": 2.2,
+        "radius": 25
+      },
+      {
+        "x": -58,
+        "z": 60,
+        "height": 2.5,
+        "radius": 27
+      },
+      {
+        "x": 78,
+        "z": 80,
+        "height": 3.4,
+        "radius": 30
+      }
+    ],
+    "foundationPads": [
+      {
+        "x": 9.938651331936796,
+        "z": 37.091551729500225,
+        "halfWidth": 12,
+        "halfDepth": 12,
+        "feather": 6
+      },
+      {
+        "x": -37.09155172950022,
+        "z": 9.938651331936807,
+        "halfWidth": 12,
+        "halfDepth": 12,
+        "feather": 6
+      },
+      {
+        "x": -9.938651331936791,
+        "z": -37.091551729500225,
+        "halfWidth": 12,
+        "halfDepth": 12,
+        "feather": 6
+      },
+      {
+        "x": 37.09155172950021,
+        "z": -9.938651331936828,
+        "halfWidth": 12,
+        "halfDepth": 12,
+        "feather": 6
+      },
+      {
+        "x": 60.273771560437865,
+        "z": 16.150308414397294,
+        "halfWidth": 12,
+        "halfDepth": 12,
+        "feather": 6
+      }
+    ],
+    "stream": {
+      "x": 112,
+      "zMin": -150,
+      "zMax": 150,
+      "meander": 7,
+      "period": 40,
+      "halfWidth": 5,
+      "bankWidth": 4,
+      "waterY": -0.12,
+      "bedY": -0.9,
+      "bridgeHalfDepth": 5,
+      "bridgeHalfWidth": 13
+    },
+    "walls": [
+      {
+        "x": -88,
+        "z": -48,
+        "width": 12,
+        "depth": 0.6,
+        "height": 1.2
+      },
+      {
+        "x": -88,
+        "z": -34,
+        "width": 12,
+        "depth": 0.6,
+        "height": 1.2
+      },
+      {
+        "x": -88,
+        "z": 34,
+        "width": 12,
+        "depth": 0.6,
+        "height": 1.2
+      },
+      {
+        "x": -88,
+        "z": 48,
+        "width": 12,
+        "depth": 0.6,
+        "height": 1.2
+      },
+      {
+        "x": 50,
+        "z": -86,
+        "width": 14,
+        "depth": 0.6,
+        "height": 1.2
+      },
+      {
+        "x": 68,
+        "z": -86,
+        "width": 14,
+        "depth": 0.6,
+        "height": 1.2
+      }
+    ]
+  },
+  "tileSpec": {
+    "side": 65,
+    "step": 8,
+    "cell": 256,
+    "padding": 128,
+    "renderSide": 129,
+    "renderPadding": 384
   }
 }

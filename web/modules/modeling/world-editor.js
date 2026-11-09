@@ -85,7 +85,7 @@ canvas.addEventListener('pointerdown',e=>{pointerStart={x:e.clientX,y:e.clientY,
 canvas.addEventListener('pointerup',e=>{if(!pointerStart||pointerStart.blocked||gizmo.dragging||Math.hypot(e.clientX-pointerStart.x,e.clientY-pointerStart.y)>4||e.button===2)return;const rect=canvas.getBoundingClientRect(),ray=new T.Raycaster();ray.setFromCamera(new T.Vector2((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1),camera);const hit=ray.intersectObjects([...groups.values()].map(g=>g.userData.model),true)[0];if(hit){let n=hit.object;while(n&&!n.userData.id)n=n.parent;if(n)select(n.userData.id);}pointerStart=null;});
 document.addEventListener('keydown',e=>{if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;if(e.key.toLowerCase()==='f')focus();if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();restore(e.shiftKey?redo:undo,e.shiftKey?undo:redo);}});
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='';}});
-renderer.setAnimationLoop(()=>{gizmo.enabled=!busy;worldTerrain.updateTarget(target,performance.now());renderer.render(scene,camera);});
+renderer.setAnimationLoop(()=>{gizmo.enabled=!busy;worldTerrain.starterLandscape?.features?.update(camera.position);worldTerrain.starterLandscape?.scanned?.updateFocus?.(camera.position);worldTerrain.updateTarget(target,performance.now());renderer.render(scene,camera);});
 await task(async()=>{const saved=await storage('readonly');if(saved){validateProject(saved);project=saved;await reconcile();focus(true);status('已恢復此瀏覽器的場景草稿。');}else{refresh();status('加入 GLB，開始編輯位置、角度與碰撞箱。');}});
 
 $('#terrain-region').onchange=e=>worldTerrain.jumpToRegion(e.target.value).catch(error=>$('#terrain-status').textContent=error.message);

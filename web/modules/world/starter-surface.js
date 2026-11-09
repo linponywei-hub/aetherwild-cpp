@@ -24,8 +24,8 @@ export function installStarterSurface(shader,starter){
  const {maps,ready}=starterTextures();shader.uniforms.awSurfaceReady=ready;
  for(const [name,value] of Object.entries(maps))shader.uniforms['aw'+name[0].toUpperCase()+name.slice(1)]={value};
  shader.uniforms.awVillage={value:new T.Vector4((starter.pixel[0]-633)*64,(starter.pixel[1]-578)*64,starter.detailRadius,starter.roadHalfWidth)};
- shader.uniforms.awPlaza={value:starter.plazaRadius};
- shader.fragmentShader=`uniform float awSurfaceReady;uniform float awPlaza;uniform vec4 awVillage;
+ shader.uniforms.awPlaza={value:starter.plazaRadius};const creek=starter.stream;shader.uniforms.awCreek={value:new T.Vector4(creek?.x||1e8,creek?.meander||0,creek?.period||40,(creek?.halfWidth||0)+(creek?.bankWidth||0))};shader.uniforms.awCreekRange={value:new T.Vector2(creek?.zMin||0,creek?.zMax||0)};
+ shader.fragmentShader=`uniform float awSurfaceReady;uniform float awPlaza;uniform vec4 awVillage;uniform vec4 awCreek;uniform vec2 awCreekRange;
  uniform sampler2D awGrassColor;uniform sampler2D awGrassNormal;uniform sampler2D awGrassArm;
  uniform sampler2D awGravelColor;uniform sampler2D awGravelNormal;uniform sampler2D awGravelArm;
  `+shader.fragmentShader;
@@ -36,6 +36,8 @@ export function installStarterSurface(shader,starter){
   float awEdge=.22*sin(awLocal.x*1.7+awLocal.y*.8)+.18*sin(awLocal.y*2.8);
   float awRoad=1.0-smoothstep(awVillage.w-.45,awVillage.w+1.1,awRoadDistance+awEdge);
   awRoad=max(awRoad,1.0-smoothstep(awPlaza-1.0,awPlaza+1.2,length(awLocal)+awEdge));
+  float awBankDistance=abs(awLocal.x-awCreek.x-awCreek.y*sin(awLocal.y/awCreek.z));
+  float awBank=(1.0-smoothstep(max(0.0,awCreek.w-2.0),awCreek.w+1.0,awBankDistance))*smoothstep(awCreekRange.x,awCreekRange.x+8.0,awLocal.y)*(1.0-smoothstep(awCreekRange.y-8.0,awCreekRange.y,awLocal.y));awRoad=max(awRoad,awBank);
   vec2 awGrassUV=awTerrainPosition.xz/4.0,awGravelUV=awTerrainPosition.xz/3.0;
   vec3 awGrass=texture2D(awGrassColor,awGrassUV).rgb;
   vec3 awGravel=texture2D(awGravelColor,awGravelUV).rgb;
