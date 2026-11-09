@@ -1,1 +1,0 @@
-Place TRIPO-001.glb here. The 8.2 MB binary is not committed by the text-only GitHub editing flow. Keep the source GLB and do not replace it with a screenshot. The model catalog refers to /assets/models/characters/TRIPO-001.glb.

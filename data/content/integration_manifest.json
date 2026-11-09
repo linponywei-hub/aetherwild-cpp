@@ -1,9 +1,0 @@
-{
-  "version": "cpp-content-0.3",
-  "source_pack": "v3.0",
-  "npc_profiles": 263,
-  "additional_service_npcs": 25,
-  "runtime_status": "prototype_integration",
-  "advanced_class_specific_mechanics": "partial",
-  "skeletal_animation_assets": "not_generated"
-}

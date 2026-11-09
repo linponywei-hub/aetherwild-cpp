@@ -1,8 +1,0 @@
-// Owner-only recovery copies remain on this browser. No credentials leave this origin.
-export class WorldBackups {
- constructor(){this.last=0;this.busy=false;}
- async db(){return new Promise((resolve,reject)=>{const r=indexedDB.open('aetherwild-recovery',1);r.onupgradeneeded=()=>r.result.createObjectStore('worlds',{keyPath:'epoch'});r.onerror=()=>reject(r.error);r.onsuccess=()=>resolve(r.result);});}
- async list(){const db=await this.db();try{return await new Promise((resolve,reject)=>{const r=db.transaction('worlds').objectStore('worlds').getAll();r.onsuccess=()=>resolve(r.result.sort((a,b)=>b.at-a.at));r.onerror=()=>reject(r.error);});}finally{db.close();}}
- async capture(epoch,api,force=false){if(this.busy||!force&&Date.now()-this.last<30000)return;this.busy=true;this.last=Date.now();try{const backup=await api('admin/backup'),db=await this.db();try{await new Promise((resolve,reject)=>{const tx=db.transaction('worlds','readwrite');tx.objectStore('worlds').put({epoch,at:Date.now(),players:backup.world.players.length,backup});tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});}finally{db.close();}const rows=await this.list();if(rows.length>5){const db2=await this.db();const tx=db2.transaction('worlds','readwrite');for(const row of rows.slice(5))tx.objectStore('worlds').delete(row.epoch);tx.oncomplete=()=>db2.close();}return backup;}finally{this.busy=false;}}
- download(backup,label='world'){const blob=new Blob([JSON.stringify(backup)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Aetherwild-'+label+'-'+new Date().toISOString().replace(/[:.]/g,'-')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-}

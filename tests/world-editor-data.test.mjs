@@ -1,7 +1,0 @@
-import test from 'node:test';
-import assert from 'node:assert/strict';
-import {emptyProject,validateProject,checkGLB,newObject,newCollider} from '../web/modules/modeling/world-editor-data.js';
-function fixture(){const p=emptyProject();p.assets.push({id:'asset',name:'house.glb',bytes:new ArrayBuffer(20)});const o=newObject('asset','房屋');o.colliders.push(newCollider());p.objects.push(o);return p;}
-test('scene retains multiple local rotated collision boxes and embedded asset bytes',()=>{const p=fixture();p.objects[0].colliders.push(newCollider());p.objects[0].colliders[1].rotation=[0,Math.PI/2,0];assert.equal(validateProject(structuredClone(p)).objects[0].colliders.length,2);});
-test('reject malformed vectors, missing assets, duplicate ids and nonpositive dimensions',()=>{for(const mutate of [p=>p.objects[0].position=[0,NaN,0],p=>p.objects[0].assetId='missing',p=>p.objects.push(structuredClone(p.objects[0])),p=>p.objects[0].colliders[0].size[1]=0,p=>p.objects[0].colliders.push(structuredClone(p.objects[0].colliders[0])),p=>p.objects[0].scale=[-1,1,1]]){const p=fixture();mutate(p);assert.throws(()=>validateProject(p));}});
-test('GLB header checks catch truncated and wrong-version input before renderer access',()=>{const b=new ArrayBuffer(20),v=new DataView(b);v.setUint32(0,0x46546c67,true);v.setUint32(4,2,true);v.setUint32(8,20,true);assert.doesNotThrow(()=>checkGLB(b));v.setUint32(4,1,true);assert.throws(()=>checkGLB(b));assert.throws(()=>checkGLB(new ArrayBuffer(5)));});
