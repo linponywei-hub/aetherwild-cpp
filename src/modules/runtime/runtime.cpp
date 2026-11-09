@@ -53,6 +53,11 @@ using namespace runtime_detail;
         }
         else populate();
         if(!legacyTestWorld){applyWorldPatch();
+            // Safely relocate returning characters stranded over the removed Verdant disc.
+            const auto& verdant=catalog_.regions.at("verdant");
+            for(auto&[id,p]:world_.players)if(p.scene=="world"&&std::hypot(p.position.x-verdant.center.x,p.position.z-verdant.center.z)<100&&std::abs(p.position.y-verdant.center.y-32)<4&&!onCityFloor(p.position,verdant)){
+                p.position=cityArrival(verdant);motion_[id].velocityY=0;motion_[id].grounded=true;
+            }
             for(auto&[id,p]:world_.players)if(p.scene=="world"&&blocked(p.position,buildings_)){bool found=false;const auto old=p.position;for(int rad=2;rad<=60&&!found;rad+=2)for(int n=0;n<16;n++){Vec3 v{old.x+std::cos(n*tau/16)*rad,old.y+2,old.z+std::sin(n*tau/16)*rad};v.y=groundBelow(v,catalog_);if(!blocked(v,buildings_)&&contentAllowed(v)){p.position=v;found=true;break;}}if(!found)p.position=cityArrival(catalog_.regions.at(p.lastCity));motion_[id].velocityY=0;}
         }
     }

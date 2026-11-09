@@ -91,6 +91,16 @@ int main() {
             pos.y=17;
             // The former external ramp at z+90 must no longer support players.
             CHECK(groundBelow(pos,c)<16);
+            const auto arrival=cityArrival(t);CHECK(onCityFloor(arrival,t));CHECK(groundBelow(arrival,c)==32);
+            // Walk continuously across all four suspended bridges and their landings.
+            for(int arm=0;arm<4;arm++)for(double d=12;d<68;d+=.1){
+                double a=arm*3.14159265358979323846/2;
+                Vec3 q{t.center.x+std::sin(a)*d,33,t.center.z+std::cos(a)*d};
+                auto floor=groundBelow(q,c);CHECK(floor>=31.49&&floor<=32.01);
+            }
+            CHECK(groundBelow({t.center.x+28,33,t.center.z+28},c)<30);
+            CHECK(groundBelow({t.center.x,0,t.center.z+12},c)<1);
+
         });
         test("verified actor ownership and permissions",[] {
             GameRuntime g({},true);
@@ -374,7 +384,7 @@ int main() {
         });
         test("urban layouts and NPC service plazas are collision-consistent",[]{
             GameRuntime g;const auto& c=g.definitions();auto b=buildings(c);CHECK(b.size()>250);int cities=0;
-            for(const auto&[id,r]:c.regions)if(!r.wilderness){cities++;CHECK(urbanRadius(r)>0&&urbanRadius(r)<=r.radius);bool found=false,lamp=false;for(const auto& house:b)if(house.region==id){found=true;lamp|=house.style.ends_with("|lamp");CHECK(finite(house.position));}CHECK(found&&lamp);}
+            for(const auto&[id,r]:c.regions)if(!r.wilderness){cities++;CHECK(urbanRadius(r)>0&&urbanRadius(r)<=r.radius);bool found=false,lamp=false;for(const auto& house:b)if(house.region==id){found=true;lamp|=house.style.ends_with("|lamp");CHECK(finite(house.position));}if(id=="verdant")CHECK(!found);else CHECK(found&&lamp);}
             CHECK(cities>=10);bool palace=false,wall=false;for(const auto& house:b){palace|=house.style=="aw_crownreach|palace";wall|=house.style=="aw_crownreach|wall";}CHECK(palace&&wall);
             for(const auto&[id,n]:c.npcs)if(!c.regions.at(n.region).wilderness)CHECK(!blocked(n.position,b,.2));
         });

@@ -1,23 +1,10 @@
-// Node.js built-in regression check: run with node tests/verdant_canopy.test.mjs
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
-const canopy=readFileSync(new URL('../web/modules/world/verdant-canopy.js',import.meta.url),'utf8');
-const city=readFileSync(new URL('../web/modules/world/city-scene.js',import.meta.url),'utf8');
-const physics=readFileSync(new URL('../src/modules/physics/geometry.cpp',import.meta.url),'utf8');
-const scene=readFileSync(new URL('../web/modules/core/scene.js',import.meta.url),'utf8');
-assert.match(canopy,/export function addVerdantCanopy\(scene\)/);
-assert.match(canopy,/r\.id === 'verdant'/);
-assert.match(canopy,/for \(let i=0;i<6;i\+\+\)/);
-assert.match(canopy,/visualOnly = true/);
-assert.match(canopy,/assetPhase = 'procedural-phase1'/);
-assert.match(city,/import \{addVerdantCanopy\} from '\.\/verdant-canopy\.js'/);
-assert.match(city,/this\.verdantCanopy=addVerdantCanopy\(scene\)/);
-assert.match(scene,/this\.cityScene=new CityScene\(this\)/);
-assert.match(canopy,/for\(let level=0;level<100;level\+\+\)/);
-assert.match(canopy,/Math\.PI\/2\+level\*8\*Math\.PI\/100/);
-assert.match(physics,/for\(int step=0;step<100;step\+\+\)/);
-assert.match(physics,/pi\/2\+step\*\(8\*pi\/100\.0\)/);
-assert.doesNotMatch(physics,/double ramp=\(150-dz\)/);
-assert.match(physics,/bool disc=std::hypot\(dx,dz\)<=94&&\!\(id=="verdant"&&std::hypot\(dx,dz\)<7\)/);
-assert.match(physics,/if\(r.id=="verdant"&&std::hypot\(dx,dz\)<7\)return false/);
-console.log('Verdant canopy source wiring and staircase constants passed; runtime physics still requires testing.');
+import {verdantDeckTiles,verdantSurface,verdantBridges} from '../web/modules/world/verdant-layout.js';
+// Continuous walking paths over each deck/bridge join, and real open air between islands.
+for(const b of verdantBridges){for(let distance=12;distance<68;distance+=.1){const h=verdantSurface(Math.sin(b.angle)*distance,Math.cos(b.angle)*distance,1);assert.notEqual(h,null,`gap on bridge arm ${b.angle} at ${distance}`);assert.ok(h>=-.501&&h<=0);}}
+assert.equal(verdantSurface(28,28,1),null,'Old monolithic city floor must be gone');
+assert.equal(verdantSurface(0,0,1),null,'Hollow-tree stairwell must stay open');
+assert.equal(verdantSurface(0,12,-32),null,'Walking under the city must not snap to the deck');
+const tiles=verdantDeckTiles();assert.equal(tiles.length,196);
+assert.equal(new Set(tiles.map(t=>`${t.x.toFixed(2)},${t.z.toFixed(2)}`)).size,196,'No doubled deck panels');
+console.log('Verdant: four continuous bridge routes, separated islands and open stairwell passed');

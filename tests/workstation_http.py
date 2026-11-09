@@ -22,6 +22,9 @@ check(request('session',{'name':'blocked','profession':'warrior'},header=False)[
 a=request('session',{'name':'QA 連線A','profession':'warrior'})[1]
 b=request('session',{'name':'QA 連線B','profession':'ranger'})[1]
 check('token' in a and 'token' in b)
+check(a['initialState']['player']['id']==a['player']['id'])
+check('_motion' in a['initialState'] and '_sync' in a['initialState'])
+check('token' not in a['initialState'])
 rid=uuid.uuid4().hex
 code,r=request('command',{'request':rid,'type':'buy','target':'potion'},a['token']);check(code==200)
 coins=r['player']['coins'];check(coins==40)
