@@ -38,7 +38,7 @@ export async function attachVerdantCC0Models(canopyRoot) {
   try {
     const gltf=await fetchModel(SOURCES.canopy);
     // Hide procedural foliage only when a real tree asset loads successfully.
-    canopyRoot.children.filter(node=>node.isMesh && node.material?.color?.getHexString && ['54764b'].includes(node.material.color.getHexString())).forEach(node=>{node.visible=false;});
+    canopyRoot.children.filter(node=>node.userData.proceduralFoliage).forEach(node=>{node.visible=false;});
     for(const [x,z] of treePositions) {
       const model=normalize(gltf.scene.clone(true),30);
       model.position.add(new T.Vector3(x,17,z));
