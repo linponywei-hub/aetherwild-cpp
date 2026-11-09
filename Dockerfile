@@ -8,6 +8,7 @@ COPY apps/ apps/
 COPY tests/ tests/
 COPY tools/build.py tools/build.py
 COPY tools/install_terrain_textures.py tools/install_terrain_textures.py
+COPY web/assets/ web/assets/
 RUN python3 tools/install_terrain_textures.py
 ENV AW_BUILD_JOBS=1
 RUN python3 tools/build.py
