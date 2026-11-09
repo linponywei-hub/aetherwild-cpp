@@ -15,4 +15,19 @@
 <aside id="terminal" class="hidden"><div class="terminal-top"><div><span class="eyebrow">TRAVELER'S TERMINAL</span><h2>旅人終端</h2></div><button id="close-terminal" class="icon-button" aria-label="關閉旅人終端">×</button></div><div class="terminal-profile"><span>◇ 遠行者的冒險手冊</span><button id="talent-indicator" data-tab="talents">天賦樹</button></div><nav id="tabs" aria-label="終端分頁"></nav><div id="panel"></div></aside>
 <section id="death" class="modal hidden"><div><span class="eyebrow">YOUR JOURNEY CONTINUES</span><h2>你倒下了。</h2><p>回到最後停留的城鎮，重新整理行裝。</p><button class="primary" id="respawn">返回城鎮</button></div></section>
 <section id="chat-panel" class="hidden"><div class="panel-heading"><h3>旅人頻道</h3><button id="close-chat">×</button></div><div id="messages"></div><form id="chat-form"><input id="chat-input" maxlength="180" placeholder="說點什麼…" autocomplete="off"><button>發送</button></form></section>
-<script type="module" src="/modules/core/client.js?v=20261108-6"></script></body></html>
+<script>
+(function(){
+ const detail=document.getElementById('loading-detail');
+ const show=(message)=>{if(detail)detail.textContent='啟動失敗：'+String(message).slice(0,240);};
+ window.addEventListener('error',event=>{if(!document.getElementById('loading')?.classList.contains('hidden'))show(event.message||'JavaScript 資源載入失敗');});
+ window.addEventListener('unhandledrejection',event=>{if(!document.getElementById('loading')?.classList.contains('hidden'))show(event.reason?.message||event.reason||'載入失敗');});
+ setTimeout(()=>{if(detail?.textContent==='建立世界連線')show('遊戲模組未啟動，請重新整理；若持續發生請回報此訊息');},12000);
+})();
+</script>
+<script type="module">
+import('/modules/core/client.js?v=20261109-connection-diagnostic-1').catch(error=>{
+ const detail=document.getElementById('loading-detail');
+ if(detail)detail.textContent='模組載入失敗：'+(error?.message||String(error));
+ console.error('[Aetherwild] client bootstrap failed',error);
+});
+</script></body></html>
