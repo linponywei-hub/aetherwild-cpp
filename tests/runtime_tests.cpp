@@ -386,7 +386,7 @@ int main() {
             GameRuntime g;const auto& c=g.definitions();auto b=buildings(c);CHECK(b.size()>250);int cities=0;
             for(const auto&[id,r]:c.regions)if(!r.wilderness){cities++;CHECK(urbanRadius(r)>0&&urbanRadius(r)<=r.radius);bool found=false,lamp=false;for(const auto& house:b)if(house.region==id){found=true;lamp|=house.style.ends_with("|lamp");CHECK(finite(house.position));}if(id=="verdant")CHECK(!found);else CHECK(found&&lamp);}
             CHECK(cities>=10);bool palace=false,wall=false;for(const auto& house:b){palace|=house.style=="aw_crownreach|palace";wall|=house.style=="aw_crownreach|wall";}CHECK(palace&&wall);
-            for(const auto&[id,n]:c.npcs)if(!c.regions.at(n.region).wilderness)CHECK(!blocked(n.position,b,.2));
+            for(const auto&[id,n]:c.npcs)if(!c.regions.at(n.region).wilderness){CHECK(!blocked(n.position,b,.2));if(n.region=="verdant")CHECK(onCityFloor(n.position,c.regions.at(n.region)));}
         });
         test("five skill slots validate ownership uniqueness privacy and survive restart",[]{
             auto path=std::filesystem::temp_directory_path()/"aw_skill_slots_runtime.json";std::filesystem::remove(path);GameRuntime g(path,true);auto a=create(g,"Slots A"),b=create(g,"Slots B");auto token=a.str("token");auto initial=g.snapshot(token).at("player").at("skillSlots");CHECK(initial.arrayItems().size()==5);auto first=initial.arrayItems()[0].string();CHECK(!first.empty());int n=0;

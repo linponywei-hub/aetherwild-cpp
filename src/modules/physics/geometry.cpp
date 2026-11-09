@@ -8,7 +8,7 @@ namespace aw {
     Vec3 cityArrival(const RegionDefinition&r) {
         auto p=r.center;
         p.y=r.center.y+cityElevation(r.id);
-        if(r.id=="verdant")p.z+=12;
+        if(r.id=="verdant")p.z+=18;
         return p;
     }
     std::vector<Building> buildings(const Catalog&c) {
