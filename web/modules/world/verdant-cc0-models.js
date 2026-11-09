@@ -44,8 +44,8 @@ export async function attachVerdantCC0Models(root) {
     return {loaded:0};
   }
   let loaded=0;
-  for(let i=0;i<6;i++){
-    const angle=i*Math.PI/3;
+  for(let i=0;i<4;i++){
+    const angle=i*Math.PI/2;
     placeModel(trees[i%trees.length],root,Math.cos(angle)*49,-32,Math.sin(angle)*49,68+(i%3)*7);
     loaded++;
   }
@@ -57,8 +57,8 @@ export async function attachVerdantCC0Models(root) {
   try {
     const bridgeSource=await fetchModel('/assets/models/verdant/aetherwild-rope-bridge.glb');
     const bridgeBase=bridgeSource.scene;
-    for(let i=0;i<6;i++){
-      const a=i*Math.PI/3,b=(i+1)*Math.PI/3;
+    for(let i=0;i<4;i++){
+      const a=i*Math.PI/2,b=(i+1)*Math.PI/2;
       const x=Math.cos(a)*49,z=Math.sin(a)*49;
       const nx=Math.cos(b)*49,nz=Math.sin(b)*49;
       const dx=nx-x,dz=nz-z,length=Math.hypot(dx,dz);
@@ -79,35 +79,15 @@ export async function attachVerdantCC0Models(root) {
       anchor.add(bridge);root.add(anchor);loaded++;
     }
   } catch(error) {console.warn('[Verdant] bridge GLB unavailable',error);}
-  // Imported short bridge segments visually mark the existing server spiral
-  // stairs, without adding a second collision system.
-  try {
-    const stairSource=await fetchModel('/assets/models/verdant/aetherwild-rope-bridge.glb');
-    for(let step=0;step<100;step+=4){
-      const a=Math.PI/2+step*8*Math.PI/100;
-      const stair=stairSource.scene.clone(true);
-      stair.updateMatrixWorld(true);
-      const bounds=new T.Box3().setFromObject(stair);
-      const size=bounds.getSize(new T.Vector3());
-      const scale=3.5/Math.max(size.x,size.z);
-      stair.scale.multiplyScalar(scale);
-      stair.updateMatrixWorld(true);
-      const adjusted=new T.Box3().setFromObject(stair);
-      const center=adjusted.getCenter(new T.Vector3());
-      stair.position.set(-center.x,-center.y,-center.z);
-      stair.rotation.y=-a;
-      const pivot=new T.Group();
-      pivot.position.set(Math.cos(a)*8.5,-32+step*.32,Math.sin(a)*8.5);
-      pivot.add(stair);root.add(pivot);loaded++;
-    }
-  } catch(error) {console.warn('[Verdant] spiral GLB segments unavailable',error);}
+  // Performance: do not clone the bridge GLB dozens of times for every stair.
+  // A dedicated low-draw-call stair asset will replace this in a later pass.
   // Reuse the game's already bundled authored GLB buildings, not primitive huts.
   // These are temporary architecture assets until licensed canopy-house GLBs are sourced.
   const houseURLs=Array.from({length:5},(_,i)=>'/assets/models/buildings/village/village_building_'+String(i+1).padStart(2,'0')+'_lod0.glb');
   const houses=await Promise.allSettled(houseURLs.map(fetchModel));
   const available=houses.filter(r=>r.status==='fulfilled').map(r=>r.value);
-  for(let i=0;i<6&&available.length;i++){
-    const a=i*Math.PI/3;
+  for(let i=0;i<4&&available.length;i++){
+    const a=i*Math.PI/2;
     try {
       const source=available[i%available.length], house=source.scene.clone(true);
       house.updateMatrixWorld(true);
