@@ -9,7 +9,8 @@ export class CityScene {
  constructor(scene){this.scene=scene;this.verdantCanopy=addVerdantCanopy(scene);if(this.verdantCanopy)attachVerdantCC0Models(this.verdantCanopy).catch(error=>console.warn('[Verdant] optional models:',error));this.chunks=[];this.glows=[];this.lamps=[];this.scenery=new Map();this.lights=[];this.pending=[];
   const batches=new Map();let starterHouseIndex=0;for(const b of scene.catalog.buildings){if(!b.style.includes('|'))continue;
    // Hide all old procedural buildings in the starter village. Only the five uploaded GLBs remain.
-   if(b.region==='verdant')continue;\n   if(b.region==='windchime'){
+   if(b.region==='verdant')continue;
+   if(b.region==='windchime'){
     if(b.style.split('|')[1]==='house'&&starterHouseIndex<5){
      const house=new T.Group();house.position.set(b.position.x,scene.landHeight(b.position.x,b.position.z),b.position.z);
      scene.root.add(house);scene.loadVillageHouse(house,++starterHouseIndex,b);
