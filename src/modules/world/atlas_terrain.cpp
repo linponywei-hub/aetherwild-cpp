@@ -62,9 +62,13 @@ double atlasHeight(Vec3 p){
   if(biome.id=="forest"){y+=w*3.5*(fractal(p.x/750,p.z/750,model.seed+113)-.5);}
  }
  for(const auto& flat:model.flat){double d=std::hypot(pixel.x-flat.center.x,pixel.z-flat.center.z);double w=1-smooth(flat.radius,flat.radius+flat.feather,d);y=mix(y,flat.base+flat.amplitude*(2*detail-1),w);}
+ // Coast and riverbank use the same water boundary as atlasWater, keeping
+ // the dry-land approach continuous instead of creating vertical cliffs.
  double shore=1e20;for(const auto& water:model.water)shore=std::min(shore,edgeDistance(pixel,water));
  double bank=1e20;for(const auto& r:model.rivers)for(std::size_t i=1;i<r.points.size();i++)bank=std::min(bank,segmentDistance(pixel,r.points[i-1],r.points[i])*64-r.width/2);
- y*=std::min(smooth(0,model.coast,shore),smooth(0,model.bank,bank));
+ const double coastBlend=smooth(0,std::max(1.0,model.coast),shore);
+ const double riverBlend=smooth(0,std::max(1.0,model.bank),bank);
+ y*=std::min(coastBlend,riverBlend);
  return std::max(0.0,y);
 }
 double harborGround(Vec3 p,const Catalog& c){double result=-1e9;if(c.worldLimit<=1800)return result;for(const auto& harbor:atlasSurface().at("harbors").arrayItems()){const auto& r=c.regions.at(harbor.str("region"));double x=p.x-r.center.x,z=p.z-r.center.z;if(std::abs(x)>harbor.num("extent")||std::abs(z)>harbor.num("extent"))continue;for(const auto& box:harbor.at("platforms").arrayItems())if(std::abs(x-box.num("x"))<=box.num("width")/2&&std::abs(z-box.num("z"))<=box.num("depth")/2&&box.num("height")<=p.y+1.4)result=std::max(result,box.num("height"));const auto& ramp=harbor.at("ramp");if(std::abs(x-ramp.num("x"))<=ramp.num("width")/2&&std::abs(z-ramp.num("z"))<=ramp.num("depth")/2){double h=ramp.num("height")*(ramp.num("z")+ramp.num("depth")/2-z)/ramp.num("depth");if(h<=p.y+1.4)result=std::max(result,h);}}
