@@ -19,6 +19,7 @@ export class ModelAssets {
     this.registry = registry;
     this.cache = new Map();
     this.loaderPromise = null;
+    this.animationCache = new Map();
   }
   async loader() {
     // Keep the Three.js dependency identical to the game's existing vendor build.
@@ -30,15 +31,28 @@ export class ModelAssets {
   }
   async template(id) {
     const asset = validateModelAsset(this.registry[id]);
-    const cacheKey = asset.baseId || id;
+    const cacheKey = asset.path;
     if (!this.cache.has(cacheKey)) {
       const task = this.loader().then(loader => loader.loadAsync(asset.path))
-        .then(gltf => {
+        .then(async gltf => {
           const root = gltf.scene;
           root.traverse(node => {
             if (node.isMesh) { node.castShadow = true; node.receiveShadow = true; }
           });
-          return { root, asset, animations: gltf.animations || [] };
+          let animations = gltf.animations || [];
+          if (asset.animationPath) {
+            if (!this.animationCache.has(asset.animationPath)) {
+              this.animationCache.set(asset.animationPath, this.loader().then(loader => loader.loadAsync(asset.animationPath)).catch(error => {this.animationCache.delete(asset.animationPath);throw error;}));
+            }
+            const library = await this.animationCache.get(asset.animationPath);
+            animations = library.animations;
+            const names = new Set();root.traverse(node => names.add(node.name));
+            for (const clip of animations) for (const track of clip.tracks) {
+              const target = T.PropertyBinding.parseTrackName(track.name).nodeName;
+              if (!names.has(target)) throw Error('Animation joint missing: '+target);
+            }
+          }
+          return { root, asset, animations };
         })
         .catch(error => { this.cache.delete(cacheKey); throw error; });
       this.cache.set(cacheKey, task);
@@ -64,43 +78,25 @@ export class ModelAssets {
       );
       target.bind(skeleton, source.bindMatrix.clone());
     }
-    // Emergency skinning fallback: retain the original textured geometry and
-    // bypass the broken proxy skeleton that produces extreme triangle spikes.
-    // The original mesh is rigid until a validated replacement rig is supplied.
-    if (id === 'HUM_EILEEN_TEST_001') {
-      const meshes = [];
-      instance.traverse(node => { if (node.isSkinnedMesh) meshes.push(node); });
-      for (const mesh of meshes) {
-        const replacement = new T.Mesh(mesh.geometry, mesh.material);
-        replacement.name = mesh.name + '_safe_static';
-        replacement.position.copy(mesh.position);
-        replacement.quaternion.copy(mesh.quaternion);
-        replacement.scale.copy(mesh.scale);
-        replacement.castShadow = mesh.castShadow;
-        replacement.receiveShadow = mesh.receiveShadow;
-        mesh.parent.add(replacement);
-        mesh.parent.remove(mesh);
-      }
-    }
-    // Size the imported character in world units without touching its bone transforms.
-    // A neutral pose is used for bounds; GLB authoring units may be centimetres.
-    if (id === 'HUM_EILEEN_TEST_001') {
+    // Measure the actual skinned neutral pose; normalize the whole asset, never bones.
+    if (asset.height) {
       instance.updateMatrixWorld(true);
-      const box = new T.Box3().setFromObject(instance);
-      const height = box.max.y - box.min.y;
-      if (Number.isFinite(height) && height > 0.0001) {
-        const targetHeight = 2.795; // player camera is at 1.68 world units
-        const scale = Math.min(10000, Math.max(0.0001, targetHeight / height));
-        instance.scale.multiplyScalar(scale);
-        instance.updateMatrixWorld(true);
-        const grounded = new T.Box3().setFromObject(instance);
-        instance.position.y -= grounded.min.y;
-      } else console.warn('[Aetherwild] Eileen has invalid bounds; retaining original size');
+      instance.traverse(node => { if (node.isSkinnedMesh) node.computeBoundingBox(); });
+      const bounds = new T.Box3().setFromObject(instance);
+      const height = bounds.max.y - bounds.min.y;
+      if (!Number.isFinite(height) || height < .001) throw Error('Invalid character bounds');
+      instance.scale.multiplyScalar(asset.height / height);
+      instance.updateMatrixWorld(true);
+      const grounded = new T.Box3().setFromObject(instance);
+      instance.position.x -= (grounded.min.x + grounded.max.x) / 2;
+      instance.position.z -= (grounded.min.z + grounded.max.z) / 2;
+      instance.position.y -= grounded.min.y;
     }
+    instance.traverse(node => {if (node.name === 'Hair_Beard') node.visible=!!asset.beard;});
     instance.scale.multiplyScalar(asset.scale ?? 1);
     instance.rotation.y += asset.yaw ?? 0;
     if (asset.tint && asset.tint !== '#ffffff') instance.traverse(node => {
-      if (!node.isMesh) return;
+      if (!node.isMesh || /head|hair|eye|brow|beard/i.test(node.name)) return;
       node.material = Array.isArray(node.material) ? node.material.map(m => m.clone()) : node.material.clone();
       for (const material of Array.isArray(node.material) ? node.material : [node.material]) material.color?.multiply(new (material.color.constructor)(asset.tint));
     });
@@ -118,24 +114,14 @@ export class ModelAssets {
       if (group.userData.modelMixer) group.userData.modelMixer.stopAllAction();
       group.userData.modelMixer = null;
       // Drive the supplied GLB clips using the cloned skeleton, without forced joint offsets.
-      if (animations.length && id !== 'HUM_EILEEN_TEST_001') {
+      if (animations.length) {
         const mixer = new T.AnimationMixer(instance);
         const idle = animations.find(clip => /idle|breathe|待機/i.test(clip.name)) || animations[0];
         mixer.clipAction(idle).play();
         group.userData.modelMixer = mixer;
         group.userData.modelClips = animations;
       }
-      // The supplied GLB animation clips do not keyframe either upper arm.
-      // Add an explicit shoulder-down pose on the existing skin (not the mesh root).
-      if (id === 'HUM_EILEEN_TEST_001') {
-        const joints = {};
-        instance.traverse(node => { if (node.isBone) joints[node.name] = node; });
-        group.userData.eileenShoulders = [
-          { bone: joints.Eileen_LeftUpperArm, angle: 0.88 },
-          { bone: joints.Eileen_RightUpperArm, angle: -0.88 }
-        ].filter(entry => !!entry.bone);
-      }
-      group.userData.modelHealth = {status: id === 'HUM_EILEEN_TEST_001' ? 'static-mesh-safety-fallback' : 'loaded', animationCount: animations.length};
+      group.userData.modelHealth = {status: 'loaded', animationCount: animations.length};
       // Hide only the procedural body. Preserve labels, collision proxies and weapons.
       for (const part of group.userData.proceduralParts || []) part.visible = false;
       return true;

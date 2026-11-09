@@ -202,7 +202,7 @@ Json GameRuntime::contentSnapshot(const Player& p)const{
   auto profile=contentEntry("profiles",id);if(!profile)continue;
   auto a=rel&&rel->contains(id)?rel->at(id):NpcSystem::initial();auto v=NpcSystem::view(a,*profile,now);v["name"]=n.name;v["id"]=id;out["relations"][id]=v;
   auto life=contentState_.at("life").contains(id)?contentState_.at("life").at(id):Json{{"mode","work"}};
-  out["npcs"].push(Json{{"id",id},{"position",vec(n.position)},{"mode",life.str("mode","work")}});
+  out["npcs"].push(Json{{"id",id},{"position",vec(n.position)},{"mode",life.str("mode","work")},{"yaw",life.num("yaw")},{"speed",life.num("speed")}});
  }
  out["stories"]=Json::array();
  for(auto&[qid,q]:contentBundle().at("regionalQuests").objectItems()){
@@ -235,9 +235,9 @@ Json GameRuntime::contentSnapshot(const Player& p)const{
  }
  return out;
 }
-void GameRuntime::contentTick(double){
+void GameRuntime::contentTick(double dt){
+ tickNpcs(dt);
  if(std::fmod(world_.now,1.0)>.06)return;
- tickNpcs();
  // A newly closed or invalid location is relocated without damage; regular movement is blocked earlier.
  if(contentState_.flag("expanded"))for(auto&[id,p]:world_.players)if(p.scene=="world"&&!contentAllowed(p.position)){
   p.position=cityArrival(catalog_.regions.at("windchime"));p.lastCity="windchime";motion_[id].velocityY=0;motion_[id].grounded=true;

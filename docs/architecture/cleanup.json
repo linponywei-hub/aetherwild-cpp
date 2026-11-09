@@ -26,7 +26,9 @@
       "reason": "byte-identical duplicate",
       "canonical": "web/assets/models/characters/TRIPO-001.glb",
       "bytes": 8955928,
-      "sha256": "a96f174aa436de3403ebfb46f773637829d49d3645eb653509a5c7cb441950ff"
+      "sha256": "a96f174aa436de3403ebfb46f773637829d49d3645eb653509a5c7cb441950ff",
+      "canonicalRetired": true,
+      "retiredReason": "User requested removal when replacing the starter village cast with external animated characters."
     },
     {
       "path": "web/assets/models/characters/monsters/goblin-test..glb",

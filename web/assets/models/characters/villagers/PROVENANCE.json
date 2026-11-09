@@ -1,0 +1,895 @@
+{
+  "creator": "Quaternius",
+  "license": "CC0-1.0",
+  "packs": [
+    "Universal Base Characters (Standard)",
+    "Modular Character Outfits - Fantasy (free Peasant / Ranger)",
+    "Universal Animation Library 1 and 2 (Standard)"
+  ],
+  "conversion": "Self-contained GLBs composed by benjamincanac/avelune/scripts/convert_universal_characters.py; only free outfit types retained. Original skeleton, skin weights and authored keyframes retained.",
+  "files": [
+    {
+      "file": "Woman_Medieval.glb",
+      "source": "https://raw.githubusercontent.com/benjamincanac/avelune/69d90c127f86dc38024baa859c987f138f037f9c/public/models/characters/Peasant_Female_Long.glb",
+      "sha256": "d782c320ba760dde17d83a29bf13e0756000ae4ea7f6b531bf1ed6fdb03e8ea7",
+      "size": 1420728,
+      "clips": [],
+      "images": [
+        {
+          "bufferView": 11,
+          "mimeType": "image/webp",
+          "name": "T_Hair_2_Normal"
+        },
+        {
+          "bufferView": 12,
+          "mimeType": "image/webp",
+          "name": "T_Hair_2_BaseColor"
+        },
+        {
+          "bufferView": 25,
+          "mimeType": "image/webp",
+          "name": "T_Eye_Brown"
+        },
+        {
+          "bufferView": 32,
+          "mimeType": "image/webp",
+          "name": "T_Peasant_Normal"
+        },
+        {
+          "bufferView": 33,
+          "mimeType": "image/webp",
+          "name": "T_Peasant_BaseColor"
+        },
+        {
+          "bufferView": 34,
+          "mimeType": "image/webp",
+          "name": "T_Peasant_ORM"
+        },
+        {
+          "bufferView": 76,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Female_Normal"
+        },
+        {
+          "bufferView": 77,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Female_Dark_BaseColor"
+        },
+        {
+          "bufferView": 78,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Female_Roughness"
+        }
+      ],
+      "bones": [
+        "root",
+        "pelvis",
+        "spine_01",
+        "spine_02",
+        "spine_03",
+        "neck_01",
+        "Head",
+        "clavicle_l",
+        "upperarm_l",
+        "lowerarm_l",
+        "hand_l",
+        "index_01_l",
+        "index_02_l",
+        "index_03_l",
+        "index_04_leaf_l",
+        "middle_01_l",
+        "middle_02_l",
+        "middle_03_l",
+        "middle_04_leaf_l",
+        "pinky_01_l",
+        "pinky_02_l",
+        "pinky_03_l",
+        "pinky_04_leaf_l",
+        "ring_01_l",
+        "ring_02_l",
+        "ring_03_l",
+        "ring_04_leaf_l",
+        "thumb_01_l",
+        "thumb_02_l",
+        "thumb_03_l",
+        "thumb_04_leaf_l",
+        "clavicle_r",
+        "upperarm_r",
+        "lowerarm_r",
+        "hand_r",
+        "index_01_r",
+        "index_02_r",
+        "index_03_r",
+        "index_04_leaf_r",
+        "middle_01_r",
+        "middle_02_r",
+        "middle_03_r",
+        "middle_04_leaf_r",
+        "pinky_01_r",
+        "pinky_02_r",
+        "pinky_03_r",
+        "pinky_04_leaf_r",
+        "ring_01_r",
+        "ring_02_r",
+        "ring_03_r",
+        "ring_04_leaf_r",
+        "thumb_01_r",
+        "thumb_02_r",
+        "thumb_03_r",
+        "thumb_04_leaf_r",
+        "thigh_l",
+        "calf_l",
+        "foot_l",
+        "ball_l",
+        "ball_leaf_l",
+        "thigh_r",
+        "calf_r",
+        "foot_r",
+        "ball_r",
+        "ball_leaf_r"
+      ]
+    },
+    {
+      "file": "Woman_Merchant.glb",
+      "source": "https://raw.githubusercontent.com/benjamincanac/avelune/69d90c127f86dc38024baa859c987f138f037f9c/public/models/characters/Peasant_Female_Buns.glb",
+      "sha256": "baa3e5d5df9cd3decebcc742343194ed9735d2ef66072e0e33a2bf5c91b3c011",
+      "size": 1444928,
+      "clips": [],
+      "images": [
+        {
+          "bufferView": 11,
+          "mimeType": "image/webp",
+          "name": "T_Hair_2_Normal"
+        },
+        {
+          "bufferView": 12,
+          "mimeType": "image/webp",
+          "name": "T_Hair_2_BaseColor"
+        },
+        {
+          "bufferView": 25,
+          "mimeType": "image/webp",
+          "name": "T_Eye_Brown"
+        },
+        {
+          "bufferView": 32,
+          "mimeType": "image/webp",
+          "name": "T_Peasant_Normal"
+        },
+        {
+          "bufferView": 33,
+          "mimeType": "image/webp",
+          "name": "T_Peasant_BaseColor"
+        },
+        {
+          "bufferView": 34,
+          "mimeType": "image/webp",
+          "name": "T_Peasant_ORM"
+        },
+        {
+          "bufferView": 76,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Female_Normal"
+        },
+        {
+          "bufferView": 77,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Female_Dark_BaseColor"
+        },
+        {
+          "bufferView": 78,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Female_Roughness"
+        }
+      ],
+      "bones": [
+        "root",
+        "pelvis",
+        "spine_01",
+        "spine_02",
+        "spine_03",
+        "neck_01",
+        "Head",
+        "clavicle_l",
+        "upperarm_l",
+        "lowerarm_l",
+        "hand_l",
+        "index_01_l",
+        "index_02_l",
+        "index_03_l",
+        "index_04_leaf_l",
+        "middle_01_l",
+        "middle_02_l",
+        "middle_03_l",
+        "middle_04_leaf_l",
+        "pinky_01_l",
+        "pinky_02_l",
+        "pinky_03_l",
+        "pinky_04_leaf_l",
+        "ring_01_l",
+        "ring_02_l",
+        "ring_03_l",
+        "ring_04_leaf_l",
+        "thumb_01_l",
+        "thumb_02_l",
+        "thumb_03_l",
+        "thumb_04_leaf_l",
+        "clavicle_r",
+        "upperarm_r",
+        "lowerarm_r",
+        "hand_r",
+        "index_01_r",
+        "index_02_r",
+        "index_03_r",
+        "index_04_leaf_r",
+        "middle_01_r",
+        "middle_02_r",
+        "middle_03_r",
+        "middle_04_leaf_r",
+        "pinky_01_r",
+        "pinky_02_r",
+        "pinky_03_r",
+        "pinky_04_leaf_r",
+        "ring_01_r",
+        "ring_02_r",
+        "ring_03_r",
+        "ring_04_leaf_r",
+        "thumb_01_r",
+        "thumb_02_r",
+        "thumb_03_r",
+        "thumb_04_leaf_r",
+        "thigh_l",
+        "calf_l",
+        "foot_l",
+        "ball_l",
+        "ball_leaf_l",
+        "thigh_r",
+        "calf_r",
+        "foot_r",
+        "ball_r",
+        "ball_leaf_r"
+      ]
+    },
+    {
+      "file": "Woman_Adventurer.glb",
+      "source": "https://raw.githubusercontent.com/benjamincanac/avelune/69d90c127f86dc38024baa859c987f138f037f9c/public/models/characters/Ranger_Female_Long.glb",
+      "sha256": "15df7bf0a4bf34352f0d8e90a8ce44eb80a606fb2a506be1aa31865095d44e39",
+      "size": 3047872,
+      "clips": [],
+      "images": [
+        {
+          "bufferView": 11,
+          "mimeType": "image/webp",
+          "name": "T_Hair_2_Normal"
+        },
+        {
+          "bufferView": 12,
+          "mimeType": "image/webp",
+          "name": "T_Hair_2_BaseColor"
+        },
+        {
+          "bufferView": 25,
+          "mimeType": "image/webp",
+          "name": "T_Eye_Brown"
+        },
+        {
+          "bufferView": 35,
+          "mimeType": "image/webp",
+          "name": "T_Ranger_Normal"
+        },
+        {
+          "bufferView": 36,
+          "mimeType": "image/webp",
+          "name": "T_Ranger_BaseColor"
+        },
+        {
+          "bufferView": 37,
+          "mimeType": "image/webp",
+          "name": "T_Ranger_ORM"
+        },
+        {
+          "bufferView": 56,
+          "mimeType": "image/webp",
+          "name": "T_Regular_Female_Normal"
+        },
+        {
+          "bufferView": 57,
+          "mimeType": "image/webp",
+          "name": "T_Regular_Female_Dark_BaseColor"
+        },
+        {
+          "bufferView": 58,
+          "mimeType": "image/webp",
+          "name": "T_Regular_Female_Roughness"
+        },
+        {
+          "bufferView": 142,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Female_Normal"
+        },
+        {
+          "bufferView": 143,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Female_Dark_BaseColor"
+        },
+        {
+          "bufferView": 144,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Female_Roughness"
+        }
+      ],
+      "bones": [
+        "root",
+        "pelvis",
+        "spine_01",
+        "spine_02",
+        "spine_03",
+        "neck_01",
+        "Head",
+        "clavicle_l",
+        "upperarm_l",
+        "lowerarm_l",
+        "hand_l",
+        "index_01_l",
+        "index_02_l",
+        "index_03_l",
+        "index_04_leaf_l",
+        "middle_01_l",
+        "middle_02_l",
+        "middle_03_l",
+        "middle_04_leaf_l",
+        "pinky_01_l",
+        "pinky_02_l",
+        "pinky_03_l",
+        "pinky_04_leaf_l",
+        "ring_01_l",
+        "ring_02_l",
+        "ring_03_l",
+        "ring_04_leaf_l",
+        "thumb_01_l",
+        "thumb_02_l",
+        "thumb_03_l",
+        "thumb_04_leaf_l",
+        "clavicle_r",
+        "upperarm_r",
+        "lowerarm_r",
+        "hand_r",
+        "index_01_r",
+        "index_02_r",
+        "index_03_r",
+        "index_04_leaf_r",
+        "middle_01_r",
+        "middle_02_r",
+        "middle_03_r",
+        "middle_04_leaf_r",
+        "pinky_01_r",
+        "pinky_02_r",
+        "pinky_03_r",
+        "pinky_04_leaf_r",
+        "ring_01_r",
+        "ring_02_r",
+        "ring_03_r",
+        "ring_04_leaf_r",
+        "thumb_01_r",
+        "thumb_02_r",
+        "thumb_03_r",
+        "thumb_04_leaf_r",
+        "thigh_l",
+        "calf_l",
+        "foot_l",
+        "ball_l",
+        "ball_leaf_l",
+        "thigh_r",
+        "calf_r",
+        "foot_r",
+        "ball_r",
+        "ball_leaf_r"
+      ]
+    },
+    {
+      "file": "Man_Farmer.glb",
+      "source": "https://raw.githubusercontent.com/benjamincanac/avelune/69d90c127f86dc38024baa859c987f138f037f9c/public/models/characters/Peasant_Male_Buzzed.glb",
+      "sha256": "2c09949d1ccfeabef338b75c2320ea3d652480e6bade92fcc15a308bea7da3ed",
+      "size": 1298564,
+      "clips": [],
+      "images": [
+        {
+          "bufferView": 11,
+          "mimeType": "image/webp",
+          "name": "T_Hair_1_BaseColor"
+        },
+        {
+          "bufferView": 24,
+          "mimeType": "image/webp",
+          "name": "T_Eye_Brown"
+        },
+        {
+          "bufferView": 31,
+          "mimeType": "image/webp",
+          "name": "T_Hair_1_Normal"
+        },
+        {
+          "bufferView": 47,
+          "mimeType": "image/webp",
+          "name": "T_Peasant_Normal"
+        },
+        {
+          "bufferView": 48,
+          "mimeType": "image/webp",
+          "name": "T_Peasant_BaseColor"
+        },
+        {
+          "bufferView": 49,
+          "mimeType": "image/webp",
+          "name": "T_Peasant_ORM"
+        },
+        {
+          "bufferView": 59,
+          "mimeType": "image/webp",
+          "name": "T_Regular_Male_Normal"
+        },
+        {
+          "bufferView": 60,
+          "mimeType": "image/webp",
+          "name": "T_Regular_Male_Dark_BaseColor"
+        },
+        {
+          "bufferView": 61,
+          "mimeType": "image/webp",
+          "name": "T_Regular_Male_Roughness"
+        },
+        {
+          "bufferView": 95,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Male_Normal"
+        },
+        {
+          "bufferView": 96,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Male_Dark"
+        },
+        {
+          "bufferView": 97,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Male_Roughness"
+        }
+      ],
+      "bones": [
+        "root",
+        "pelvis",
+        "spine_01",
+        "spine_02",
+        "spine_03",
+        "neck_01",
+        "Head",
+        "clavicle_l",
+        "upperarm_l",
+        "lowerarm_l",
+        "hand_l",
+        "index_01_l",
+        "index_02_l",
+        "index_03_l",
+        "index_04_leaf_l",
+        "middle_01_l",
+        "middle_02_l",
+        "middle_03_l",
+        "middle_04_leaf_l",
+        "pinky_01_l",
+        "pinky_02_l",
+        "pinky_03_l",
+        "pinky_04_leaf_l",
+        "ring_01_l",
+        "ring_02_l",
+        "ring_03_l",
+        "ring_04_leaf_l",
+        "thumb_01_l",
+        "thumb_02_l",
+        "thumb_03_l",
+        "thumb_04_leaf_l",
+        "clavicle_r",
+        "upperarm_r",
+        "lowerarm_r",
+        "hand_r",
+        "index_01_r",
+        "index_02_r",
+        "index_03_r",
+        "index_04_leaf_r",
+        "middle_01_r",
+        "middle_02_r",
+        "middle_03_r",
+        "middle_04_leaf_r",
+        "pinky_01_r",
+        "pinky_02_r",
+        "pinky_03_r",
+        "pinky_04_leaf_r",
+        "ring_01_r",
+        "ring_02_r",
+        "ring_03_r",
+        "ring_04_leaf_r",
+        "thumb_01_r",
+        "thumb_02_r",
+        "thumb_03_r",
+        "thumb_04_leaf_r",
+        "thigh_l",
+        "calf_l",
+        "foot_l",
+        "ball_l",
+        "ball_leaf_l",
+        "thigh_r",
+        "calf_r",
+        "foot_r",
+        "ball_r",
+        "ball_leaf_r"
+      ]
+    },
+    {
+      "file": "Man_Adventurer.glb",
+      "source": "https://raw.githubusercontent.com/benjamincanac/avelune/69d90c127f86dc38024baa859c987f138f037f9c/public/models/characters/Ranger_Male_SimpleParted.glb",
+      "sha256": "d8eccaa6ba5cd5a9aa3c204d656deb4a55fd8720dee3fa46c007d8d146b1d67f",
+      "size": 2565040,
+      "clips": [],
+      "images": [
+        {
+          "bufferView": 11,
+          "mimeType": "image/webp",
+          "name": "T_Hair_1_BaseColor"
+        },
+        {
+          "bufferView": 24,
+          "mimeType": "image/webp",
+          "name": "T_Eye_Brown"
+        },
+        {
+          "bufferView": 31,
+          "mimeType": "image/webp",
+          "name": "T_Hair_1_Normal"
+        },
+        {
+          "bufferView": 44,
+          "mimeType": "image/webp",
+          "name": "T_Ranger_Normal"
+        },
+        {
+          "bufferView": 45,
+          "mimeType": "image/webp",
+          "name": "T_Ranger_BaseColor"
+        },
+        {
+          "bufferView": 46,
+          "mimeType": "image/webp",
+          "name": "T_Ranger_ORM"
+        },
+        {
+          "bufferView": 65,
+          "mimeType": "image/webp",
+          "name": "T_Regular_Male_Normal"
+        },
+        {
+          "bufferView": 66,
+          "mimeType": "image/webp",
+          "name": "T_Regular_Male_Dark_BaseColor"
+        },
+        {
+          "bufferView": 67,
+          "mimeType": "image/webp",
+          "name": "T_Regular_Male_Roughness"
+        },
+        {
+          "bufferView": 129,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Male_Normal"
+        },
+        {
+          "bufferView": 130,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Male_Dark"
+        },
+        {
+          "bufferView": 131,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Male_Roughness"
+        }
+      ],
+      "bones": [
+        "root",
+        "pelvis",
+        "spine_01",
+        "spine_02",
+        "spine_03",
+        "neck_01",
+        "Head",
+        "clavicle_l",
+        "upperarm_l",
+        "lowerarm_l",
+        "hand_l",
+        "index_01_l",
+        "index_02_l",
+        "index_03_l",
+        "index_04_leaf_l",
+        "middle_01_l",
+        "middle_02_l",
+        "middle_03_l",
+        "middle_04_leaf_l",
+        "pinky_01_l",
+        "pinky_02_l",
+        "pinky_03_l",
+        "pinky_04_leaf_l",
+        "ring_01_l",
+        "ring_02_l",
+        "ring_03_l",
+        "ring_04_leaf_l",
+        "thumb_01_l",
+        "thumb_02_l",
+        "thumb_03_l",
+        "thumb_04_leaf_l",
+        "clavicle_r",
+        "upperarm_r",
+        "lowerarm_r",
+        "hand_r",
+        "index_01_r",
+        "index_02_r",
+        "index_03_r",
+        "index_04_leaf_r",
+        "middle_01_r",
+        "middle_02_r",
+        "middle_03_r",
+        "middle_04_leaf_r",
+        "pinky_01_r",
+        "pinky_02_r",
+        "pinky_03_r",
+        "pinky_04_leaf_r",
+        "ring_01_r",
+        "ring_02_r",
+        "ring_03_r",
+        "ring_04_leaf_r",
+        "thumb_01_r",
+        "thumb_02_r",
+        "thumb_03_r",
+        "thumb_04_leaf_r",
+        "thigh_l",
+        "calf_l",
+        "foot_l",
+        "ball_l",
+        "ball_leaf_l",
+        "thigh_r",
+        "calf_r",
+        "foot_r",
+        "ball_r",
+        "ball_leaf_r"
+      ]
+    },
+    {
+      "file": "Man_Resident.glb",
+      "source": "https://raw.githubusercontent.com/benjamincanac/avelune/69d90c127f86dc38024baa859c987f138f037f9c/public/models/characters/Peasant_Male_SimpleParted.glb",
+      "sha256": "ea52a8fb339c29ed1c8bd9a11b39964a1c3bf9764eeb25a27a8cb0de3c45f2b3",
+      "size": 1316528,
+      "clips": [],
+      "images": [
+        {
+          "bufferView": 11,
+          "mimeType": "image/webp",
+          "name": "T_Hair_1_BaseColor"
+        },
+        {
+          "bufferView": 24,
+          "mimeType": "image/webp",
+          "name": "T_Eye_Brown"
+        },
+        {
+          "bufferView": 31,
+          "mimeType": "image/webp",
+          "name": "T_Hair_1_Normal"
+        },
+        {
+          "bufferView": 47,
+          "mimeType": "image/webp",
+          "name": "T_Peasant_Normal"
+        },
+        {
+          "bufferView": 48,
+          "mimeType": "image/webp",
+          "name": "T_Peasant_BaseColor"
+        },
+        {
+          "bufferView": 49,
+          "mimeType": "image/webp",
+          "name": "T_Peasant_ORM"
+        },
+        {
+          "bufferView": 59,
+          "mimeType": "image/webp",
+          "name": "T_Regular_Male_Normal"
+        },
+        {
+          "bufferView": 60,
+          "mimeType": "image/webp",
+          "name": "T_Regular_Male_Dark_BaseColor"
+        },
+        {
+          "bufferView": 61,
+          "mimeType": "image/webp",
+          "name": "T_Regular_Male_Roughness"
+        },
+        {
+          "bufferView": 95,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Male_Normal"
+        },
+        {
+          "bufferView": 96,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Male_Dark"
+        },
+        {
+          "bufferView": 97,
+          "mimeType": "image/webp",
+          "name": "T_Superhero_Male_Roughness"
+        }
+      ],
+      "bones": [
+        "root",
+        "pelvis",
+        "spine_01",
+        "spine_02",
+        "spine_03",
+        "neck_01",
+        "Head",
+        "clavicle_l",
+        "upperarm_l",
+        "lowerarm_l",
+        "hand_l",
+        "index_01_l",
+        "index_02_l",
+        "index_03_l",
+        "index_04_leaf_l",
+        "middle_01_l",
+        "middle_02_l",
+        "middle_03_l",
+        "middle_04_leaf_l",
+        "pinky_01_l",
+        "pinky_02_l",
+        "pinky_03_l",
+        "pinky_04_leaf_l",
+        "ring_01_l",
+        "ring_02_l",
+        "ring_03_l",
+        "ring_04_leaf_l",
+        "thumb_01_l",
+        "thumb_02_l",
+        "thumb_03_l",
+        "thumb_04_leaf_l",
+        "clavicle_r",
+        "upperarm_r",
+        "lowerarm_r",
+        "hand_r",
+        "index_01_r",
+        "index_02_r",
+        "index_03_r",
+        "index_04_leaf_r",
+        "middle_01_r",
+        "middle_02_r",
+        "middle_03_r",
+        "middle_04_leaf_r",
+        "pinky_01_r",
+        "pinky_02_r",
+        "pinky_03_r",
+        "pinky_04_leaf_r",
+        "ring_01_r",
+        "ring_02_r",
+        "ring_03_r",
+        "ring_04_leaf_r",
+        "thumb_01_r",
+        "thumb_02_r",
+        "thumb_03_r",
+        "thumb_04_leaf_r",
+        "thigh_l",
+        "calf_l",
+        "foot_l",
+        "ball_l",
+        "ball_leaf_l",
+        "thigh_r",
+        "calf_r",
+        "foot_r",
+        "ball_r",
+        "ball_leaf_r"
+      ]
+    },
+    {
+      "file": "animations.glb",
+      "source": "https://raw.githubusercontent.com/benjamincanac/avelune/69d90c127f86dc38024baa859c987f138f037f9c/public/models/characters/animations.glb",
+      "sha256": "d458e4175aa0306797016f14d28e833080dcc97a7889d033ff45be36330d06ad",
+      "size": 1346616,
+      "clips": [
+        "Idle_Loop",
+        "Walk_Loop",
+        "Jog_Fwd_Loop",
+        "Sprint_Loop",
+        "Jump_Start",
+        "Jump_Loop",
+        "Jump_Land",
+        "Roll",
+        "Dance_Loop",
+        "Death01",
+        "Spell_Simple_Shoot",
+        "Slide_Start",
+        "Slide_Loop",
+        "Sword_Regular_A",
+        "Yes",
+        "Sword_Dash",
+        "Shield_Dash",
+        "Idle_FoldArms_Loop",
+        "OverhandThrow",
+        "Swim_Loop",
+        "Swim_Idle"
+      ],
+      "images": [],
+      "bones": [
+        "root",
+        "pelvis",
+        "spine_01",
+        "spine_02",
+        "spine_03",
+        "neck_01",
+        "Head",
+        "clavicle_l",
+        "upperarm_l",
+        "lowerarm_l",
+        "hand_l",
+        "index_01_l",
+        "index_02_l",
+        "index_03_l",
+        "index_04_leaf_l",
+        "middle_01_l",
+        "middle_02_l",
+        "middle_03_l",
+        "middle_04_leaf_l",
+        "pinky_01_l",
+        "pinky_02_l",
+        "pinky_03_l",
+        "pinky_04_leaf_l",
+        "ring_01_l",
+        "ring_02_l",
+        "ring_03_l",
+        "ring_04_leaf_l",
+        "thumb_01_l",
+        "thumb_02_l",
+        "thumb_03_l",
+        "thumb_04_leaf_l",
+        "clavicle_r",
+        "upperarm_r",
+        "lowerarm_r",
+        "hand_r",
+        "index_01_r",
+        "index_02_r",
+        "index_03_r",
+        "index_04_leaf_r",
+        "middle_01_r",
+        "middle_02_r",
+        "middle_03_r",
+        "middle_04_leaf_r",
+        "pinky_01_r",
+        "pinky_02_r",
+        "pinky_03_r",
+        "pinky_04_leaf_r",
+        "ring_01_r",
+        "ring_02_r",
+        "ring_03_r",
+        "ring_04_leaf_r",
+        "thumb_01_r",
+        "thumb_02_r",
+        "thumb_03_r",
+        "thumb_04_leaf_r",
+        "thigh_l",
+        "calf_l",
+        "foot_l",
+        "ball_l",
+        "ball_leaf_l",
+        "thigh_r",
+        "calf_r",
+        "foot_r",
+        "ball_r",
+        "ball_leaf_r"
+      ]
+    }
+  ]
+}

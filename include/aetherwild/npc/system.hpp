@@ -5,6 +5,7 @@ namespace aw {
 const NpcDefinition& nearbyNpc(const Player&,const Id&,std::string_view role,const Catalog&);
 struct NpcSystem {
  static double clock();
+ static std::string villageReply(const Id&,int topic);
  static Json initial();
  static int score(const Json&);
  static std::string tier(int);
