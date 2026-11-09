@@ -1,0 +1,36 @@
+name: Patch house 001 tiny mesh holes
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Install Blender and NumPy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y blender python3-numpy
+      - name: Build small-hole patch candidate
+        run: blender --background --factory-startup --python-exit-code 1 --python tools/patch_house_001.py
+      - name: Verify candidate and report
+        run: |
+          python3 - <<'PY'
+          import pathlib,json,struct
+          root=pathlib.Path('village-hole-fill-candidate')
+          data=(root/'village_building_01_lod0_patch_test.glb').read_bytes()
+          assert data[:4]==b'glTF' and struct.unpack_from('<I',data,8)[0]==len(data)
+          report=json.loads((root/'report.json').read_text())
+          assert report['new_faces']>0, 'No holes safely patched; candidate not useful'
+          print(report)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: house-001-small-hole-patch-candidate
+          path: village-hole-fill-candidate/
+          if-no-files-found: error
+          retention-days: 14

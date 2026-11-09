@@ -1,0 +1,116 @@
+界域紀元 C++ 工作站 0.2.1 — 實測紀錄
+日期：2026-11-07（台灣）
+環境：Linux GCC14.2.0、Python3.12.14、受管理工作站瀏覽器。
+
+已通過：
+- Release：20組原核心／152項檢查＋9組工作站／50項檢查，共29組／202項。
+- ASan/UBSan：相同202項檢查通過，未偵測到非法記憶體存取或未定義行為。
+- 隔離原生HTTP服務：18項整合檢查通過；身份、角色綁定、請求去重、多角色、隊伍、正規化移動、儲存。
+- 實際關閉並重啟原生HTTP服務：世界存檔與Session恢復，金幣一致。
+- 上述HTTP及重啟測試也在ASan/UBSan原生服務通過。
+- 新工作站測試涵蓋嚴格JSON解析、Unicode與int64、非法輸入、角色權限、交易失敗回復、城下與高架樓板、鍛造城市限制、共享Run、各成員寶箱、防重領、升降上下站與中途重啟。
+- JavaScript三個新客戶端模組均通過node --check語法檢查。
+- 瀏覽器實際進入場景、建立Pony角色、開啟旅人終端、檢查角色能力、使用管理瞬移至星穹並返回風鈴、E公會交談、接取新手任務、W/S移動與儲存。
+- 原生服務重啟後，瀏覽器可繼續既有角色；原版ZIP仍完整保留，不執行舊game.js或Worker。
+
+限制：
+- 本工作站WebGL建立失敗，已實作並實際驗證Canvas相容3D投影，共用相同場景、鏡頭與C++快照。沒有宣稱已實測硬體WebGL路徑。
+- LeakSanitizer不能在此受追蹤環境運作。ASan/UBSan使用ASAN_OPTIONS=detect_leaks=0，因此不宣稱通過洩漏檢查。
+- Windows／macOS未實機測試，也沒有預編譯的Windows/Mac安裝包。
+- CMake不在此環境，實測使用附帶的GCC編譯腳本；CMake與Windows腳本提供但未實機執行。
+- Google正式登入、SQL持久化、原玩家資料匯入、正式網路部署、大量玩家壓力、完整模型與世界編輯器、全部職業特殊技能尚未完成。
+- 所有測試使用獨立本機資料，沒有修改正式站或原玩家資料。
+
+Release測試輸出：
+PASS catalog integrity and preserved IDs
+PASS entity damage invariants
+PASS player and weapon ownership
+PASS attack range cooldown scene safe zone and duplicate death
+PASS reward ownership exactly once
+PASS bows consume arrows and magic consumes mana
+PASS world boss shared pool hitters first
+PASS gather reservations distance proficiency tools respawn
+PASS craft atomicity city restrictions tools and arrow discounts
+PASS quest progression and no repeat claim
+PASS class advancement at NPC with materials secret and parent
+PASS economy overflow negatives proximity and warehouse
+PASS fall damage boundaries and low health
+PASS stamina exhaustion lock recovery and speed
+PASS skill mana cooldown area freeze and ownership
+PASS dungeon guards objectives boss chest and return
+PASS character snapshot roundtrip version validation and backup
+PASS death respawn and simulation invalid time
+PASS party invitation membership and leadership
+PASS admin permissions audit and PvP actual HP
+OK 20 groups, 152 checks
+PASS JSON strict parser Unicode and int64
+PASS layered ground and city safety
+PASS verified actor ownership and permissions
+PASS idempotent commands and rollback
+PASS authoritative normalized movement building collision
+PASS craft forging location and material atomicity
+PASS shared dungeon progression chest ownership and restart
+PASS lift call ride destination remains grounded
+PASS restart during lift keeps destination and passenger
+OK 9 workstation groups, 50 checks
+
+Sanitizer測試輸出：
+PASS catalog integrity and preserved IDs
+PASS entity damage invariants
+PASS player and weapon ownership
+PASS attack range cooldown scene safe zone and duplicate death
+PASS reward ownership exactly once
+PASS bows consume arrows and magic consumes mana
+PASS world boss shared pool hitters first
+PASS gather reservations distance proficiency tools respawn
+PASS craft atomicity city restrictions tools and arrow discounts
+PASS quest progression and no repeat claim
+PASS class advancement at NPC with materials secret and parent
+PASS economy overflow negatives proximity and warehouse
+PASS fall damage boundaries and low health
+PASS stamina exhaustion lock recovery and speed
+PASS skill mana cooldown area freeze and ownership
+PASS dungeon guards objectives boss chest and return
+PASS character snapshot roundtrip version validation and backup
+PASS death respawn and simulation invalid time
+PASS party invitation membership and leadership
+PASS admin permissions audit and PvP actual HP
+OK 20 groups, 152 checks
+PASS JSON strict parser Unicode and int64
+PASS layered ground and city safety
+PASS verified actor ownership and permissions
+PASS idempotent commands and rollback
+PASS authoritative normalized movement building collision
+PASS craft forging location and material atomicity
+PASS shared dungeon progression chest ownership and restart
+PASS lift call ride destination remains grounded
+PASS restart during lift keeps destination and passenger
+OK 9 workstation groups, 50 checks
+
+HTTP整合與重啟：
+HTTP WORKSTATION OK: 18 checks; native engine, identity, idempotency, multiplayer, movement, save
+HTTP RESTART OK: durable world and session restored
+
+Sanitizer HTTP整合與重啟：
+HTTP WORKSTATION OK: 18 checks; native engine, identity, idempotency, multiplayer, movement, save
+HTTP RESTART OK: durable world and session restored
+
+0.2.1雲端準備增量：
+CLOUD ACCESS OK: 12 checks; first visitor cannot take ownership; secrets not saved; graceful shutdown
+HTTP WORKSTATION OK: 18 checks; native engine, identity, idempotency, multiplayer, movement, save
+HTTP RESTART OK: durable world and session restored
+
+既有202項檢查仍通過，JavaScript語法檢查通過。
+Render YAML本機語法／指定Free單一服務檢查通過；完整Render schema透過目前執行環境抓取逾時，未取得CLI平台驗證。
+沒有Docker環境，容器建置須由Render建置階段驗證。沒有宣稱雲端服務已上線。
+
+0.2.1 Cloud access on ASan/UBSan:
+CLOUD ACCESS OK: 12 checks; first visitor cannot take ownership; secrets not saved; graceful shutdown
+
+
+
+0.2.2 裝備倉庫增量（2026-11-07）：
+Release與ASan/UBSan：21核心組171檢查 + 10工作站組60檢查，共231檢查通過。
+原生HTTP：26項通過；實際進程重啟恢復裝備倉庫與session。
+Release與ASan/UBSan原生HTTP均通過26項與重啟；雲端存取12項亦均通過。
+JavaScript client.js語法檢查通過。此輪未瀏覽器手動點擊；LeakSanitizer未執行。

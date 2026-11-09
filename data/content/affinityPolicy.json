@@ -1,0 +1,72 @@
+{
+  "range": [
+    -100,
+    100
+  ],
+  "tiers": [
+    {
+      "id": "hostile",
+      "min": -100,
+      "max": -40
+    },
+    {
+      "id": "wary",
+      "min": -39,
+      "max": -1
+    },
+    {
+      "id": "neutral",
+      "min": 0,
+      "max": 19
+    },
+    {
+      "id": "familiar",
+      "min": 20,
+      "max": 39
+    },
+    {
+      "id": "trusted",
+      "min": 40,
+      "max": 69
+    },
+    {
+      "id": "confidant",
+      "min": 70,
+      "max": 100
+    }
+  ],
+  "gain": {
+    "chat": {
+      "points": 1,
+      "distinct_topics_per_day": 2,
+      "cooldown_hours": 6
+    },
+    "purchase": {
+      "per_net_100_coins": 1,
+      "per_transaction_cap": 2,
+      "daily_cap": 4
+    },
+    "ordinary_quest": 6,
+    "major_quest": 12,
+    "favored_gift": {
+      "points": 3,
+      "daily_cap": 3
+    }
+  },
+  "all_positive_daily_cap": 20,
+  "reset_timezone": "Asia/Taipei, server timestamp",
+  "attack": {
+    "points": -25,
+    "per_same_target_cooldown_seconds": 5,
+    "safety_lock_hours": 24,
+    "repair_required": true,
+    "attempt_counts_even_when_invulnerable": true,
+    "splash_or_mistarget_does_not_count": true
+  },
+  "gift_threshold": 70,
+  "hidden_quest_threshold": 40,
+  "gift_requires_private_quest": true,
+  "ordinary_discount_max_percent": 5,
+  "no_inactivity_decay": true,
+  "source": "prototype values for playtesting, not a fixed economy promise"
+}

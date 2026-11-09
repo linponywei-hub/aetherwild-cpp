@@ -1,0 +1,4127 @@
+[
+  {
+    "id": "aw_exp_aw_crownreach_01",
+    "name": "水鐘下層",
+    "region": "aw_crownreach",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 1449,
+      "z": 388
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 25,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "水鐘下層・裝置殘響監守者",
+    "story": "王城收到各地請求，卻把沒有正式戶籍的人排除在調查外。 此處提供早期使用紀錄，交由黎紗核對。",
+    "clue": "路旁找到《水鐘下層交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋水鐘下層紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_crownreach",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_crownreach_02",
+    "name": "王印失竊庫",
+    "region": "aw_crownreach",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 79,
+      "z": 1498
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 28,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "王印失竊庫・失控巡衛",
+    "story": "王城收到各地請求，卻把沒有正式戶籍的人排除在調查外。 此處提供最近的交班證詞，交由蘇棠核對。",
+    "clue": "路旁找到《王印失竊庫交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋王印失竊庫紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_crownreach",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_crownreach_03",
+    "name": "無席者審議廳",
+    "region": "aw_crownreach",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -1400,
+      "z": 538
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 31,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "無席者審議廳・篡頁書記",
+    "story": "王城收到各地請求，卻把沒有正式戶籍的人排除在調查外。 此處提供與官方說法矛盾的實物，交由赫維爾核對。",
+    "clue": "路旁找到《無席者審議廳交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋無席者審議廳紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_crownreach",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_crownreach_04",
+    "name": "晨冠舊兵營",
+    "region": "aw_crownreach",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -944,
+      "z": -1166
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 34,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "晨冠舊兵營・封門統領",
+    "story": "王城收到各地請求，卻把沒有正式戶籍的人排除在調查外。 此處提供受影響者留下的撤離路線，交由黎紗核對。",
+    "clue": "路旁找到《晨冠舊兵營交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋晨冠舊兵營紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_crownreach",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_crownreach_05",
+    "name": "第零號配水宮",
+    "region": "aw_crownreach",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 817,
+      "z": -1258
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 37,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "第零號配水宮・裂界回聲核",
+    "story": "王城收到各地請求，卻把沒有正式戶籍的人排除在調查外。 此處提供最後的系統命令，交由蘇棠核對。",
+    "clue": "路旁找到《第零號配水宮交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋第零號配水宮紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_crownreach",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_windchime_01",
+    "name": "蘆田暗渠",
+    "region": "windchime",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -4823,
+      "z": -14204
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 1,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "蘆田暗渠・裝置殘響監守者",
+    "story": "地下傳來的三聲不是狼叫，而是故障通風管裡的求援。 此處提供早期使用紀錄，交由艾琳核對。",
+    "clue": "路旁找到《蘆田暗渠交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋蘆田暗渠紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_windchime",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_windchime_02",
+    "name": "風車腹室",
+    "region": "windchime",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -6193,
+      "z": -13094
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 4,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "風車腹室・失控巡衛",
+    "story": "地下傳來的三聲不是狼叫，而是故障通風管裡的求援。 此處提供最近的交班證詞，交由砧邊小禾核對。",
+    "clue": "路旁找到《風車腹室交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋風車腹室紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_windchime",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_windchime_03",
+    "name": "石鈴狐穴",
+    "region": "windchime",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -7672,
+      "z": -14054
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 7,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "石鈴狐穴・篡頁書記",
+    "story": "地下傳來的三聲不是狼叫，而是故障通風管裡的求援。 此處提供與官方說法矛盾的實物，交由守鈴人阿榆核對。",
+    "clue": "路旁找到《石鈴狐穴交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋石鈴狐穴紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_windchime",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_windchime_04",
+    "name": "回信地窖",
+    "region": "windchime",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -7216,
+      "z": -15758
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 10,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "回信地窖・封門統領",
+    "story": "地下傳來的三聲不是狼叫，而是故障通風管裡的求援。 此處提供受影響者留下的撤離路線，交由艾琳核對。",
+    "clue": "路旁找到《回信地窖交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋回信地窖紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_windchime",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_windchime_05",
+    "name": "牧人舊棚",
+    "region": "windchime",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -5455,
+      "z": -15850
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 13,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "牧人舊棚・裂界回聲核",
+    "story": "地下傳來的三聲不是狼叫，而是故障通風管裡的求援。 此處提供最後的系統命令，交由砧邊小禾核對。",
+    "clue": "路旁找到《牧人舊棚交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋牧人舊棚紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_windchime",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_verdant_01",
+    "name": "倒生藤宮",
+    "region": "verdant",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -25111,
+      "z": 2308
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 6,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "倒生藤宮・裝置殘響監守者",
+    "story": "根脈記憶裡有一條不在現行地圖上的地下街道。 此處提供早期使用紀錄，交由賽林核對。",
+    "clue": "路旁找到《倒生藤宮交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋倒生藤宮紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_verdant",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_verdant_02",
+    "name": "葉脈絃廊",
+    "region": "verdant",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -26481,
+      "z": 3418
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 9,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "葉脈絃廊・失控巡衛",
+    "story": "根脈記憶裡有一條不在現行地圖上的地下街道。 此處提供最近的交班證詞，交由藤匠苒枝核對。",
+    "clue": "路旁找到《葉脈絃廊交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋葉脈絃廊紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_verdant",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_verdant_03",
+    "name": "白蛾育巢",
+    "region": "verdant",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -27960,
+      "z": 2458
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 12,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "白蛾育巢・篡頁書記",
+    "story": "根脈記憶裡有一條不在現行地圖上的地下街道。 此處提供與官方說法矛盾的實物，交由落葉抄手伏青核對。",
+    "clue": "路旁找到《白蛾育巢交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋白蛾育巢紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_verdant",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_verdant_04",
+    "name": "無冠樹庭",
+    "region": "verdant",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -27504,
+      "z": 754
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 15,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "無冠樹庭・封門統領",
+    "story": "根脈記憶裡有一條不在現行地圖上的地下街道。 此處提供受影響者留下的撤離路線，交由賽林核對。",
+    "clue": "路旁找到《無冠樹庭交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋無冠樹庭紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_verdant",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_verdant_05",
+    "name": "墜枝鐘室",
+    "region": "verdant",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -25743,
+      "z": 662
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 18,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "墜枝鐘室・裂界回聲核",
+    "story": "根脈記憶裡有一條不在現行地圖上的地下街道。 此處提供最後的系統命令，交由藤匠苒枝核對。",
+    "clue": "路旁找到《墜枝鐘室交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋墜枝鐘室紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_verdant",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_cinder_01",
+    "name": "百閥壓力廠",
+    "region": "cinder",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -29335,
+      "z": -17916
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 25,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "百閥壓力廠・裝置殘響監守者",
+    "story": "王城要求增產，老幫浦開始把地下空氣抽走。 此處提供早期使用紀錄，交由葛隆核對。",
+    "clue": "路旁找到《百閥壓力廠交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋百閥壓力廠紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_cinder",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_cinder_02",
+    "name": "赤鐵轉運站",
+    "region": "cinder",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -30705,
+      "z": -16806
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 28,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "赤鐵轉運站・失控巡衛",
+    "story": "王城要求增產，老幫浦開始把地下空氣抽走。 此處提供最近的交班證詞，交由銅肺阿嵐核對。",
+    "clue": "路旁找到《赤鐵轉運站交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋赤鐵轉運站紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_cinder",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_cinder_03",
+    "name": "斷軸車庫",
+    "region": "cinder",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -32184,
+      "z": -17766
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 31,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "斷軸車庫・篡頁書記",
+    "story": "王城要求增產，老幫浦開始把地下空氣抽走。 此處提供與官方說法矛盾的實物，交由工班長斷鉗核對。",
+    "clue": "路旁找到《斷軸車庫交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋斷軸車庫紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_cinder",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_cinder_04",
+    "name": "冷爐孤塔",
+    "region": "cinder",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -31728,
+      "z": -19470
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 34,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "冷爐孤塔・封門統領",
+    "story": "王城要求增產，老幫浦開始把地下空氣抽走。 此處提供受影響者留下的撤離路線，交由葛隆核對。",
+    "clue": "路旁找到《冷爐孤塔交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋冷爐孤塔紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_cinder",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_cinder_05",
+    "name": "零氧避難站",
+    "region": "cinder",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -29967,
+      "z": -19562
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 37,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "零氧避難站・裂界回聲核",
+    "story": "王城要求增產，老幫浦開始把地下空氣抽走。 此處提供最後的系統命令，交由銅肺阿嵐核對。",
+    "clue": "路旁找到《零氧避難站交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋零氧避難站紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_cinder",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_tidehaven_01",
+    "name": "十三號壓艙室",
+    "region": "tidehaven",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 28649,
+      "z": 388
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 12,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "十三號壓艙室・裝置殘響監守者",
+    "story": "第七次潮災乘客從海關紀錄消失，醫療薄卻仍保有他們的症狀。 此處提供早期使用紀錄，交由賽娜核對。",
+    "clue": "路旁找到《十三號壓艙室交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋十三號壓艙室紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_tidehaven",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_tidehaven_02",
+    "name": "盲潮航圖艙",
+    "region": "tidehaven",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 27279,
+      "z": 1498
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 15,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "盲潮航圖艙・失控巡衛",
+    "story": "第七次潮災乘客從海關紀錄消失，醫療薄卻仍保有他們的症狀。 此處提供最近的交班證詞，交由繫船童阿結核對。",
+    "clue": "路旁找到《盲潮航圖艙交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋盲潮航圖艙紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_tidehaven",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_tidehaven_03",
+    "name": "鹽帆法庭",
+    "region": "tidehaven",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 25800,
+      "z": 538
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 18,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "鹽帆法庭・篡頁書記",
+    "story": "第七次潮災乘客從海關紀錄消失，醫療薄卻仍保有他們的症狀。 此處提供與官方說法矛盾的實物，交由舊關員鹽墨核對。",
+    "clue": "路旁找到《鹽帆法庭交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋鹽帆法庭紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_tidehaven",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_tidehaven_04",
+    "name": "珊瑚纜井",
+    "region": "tidehaven",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 26256,
+      "z": -1166
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 21,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "珊瑚纜井・封門統領",
+    "story": "第七次潮災乘客從海關紀錄消失，醫療薄卻仍保有他們的症狀。 此處提供受影響者留下的撤離路線，交由賽娜核對。",
+    "clue": "路旁找到《珊瑚纜井交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋珊瑚纜井紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_tidehaven",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_tidehaven_05",
+    "name": "離港者密倉",
+    "region": "tidehaven",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 28017,
+      "z": -1258
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 24,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "離港者密倉・裂界回聲核",
+    "story": "第七次潮災乘客從海關紀錄消失，醫療薄卻仍保有他們的症狀。 此處提供最後的系統命令，交由繫船童阿結核對。",
+    "clue": "路旁找到《離港者密倉交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋離港者密倉紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_tidehaven",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_frosthold_01",
+    "name": "白湯避難所",
+    "region": "frosthold",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -21463,
+      "z": -26044
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 25,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "白湯避難所・裝置殘響監守者",
+    "story": "埋鐘內的命令證實地下撤離曾被迫等待。 此處提供早期使用紀錄，交由波爾核對。",
+    "clue": "路旁找到《白湯避難所交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋白湯避難所紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_frosthold",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_frosthold_02",
+    "name": "埋雪索道站",
+    "region": "frosthold",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -22833,
+      "z": -24934
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 28,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "埋雪索道站・失控巡衛",
+    "story": "埋鐘內的命令證實地下撤離曾被迫等待。 此處提供最近的交班證詞，交由湯屋學徒小溫核對。",
+    "clue": "路旁找到《埋雪索道站交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋埋雪索道站紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_frosthold",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_frosthold_03",
+    "name": "冰燈送行道",
+    "region": "frosthold",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -24312,
+      "z": -25894
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 31,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "冰燈送行道・篡頁書記",
+    "story": "埋鐘內的命令證實地下撤離曾被迫等待。 此處提供與官方說法矛盾的實物，交由封鐘守人霜棠核對。",
+    "clue": "路旁找到《冰燈送行道交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋冰燈送行道紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_frosthold",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_frosthold_04",
+    "name": "暖石斷層",
+    "region": "frosthold",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -23856,
+      "z": -27598
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 34,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "暖石斷層・封門統領",
+    "story": "埋鐘內的命令證實地下撤離曾被迫等待。 此處提供受影響者留下的撤離路線，交由波爾核對。",
+    "clue": "路旁找到《暖石斷層交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋暖石斷層紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_frosthold",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_frosthold_05",
+    "name": "無聲救援營",
+    "region": "frosthold",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -22095,
+      "z": -27690
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 37,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "無聲救援營・裂界回聲核",
+    "story": "埋鐘內的命令證實地下撤離曾被迫等待。 此處提供最後的系統命令，交由湯屋學徒小溫核對。",
+    "clue": "路旁找到《無聲救援營交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋無聲救援營紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_frosthold",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_sundune_01",
+    "name": "九井相連宮",
+    "region": "sundune",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 28009,
+      "z": 25028
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 25,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "九井相連宮・裝置殘響監守者",
+    "story": "水源被改向王城，地下缺水與沙海乾井其實是同一份帳。 此處提供早期使用紀錄，交由沙圖核對。",
+    "clue": "路旁找到《九井相連宮交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋九井相連宮紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_sundune",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_sundune_02",
+    "name": "蜃景驗水所",
+    "region": "sundune",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 26639,
+      "z": 26138
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 28,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "蜃景驗水所・失控巡衛",
+    "story": "水源被改向王城，地下缺水與沙海乾井其實是同一份帳。 此處提供最近的交班證詞，交由量水人夕杯核對。",
+    "clue": "路旁找到《蜃景驗水所交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋蜃景驗水所紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_sundune",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_sundune_03",
+    "name": "日輪背室",
+    "region": "sundune",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 25160,
+      "z": 25178
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 31,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "日輪背室・篡頁書記",
+    "story": "水源被改向王城，地下缺水與沙海乾井其實是同一份帳。 此處提供與官方說法矛盾的實物，交由九碗廚人莉雅核對。",
+    "clue": "路旁找到《日輪背室交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋日輪背室紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_sundune",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_sundune_04",
+    "name": "覆沙信使館",
+    "region": "sundune",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 25616,
+      "z": 23474
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 34,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "覆沙信使館・封門統領",
+    "story": "水源被改向王城，地下缺水與沙海乾井其實是同一份帳。 此處提供受影響者留下的撤離路線，交由沙圖核對。",
+    "clue": "路旁找到《覆沙信使館交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋覆沙信使館紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_sundune",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_sundune_05",
+    "name": "空杯祭廊",
+    "region": "sundune",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 27377,
+      "z": 23382
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 37,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "空杯祭廊・裂界回聲核",
+    "story": "水源被改向王城，地下缺水與沙海乾井其實是同一份帳。 此處提供最後的系統命令，交由量水人夕杯核對。",
+    "clue": "路旁找到《空杯祭廊交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋空杯祭廊紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_sundune",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_astral_01",
+    "name": "第四觀測環",
+    "region": "astral",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 19881,
+      "z": -22908
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 25,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "第四觀測環・裝置殘響監守者",
+    "story": "零號觀測資料被封存，城下卻不斷傳來當代生活訊號。 此處提供早期使用紀錄，交由繪星核對。",
+    "clue": "路旁找到《第四觀測環交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋第四觀測環紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_astral",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_astral_02",
+    "name": "反重力檔庫",
+    "region": "astral",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 18511,
+      "z": -21798
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 28,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "反重力檔庫・失控巡衛",
+    "story": "零號觀測資料被封存，城下卻不斷傳來當代生活訊號。 此處提供最近的交班證詞，交由觀測生微弧核對。",
+    "clue": "路旁找到《反重力檔庫交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋反重力檔庫紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_astral",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_astral_03",
+    "name": "失聯星舟",
+    "region": "astral",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 17032,
+      "z": -22758
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 31,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "失聯星舟・篡頁書記",
+    "story": "零號觀測資料被封存，城下卻不斷傳來當代生活訊號。 此處提供與官方說法矛盾的實物，交由失重技師緩落核對。",
+    "clue": "路旁找到《失聯星舟交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋失聯星舟紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_astral",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_astral_04",
+    "name": "未刊星圖室",
+    "region": "astral",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 17488,
+      "z": -24462
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 34,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "未刊星圖室・封門統領",
+    "story": "零號觀測資料被封存，城下卻不斷傳來當代生活訊號。 此處提供受影響者留下的撤離路線，交由繪星核對。",
+    "clue": "路旁找到《未刊星圖室交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋未刊星圖室紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_astral",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_astral_05",
+    "name": "懸誓鐘宮",
+    "region": "astral",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 19249,
+      "z": -24554
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 37,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "懸誓鐘宮・裂界回聲核",
+    "story": "零號觀測資料被封存，城下卻不斷傳來當代生活訊號。 此處提供最後的系統命令，交由觀測生微弧核對。",
+    "clue": "路旁找到《懸誓鐘宮交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋懸誓鐘宮紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_astral",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_darkforest_01",
+    "name": "纏名祭場",
+    "region": "darkforest",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -35029,
+      "z": 7916
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 55,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "纏名祭場・裝置殘響監守者",
+    "story": "黑棘吸收了被長期隔離的痛苦，遠征只能爭取修復窗口。 此處提供早期使用紀錄，交由亞斯核對。",
+    "clue": "路旁找到《纏名祭場交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋纏名祭場紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_darkforest",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_darkforest_02",
+    "name": "盲根舊校",
+    "region": "darkforest",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -36765,
+      "z": 9321
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 58,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "盲根舊校・失控巡衛",
+    "story": "黑棘吸收了被長期隔離的痛苦，遠征只能爭取修復窗口。 此處提供最近的交班證詞，交由白繩救援員回木核對。",
+    "clue": "路旁找到《盲根舊校交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋盲根舊校紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_darkforest",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_darkforest_03",
+    "name": "腐葉收容所",
+    "region": "darkforest",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -38638,
+      "z": 8105
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 61,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "腐葉收容所・篡頁書記",
+    "story": "黑棘吸收了被長期隔離的痛苦，遠征只能爭取修復窗口。 此處提供與官方說法矛盾的實物，交由隔離研究者棘息核對。",
+    "clue": "路旁找到《腐葉收容所交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋腐葉收容所紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_darkforest",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_darkforest_04",
+    "name": "白繩盡頭",
+    "region": "darkforest",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -38060,
+      "z": 5947
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 64,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "白繩盡頭・封門統領",
+    "story": "黑棘吸收了被長期隔離的痛苦，遠征只能爭取修復窗口。 此處提供受影響者留下的撤離路線，交由亞斯核對。",
+    "clue": "路旁找到《白繩盡頭交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋白繩盡頭紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_darkforest",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_darkforest_05",
+    "name": "無夢黑井",
+    "region": "darkforest",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -35829,
+      "z": 5831
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 67,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "無夢黑井・裂界回聲核",
+    "story": "黑棘吸收了被長期隔離的痛苦，遠征只能爭取修復窗口。 此處提供最後的系統命令，交由白繩救援員回木核對。",
+    "clue": "路旁找到《無夢黑井交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋無夢黑井紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_darkforest",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_northwatch_01",
+    "name": "裂垣獸窟",
+    "region": "aw_northwatch",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 2537,
+      "z": -31036
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 25,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "裂垣獸窟・裝置殘響監守者",
+    "story": "邊關把所有無戶籍旅人列為威脅，卻依賴同一群人的補給與嚮導。 此處提供早期使用紀錄，交由關務官垣石核對。",
+    "clue": "路旁找到《裂垣獸窟交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋裂垣獸窟紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_northwatch",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_northwatch_02",
+    "name": "凍河軍械庫",
+    "region": "aw_northwatch",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 1167,
+      "z": -29926
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 28,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "凍河軍械庫・失控巡衛",
+    "story": "邊關把所有無戶籍旅人列為威脅，卻依賴同一群人的補給與嚮導。 此處提供最近的交班證詞，交由馴獸員北茸核對。",
+    "clue": "路旁找到《凍河軍械庫交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋凍河軍械庫紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_northwatch",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_northwatch_03",
+    "name": "白旗通道",
+    "region": "aw_northwatch",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -312,
+      "z": -30886
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 31,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "白旗通道・篡頁書記",
+    "story": "邊關把所有無戶籍旅人列為威脅，卻依賴同一群人的補給與嚮導。 此處提供與官方說法矛盾的實物，交由舊哨兵雪簡核對。",
+    "clue": "路旁找到《白旗通道交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋白旗通道紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_northwatch",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_northwatch_04",
+    "name": "狼煙雪堡",
+    "region": "aw_northwatch",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 144,
+      "z": -32590
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 34,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "狼煙雪堡・封門統領",
+    "story": "邊關把所有無戶籍旅人列為威脅，卻依賴同一群人的補給與嚮導。 此處提供受影響者留下的撤離路線，交由關務官垣石核對。",
+    "clue": "路旁找到《狼煙雪堡交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋狼煙雪堡紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_northwatch",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_northwatch_05",
+    "name": "舊哨裁決庭",
+    "region": "aw_northwatch",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 1905,
+      "z": -32682
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 37,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "舊哨裁決庭・裂界回聲核",
+    "story": "邊關把所有無戶籍旅人列為威脅，卻依賴同一群人的補給與嚮導。 此處提供最後的系統命令，交由馴獸員北茸核對。",
+    "clue": "路旁找到《舊哨裁決庭交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋舊哨裁決庭紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_northwatch",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_westport_01",
+    "name": "霧鐘私鹽窟",
+    "region": "aw_westport",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -28695,
+      "z": 27844
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 12,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "霧鐘私鹽窟・裝置殘響監守者",
+    "story": "霧鐘為陌生船引航，被走私者利用後，官署想全面停鐘。 此處提供早期使用紀錄，交由霧鐘師白汐核對。",
+    "clue": "路旁找到《霧鐘私鹽窟交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋霧鐘私鹽窟紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_westport",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_westport_02",
+    "name": "潮石沉墓",
+    "region": "aw_westport",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -30065,
+      "z": 28954
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 15,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "潮石沉墓・失控巡衛",
+    "story": "霧鐘為陌生船引航，被走私者利用後，官署想全面停鐘。 此處提供最近的交班證詞，交由船塢工鉚眠核對。",
+    "clue": "路旁找到《潮石沉墓交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋潮石沉墓紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_westport",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_westport_03",
+    "name": "白帆病院",
+    "region": "aw_westport",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -31544,
+      "z": 27994
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 18,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "白帆病院・篡頁書記",
+    "story": "霧鐘為陌生船引航，被走私者利用後，官署想全面停鐘。 此處提供與官方說法矛盾的實物，交由白牆房東霧安核對。",
+    "clue": "路旁找到《白帆病院交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋白帆病院紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_westport",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_westport_04",
+    "name": "不歸船塢",
+    "region": "aw_westport",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -31088,
+      "z": 26290
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 21,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "不歸船塢・封門統領",
+    "story": "霧鐘為陌生船引航，被走私者利用後，官署想全面停鐘。 此處提供受影響者留下的撤離路線，交由霧鐘師白汐核對。",
+    "clue": "路旁找到《不歸船塢交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋不歸船塢紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_westport",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_westport_05",
+    "name": "無霧燈樓",
+    "region": "aw_westport",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -29327,
+      "z": 26198
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 24,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "無霧燈樓・裂界回聲核",
+    "story": "霧鐘為陌生船引航，被走私者利用後，官署想全面停鐘。 此處提供最後的系統命令，交由船塢工鉚眠核對。",
+    "clue": "路旁找到《無霧燈樓交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋無霧燈樓紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_westport",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_southmill_01",
+    "name": "空穗糧庫",
+    "region": "aw_southmill",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 105,
+      "z": 34180
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 12,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "空穗糧庫・裝置殘響監守者",
+    "story": "供應王城的糧倉把河岸住戶當成可隨時清空的倉地。 此處提供早期使用紀錄，交由糧務員穗舟核對。",
+    "clue": "路旁找到《空穗糧庫交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋空穗糧庫紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_southmill",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_southmill_02",
+    "name": "逆流水輪宮",
+    "region": "aw_southmill",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -1265,
+      "z": 35290
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 15,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "逆流水輪宮・失控巡衛",
+    "story": "供應王城的糧倉把河岸住戶當成可隨時清空的倉地。 此處提供最近的交班證詞，交由閘工阿汀核對。",
+    "clue": "路旁找到《逆流水輪宮交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋逆流水輪宮紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_southmill",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_southmill_03",
+    "name": "泥渠學舍",
+    "region": "aw_southmill",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -2744,
+      "z": 34330
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 18,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "泥渠學舍・篡頁書記",
+    "story": "供應王城的糧倉把河岸住戶當成可隨時清空的倉地。 此處提供與官方說法矛盾的實物，交由借屋人蘆娘核對。",
+    "clue": "路旁找到《泥渠學舍交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋泥渠學舍紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_southmill",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_southmill_04",
+    "name": "第七分洪閘",
+    "region": "aw_southmill",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -2288,
+      "z": 32626
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 21,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "第七分洪閘・封門統領",
+    "story": "供應王城的糧倉把河岸住戶當成可隨時清空的倉地。 此處提供受影響者留下的撤離路線，交由糧務員穗舟核對。",
+    "clue": "路旁找到《第七分洪閘交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋第七分洪閘紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_southmill",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_southmill_05",
+    "name": "被淹契約所",
+    "region": "aw_southmill",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -527,
+      "z": 32534
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 24,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "被淹契約所・裂界回聲核",
+    "story": "供應王城的糧倉把河岸住戶當成可隨時清空的倉地。 此處提供最後的系統命令，交由閘工阿汀核對。",
+    "clue": "路旁找到《被淹契約所交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋被淹契約所紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_southmill",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_eastglass_01",
+    "name": "千鏡折光宮",
+    "region": "aw_eastglass",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 37417,
+      "z": -24124
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 25,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "千鏡折光宮・裝置殘響監守者",
+    "story": "晶鏡讓遠方看起來更近，也被用來修改公開測量畫面。 此處提供早期使用紀錄，交由鏡匠璃衡核對。",
+    "clue": "路旁找到《千鏡折光宮交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋千鏡折光宮紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_eastglass",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_eastglass_02",
+    "name": "鹽晶靈柩",
+    "region": "aw_eastglass",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 36047,
+      "z": -23014
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 28,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "鹽晶靈柩・失控巡衛",
+    "story": "晶鏡讓遠方看起來更近，也被用來修改公開測量畫面。 此處提供最近的交班證詞，交由曬鹽人晝白核對。",
+    "clue": "路旁找到《鹽晶靈柩交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋鹽晶靈柩紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_eastglass",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_eastglass_03",
+    "name": "彩窗禁庫",
+    "region": "aw_eastglass",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 34568,
+      "z": -23974
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 31,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "彩窗禁庫・篡頁書記",
+    "story": "晶鏡讓遠方看起來更近，也被用來修改公開測量畫面。 此處提供與官方說法矛盾的實物，交由遠征醫師星鹽核對。",
+    "clue": "路旁找到《彩窗禁庫交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋彩窗禁庫紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_eastglass",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_eastglass_04",
+    "name": "褪色觀星臺",
+    "region": "aw_eastglass",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 35024,
+      "z": -25678
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 34,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "褪色觀星臺・封門統領",
+    "story": "晶鏡讓遠方看起來更近，也被用來修改公開測量畫面。 此處提供受影響者留下的撤離路線，交由鏡匠璃衡核對。",
+    "clue": "路旁找到《褪色觀星臺交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋褪色觀星臺紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_eastglass",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_eastglass_05",
+    "name": "光盲試驗井",
+    "region": "aw_eastglass",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 36785,
+      "z": -25770
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 37,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "光盲試驗井・裂界回聲核",
+    "story": "晶鏡讓遠方看起來更近，也被用來修改公開測量畫面。 此處提供最後的系統命令，交由曬鹽人晝白核對。",
+    "clue": "路旁找到《光盲試驗井交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋光盲試驗井紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_eastglass",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_windplain_01",
+    "name": "四風塚",
+    "region": "aw_windplain",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 6379,
+      "z": -14932
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 6,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "四風塚・裝置殘響監守者",
+    "story": "新官道截斷牧群水路，旅人與牧民互相責怪。 此處提供早期使用紀錄，交由驛長岑野核對。",
+    "clue": "路旁找到《四風塚交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋四風塚紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_windplain",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_windplain_02",
+    "name": "牧笛空堡",
+    "region": "aw_windplain",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 4643,
+      "z": -13527
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 9,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "牧笛空堡・失控巡衛",
+    "story": "新官道截斷牧群水路，旅人與牧民互相責怪。 此處提供最近的交班證詞，交由牧人小犁核對。",
+    "clue": "路旁找到《牧笛空堡交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋牧笛空堡紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_windplain",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_windplain_03",
+    "name": "陷馬斷壕",
+    "region": "aw_windplain",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 2770,
+      "z": -14743
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 12,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "陷馬斷壕・篡頁書記",
+    "story": "新官道截斷牧群水路，旅人與牧民互相責怪。 此處提供與官方說法矛盾的實物，交由路碑匠石回核對。",
+    "clue": "路旁找到《陷馬斷壕交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋陷馬斷壕紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_windplain",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_windplain_04",
+    "name": "無旗驛所",
+    "region": "aw_windplain",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 3348,
+      "z": -16901
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 15,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "無旗驛所・封門統領",
+    "story": "新官道截斷牧群水路，旅人與牧民互相責怪。 此處提供受影響者留下的撤離路線，交由驛長岑野核對。",
+    "clue": "路旁找到《無旗驛所交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋無旗驛所紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_windplain",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_windplain_05",
+    "name": "青草下的軍糧",
+    "region": "aw_windplain",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 5579,
+      "z": -17017
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 18,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "青草下的軍糧・裂界回聲核",
+    "story": "新官道截斷牧群水路，旅人與牧民互相責怪。 此處提供最後的系統命令，交由牧人小犁核對。",
+    "clue": "路旁找到《青草下的軍糧交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋青草下的軍糧紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_windplain",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_reedbasin_01",
+    "name": "蘆影沉臺",
+    "region": "aw_reedbasin",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 14507,
+      "z": 13612
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 12,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "蘆影沉臺・裝置殘響監守者",
+    "story": "湖水忽高忽低，讓村民以為有巨獸，其實上游舊閘依錯誤時序運作。 此處提供早期使用紀錄，交由蘆湖巡員芷回核對。",
+    "clue": "路旁找到《蘆影沉臺交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋蘆影沉臺紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_reedbasin",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_reedbasin_02",
+    "name": "斷槳水道",
+    "region": "aw_reedbasin",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 12771,
+      "z": 15017
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 15,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "斷槳水道・失控巡衛",
+    "story": "湖水忽高忽低，讓村民以為有巨獸，其實上游舊閘依錯誤時序運作。 此處提供最近的交班證詞，交由舟匠半槳核對。",
+    "clue": "路旁找到《斷槳水道交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋斷槳水道紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_reedbasin",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_reedbasin_03",
+    "name": "黑鷺孵室",
+    "region": "aw_reedbasin",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 10898,
+      "z": 13801
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 18,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "黑鷺孵室・篡頁書記",
+    "story": "湖水忽高忽低，讓村民以為有巨獸，其實上游舊閘依錯誤時序運作。 此處提供與官方說法矛盾的實物，交由記水員鷺白核對。",
+    "clue": "路旁找到《黑鷺孵室交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋黑鷺孵室紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_reedbasin",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_reedbasin_04",
+    "name": "水線檔案所",
+    "region": "aw_reedbasin",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 11476,
+      "z": 11643
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 21,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "水線檔案所・封門統領",
+    "story": "湖水忽高忽低，讓村民以為有巨獸，其實上游舊閘依錯誤時序運作。 此處提供受影響者留下的撤離路線，交由蘆湖巡員芷回核對。",
+    "clue": "路旁找到《水線檔案所交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋水線檔案所紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_reedbasin",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_reedbasin_05",
+    "name": "湖底假月",
+    "region": "aw_reedbasin",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 13707,
+      "z": 11527
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 24,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "湖底假月・裂界回聲核",
+    "story": "湖水忽高忽低，讓村民以為有巨獸，其實上游舊閘依錯誤時序運作。 此處提供最後的系統命令，交由舟匠半槳核對。",
+    "clue": "路旁找到《湖底假月交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋湖底假月紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_reedbasin",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_moonveil_01",
+    "name": "雙瀑回聲宮",
+    "region": "aw_moonveil",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -14549,
+      "z": 13164
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 6,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "雙瀑回聲宮・裝置殘響監守者",
+    "story": "有人刻意拆去安全石徑標誌，把探索者引向不安全水道。 此處提供早期使用紀錄，交由沐川核對。",
+    "clue": "路旁找到《雙瀑回聲宮交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋雙瀑回聲宮紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_moonveil",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_moonveil_02",
+    "name": "落水者步道",
+    "region": "aw_moonveil",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -16285,
+      "z": 14569
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 9,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "落水者步道・失控巡衛",
+    "story": "有人刻意拆去安全石徑標誌，把探索者引向不安全水道。 此處提供最近的交班證詞，交由瀑邊聽雨核對。",
+    "clue": "路旁找到《落水者步道交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋落水者步道紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_moonveil",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_moonveil_03",
+    "name": "青苔虹廳",
+    "region": "aw_moonveil",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -18158,
+      "z": 13353
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 12,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "青苔虹廳・篡頁書記",
+    "story": "有人刻意拆去安全石徑標誌，把探索者引向不安全水道。 此處提供與官方說法矛盾的實物，交由涅露核對。",
+    "clue": "路旁找到《青苔虹廳交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋青苔虹廳紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_moonveil",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_moonveil_04",
+    "name": "逆瀑神龕",
+    "region": "aw_moonveil",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -17580,
+      "z": 11195
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 15,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "逆瀑神龕・封門統領",
+    "story": "有人刻意拆去安全石徑標誌，把探索者引向不安全水道。 此處提供受影響者留下的撤離路線，交由沐川核對。",
+    "clue": "路旁找到《逆瀑神龕交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋逆瀑神龕紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_moonveil",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_moonveil_05",
+    "name": "三鐘源池",
+    "region": "aw_moonveil",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -15349,
+      "z": 11079
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 18,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "三鐘源池・裂界回聲核",
+    "story": "有人刻意拆去安全石徑標誌，把探索者引向不安全水道。 此處提供最後的系統命令，交由瀑邊聽雨核對。",
+    "clue": "路旁找到《三鐘源池交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋三鐘源池紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_moonveil",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 1
+  },
+  {
+    "id": "aw_exp_aw_ambermesa_01",
+    "name": "琥珀蟲寢",
+    "region": "aw_ambermesa",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 18987,
+      "z": -10324
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 25,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "琥珀蟲寢・裝置殘響監守者",
+    "story": "上層長橋收費讓下層村民無法送藥，近路卻經過脆弱化石區。 此處提供早期使用紀錄，交由臺地引路人赭羽核對。",
+    "clue": "路旁找到《琥珀蟲寢交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋琥珀蟲寢紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_ambermesa",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_ambermesa_02",
+    "name": "斷翼石巢",
+    "region": "aw_ambermesa",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 17251,
+      "z": -8919
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 28,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "斷翼石巢・失控巡衛",
+    "story": "上層長橋收費讓下層村民無法送藥，近路卻經過脆弱化石區。 此處提供最近的交班證詞，交由琥珀匠封芽核對。",
+    "clue": "路旁找到《斷翼石巢交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋斷翼石巢紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_ambermesa",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_ambermesa_03",
+    "name": "封脂地宮",
+    "region": "aw_ambermesa",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 15378,
+      "z": -10135
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 31,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "封脂地宮・篡頁書記",
+    "story": "上層長橋收費讓下層村民無法送藥，近路卻經過脆弱化石區。 此處提供與官方說法矛盾的實物，交由收橋人索延核對。",
+    "clue": "路旁找到《封脂地宮交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋封脂地宮紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_ambermesa",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_ambermesa_04",
+    "name": "赭橋收費堡",
+    "region": "aw_ambermesa",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 15956,
+      "z": -12293
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 34,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "赭橋收費堡・封門統領",
+    "story": "上層長橋收費讓下層村民無法送藥，近路卻經過脆弱化石區。 此處提供受影響者留下的撤離路線，交由臺地引路人赭羽核對。",
+    "clue": "路旁找到《赭橋收費堡交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋赭橋收費堡紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_ambermesa",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_ambermesa_05",
+    "name": "台地下的舊雨",
+    "region": "aw_ambermesa",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 18187,
+      "z": -12409
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 37,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "台地下的舊雨・裂界回聲核",
+    "story": "上層長橋收費讓下層村民無法送藥，近路卻經過脆弱化石區。 此處提供最後的系統命令，交由琥珀匠封芽核對。",
+    "clue": "路旁找到《台地下的舊雨交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋台地下的舊雨紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_ambermesa",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_silvergrass_01",
+    "name": "銀草石環墓",
+    "region": "aw_silvergrass",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -15829,
+      "z": 29164
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 25,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "銀草石環墓・裝置殘響監守者",
+    "story": "新劃地界封住古獸道，坐騎繞行後成批疲憊倒下。 此處提供早期使用紀錄，交由馴行師拓野核對。",
+    "clue": "路旁找到《銀草石環墓交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋銀草石環墓紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_silvergrass",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_silvergrass_02",
+    "name": "遷徙獸王窟",
+    "region": "aw_silvergrass",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -17565,
+      "z": 30569
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 28,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "遷徙獸王窟・失控巡衛",
+    "story": "新劃地界封住古獸道，坐騎繞行後成批疲憊倒下。 此處提供最近的交班證詞，交由牧道見證人銀穗核對。",
+    "clue": "路旁找到《遷徙獸王窟交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋遷徙獸王窟紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_silvergrass",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_silvergrass_03",
+    "name": "折鞍營帳",
+    "region": "aw_silvergrass",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -19438,
+      "z": 29353
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 31,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "折鞍營帳・篡頁書記",
+    "story": "新劃地界封住古獸道，坐騎繞行後成批疲憊倒下。 此處提供與官方說法矛盾的實物，交由退役騎手遲蹄核對。",
+    "clue": "路旁找到《折鞍營帳交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋折鞍營帳紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_silvergrass",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_silvergrass_04",
+    "name": "空羊圈古井",
+    "region": "aw_silvergrass",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -18860,
+      "z": 27195
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 34,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "空羊圈古井・封門統領",
+    "story": "新劃地界封住古獸道，坐騎繞行後成批疲憊倒下。 此處提供受影響者留下的撤離路線，交由馴行師拓野核對。",
+    "clue": "路旁找到《空羊圈古井交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋空羊圈古井紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_silvergrass",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_silvergrass_05",
+    "name": "白毛風祠",
+    "region": "aw_silvergrass",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -16629,
+      "z": 27079
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 37,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "白毛風祠・裂界回聲核",
+    "story": "新劃地界封住古獸道，坐騎繞行後成批疲憊倒下。 此處提供最後的系統命令，交由牧道見證人銀穗核對。",
+    "clue": "路旁找到《白毛風祠交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋白毛風祠紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_silvergrass",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_ashmarch_01",
+    "name": "灰雪交界站",
+    "region": "aw_ashmarch",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -23637,
+      "z": -31764
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 25,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "灰雪交界站・裝置殘響監守者",
+    "story": "灰穀倉被焚燒後，官方說是污染，倖存者卻記得先封門才起火。 此處提供早期使用紀錄，交由熱泉醫師溫澤核對。",
+    "clue": "路旁找到《灰雪交界站交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋灰雪交界站紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_ashmarch",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_ashmarch_02",
+    "name": "冷熔龍脊",
+    "region": "aw_ashmarch",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -25373,
+      "z": -30359
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 28,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "冷熔龍脊・失控巡衛",
+    "story": "灰穀倉被焚燒後，官方說是污染，倖存者卻記得先封門才起火。 此處提供最近的交班證詞，交由灰穀阿稔核對。",
+    "clue": "路旁找到《冷熔龍脊交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋冷熔龍脊紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_ashmarch",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_ashmarch_03",
+    "name": "燙泉療養窟",
+    "region": "aw_ashmarch",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -27246,
+      "z": -31575
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 31,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "燙泉療養窟・篡頁書記",
+    "story": "灰穀倉被焚燒後，官方說是污染，倖存者卻記得先封門才起火。 此處提供與官方說法矛盾的實物，交由舊軌引路人折軸核對。",
+    "clue": "路旁找到《燙泉療養窟交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋燙泉療養窟紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_ashmarch",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_ashmarch_04",
+    "name": "廢軌守爐室",
+    "region": "aw_ashmarch",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -26668,
+      "z": -33733
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 34,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "廢軌守爐室・封門統領",
+    "story": "灰穀倉被焚燒後，官方說是污染，倖存者卻記得先封門才起火。 此處提供受影響者留下的撤離路線，交由熱泉醫師溫澤核對。",
+    "clue": "路旁找到《廢軌守爐室交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋廢軌守爐室紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_ashmarch",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_ashmarch_05",
+    "name": "黑穀焚倉",
+    "region": "aw_ashmarch",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -24437,
+      "z": -33849
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 37,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "黑穀焚倉・裂界回聲核",
+    "story": "灰穀倉被焚燒後，官方說是污染，倖存者卻記得先封門才起火。 此處提供最後的系統命令，交由灰穀阿稔核對。",
+    "clue": "路旁找到《黑穀焚倉交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋黑穀焚倉紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_ashmarch",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 2
+  },
+  {
+    "id": "aw_exp_aw_thundercoast_01",
+    "name": "雷柱觀潮臺",
+    "region": "aw_thundercoast",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 37611,
+      "z": 36780
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 25,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "雷柱觀潮臺・裝置殘響監守者",
+    "story": "風暴封鎖海岬，失修燈塔卻把安全港標成危險。 此處提供早期使用紀錄，交由守燈人嶼雷核對。",
+    "clue": "路旁找到《雷柱觀潮臺交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋雷柱觀潮臺紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_thundercoast",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_thundercoast_02",
+    "name": "碎帆海蝕洞",
+    "region": "aw_thundercoast",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 35875,
+      "z": 38185
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 28,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "碎帆海蝕洞・失控巡衛",
+    "story": "風暴封鎖海岬，失修燈塔卻把安全港標成危險。 此處提供最近的交班證詞，交由帆匠折潮核對。",
+    "clue": "路旁找到《碎帆海蝕洞交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋碎帆海蝕洞紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_thundercoast",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_thundercoast_03",
+    "name": "鹽電蓄池",
+    "region": "aw_thundercoast",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 34002,
+      "z": 36969
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 31,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "鹽電蓄池・篡頁書記",
+    "story": "風暴封鎖海岬，失修燈塔卻把安全港標成危險。 此處提供與官方說法矛盾的實物，交由觀雷師碧衡核對。",
+    "clue": "路旁找到《鹽電蓄池交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋鹽電蓄池紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_thundercoast",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_thundercoast_04",
+    "name": "風暴避難艙",
+    "region": "aw_thundercoast",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 34580,
+      "z": 34811
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 34,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "風暴避難艙・封門統領",
+    "story": "風暴封鎖海岬，失修燈塔卻把安全港標成危險。 此處提供受影響者留下的撤離路線，交由守燈人嶼雷核對。",
+    "clue": "路旁找到《風暴避難艙交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋風暴避難艙紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_thundercoast",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_thundercoast_05",
+    "name": "斷燈海崖寺",
+    "region": "aw_thundercoast",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 36811,
+      "z": 34695
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 37,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "斷燈海崖寺・裂界回聲核",
+    "story": "風暴封鎖海岬，失修燈塔卻把安全港標成危險。 此處提供最後的系統命令，交由帆匠折潮核對。",
+    "clue": "路旁找到《斷燈海崖寺交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋斷燈海崖寺紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_thundercoast",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_mirrorice_01",
+    "name": "藍冰反照窟",
+    "region": "aw_mirrorice",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 4267,
+      "z": -34708
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 25,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "藍冰反照窟・裝置殘響監守者",
+    "story": "冰下第二湖正在變暖，郵站繼續使用過時的厚冰路線。 此處提供早期使用紀錄，交由冰郵員藍渡核對。",
+    "clue": "路旁找到《藍冰反照窟交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋藍冰反照窟紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_mirrorice",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_mirrorice_02",
+    "name": "鹿角渡冰所",
+    "region": "aw_mirrorice",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 2531,
+      "z": -33303
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 28,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "鹿角渡冰所・失控巡衛",
+    "story": "冰下第二湖正在變暖，郵站繼續使用過時的厚冰路線。 此處提供最近的交班證詞，交由鹿路嚮導白茸核對。",
+    "clue": "路旁找到《鹿角渡冰所交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋鹿角渡冰所紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_mirrorice",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_mirrorice_03",
+    "name": "永凍郵館",
+    "region": "aw_mirrorice",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 658,
+      "z": -34519
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 31,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "永凍郵館・篡頁書記",
+    "story": "冰下第二湖正在變暖，郵站繼續使用過時的厚冰路線。 此處提供與官方說法矛盾的實物，交由暖棚匠晴裂核對。",
+    "clue": "路旁找到《永凍郵館交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋永凍郵館紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_mirrorice",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_mirrorice_04",
+    "name": "裂雪溫室",
+    "region": "aw_mirrorice",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 1236,
+      "z": -36677
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 34,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "裂雪溫室・封門統領",
+    "story": "冰下第二湖正在變暖，郵站繼續使用過時的厚冰路線。 此處提供受影響者留下的撤離路線，交由冰郵員藍渡核對。",
+    "clue": "路旁找到《裂雪溫室交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋裂雪溫室紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_mirrorice",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_mirrorice_05",
+    "name": "冰下第二湖",
+    "region": "aw_mirrorice",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 3467,
+      "z": -36793
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 37,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "冰下第二湖・裂界回聲核",
+    "story": "冰下第二湖正在變暖，郵站繼續使用過時的厚冰路線。 此處提供最後的系統命令，交由鹿路嚮導白茸核對。",
+    "clue": "路旁找到《冰下第二湖交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋冰下第二湖紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_mirrorice",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_starfall_01",
+    "name": "隕鐵孵光場",
+    "region": "aw_starfall",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 33131,
+      "z": -32276
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 55,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "隕鐵孵光場・裝置殘響監守者",
+    "story": "墜落殘舟送出多語求援，學院卻想先回收核心研究。 此處提供早期使用紀錄，交由隕場研究員辰砂核對。",
+    "clue": "路旁找到《隕鐵孵光場交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋隕鐵孵光場紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_starfall",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_starfall_02",
+    "name": "碎星步道",
+    "region": "aw_starfall",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 31395,
+      "z": -30871
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 58,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "碎星步道・失控巡衛",
+    "story": "墜落殘舟送出多語求援，學院卻想先回收核心研究。 此處提供最近的交班證詞，交由拾星人灰耀核對。",
+    "clue": "路旁找到《碎星步道交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋碎星步道紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_starfall",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_starfall_03",
+    "name": "坍時測站",
+    "region": "aw_starfall",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 29522,
+      "z": -32087
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 61,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "坍時測站・篡頁書記",
+    "story": "墜落殘舟送出多語求援，學院卻想先回收核心研究。 此處提供與官方說法矛盾的實物，交由遠客聆舟核對。",
+    "clue": "路旁找到《坍時測站交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋坍時測站紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_starfall",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_starfall_04",
+    "name": "失重鹽坑",
+    "region": "aw_starfall",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 30100,
+      "z": -34245
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 64,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "失重鹽坑・封門統領",
+    "story": "墜落殘舟送出多語求援，學院卻想先回收核心研究。 此處提供受影響者留下的撤離路線，交由隕場研究員辰砂核對。",
+    "clue": "路旁找到《失重鹽坑交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋失重鹽坑紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_starfall",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_starfall_05",
+    "name": "遠客殘舟",
+    "region": "aw_starfall",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 32331,
+      "z": -34361
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 67,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "遠客殘舟・裂界回聲核",
+    "story": "墜落殘舟送出多語求援，學院卻想先回收核心研究。 此處提供最後的系統命令，交由拾星人灰耀核對。",
+    "clue": "路旁找到《遠客殘舟交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋遠客殘舟紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_starfall",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 4
+  },
+  {
+    "id": "aw_exp_aw_sunken_01",
+    "name": "沉鐘學堂",
+    "region": "aw_sunken",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 38571,
+      "z": -8468
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 25,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "沉鐘學堂・裝置殘響監守者",
+    "story": "沉鐘塔下保存舊學堂，尋寶者誤把課桌下的名牌當成可賣的飾品。 此處提供早期使用紀錄，交由漂流村長珊橋核對。",
+    "clue": "路旁找到《沉鐘學堂交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋沉鐘學堂紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_sunken",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_sunken_02",
+    "name": "珊瑚王座廊",
+    "region": "aw_sunken",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 36835,
+      "z": -7063
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 28,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "珊瑚王座廊・失控巡衛",
+    "story": "沉鐘塔下保存舊學堂，尋寶者誤把課桌下的名牌當成可賣的飾品。 此處提供最近的交班證詞，交由潛線員若泡核對。",
+    "clue": "路旁找到《珊瑚王座廊交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋珊瑚王座廊紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_sunken",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_sunken_03",
+    "name": "漂流者寶庫",
+    "region": "aw_sunken",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 34962,
+      "z": -8279
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 31,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "漂流者寶庫・篡頁書記",
+    "story": "沉鐘塔下保存舊學堂，尋寶者誤把課桌下的名牌當成可賣的飾品。 此處提供與官方說法矛盾的實物，交由沉鐘抄手苔音核對。",
+    "clue": "路旁找到《漂流者寶庫交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋漂流者寶庫紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_sunken",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_sunken_04",
+    "name": "海綿通氣井",
+    "region": "aw_sunken",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 35540,
+      "z": -10437
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 34,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "海綿通氣井・封門統領",
+    "story": "沉鐘塔下保存舊學堂，尋寶者誤把課桌下的名牌當成可賣的飾品。 此處提供受影響者留下的撤離路線，交由漂流村長珊橋核對。",
+    "clue": "路旁找到《海綿通氣井交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋海綿通氣井紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_sunken",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_sunken_05",
+    "name": "無潮深門",
+    "region": "aw_sunken",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 37771,
+      "z": -10553
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 37,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "無潮深門・裂界回聲核",
+    "story": "沉鐘塔下保存舊學堂，尋寶者誤把課桌下的名牌當成可賣的飾品。 此處提供最後的系統命令，交由潛線員若泡核對。",
+    "clue": "路旁找到《無潮深門交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋無潮深門紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_sunken",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 3
+  },
+  {
+    "id": "aw_exp_aw_underlost_01",
+    "name": "菌光失耕層",
+    "region": "aw_underlost",
+    "status": "proposed_new",
+    "layer": "underground",
+    "suggested_anchor": {
+      "x": 1449,
+      "z": 388
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "puzzle",
+    "level_hint": 55,
+    "floors": 1,
+    "expected_minutes": 15,
+    "objective": "調整流向／閥門，使三處指示同時安全",
+    "boss": "菌光失耕層・裝置殘響監守者",
+    "story": "外界終於到來，卻有人把仍在生活的地下城當作待開採遺跡。 此處提供早期使用紀錄，交由聞燈核對。",
+    "clue": "路旁找到《菌光失耕層交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋菌光失耕層紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_underlost",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_underlost_02",
+    "name": "呼吸名冊室",
+    "region": "aw_underlost",
+    "status": "proposed_new",
+    "layer": "underground",
+    "suggested_anchor": {
+      "x": 79,
+      "z": 1498
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "rescue",
+    "level_hint": 58,
+    "floors": 2,
+    "expected_minutes": 20,
+    "objective": "尋找並護送受困者到安全檢查點",
+    "boss": "呼吸名冊室・失控巡衛",
+    "story": "外界終於到來，卻有人把仍在生活的地下城當作待開採遺跡。 此處提供最近的交班證詞，交由菌田學徒小苔核對。",
+    "clue": "路旁找到《呼吸名冊室交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋呼吸名冊室紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_underlost",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_underlost_03",
+    "name": "滴水議庭",
+    "region": "aw_underlost",
+    "status": "proposed_new",
+    "layer": "underground",
+    "suggested_anchor": {
+      "x": -1400,
+      "z": 538
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "investigation",
+    "level_hint": 61,
+    "floors": 3,
+    "expected_minutes": 25,
+    "objective": "比對兩份矛盾紀錄與第三件實物",
+    "boss": "滴水議庭・篡頁書記",
+    "story": "外界終於到來，卻有人把仍在生活的地下城當作待開採遺跡。 此處提供與官方說法矛盾的實物，交由根網守錄者核對。",
+    "clue": "路旁找到《滴水議庭交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋滴水議庭紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_underlost",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_underlost_04",
+    "name": "零鐘維修井",
+    "region": "aw_underlost",
+    "status": "proposed_new",
+    "layer": "underground",
+    "suggested_anchor": {
+      "x": -944,
+      "z": -1166
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "combat",
+    "level_hint": 64,
+    "floors": 1,
+    "expected_minutes": 30,
+    "objective": "選擇兩條可繞路的戰鬥路線並關閉增援點",
+    "boss": "零鐘維修井・封門統領",
+    "story": "外界終於到來，卻有人把仍在生活的地下城當作待開採遺跡。 此處提供受影響者留下的撤離路線，交由聞燈核對。",
+    "clue": "路旁找到《零鐘維修井交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋零鐘維修井紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_underlost",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_underlost_05",
+    "name": "未曾失落的家",
+    "region": "aw_underlost",
+    "status": "proposed_new",
+    "layer": "underground",
+    "suggested_anchor": {
+      "x": 817,
+      "z": -1258
+    },
+    "entrance_validation": "建議錨點，須以地形、水深、城市碰撞及道路保護區重新選安全落點",
+    "type": "mixed",
+    "level_hint": 67,
+    "floors": 2,
+    "expected_minutes": 35,
+    "objective": "修復供能後完成首領三階段，保留撤退路",
+    "boss": "未曾失落的家・裂界回聲核",
+    "story": "外界終於到來，卻有人把仍在生活的地下城當作待開採遺跡。 此處提供最後的系統命令，交由菌田學徒小苔核對。",
+    "clue": "路旁找到《未曾失落的家交班札》：最後一班人留下的箭頭與今天地圖方向不同。",
+    "reward": {
+      "first_clear": "區域圖鑑＋未曾失落的家紀念圖樣",
+      "repeat": "依原掉落平衡給普通材料",
+      "combat_unique": "未定義，不自動發放新技能"
+    },
+    "access": "關鍵線索可先在入口閱讀；副本挑戰不作購屋或基本游泳前置",
+    "regional_arc": "aw_arc2_aw_underlost",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_oldriver_01",
+    "name": "分洪堤內室",
+    "region": "aw_oldriver",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": 648,
+      "z": 21248
+    },
+    "entrance_validation": "待地形驗證",
+    "type": "puzzle",
+    "level_hint": 45,
+    "floors": 1,
+    "expected_minutes": 20,
+    "objective": "調查改河後不同住民的證據，恢復安全水道",
+    "boss": "分洪堤內室・逆水監錄者",
+    "story": "改河工程把同一個村分成兩套戶籍，兩岸都被當成對方負責的人。 此處提供早期使用紀錄，交由故道守記人川頁核對。",
+    "clue": "路碑正反兩面記錄不同河名。",
+    "reward": {
+      "first_clear": "故道圖鑑與家具圖樣",
+      "repeat": "普通材料",
+      "combat_unique": "未定義"
+    },
+    "access": "解鎖區域後",
+    "regional_arc": "aw_arc2_aw_oldriver",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_oldriver_02",
+    "name": "逆流戶籍所",
+    "region": "aw_oldriver",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -585,
+      "z": 22956
+    },
+    "entrance_validation": "待地形驗證",
+    "type": "investigation",
+    "level_hint": 48,
+    "floors": 2,
+    "expected_minutes": 25,
+    "objective": "調查改河後不同住民的證據，恢復安全水道",
+    "boss": "逆流戶籍所・逆水監錄者",
+    "story": "改河工程把同一個村分成兩套戶籍，兩岸都被當成對方負責的人。 此處提供最近的交班證詞，交由渡埠匠阿洄核對。",
+    "clue": "路碑正反兩面記錄不同河名。",
+    "reward": {
+      "first_clear": "故道圖鑑與家具圖樣",
+      "repeat": "普通材料",
+      "combat_unique": "未定義"
+    },
+    "access": "解鎖區域後",
+    "regional_arc": "aw_arc2_aw_oldriver",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_oldriver_03",
+    "name": "兩岸斷橋廳",
+    "region": "aw_oldriver",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -2594,
+      "z": 22325
+    },
+    "entrance_validation": "待地形驗證",
+    "type": "rescue",
+    "level_hint": 51,
+    "floors": 3,
+    "expected_minutes": 30,
+    "objective": "調查改河後不同住民的證據，恢復安全水道",
+    "boss": "兩岸斷橋廳・逆水監錄者",
+    "story": "改河工程把同一個村分成兩套戶籍，兩岸都被當成對方負責的人。 此處提供與官方說法矛盾的實物，交由戶籍抄員路禾核對。",
+    "clue": "路碑正反兩面記錄不同河名。",
+    "reward": {
+      "first_clear": "故道圖鑑與家具圖樣",
+      "repeat": "普通材料",
+      "combat_unique": "未定義"
+    },
+    "access": "解鎖區域後",
+    "regional_arc": "aw_arc2_aw_oldriver",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_oldriver_04",
+    "name": "無名渡埠",
+    "region": "aw_oldriver",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -2629,
+      "z": 20220
+    },
+    "entrance_validation": "待地形驗證",
+    "type": "combat",
+    "level_hint": 54,
+    "floors": 1,
+    "expected_minutes": 35,
+    "objective": "調查改河後不同住民的證據，恢復安全水道",
+    "boss": "無名渡埠・逆水監錄者",
+    "story": "改河工程把同一個村分成兩套戶籍，兩岸都被當成對方負責的人。 此處提供受影響者留下的撤離路線，交由故道守記人川頁核對。",
+    "clue": "路碑正反兩面記錄不同河名。",
+    "reward": {
+      "first_clear": "故道圖鑑與家具圖樣",
+      "repeat": "普通材料",
+      "combat_unique": "未定義"
+    },
+    "access": "解鎖區域後",
+    "regional_arc": "aw_arc2_aw_oldriver",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  },
+  {
+    "id": "aw_exp_aw_oldriver_05",
+    "name": "改河密令庫",
+    "region": "aw_oldriver",
+    "status": "proposed_new",
+    "layer": "surface",
+    "suggested_anchor": {
+      "x": -642,
+      "z": 19522
+    },
+    "entrance_validation": "待地形驗證",
+    "type": "mixed",
+    "level_hint": 57,
+    "floors": 2,
+    "expected_minutes": 40,
+    "objective": "調查改河後不同住民的證據，恢復安全水道",
+    "boss": "改河密令庫・逆水監錄者",
+    "story": "改河工程把同一個村分成兩套戶籍，兩岸都被當成對方負責的人。 此處提供最後的系統命令，交由渡埠匠阿洄核對。",
+    "clue": "路碑正反兩面記錄不同河名。",
+    "reward": {
+      "first_clear": "故道圖鑑與家具圖樣",
+      "repeat": "普通材料",
+      "combat_unique": "未定義"
+    },
+    "access": "解鎖區域後",
+    "regional_arc": "aw_arc2_aw_oldriver",
+    "boss_dialogue": {
+      "entry": "未確認新命令。此處仍按最後一次封閉令執行。",
+      "phase": "記錄裡的人數不符。請不要把缺漏當成不存在。",
+      "defeat": "把這份副本……帶到能回答的人面前。"
+    },
+    "release": 5
+  }
+]

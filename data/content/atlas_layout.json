@@ -1,0 +1,196 @@
+{
+  "id": "reference-atlas-v2",
+  "version": 2,
+  "width": 1254,
+  "height": 1254,
+  "metersPerPixel": 64,
+  "originPixel": {
+    "x": 633,
+    "y": 578
+  },
+  "worldLimit": 48000,
+  "image": "/art/world-atlas.webp",
+  "bounds": {
+    "minX": -40512,
+    "minZ": -36992,
+    "maxX": 39744,
+    "maxZ": 43264
+  },
+  "previousRegions": {
+    "aw_crownreach": {
+      "center": {
+        "x": 0,
+        "z": 0
+      },
+      "radius": 850
+    },
+    "windchime": {
+      "center": {
+        "x": -4500,
+        "z": 4800
+      },
+      "radius": 450
+    },
+    "verdant": {
+      "center": {
+        "x": -14000,
+        "z": 3000
+      },
+      "radius": 850
+    },
+    "cinder": {
+      "center": {
+        "x": -17000,
+        "z": -10500
+      },
+      "radius": 850
+    },
+    "tidehaven": {
+      "center": {
+        "x": 21000,
+        "z": 4000
+      },
+      "radius": 850
+    },
+    "frosthold": {
+      "center": {
+        "x": -15500,
+        "z": -20500
+      },
+      "radius": 850
+    },
+    "sundune": {
+      "center": {
+        "x": 12000,
+        "z": 18000
+      },
+      "radius": 850
+    },
+    "astral": {
+      "center": {
+        "x": 16000,
+        "z": -16000
+      },
+      "radius": 850
+    },
+    "darkforest": {
+      "center": {
+        "x": -25000,
+        "z": -2000
+      },
+      "radius": 2800
+    },
+    "aw_northwatch": {
+      "center": {
+        "x": 3500,
+        "z": -24000
+      },
+      "radius": 850
+    },
+    "aw_westport": {
+      "center": {
+        "x": -25000,
+        "z": 14000
+      },
+      "radius": 850
+    },
+    "aw_southmill": {
+      "center": {
+        "x": -4500,
+        "z": 24500
+      },
+      "radius": 850
+    },
+    "aw_eastglass": {
+      "center": {
+        "x": 25500,
+        "z": -11500
+      },
+      "radius": 850
+    },
+    "aw_windplain": {
+      "center": {
+        "x": -3000,
+        "z": -8000
+      },
+      "radius": 2800
+    },
+    "aw_reedbasin": {
+      "center": {
+        "x": 7500,
+        "z": -6500
+      },
+      "radius": 2800
+    },
+    "aw_moonveil": {
+      "center": {
+        "x": -11000,
+        "z": 10000
+      },
+      "radius": 2800
+    },
+    "aw_ambermesa": {
+      "center": {
+        "x": 9500,
+        "z": 8500
+      },
+      "radius": 2800
+    },
+    "aw_silvergrass": {
+      "center": {
+        "x": -24000,
+        "z": 23500
+      },
+      "radius": 2800
+    },
+    "aw_ashmarch": {
+      "center": {
+        "x": -8000,
+        "z": -16500
+      },
+      "radius": 2800
+    },
+    "aw_thundercoast": {
+      "center": {
+        "x": 27000,
+        "z": 15500
+      },
+      "radius": 2800
+    },
+    "aw_mirrorice": {
+      "center": {
+        "x": -6500,
+        "z": -27000
+      },
+      "radius": 2800
+    },
+    "aw_starfall": {
+      "center": {
+        "x": 23500,
+        "z": -25000
+      },
+      "radius": 2800
+    },
+    "aw_sunken": {
+      "center": {
+        "x": 28500,
+        "z": -1000
+      },
+      "radius": 2800
+    },
+    "aw_underlost": {
+      "center": {
+        "x": 0,
+        "z": 0
+      },
+      "radius": 450
+    },
+    "aw_oldriver": {
+      "center": {
+        "x": 2500,
+        "z": 17500
+      },
+      "radius": 2600
+    }
+  }
+}

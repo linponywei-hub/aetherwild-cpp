@@ -1,0 +1,90 @@
+[
+  {
+    "id": "aw_release_1",
+    "number": 1,
+    "title": "第一批｜聽見沿途的人",
+    "regions": [
+      "windchime",
+      "verdant",
+      "aw_moonveil",
+      "aw_windplain",
+      "aw_reedbasin"
+    ],
+    "theme": "以村莊、森林、水域建立旅行與線索閱讀；看得見王城，但尚不能進城。",
+    "dependencies": [],
+    "world_geometry": "全部區域地形已在第0階段建成；本批只開放內容、道路與服務",
+    "capital_open": false
+  },
+  {
+    "id": "aw_release_2",
+    "number": 2,
+    "title": "第二批｜王城開門",
+    "regions": [
+      "aw_crownreach",
+      "cinder",
+      "aw_ashmarch",
+      "aw_ambermesa",
+      "aw_southmill"
+    ],
+    "theme": "王城正式開放；王城的補給、鍛造、糧食與道路問題同步出現。",
+    "dependencies": [
+      "aw_release_1"
+    ],
+    "world_geometry": "全部區域地形已在第0階段建成；本批只開放內容、道路與服務",
+    "capital_open": true
+  },
+  {
+    "id": "aw_release_3",
+    "number": 3,
+    "title": "第三批｜海的另一份名冊",
+    "regions": [
+      "tidehaven",
+      "aw_westport",
+      "aw_sunken",
+      "aw_thundercoast",
+      "aw_silvergrass"
+    ],
+    "theme": "擴展沿海與西岸商路，揭露第七次潮災和沒有列名的乘客。",
+    "dependencies": [
+      "aw_release_2"
+    ],
+    "world_geometry": "全部區域地形已在第0階段建成；本批只開放內容、道路與服務",
+    "capital_open": false
+  },
+  {
+    "id": "aw_release_4",
+    "number": 4,
+    "title": "第四批｜鐘聲穿過雪與天空",
+    "regions": [
+      "frosthold",
+      "aw_mirrorice",
+      "aw_northwatch",
+      "astral",
+      "aw_starfall"
+    ],
+    "theme": "取得封鐘令與零號觀測資料，準備地下聯絡與共同議事。",
+    "dependencies": [
+      "aw_release_3"
+    ],
+    "world_geometry": "全部區域地形已在第0階段建成；本批只開放內容、道路與服務",
+    "capital_open": false
+  },
+  {
+    "id": "aw_release_5",
+    "number": 5,
+    "title": "第五批｜讓失落者自己回答",
+    "regions": [
+      "sundune",
+      "aw_eastglass",
+      "darkforest",
+      "aw_underlost",
+      "aw_oldriver"
+    ],
+    "theme": "各地水權證據匯流，完成地下接觸、隔離網修復及復鳴結局。",
+    "dependencies": [
+      "aw_release_4"
+    ],
+    "world_geometry": "全部區域地形已在第0階段建成；本批只開放內容、道路與服務",
+    "capital_open": false
+  }
+]

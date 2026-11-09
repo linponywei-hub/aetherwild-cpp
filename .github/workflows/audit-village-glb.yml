@@ -1,0 +1,23 @@
+name: Audit village GLB geometry
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'web/assets/models/buildings/village/*.glb'
+      - 'tools/audit_village_glb.py'
+      - '.github/workflows/audit-village-glb.yml'
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Inspect GLB topology without modifying assets
+        run: python3 tools/audit_village_glb.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: village-glb-audit
+          path: village_glb_audit.json
