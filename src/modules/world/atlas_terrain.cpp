@@ -39,11 +39,14 @@ double atlasHeight(Vec3 p){
  // and ridges break the old smooth domes without moving their geographic anchors.
  const double warpX=(noise(p.x/2400,p.z/2400,model.seed+11)-.5)*380;
  const double warpZ=(noise(p.x/2400,p.z/2400,model.seed+13)-.5)*380;
- const double ridge=1-std::abs(fractal((p.x+warpX)/720,(p.z+warpZ)/720,model.seed+23)*2-1);
- for(const auto& peak:model.peaks){double dx=(pixel.x-peak.center.x)/peak.radius,dz=(pixel.z-peak.center.z)/peak.radius;double envelope=std::exp(-(dx*dx+dz*dz));y+=peak.height*envelope*(.69+.31*ridge)+peak.height*envelope*.09*(detail-.5);}
+ const double ridgeSignal=fractal((p.x+warpX)/720,(p.z+warpZ)/720,model.seed+23)*2-1;
+ // Smooth ridge crests instead of a sharp absolute-value cusp. This keeps
+ // adjacent 8m terrain samples continuous and prevents needle-like peaks.
+ const double ridge=1-std::sqrt(ridgeSignal*ridgeSignal+.035*.035);
+ for(const auto& peak:model.peaks){double dx=(pixel.x-peak.center.x)/peak.radius,dz=(pixel.z-peak.center.z)/peak.radius;double envelope=std::exp(-(dx*dx+dz*dz));y+=peak.height*envelope*(.69+.31*ridge)+peak.height*envelope*.045*(detail-.5);}
  for(const auto& biome:model.biomes){if(!polygon(pixel.x,pixel.z,biome.points))continue;double w=smooth(0,500,edgeDistance(pixel,biome.points));
-  if(biome.id=="desert"){double wave=std::sin(p.x/210+p.z/410+3*broad);y=mix(y,8+10*broad+14*std::pow(.5+.5*wave,2),w);}
-  if(biome.id=="mesa"){double t=fractal(p.x/1500,p.z/1500,model.seed+31)*4;double terrace=(std::floor(t)+smooth(.6,1,t-std::floor(t)))/4;y=mix(y,32+240*terrace+4*(detail-.5),w*.85);}
+  if(biome.id=="desert"){double phase=p.x/210+p.z/410+3*broad;double dunes=std::sin(phase)*.7+std::sin(phase*.53+1.7)*.3; y=mix(y,8+10*broad+14*std::pow(.5+.5*dunes,2),w);}
+  if(biome.id=="mesa"){double t=fractal(p.x/1500,p.z/1500,model.seed+31)*4;double terrace=(std::floor(t)+smooth(.25,.75,t-std::floor(t)))/4;y=mix(y,32+240*terrace+4*(detail-.5),w*.85);}
   if(biome.id=="marsh")y=mix(y,1.5+.8*broad,w);
  }
  for(const auto& flat:model.flat){double d=std::hypot(pixel.x-flat.center.x,pixel.z-flat.center.z);double w=1-smooth(flat.radius,flat.radius+flat.feather,d);y=mix(y,flat.base+flat.amplitude*(2*detail-1),w);}
