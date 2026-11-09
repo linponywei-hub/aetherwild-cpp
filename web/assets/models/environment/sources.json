@@ -29,6 +29,18 @@
       "sha256": "c18cdf3d54c6e9d6ad03def8459377488c21070e1530a93b6651c251899bffcc",
       "bytes": 636276,
       "triangles": 645
+    },
+    {
+      "asset": "timber_fence_panel",
+      "provider": "3DAssets.dev",
+      "source": "https://3dassets.dev/assets/allotments-and-community-garden-timber-fence-panel-cf78aac3",
+      "download": "https://cdn.3dassets.dev/assets/35164/v1/model.glb",
+      "license": "CC0-1.0",
+      "path": "/assets/models/environment/timber_fence.glb",
+      "sha256": "6edaad5c137a9b40c8e03fe92c57a9f4544471c514e861c3edd79ab028157399",
+      "bytes": 17704,
+      "triangles": 192,
+      "processing": "Original GLB, unchanged; procedural AI-assisted source asset, not a photogrammetry scan"
     }
   ]
 }

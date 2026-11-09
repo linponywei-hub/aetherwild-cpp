@@ -25,7 +25,12 @@ namespace aw {
         return v;
     }
     bool blocked(Vec3 p,const std::vector<Building>& bs,double radius) {
-        for(auto&b:bs)if((b.region!="windchime"||b.style.ends_with("|starter_wall"))&&p.y+1.7>b.position.y&&p.y<b.position.y+b.height&&std::abs(p.x-b.position.x)<b.width/2+radius&&std::abs(p.z-b.position.z)<b.depth/2+radius)return true;
+        for(const auto& b:bs){
+            if(b.region=="windchime"&&!b.style.ends_with("|starter_wall")&&!b.style.ends_with("|starter_fence"))continue;
+            if(p.y+1.7<=b.position.y||p.y>=b.position.y+b.height)continue;
+            const double dx=p.x-b.position.x,dz=p.z-b.position.z,co=std::cos(b.yaw),si=std::sin(b.yaw);
+            if(std::abs(co*dx-si*dz)<b.width/2+radius&&std::abs(si*dx+co*dz)<b.depth/2+radius)return true;
+        }
         return false;
     }
     bool onCityFloor(Vec3 p,const RegionDefinition&r) {
@@ -41,8 +46,13 @@ namespace aw {
     double groundBelow(Vec3 p,const Catalog&c) {
         double y=std::max(worldLandHeight(p,c),harborGround(p,c));
         if(c.worldLimit>1800){
-            struct Wall {double x,z,w,d,height;};static const auto walls=[] {std::vector<Wall> out;for(const auto& b:atlasSurface().at("starterVillage").at("walls").arrayItems())out.push_back({b.num("x"),b.num("z"),b.num("width")/2,b.num("depth")/2,b.num("height")});return out;}();
-            const auto center=c.regions.at("windchime").center;for(const auto& b:walls)if(std::abs(p.x-center.x-b.x)<=b.w&&std::abs(p.z-center.z-b.z)<=b.d&&b.height<=p.y+1.4)y=std::max(y,b.height);
+            struct Wall {double x,z,w,d,height,co,si,base;};
+            static const auto walls=[&] {std::vector<Wall> out;const auto center=c.regions.at("windchime").center;
+                for(const auto& key:{"walls","fences"})for(const auto& b:atlasSurface().at("starterVillage").at(key).arrayItems()){double x=b.num("x"),z=b.num("z"),yaw=b.num("yaw");out.push_back({x,z,b.num("width")/2,b.num("depth")/2,b.num("height"),std::cos(yaw),std::sin(yaw),worldLandHeight({center.x+x,0,center.z+z},c)});}
+                return out;
+            }();
+            const auto center=c.regions.at("windchime").center;for(const auto& b:walls){double dx=p.x-center.x-b.x,dz=p.z-center.z-b.z,top=b.base+b.height;if(std::abs(b.co*dx-b.si*dz)<=b.w&&std::abs(b.si*dx+b.co*dz)<=b.d&&top<=p.y+1.4)y=std::max(y,top);}
+
         }
         for(auto&[id,r]:c.regions) {
             double dx=p.x-r.center.x,dz=p.z-r.center.z,h=cityElevation(id);

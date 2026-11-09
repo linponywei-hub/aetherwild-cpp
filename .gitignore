@@ -1,4 +1,4 @@
-build*/
+/build*/
 *.awc
 *.awc.bak
 *.awc.tmp

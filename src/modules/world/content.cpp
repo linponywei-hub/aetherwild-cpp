@@ -100,18 +100,20 @@ void expandContentWorld(Catalog& c){
  installContent(c);
 }
 namespace {
-struct VillagePad {double x,z,w,d,feather;};
+struct VillagePad {double x,z,w,d,feather,height;};
+struct VillageRoad {double x,z,dx,dz,length;};
 struct VillageMound {double x,z,height,radius;};
 struct VillageWall {double x,z,width,depth;};
 struct VillageStream {double x,meander,period,minZ,maxZ,halfWidth,bankWidth,bedY,bridgeDepth,bridgeWidth;};
-struct VillageRelief {Id region;double flat,blend,radius,safe;VillageStream stream;std::vector<VillagePad> pads;std::vector<VillageMound> mounds;std::vector<VillageWall> walls;};
+struct VillageRelief {Id region;double flat,blend,radius,safe;VillageStream stream;std::vector<VillagePad> pads;std::vector<VillageMound> mounds;std::vector<VillageWall> walls;std::vector<VillageRoad> roads;};
 const VillageRelief& villageRelief(){
  static const VillageRelief data=[] {const auto& v=atlasSurface().at("starterVillage");const auto& r=v.at("stream");VillageRelief out;
   out.region=v.str("region");out.flat=v.num("flatRadius");out.blend=v.num("blendMeters");out.radius=v.num("detailRadius");out.safe=v.num("safeRadius");
   out.stream={r.num("x"),r.num("meander"),r.num("period"),r.num("zMin"),r.num("zMax"),r.num("halfWidth"),r.num("bankWidth"),r.num("bedY"),r.num("bridgeHalfDepth"),r.num("bridgeHalfWidth")};
-  for(const auto& p:v.at("foundationPads").arrayItems())out.pads.push_back({p.num("x"),p.num("z"),p.num("halfWidth"),p.num("halfDepth"),p.num("feather")});
+  for(const auto& p:v.at("foundationPads").arrayItems())out.pads.push_back({p.num("x"),p.num("z"),p.num("halfWidth"),p.num("halfDepth"),p.num("feather"),p.num("height")});
   for(const auto& p:v.at("mounds").arrayItems())out.mounds.push_back({p.num("x"),p.num("z"),p.num("height"),p.num("radius")});
   for(const auto& p:v.at("walls").arrayItems())out.walls.push_back({p.num("x"),p.num("z"),p.num("width"),p.num("depth")});
+  for(const auto& road:v.at("roads").arrayItems()){const auto& points=road.arrayItems();for(size_t i=1;i<points.size();i++){double x=points[i-1].arrayItems()[0].number(),z=points[i-1].arrayItems()[1].number(),dx=points[i].arrayItems()[0].number()-x,dz=points[i].arrayItems()[1].number()-z;out.roads.push_back({x,z,dx,dz,dx*dx+dz*dz});}}
   return out;
  }();return data;
 }
@@ -122,12 +124,14 @@ double worldLandHeight(Vec3 p,const Catalog& c){
  const auto& v=villageRelief();double y=atlasHeight(p);
  for(auto&[id,r]:c.regions){if(r.wilderness||id=="tidehaven"||id=="aw_westport"||id=="aw_southmill")continue;double d=std::hypot(p.x-r.center.x,p.z-r.center.z);const bool village=id==v.region;double t=std::clamp((d-(village?v.flat:r.radius+30))/(village?v.blend:1000),0.0,1.0);t=t*t*(3-2*t);y=r.center.y*(1-t)+y*t;}
  const auto center=c.regions.at(v.region).center;double x=p.x-center.x,z=p.z-center.z,distance=std::hypot(x,z);if(distance>=v.radius||distance<=v.safe)return y;
- double mask=villageSmooth(v.safe,v.safe+8,distance)*villageSmooth(5,9,std::min(std::abs(x),std::abs(z)));
+ double roadDistance=1e9;for(const auto& r:v.roads){double t=std::clamp(((x-r.x)*r.dx+(z-r.z)*r.dz)/r.length,0.0,1.0);roadDistance=std::min(roadDistance,std::hypot(x-r.x-t*r.dx,z-r.z-t*r.dz));}
+ double mask=villageSmooth(v.safe,v.safe+8,distance)*(.35+.65*villageSmooth(3,8,roadDistance));
  for(const auto& pad:v.pads){double edge=std::max(std::abs(x-pad.x)-pad.w,std::abs(z-pad.z)-pad.d);mask*=villageSmooth(0,pad.feather,edge);}
  if(mask>0){double rise=0;for(const auto& mound:v.mounds){double dx=(x-mound.x)/mound.radius,dz=(z-mound.z)/mound.radius;rise+=mound.height*std::exp(-(dx*dx+dz*dz)*1.5);}y+=rise*mask;}
  const auto& r=v.stream;double cx=r.x+r.meander*std::sin(z/r.period);const bool bridge=std::abs(z)<=r.bridgeDepth&&std::abs(x-r.x)<=r.bridgeWidth;
  if(z>r.minZ&&z<r.maxZ&&!bridge){double bank=1-villageSmooth(r.halfWidth*.65,r.halfWidth+r.bankWidth,std::abs(x-cx));double end=villageSmooth(r.minZ,r.minZ+15,z)*(1-villageSmooth(r.maxZ-15,r.maxZ,z));y=y*(1-bank*end)+r.bedY*bank*end;}
  if(bridge)y=center.y;
+ for(const auto& pad:v.pads){double edge=std::max(std::abs(x-pad.x)-pad.w,std::abs(z-pad.z)-pad.d);double blend=1-villageSmooth(0,pad.feather,edge);y=y*(1-blend)+(center.y+pad.height)*blend;}
  for(const auto& w:v.walls){double edge=std::max(std::abs(x-w.x)-w.width/2-4,std::abs(z-w.z)-w.depth/2-4);double flat=1-villageSmooth(0,4,edge);y=y*(1-flat)+center.y*flat;}
  return y;
 }

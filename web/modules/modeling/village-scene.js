@@ -1,8 +1,10 @@
+import {loadRepairedHouse,seatHouse} from './house-repair.js';
 import {resolveVillagePose,captureVillagePose} from './village-pose.js';
-import * as T from '/vendor/three.module.js';
-import {applyVillageTransform} from '/modules/modeling/village-model-editor.js';
+import * as T from '../../vendor/three.module.js';
+import {applyVillageTransform} from './village-model-editor.js';
 // Rendering adapters; authoritative simulation remains in C++.
 export const villageSceneMethods = {
+ refreshVillageGround(){if(this.modelEditing)return;for(const g of this.root.children)if(g.userData?.villageGLB&&seatHouse(g,(x,z)=>this.landHeight(x,z)))this.refreshVillageCollision(g);},
  refreshVillageCollision(group){
   const model=group?.userData?.villageGLB,index=group?.userData?.villageIndex;
   if(!model||!index)return;
@@ -16,8 +18,9 @@ export const villageSceneMethods = {
   this.preview.villageCollisionBounds=this.villageCollisionBounds;
  },
  loadVillageHouse(group,index,building){
+  const config=this.catalog.landscape?.starterVillage;if(config?.houseSites){group.userData.villageSite=config.houseSites[index-1];group.userData.villageLegacySite=config.legacyHouseSites?.[index-1];group.userData.villageCenter={x:(config.pixel[0]-633)*64,z:(config.pixel[1]-578)*64};group.userData.layoutSeed=config.layoutSeed;}
   const filename='village_building_'+String(index).padStart(2,'0')+'_lod0.glb';
-  import('/vendor/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync('/assets/models/buildings/village/'+filename)).then(({scene})=>{
+  import('../../vendor/GLTFLoader.js').then(({GLTFLoader})=>loadRepairedHouse(new GLTFLoader(),'/assets/models/buildings/village/'+filename)).then(({scene})=>{
     let savedPose;try{savedPose=resolveVillagePose(index,this.state?.content?.villageLayout||this.catalog.villageLayout)?.pose;}catch(error){group.userData.poseError=error.message;}
     // House 01: infer the base from broad near-planar underside faces.
     // This fixes an incorrectly authored up axis without guessing a 90-degree yaw.
@@ -76,59 +79,10 @@ export const villageSceneMethods = {
     if(!Number.isFinite(size.x)||Math.min(size.x,size.y,size.z)<=0)throw Error('Invalid village house bounds');
     const scale=Math.min(building.width/size.x,building.depth/size.z,building.height/size.y);
     scene.scale.setScalar(scale);
+    if(!savedPose)scene.rotation.y+=building.yaw||0;
     const fitted=new T.Box3().setFromObject(scene);
     const center=fitted.getCenter(new T.Vector3());
     scene.position.set(-center.x,-fitted.min.y,-center.z);
-    // Ground-contact correction: sample the terrain under the entire building footprint.
-    // Using only the center height makes a house float above sloping terrain.
-    const footprint=[[0,0],[-.4,-.4],[-.4,.4],[.4,-.4],[.4,.4]];
-    const heights=footprint.map(([u,v])=>this.landHeight(group.position.x+u*building.width,group.position.z+v*building.depth)).filter(Number.isFinite);
-    // Anchor to the terrain at the house centre, then embed the foundation slightly.
-    // The old minimum-footprint anchor left the entire visible foundation hovering
-    // where the terrain renderer and catalog elevation did not coincide.
-    const centreHeight=this.landHeight(group.position.x,group.position.z);
-    if(Number.isFinite(centreHeight))group.position.y=centreHeight;
-    else if(heights.length)group.position.y=heights[Math.floor(heights.length/2)];
-    // Sink the bottom trim into the terrain rather than allowing a visible air gap.
-    // Clamp to avoid burying short houses or changing their overall proportions.
-    scene.position.y-=Math.min(.45,Math.max(.16,building.height*.065));
-    if(index===1&&!savedPose?.modelPosition){
-      // Recompute the actual underside AFTER correcting the GLB orientation.
-      // Use a low percentile to ignore isolated stray triangles and align
-      // the foundation with the terrain sampled under its whole footprint.
-      group.updateMatrixWorld(true);
-      const levels=[],v=new T.Vector3();
-      scene.traverse(obj=>{
-        if(!obj.isMesh||!obj.geometry?.attributes?.position)return;
-        const attr=obj.geometry.attributes.position;
-        const step=Math.max(1,Math.floor(attr.count/15000));
-        for(let j=0;j<attr.count;j+=step){
-          v.fromBufferAttribute(attr,j).applyMatrix4(obj.matrixWorld);
-          if(Number.isFinite(v.y))levels.push(v.y);
-        }
-      });
-      if(levels.length>100){
-        levels.sort((a,b)=>a-b);
-        const foundationY=levels[Math.floor(levels.length*.02)];
-        // Use the lowest terrain contact point to prevent any floating corner
-        // while keeping the house upright. Do not change the detected rotation.
-        const terrainY=heights.length?Math.min(...heights):group.position.y;
-        // The GLB is not parented to the house group yet, so its sampled
-        // vertex heights are in local space. Convert terrain world height to
-        // the same local space before calculating the correction.
-        const targetLocalY=terrainY-group.position.y-.12;
-        const shift=targetLocalY-foundationY;
-        if(Number.isFinite(shift))scene.position.y+=shift;
-        // House 01 uses a visible foundation above stray underside geometry.
-        // Seat the entire building slightly into the terrain to eliminate
-        // the persistent visible air gap without changing its rotation.
-        scene.position.y-=Math.min(1.25,Math.max(.35,building.height*.12));
-        console.info('[Aetherwild] House 01 ground correction',{
-          foundationLocalY:foundationY,targetLocalY,shift,terrainY,
-          groupY:group.position.y,modelY:scene.position.y
-        });
-      }
-    }
     // GLB rendering repair pass: inconsistent triangle winding and thin
     // overlapping surfaces are common in the imported village assets.
     // Keep mesh positions untouched so manually saved transforms survive.
@@ -158,6 +112,7 @@ export const villageSceneMethods = {
     group.userData.villageGLB=scene;
     group.userData.villageBaseline=captureVillagePose(group,scene);
     try{applyVillageTransform(index,group,scene,this.state?.content?.villageLayout||this.catalog.villageLayout);}catch(error){group.userData.poseError=error.message;}
+    seatHouse(group,(x,z)=>this.landHeight(x,z),{force:true});
     this.villageEditorRefresh?.();
     // Generate cheap wall proxies once, from the lower/middle portion of the GLB.
     // Full mesh bounds include roof overhangs and create invisible walls.
@@ -184,6 +139,7 @@ export const villageSceneMethods = {
     else this.villageCollisionBounds.push(proxy);
     this.preview.villageCollisionBounds=this.villageCollisionBounds;
     // Temporary model identification marker for isolating the remaining cracked house.
+    if(this.villageMarkers===false)return;
     const markerCanvas=document.createElement('canvas');
     markerCanvas.width=256;markerCanvas.height=96;
     const ctx=markerCanvas.getContext('2d');

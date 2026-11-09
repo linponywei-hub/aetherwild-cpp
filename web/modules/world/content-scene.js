@@ -21,7 +21,7 @@ function requestDetail(scene,patch){
  const limit=scene.catalog.worldLimit;const x=Math.max(-limit,Math.min(limit,patch.x+128)),z=Math.max(-limit,Math.min(limit,patch.z+128));
  scene.detailPromise=fetch('/api/terrain',{method:'POST',headers:{'Content-Type':'application/json','X-Aetherwild-Client':'1'},body:JSON.stringify({x,z,detail:true})}).then(r=>{if(!r.ok)throw Error('terrain detail unavailable');return r.json();}).then(data=>{
   if(id!==scene.detailRequest)return;const p=data.terrain;if(p?.side!==129||p.step!==8||p.version!==patch.version||p.x!==patch.x-256||p.z!==patch.z-256||p.heights?.length!==16641||!p.heights.every(Number.isFinite))throw Error('invalid terrain detail');
-  scene.detailCompleteKey=key;scene.terrainHistory.put(p);installTerrainMesh(scene,p);scene.starterLandscape?.rebuild();
+  scene.detailCompleteKey=key;scene.terrainHistory.put(p);installTerrainMesh(scene,p);scene.starterLandscape?.rebuild();scene.refreshVillageGround?.();
  }).catch(()=>{if(id===scene.detailRequest)scene.detailRetryAt=Date.now()+3000;}).finally(()=>{if(id===scene.detailRequest)scene.detailPending=false;});
 }
 export function updateContentScene(scene,state){
@@ -30,7 +30,7 @@ export function updateContentScene(scene,state){
  for(const live of c.npcs||[]){const obj=scene.npcObjects.get(live.id);if(obj)obj.userData.track.push(live.position,state.now);}
  const patch=c.terrainPatch,patchKey=patch?[patch.version,patch.x,patch.z].join(':'):'';
  if(patch&&scene.patchKey!==patchKey){
-  scene.terrainHistory??=new TerrainCache();scene.terrainHistory.put(patch);scene.sceneryCell='';scene.patchKey=patchKey;scene.starterLandscape?.rebuild();
+  scene.terrainHistory??=new TerrainCache();scene.terrainHistory.put(patch);scene.sceneryCell='';scene.patchKey=patchKey;scene.starterLandscape?.rebuild();scene.refreshVillageGround?.();
   if(!scene.terrainPatch||scene.terrainPatch.geometry.attributes.position.count<16641)installTerrainMesh(scene,patch);requestDetail(scene,patch);
  }
  if(patch&&scene.detailCompleteKey!==patchKey&&!scene.detailPending&&Date.now()>=(scene.detailRetryAt||0))requestDetail(scene,patch);

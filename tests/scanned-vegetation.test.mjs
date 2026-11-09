@@ -8,7 +8,7 @@ import {ScannedVegetation} from '../web/modules/world/scanned-vegetation.js';
 const manifest=JSON.parse(readFileSync(new URL('../web/assets/models/environment/sources.json',import.meta.url)));
 test('third-party assets load through the official loader with native buffers and bounded triangles',async()=>{
  // Decode-free image stub: this checks scene/geometry parsing, not GPU rendering.
- globalThis.self={URL:globalThis.URL};globalThis.createImageBitmap=async()=>({width:512,height:512,close(){}});
+ globalThis.Image=class {set src(value){this.height=1;queueMicrotask(()=>this.onload?.());}};globalThis.self={URL:globalThis.URL};globalThis.createImageBitmap=async()=>({width:512,height:512,close(){}});
  for(const asset of manifest.models){
   const raw=readFileSync(new URL('../web'+asset.path,import.meta.url));assert.equal(createHash('sha256').update(raw).digest('hex'),asset.sha256);assert.equal(asset.license,'CC0-1.0');
   const loaded=await new GLTFLoader().parseAsync(raw.buffer.slice(raw.byteOffset,raw.byteOffset+raw.byteLength),'');let count=0;
@@ -24,7 +24,7 @@ test('scanned plant instances normalize translated source geometry and remain on
 });
 test('scan download failure keeps the caller fallback and never signals readiness',async()=>{let ready=false;const plants=new ScannedVegetation(new T.Group(),[],{x:0,z:0},()=>0,{loadModels:async()=>{throw Error('offline');},onReady:()=>ready=true});assert.equal(await plants.promise,false);assert.equal(ready,false);assert.equal(plants.groups.length,0);});
 test('existing house 001 also parses with the official glTF reader without editing the source model',async()=>{
- globalThis.self={URL:globalThis.URL};globalThis.createImageBitmap=async()=>({width:512,height:512,close(){}});
+ globalThis.Image=class {set src(value){this.height=1;queueMicrotask(()=>this.onload?.());}};globalThis.self={URL:globalThis.URL};globalThis.createImageBitmap=async()=>({width:512,height:512,close(){}});
  const raw=readFileSync(new URL('../web/assets/models/buildings/village/village_building_01_lod0.glb',import.meta.url));const loaded=await new GLTFLoader().parseAsync(raw.buffer.slice(raw.byteOffset,raw.byteOffset+raw.byteLength),'');const box=new T.Box3().setFromObject(loaded.scene);assert.ok(Number.isFinite(box.min.y)&&box.max.y>box.min.y);let meshes=0;loaded.scene.traverse(o=>{if(o.isMesh){meshes++;assert.ok(o.geometry.attributes.position.count>0);}});assert.ok(meshes>0);
 });
 test('dense vegetation selects nearby instances under explicit mobile draw budgets',async()=>{

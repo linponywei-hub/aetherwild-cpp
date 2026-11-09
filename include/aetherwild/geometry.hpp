@@ -8,6 +8,7 @@ namespace aw {
         depth {},
         height {};
         std::string style;
+        double yaw{};
     };
     double cityElevation(const Id&);
     Vec3 cityArrival(const RegionDefinition&);

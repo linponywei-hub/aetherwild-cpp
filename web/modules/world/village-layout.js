@@ -1,0 +1,3 @@
+// Native-authored paths shared by ground shading and vegetation exclusions.
+export function roadSegments(config){return (config?.roads||[]).flatMap(points=>points.slice(1).map((b,i)=>[...points[i],...b]));}
+export function roadDistance(x,z,config){const roads=roadSegments(config);if(!roads.length)return Math.min(Math.abs(x+.3*Math.sin(z*.075)),Math.abs(z+.3*Math.sin(x*.075)));let distance=Infinity;for(const [ax,az,bx,bz] of roads){const dx=bx-ax,dz=bz-az,t=Math.max(0,Math.min(1,((x-ax)*dx+(z-az)*dz)/(dx*dx+dz*dz)));distance=Math.min(distance,Math.hypot(x-ax-t*dx,z-az-t*dz));}return distance;}

@@ -237,6 +237,8 @@ using namespace runtime_detail;
                 "height",b.height
             },
             {
+                "yaw",b.yaw
+            }, {
                 "style",b.style
             }
         });
