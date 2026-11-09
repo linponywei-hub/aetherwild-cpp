@@ -6,8 +6,8 @@ import {terrainMaterial,clipTerrainPatch} from './terrain-material.js';
 export function terrainMesh(data,color,landscape){
  const n=data.side,vertices=[],indices=[];for(let z=0;z<n;z++)for(let x=0;x<n;x++)vertices.push(data.x+x*data.step,data.heights[z*n+x],data.z+z*data.step);
  for(let z=0;z<n-1;z++)for(let x=0;x<n-1;x++){const a=z*n+x;indices.push(a,a+n,a+1,a+1,a+n,a+n+1);}
- const colors=[];if(landscape){const palette={plain:'#79925f',water:'#3c889c',snow:'#d7e2e5',volcanic:'#68574b',forest:'#355f3a',desert:'#d5b57e',mesa:'#b78054',marsh:'#6f9468'};for(let i=0;i<vertices.length;i+=3){const kind=surfaceAt(vertices[i],vertices[i+2],landscape),color=new T.Color(palette[kind]||palette.plain);colors.push(color.r,color.g,color.b);}}
- const climate=[];for(let i=0;i<vertices.length;i+=3)climate.push(landscape&&surfaceAt(vertices[i],vertices[i+2],landscape)==='snow'?1:0);
+ const colors=[],climate=[];if(landscape){const palette={plain:'#79925f',water:'#3c889c',snow:'#d7e2e5',volcanic:'#68574b',forest:'#355f3a',desert:'#d5b57e',mesa:'#b78054',marsh:'#6f9468'};for(let i=0;i<vertices.length;i+=3){const kind=surfaceAt(vertices[i],vertices[i+2],landscape),color=new T.Color(palette[kind]||palette.plain);colors.push(color.r,color.g,color.b);climate.push(kind==='snow'?1:0);}}
+ if(!landscape)for(let i=0;i<vertices.length;i+=3)climate.push(0);
  const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geometry.setAttribute('awClimate',new T.Float32BufferAttribute(climate,1));geometry.setIndex(indices);if(colors.length)geometry.setAttribute('color',new T.Float32BufferAttribute(colors,3));geometry.computeVertexNormals();
  const mesh=new T.Mesh(geometry,terrainMaterial({color:landscape?'#ffffff':color,vertexColors:!!landscape,starter:landscape?.starterVillage}));mesh.receiveShadow=true;mesh.userData.fullIndices=indices;return mesh;
 }
