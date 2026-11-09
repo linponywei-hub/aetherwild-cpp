@@ -24,13 +24,20 @@ export function terrainMaterial(options={}) {
    vec3 awRock=mix(vec3(.21,.22,.20),diffuseColor.rgb*.72,.45);
    diffuseColor.rgb=mix(diffuseColor.rgb,awRock,smoothstep(.26,.65,awSlope)*.85);
    diffuseColor.rgb*=.84+.24*awPatch+.12*awFine;
+   // Region-specific microdetail: dark forest litter, dry sandstone and
+   // volcanic scree remain distinct even when their base vertex colors blend.
+   float awDry=clamp((diffuseColor.r-diffuseColor.b)*2.5,0.0,1.0);
+   float awForest=clamp((diffuseColor.g-diffuseColor.r)*3.0,0.0,1.0);
+   float awGrain=awNoise(vec3(awTerrainPosition.xz*.9,12.0));
+   float awStrata=awNoise(vec3(awTerrainPosition.xz*.08,awTerrainPosition.y*.12));
+   diffuseColor.rgb*=1.0+awDry*(awGrain-.5)*.24+awForest*(awStrata-.5)*.15;
    float awIce=awSnow*(1.0-smoothstep(.35,.7,awSlope));
    diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.88,.91,.90),awIce*.65);`);
   shader.fragmentShader=shader.fragmentShader.replace('#include <normal_fragment_maps>',`#include <normal_fragment_maps>
    normal=normalize(normal+vec3(dFdx(awFine),dFdy(awFine),0.0)*.16);`);
   installStarterSurface(shader,starter);
  };
- material.customProgramCacheKey=()=> 'atlas-terrain-material-v5' + (starter?'-starter':'');
+ material.customProgramCacheKey=()=> 'atlas-terrain-material-v6' + (starter?'-starter':'');
  return material;
 }
 
