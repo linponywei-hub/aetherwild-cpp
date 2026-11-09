@@ -16,6 +16,6 @@ export function makeNpcs(view){
   const entity=view.human(n.role,n.id,asset);entity.position.set(n.position.x,n.position.y,n.position.z);
   entity.userData={...entity.userData,kind:'npc',data:n,externalVillager:!!asset};
   view.nameplates.register('npc:'+n.id,entity,n.name+' · '+(({guild:'公會',merchant:'商人',smith:'鍛造',healer:'療癒',cartographer:'製圖'})[n.role]||'居民'),true);
-  view.root.add(entity);view.npcObjects.set(n.id,entity);entity.userData.track=new RemoteTrack();
+  view.root.add(entity);if(asset&&!view.renderer.software&&view.modelAssets.registry[asset])void view.modelAssets.attach(entity,asset);view.npcObjects.set(n.id,entity);entity.userData.track=new RemoteTrack();
  }
 }
