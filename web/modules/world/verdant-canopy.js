@@ -20,6 +20,23 @@ export function addVerdantCanopy(scene) {
     mesh.position.set(x,y,z); mesh.castShadow=true;mesh.receiveShadow=true;
     root.add(mesh); return mesh;
   };
+  // Hollow trunk concept: visible entrance, interior stair flights and lanterns.
+  // This remains visual-only until server-side stair collision is implemented.
+  const bark = new T.MeshStandardMaterial({color:'#58442f',roughness:1,side:T.DoubleSide});
+  const innerRadius=8.5;
+  for(let j=0;j<20;j++) {
+    const theta=j*Math.PI/10;
+    // Leave a wide entrance opening on the south side of the trunk.
+    if(j>=4&&j<=6)continue;
+    const segment=add(new T.CylinderGeometry(11,12,35,32,1,true,theta,Math.PI/10),bark,0,-17,0);
+    segment.userData.decorativeTrunk=true;
+  }
+  for(let level=0;level<28;level++) {
+    const a=level*Math.PI/5, y=-31+level*1.15;
+    const step=add(new T.BoxGeometry(4,.32,2.7),wood,Math.cos(a)*innerRadius,y,Math.sin(a)*innerRadius);
+    step.rotation.y=-a;
+    if(level%5===0)add(new T.BoxGeometry(.5,.65,.5),windowMat,Math.cos(a)*6.8,y+.55,Math.sin(a)*6.8);
+  }
   // Raised decks and walkways are decorative only: never advertise them as
   // navigable until their matching server collision geometry is implemented.
   for (let i=0;i<6;i++) {
