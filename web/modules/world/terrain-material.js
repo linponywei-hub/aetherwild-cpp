@@ -8,9 +8,9 @@ function terrainExternalTextures(){
  if(externalSurfaces)return externalSurfaces;
  const ready={value:0},maps={};let loaded=0,failed=false;
  const sources={
-  grass:'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/terrain/grasslight-big.jpg',
-  stone:'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/brick_diffuse.jpg',
-  lava:'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/lava/lavatile.jpg'
+  grass:'/assets/terrain/grass.jpg',
+  stone:'/assets/terrain/stone.jpg',
+  lava:'/assets/terrain/lava.jpg'
  };
  const loader=new T.TextureLoader();
  for(const [name,url] of Object.entries(sources)){
@@ -88,7 +88,7 @@ export function terrainMaterial(options={}) {
    normal=normalize(normal+vec3(dFdx(awFine),dFdy(awFine),0.0)*.16);`);
   installStarterSurface(shader,starter);
  };
- material.customProgramCacheKey=()=> 'atlas-terrain-material-v9' + (starter?'-starter':'');
+ material.customProgramCacheKey=()=> 'atlas-terrain-material-v10' + (starter?'-starter':'');
  return material;
 }
 
