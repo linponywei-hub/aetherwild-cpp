@@ -1,10 +1,11 @@
 import {starterCenter,starterConfig} from './starter-landscape.js';
+import {addVerdantCanopy} from './verdant-canopy.js';
 import * as T from '../../vendor/three.module.js';
 import {buildingParts,chunkKey,desiredCells} from './city-architecture.js';
 import {batchParts} from '../rendering/mesh-batch.js';
 import {surfaceAt} from './landscape-model.js';
 export class CityScene {
- constructor(scene){this.scene=scene;this.chunks=[];this.glows=[];this.lamps=[];this.scenery=new Map();this.lights=[];this.pending=[];
+ constructor(scene){this.scene=scene;this.verdantCanopy=addVerdantCanopy(scene);this.chunks=[];this.glows=[];this.lamps=[];this.scenery=new Map();this.lights=[];this.pending=[];
   const batches=new Map();let starterHouseIndex=0;for(const b of scene.catalog.buildings){if(!b.style.includes('|'))continue;
    // Hide all old procedural buildings in the starter village. Only the five uploaded GLBs remain.
    if(b.region==='windchime'){
