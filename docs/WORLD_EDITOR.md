@@ -36,3 +36,5 @@ GLB 支援範圍沿用專案 vendor loader；Draco、Meshopt、KTX2 等 required
 第三方操作器：視角使用 Three.js 官方 OrbitControls；移動／旋轉／縮放使用官方 TransformControls。拖曳操作器時會停用相機操作，完成一次拖曳視為一次可復原修改。GLB 使用官方 r160 GLTFLoader。
 
 遊戲內五棟房屋的舊手動設定可在「模型編輯器」匯入 JSON；擁有者可選「保存至伺服器世界設定」，讓其他裝置讀到相同完整姿態。這與獨立編輯器場景草稿不同，仍未發布精確原生 GLB 碰撞。詳見 `STABLE_SCENE_LAYOUT.md`。
+
+新手村 v4 同步顯示村內土丘、淺溪／木板通道、第三方短圍牆及加密植被。移動與圍牆碰撞由 C++ 決定；水面為近景 Water2 視覺效果，並未加入游泳。呈現用地形格改為另行取得的 129×129／8m 格，避免跨格降回粗地形。詳見 `VILLAGE_RELIEF_FLOW.md`。

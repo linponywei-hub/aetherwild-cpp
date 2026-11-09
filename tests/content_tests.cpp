@@ -78,9 +78,10 @@ int main(){try{
  // Terrain v2 preserves reference anchors and shares native authoring tiles with gameplay.
  {GameRuntime full;auto session=create(full);const auto p=full.world().players.at(session.at("player").str("id")).position;
   const auto before=full.exportBackup(session.str("token")).dump();const auto tile=full.terrain(Json{{"x",p.x},{"z",p.z}}).at("terrain");
-  yes(tile.num("side")==65&&tile.num("step")==16&&tile.at("heights").arrayItems().size()==4225);yes(tile.num("version")==3);
+  yes(tile.num("side")==65&&tile.num("step")==8&&tile.at("heights").arrayItems().size()==4225);yes(tile.num("version")==4);
   yes(tile.dump()==full.snapshot(session.str("token")).at("content").at("terrainPatch").dump());yes(before==full.exportBackup(session.str("token")).dump());
-  for(int row:{0,32,64})for(int col:{0,32,64}){double expected=worldLandHeight({tile.num("x")+col*16,0,tile.num("z")+row*16},full.definitions());yes(std::abs(tile.at("heights").arrayItems()[row*65+col].number()-expected)<=.00051);}
+  const auto detail=full.terrain(Json{{"x",p.x},{"z",p.z},{"detail",true}}).at("terrain");yes(detail.num("side")==129&&detail.num("step")==8&&detail.at("heights").arrayItems().size()==16641);yes(before==full.exportBackup(session.str("token")).dump());
+  for(int row:{0,32,64})for(int col:{0,32,64}){double expected=worldLandHeight({tile.num("x")+col*8,0,tile.num("z")+row*8},full.definitions());yes(std::abs(tile.at("heights").arrayItems()[row*65+col].number()-expected)<=.00051);}
   no([&]{full.terrain(Json{{"x",48001},{"z",0}});});no([&]{full.terrain(Json{{"x","wrong"},{"z",0}});});
   double low=1e9,high=-1e9;const auto center=full.definitions().regions.at("darkforest").center;
   for(int z=-4000;z<=4000;z+=500)for(int x=-4000;x<=4000;x+=500)if(std::hypot(x,z)<=4000){double h=atlasHeight({center.x+x,0,center.z+z});yes(std::isfinite(h)&&h>=0);low=std::min(low,h);high=std::max(high,h);}
@@ -88,9 +89,16 @@ int main(){try{
  }
  // The village keeps safe service/building pads, with genuine relief outside them.
  {GameRuntime full;const auto& c=full.definitions();const auto village=c.regions.at("windchime").center;
-  for(int z=-64;z<=64;z+=16)for(int x=-64;x<=64;x+=16)yes(std::abs(worldLandHeight({village.x+x,0,village.z+z},c)-village.y)<.00001);
+  for(int z=-24;z<=24;z+=8)for(int x=-24;x<=24;x+=8)yes(std::abs(worldLandHeight({village.x+x,0,village.z+z},c)-village.y)<.00001);
   double variation=0;for(int d=112;d<=400;d+=16){Vec3 p{village.x+d,0,village.z+80};double h=worldLandHeight(p,c);variation=std::max(variation,std::abs(h-village.y));Vec3 q{p.x+1,0,p.z};yes(std::abs(worldLandHeight(q,c)-h)<1);}
-  yes(variation>.5);for(const auto& b:cityBuildings(c))if(b.region=="windchime")yes(std::abs(b.position.y-village.y)<.00001);
+  yes(variation>.5);int homes=0;for(const auto& b:cityBuildings(c))if(b.region=="windchime"&&b.style.ends_with("|house")&&homes++<5)yes(std::abs(b.position.y-village.y)<.00001);
+ }
+ // Village relief, protected foundations, shallow water and imported wall collision agree.
+ {GameRuntime full;const auto& c=full.definitions();const auto center=c.regions.at("windchime").center;const auto& v=atlasSurface().at("starterVillage");
+  for(const auto& pad:v.at("foundationPads").arrayItems())for(double dx:{-7.,0.,7.})for(double dz:{-7.,0.,7.})yes(std::abs(worldLandHeight({center.x+pad.num("x")+dx,0,center.z+pad.num("z")+dz},c))<.00001);
+  yes(worldLandHeight({center.x-58,0,center.z-48},c)>2);yes(worldLandHeight({center.x+48,0,center.z-62},c)>1.5);
+  const auto& river=v.at("stream");double z=60,x=river.num("x")+river.num("meander")*std::sin(z/river.num("period"));yes(worldLandHeight({center.x+x,0,center.z+z},c)<river.num("waterY"));yes(worldLandHeight({center.x+river.num("x"),0,center.z},c)==0);
+  auto bs=cityBuildings(c);int count=0;for(const auto& b:bs)if(b.style.ends_with("|starter_wall")){count++;yes(blocked({b.position.x,0,b.position.z},bs));yes(!blocked({b.position.x,b.position.y+b.height+.1,b.position.z},bs));yes(std::abs(groundBelow({b.position.x,b.position.y+b.height+.1,b.position.z},c)-(b.position.y+b.height))<.00001);}yes(count==6);
  }
  // A terrain-v2 save relocates only entity heights, keeping progression and homes.
  Id terrainResource,terrainMonster;
@@ -102,13 +110,14 @@ int main(){try{
   std::ofstream(pathFile)<<raw.dump();
  }
  {GameRuntime full(pathFile);const auto& c=full.definitions();const auto p=full.world().players.at(pid);yes(p.coins==1871);yes(std::abs(p.position.y-worldLandHeight(p.position,c))<.00001);yes(!terrainResource.empty()&&!terrainMonster.empty());const auto r=full.world().resources.at(terrainResource);yes(std::abs(r.position.y-worldLandHeight(r.position,c))<.00001);const auto m=full.world().monsters.at(terrainMonster);yes(std::abs(m.position.y-worldLandHeight(m.position,c))<.00001);full.save();}
- {GameRuntime full(pathFile);yes(full.world().players.at(pid).coins==1871);std::ifstream f(pathFile);const auto raw=Json::parse(std::string(std::istreambuf_iterator<char>(f),{}));yes(raw.at("contentState").num("terrainVersion")==3);for(const auto& m:raw.at("monsters").arrayItems())if(m.str("id")==terrainMonster){const auto& p=m.at("home");Vec3 home{p.num("x"),p.num("y"),p.num("z")};yes(std::abs(home.y-worldLandHeight(home,full.definitions()))<.00001);}}
+ {GameRuntime full(pathFile);yes(full.world().players.at(pid).coins==1871);std::ifstream f(pathFile);const auto raw=Json::parse(std::string(std::istreambuf_iterator<char>(f),{}));yes(raw.at("contentState").num("terrainVersion")==4);for(const auto& m:raw.at("monsters").arrayItems())if(m.str("id")==terrainMonster){const auto& p=m.at("home");Vec3 home{p.num("x"),p.num("y"),p.num("z")};yes(std::abs(home.y-worldLandHeight(home,full.definitions()))<.00001);}}
  // World house poses use owner authority, optimistic revisions, receipts and durable state.
  {const auto file=pathFile.parent_path()/"house-poses.json";Id ownerKey;Json pose{{"position",Json::Array{-6272,0,-14592}},{"modelPosition",Json::Array{1.13,-.73,2.08}},{"rotation",Json::Array{.234,-.81,.12}},{"scale",Json::Array{.82,.82,.82}},{"rotationOrder","XYZ"}};
   {GameRuntime full(file);auto owner=create(full),guest=create(full);ownerKey=owner.str("token");Json body{{"type","village_pose_save"},{"index",1},{"revision",0},{"pose",pose},{"request","pose-first"}};
    no([&]{full.command(guest.str("token"),body);});auto saved=full.command(ownerKey,body);yes(saved.at("content").at("villageLayout").num("revision")==1);yes(saved.at("content").at("villageLayout").at("poses").at("1").dump()==pose.dump());full.command(ownerKey,body);yes(full.catalog().at("villageLayout").num("revision")==1);
    auto before=full.exportBackup(ownerKey).dump();body["request"]="stale-pose";no([&]{full.command(ownerKey,body);});yes(before==full.exportBackup(ownerKey).dump());body["revision"]=1;body["request"]="invalid-pose";body["pose"]["scale"]=Json::Array{0,1,1};no([&]{full.command(ownerKey,body);});yes(before==full.exportBackup(ownerKey).dump());full.save();
   }
+  {std::ifstream f(file);auto raw=Json::parse(std::string(std::istreambuf_iterator<char>(f),{}));f.close();raw["contentState"]["terrainVersion"]=3;std::ofstream(file)<<raw.dump();}
   {GameRuntime full(file);yes(full.snapshot(ownerKey).at("content").at("villageLayout").at("poses").at("1").dump()==pose.dump());yes(full.catalog().at("villageLayout").num("revision")==1);}
  }
  std::filesystem::remove_all(pathFile.parent_path());

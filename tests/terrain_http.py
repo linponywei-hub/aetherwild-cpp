@@ -33,7 +33,8 @@ with tempfile.TemporaryDirectory(prefix='aw_terrain_') as folder:
    if r['id']=='aw_underlost':continue
    code,result=request('terrain',{'x':r['position']['x'],'z':r['position']['z']})
    assert code==200 and set(result)=={'ok','terrain','worldLimit'}
-   tile=result['terrain'];assert tile['side']==65 and tile['step']==16 and tile['version']==3 and len(tile['heights'])==4225
+   tile=result['terrain'];assert tile['side']==65 and tile['step']==8 and tile['version']==4 and len(tile['heights'])==4225
+  detail=request('terrain',{'x':-6272,'z':-14592,'detail':True})[1]['terrain'];assert detail['side']==129 and detail['step']==8 and len(detail['heights'])==16641
   assert request('health')[1]['profiles']==initial
   assert request('terrain',{'x':48001,'z':0})[0]==400
   assert request('terrain',{'x':'bad','z':0})[0]==400

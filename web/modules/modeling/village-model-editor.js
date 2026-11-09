@@ -38,7 +38,7 @@ export function installVillageEditor(view){
   }
  };
  const updateList=()=>{const id=select.value;select.replaceChildren();for(const g of houses()){const o=document.createElement('option');o.value=g.userData.villageIndex;o.textContent='房屋 '+String(g.userData.villageIndex).padStart(2,'0');select.append(o)}if(id&&[...select.options].some(o=>o.value===id))select.value=id;refresh()};
- root.querySelector('#aw-edit-toggle').onclick=()=>{body.hidden=!body.hidden;view.modelEditing=!body.hidden;document.body.classList.toggle('aw-model-editing',view.modelEditing);view.keys.clear();if(!body.hidden){document.exitPointerLock?.();updateList()}else attach();};
+ root.querySelector('#aw-edit-toggle').onclick=()=>{body.hidden=!body.hidden;view.modelEditing=!body.hidden;document.body.classList.toggle('aw-model-editing',view.modelEditing);view.keys.clear();view.lookInput?.reset();if(!body.hidden){document.exitPointerLock?.();updateList()}else attach();};
  root.querySelector('#aw-edit-close').onclick=()=>{body.hidden=true;view.modelEditing=false;document.body.classList.remove('aw-model-editing');attach();};
  root.querySelector('#aw-edit-mode').onchange=attach;
  document.addEventListener('keydown',e=>{if(e.code==='Escape'&&!body.hidden){body.hidden=true;view.modelEditing=false;document.body.classList.remove('aw-model-editing');attach();}});
