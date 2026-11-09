@@ -49,13 +49,58 @@ export async function attachVerdantCC0Models(root) {
     placeModel(trees[i%trees.length],root,Math.cos(angle)*49,-32,Math.sin(angle)*49,68+(i%3)*7);
     loaded++;
   }
-  // Keep the doorway clear: the central external crown is suspended above the
-  // existing server-controlled hollow-trunk entrance and spiral stair region.
-  for(let i=0;i<5;i++){
-    const a=i*Math.PI*2/5;
-    placeModel(trees[i%trees.length],root,Math.cos(a)*14,10,Math.sin(a)*14,66);
-    loaded++;
-  }
+  // One dominant imported tree, with the base lifted to preserve the central
+  // entrance. Satellite crowns stay separated so the skyline is not one slab.
+  placeModel(trees[0],root,0,-19,0,82);
+  loaded++;
+  // Imported bridge GLB spans between the individual tree platforms.
+  try {
+    const bridgeSource=await fetchModel('/assets/models/verdant/aetherwild-rope-bridge.glb');
+    const bridgeBase=bridgeSource.scene;
+    for(let i=0;i<6;i++){
+      const a=i*Math.PI/3,b=(i+1)*Math.PI/3;
+      const x=Math.cos(a)*49,z=Math.sin(a)*49;
+      const nx=Math.cos(b)*49,nz=Math.sin(b)*49;
+      const dx=nx-x,dz=nz-z,length=Math.hypot(dx,dz);
+      const bridge=bridgeBase.clone(true);
+      bridge.updateMatrixWorld(true);
+      const box=new T.Box3().setFromObject(bridge);
+      const size=box.getSize(new T.Vector3());
+      const longitudinalX=size.x>=size.z;
+      const factor=length/Math.max(size.x,size.z);
+      bridge.scale.multiplyScalar(factor);
+      bridge.updateMatrixWorld(true);
+      const centered=new T.Box3().setFromObject(bridge);
+      const center=centered.getCenter(new T.Vector3());
+      bridge.position.set(-center.x,-center.y,-center.z);
+      bridge.rotation.y=(longitudinalX?-Math.atan2(dz,dx):Math.atan2(dx,dz));
+      const anchor=new T.Group();
+      anchor.position.set((x+nx)/2,1.2,(z+nz)/2);
+      anchor.add(bridge);root.add(anchor);loaded++;
+    }
+  } catch(error) {console.warn('[Verdant] bridge GLB unavailable',error);}
+  // Imported short bridge segments visually mark the existing server spiral
+  // stairs, without adding a second collision system.
+  try {
+    const stairSource=await fetchModel('/assets/models/verdant/aetherwild-rope-bridge.glb');
+    for(let step=0;step<100;step+=4){
+      const a=Math.PI/2+step*8*Math.PI/100;
+      const stair=stairSource.scene.clone(true);
+      stair.updateMatrixWorld(true);
+      const bounds=new T.Box3().setFromObject(stair);
+      const size=bounds.getSize(new T.Vector3());
+      const scale=3.5/Math.max(size.x,size.z);
+      stair.scale.multiplyScalar(scale);
+      stair.updateMatrixWorld(true);
+      const adjusted=new T.Box3().setFromObject(stair);
+      const center=adjusted.getCenter(new T.Vector3());
+      stair.position.set(-center.x,-center.y,-center.z);
+      stair.rotation.y=-a;
+      const pivot=new T.Group();
+      pivot.position.set(Math.cos(a)*8.5,-32+step*.32,Math.sin(a)*8.5);
+      pivot.add(stair);root.add(pivot);loaded++;
+    }
+  } catch(error) {console.warn('[Verdant] spiral GLB segments unavailable',error);}
   // Reuse the game's already bundled authored GLB buildings, not primitive huts.
   // These are temporary architecture assets until licensed canopy-house GLBs are sourced.
   const houseURLs=Array.from({length:5},(_,i)=>'/assets/models/buildings/village/village_building_'+String(i+1).padStart(2,'0')+'_lod0.glb');
