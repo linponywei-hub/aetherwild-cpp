@@ -56,6 +56,30 @@ export async function attachVerdantCC0Models(root) {
     placeModel(trees[i%trees.length],root,Math.cos(a)*14,10,Math.sin(a)*14,66);
     loaded++;
   }
+  // Reuse the game's already bundled authored GLB buildings, not primitive huts.
+  // These are temporary architecture assets until licensed canopy-house GLBs are sourced.
+  const houseURLs=Array.from({length:5},(_,i)=>'/assets/models/buildings/village/village_building_'+String(i+1).padStart(2,'0')+'_lod0.glb');
+  const houses=await Promise.allSettled(houseURLs.map(fetchModel));
+  const available=houses.filter(r=>r.status==='fulfilled').map(r=>r.value);
+  for(let i=0;i<6&&available.length;i++){
+    const a=i*Math.PI/3;
+    try {
+      const source=available[i%available.length], house=source.scene.clone(true);
+      house.updateMatrixWorld(true);
+      const bounds=new T.Box3().setFromObject(house);
+      const size=bounds.getSize(new T.Vector3());
+      const scale=12/Math.max(size.x,size.y,size.z);
+      if(!Number.isFinite(scale)||scale<=0)continue;
+      house.scale.multiplyScalar(scale);
+      house.updateMatrixWorld(true);
+      const placed=new T.Box3().setFromObject(house);
+      const center=placed.getCenter(new T.Vector3());
+      house.position.set(Math.cos(a)*49-center.x,-placed.min.y,Math.sin(a)*49-center.z);
+      house.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});
+      root.add(house);
+      loaded++;
+    } catch(error) { console.warn('[Verdant] External house placement failed:',error); }
+  }
   root.userData.externalCC0Models=loaded;
   root.userData.assetError=results.some(r=>r.status==='rejected')?'Some GLB variants failed to load':null;
   console.info('[Verdant] External-only 3D tree models loaded:',loaded);
