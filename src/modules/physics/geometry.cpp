@@ -33,7 +33,7 @@ namespace aw {
         if(cityElevation(r.id)==0)return std::hypot(dx,dz)<=r.radius&&std::abs(p.y-r.center.y)<6;
         if(std::abs(p.y-cityElevation(r.id))>4)return false;
         if(std::hypot(dx,dz)<=94) {
-            if(r.id=="verdant"&&std::abs(dx)<8&&dz>30)return false;
+            if(r.id=="verdant"&&std::hypot(dx,dz)<7)return false;
             return true;
         }
         return r.id=="astral"&&std::abs(dx)<7&&dz>=85&&dz<=116;
@@ -60,7 +60,7 @@ namespace aw {
                     if(radial<=2.0&&tread<=p.y+1.4&&tread>y)y=tread;
                 }
             }
-            bool disc=std::hypot(dx,dz)<=94&&!(id=="verdant"&&std::abs(dx)<8&&dz>30);
+            bool disc=std::hypot(dx,dz)<=94&&!(id=="verdant"&&std::hypot(dx,dz)<7);
             bool bridge=id=="astral"&&std::abs(dx)<7&&dz>=85&&dz<=116;
             if((disc||bridge)&&h<=p.y+1.4)y=std::max(y,h);
         }
