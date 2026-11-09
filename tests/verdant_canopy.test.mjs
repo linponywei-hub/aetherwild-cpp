@@ -1,23 +1,16 @@
-// Node.js built-in regression check: run with node tests/verdant_canopy.test.mjs
+import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
-const canopy=readFileSync(new URL('../web/modules/world/verdant-canopy.js',import.meta.url),'utf8');
-const city=readFileSync(new URL('../web/modules/world/city-scene.js',import.meta.url),'utf8');
-const physics=readFileSync(new URL('../src/modules/physics/geometry.cpp',import.meta.url),'utf8');
-const scene=readFileSync(new URL('../web/modules/core/scene.js',import.meta.url),'utf8');
-assert.match(canopy,/export function addVerdantCanopy\(scene\)/);
-assert.match(canopy,/r\.id === 'verdant'/);
-assert.match(canopy,/for \(let i=0;i<6;i\+\+\)/);
-assert.match(canopy,/visualOnly = true/);
-assert.match(canopy,/assetPhase = 'procedural-phase1'/);
-assert.match(city,/import \{addVerdantCanopy\} from '\.\/verdant-canopy\.js'/);
-assert.match(city,/this\.verdantCanopy=addVerdantCanopy\(scene\)/);
-assert.match(scene,/this\.cityScene=new CityScene\(this\)/);
-assert.match(canopy,/for\(let level=0;level<100;level\+\+\)/);
-assert.match(canopy,/Math\.PI\/2\+level\*8\*Math\.PI\/100/);
-assert.match(physics,/for\(int step=0;step<100;step\+\+\)/);
-assert.match(physics,/pi\/2\+step\*\(8\*pi\/100\.0\)/);
-assert.doesNotMatch(physics,/double ramp=\(150-dz\)/);
-assert.match(physics,/bool disc=std::hypot\(dx,dz\)<=94&&\!\(id=="verdant"&&std::hypot\(dx,dz\)<7\)/);
-assert.match(physics,/if\(r.id=="verdant"&&std::hypot\(dx,dz\)<7\)return false/);
-console.log('Verdant canopy source wiring and staircase constants passed; runtime physics still requires testing.');
+import {registerHooks} from 'node:module';
+import * as T from '../web/vendor/three.module.js';
+const webRoot=new URL('../web/',import.meta.url);
+registerHooks({resolve(s,c,n){if(s.startsWith('/')&&c.parentURL?.startsWith(webRoot.href))return n(new URL(s.slice(1),webRoot).href,c);return n(s,c);}});
+const {addVerdantCanopy}=await import('../web/modules/world/verdant-canopy.js');
+test('external Verdant visual root preserves its city anchor without recreating removed floating bridges',()=>{
+ const scene={root:new T.Group(),catalog:{regions:[{id:'verdant',position:{x:100,z:200},elevation:32}]}};
+ const root=addVerdantCanopy(scene);assert.equal(root.parent,scene.root);
+ assert.deepEqual(root.position.toArray(),[100,32,200]);assert.equal(root.userData.visualOnly,true);assert.equal(root.userData.assetPhase,'external-only');
+ assert.equal(root.children.length,0,'obsolete procedural bridge/tree/stair meshes must stay removed');
+});
+test('Verdant root does not create objects when the region is absent',()=>{
+ const scene={root:new T.Group(),catalog:{regions:[]}};assert.equal(addVerdantCanopy(scene),null);assert.equal(scene.root.children.length,0);
+});
