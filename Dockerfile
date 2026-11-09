@@ -7,6 +7,8 @@ COPY src/ src/
 COPY apps/ apps/
 COPY tests/ tests/
 COPY tools/build.py tools/build.py
+COPY tools/install_terrain_textures.py tools/install_terrain_textures.py
+RUN python3 tools/install_terrain_textures.py
 ENV AW_BUILD_JOBS=1
 RUN python3 tools/build.py
 RUN python3 tests/http_runner.py && python3 tests/content_http.py && python3 tests/cloud_access.py && python3 tests/bow_http.py build/aetherwild_workstation
@@ -18,6 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends util-linux && r
 COPY --from=builder /runtime-libs/ /opt/aetherwild/lib/
 COPY --from=builder /src/build/aetherwild_workstation /app/aetherwild_workstation
 COPY web/ /app/web/
+COPY --from=builder /src/web/assets/terrain/ /app/web/assets/terrain/
 COPY assets/reference/ /app/assets/reference/
 RUN mkdir -p /app/runtime-data && chown -R 10001:10001 /app/runtime-data
 ENV LD_LIBRARY_PATH=/opt/aetherwild/lib AETHERWILD_PUBLIC=1 AETHERWILD_DATA_DIR=/app/runtime-data
