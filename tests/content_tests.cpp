@@ -8,6 +8,23 @@ Json cmd(GameRuntime& g,const Json& s,const std::string& type,Json extra=Json::o
 Json create(GameRuntime&g,const std::string& job="warrior"){return g.createSession(Json{{"name","內容測試"},{"profession",job}});}
 }
 int main(){try{
+ // Village roaming is server-owned, continuous, grounded, and pauses under a conversation lease.
+ {GameRuntime village;auto s=create(village),second=create(village);auto key=s.str("token"),pid=s.at("player").str("id");
+  auto home=village.definitions().npcs.at("windchime_guild").position;
+  village.world().players.at(pid).position=home;village.world().players.at(pid).position.z+=2;
+  auto talk=cmd(village,s,"npc_talk",Json{{"target","windchime_guild"}});bool talking=false;
+  for(const auto& n:talk.at("content").at("npcs").arrayItems())if(n.str("id")=="windchime_guild")talking=n.str("mode")=="talk";yes(talking);
+  for(int i=0;i<60;i++)village.tick(.05);yes(distance(home,village.definitions().npcs.at("windchime_guild").position)<.001);
+  no([&]{cmd(village,second,"npc_talk",Json{{"target","windchime_guild"}});});
+  auto old=village.exportBackup(key).dump();no([&]{cmd(village,s,"npc_chat",Json{{"target","windchime_guild"},{"topic","invented"}});});yes(old==village.exportBackup(key).dump());
+  auto profile=contentEntry("profiles","windchime_guild");auto chat=cmd(village,s,"npc_chat",Json{{"target","windchime_guild"},{"topic",profile->at("conversation_topics").arrayItems()[0]}});yes(chat.at("content").at("relations").at("windchime_guild").str("dialogue").find("名冊")!=std::string::npos);
+  cmd(village,s,"npc_leave",Json{{"target","windchime_guild"}});bool moved=false;auto prev=home;
+  for(int i=0;i<400;i++){village.tick(.05);auto next=village.definitions().npcs.at("windchime_guild").position;yes(distance(prev,next)<=.043);yes(std::abs(next.y-groundBelow(next,village.definitions()))<.001);yes(!blocked(next,cityBuildings(village.definitions())));moved=moved||distance(home,next)>.2;prev=next;}yes(moved);
+  village.world().players.at(pid).position=prev;cmd(village,s,"npc_talk",Json{{"target","windchime_guild"}});
+  village.world().players.at(pid).position.x+=25;village.tick(.05);
+  const auto ended=village.snapshot(key);for(const auto& n:ended.at("content").at("npcs").arrayItems())if(n.str("id")=="windchime_guild")yes(n.str("mode")!="talk");
+  old=village.exportBackup(key).dump();no([&]{cmd(village,s,"npc_talk",Json{{"target","windchime_guild"}});});yes(old==village.exportBackup(key).dump());
+ }
  auto c=makeCatalog();installContent(c);yes(c.classes.size()==46);yes(c.skills.size()>=285);yes(c.npcs.size()>=165);
  yes(c.classes.at("aw_class_tank").weapon==WeaponKind::ShieldBlade);yes(c.classes.at("aw_class_assassin").weapon==WeaponKind::Daggers);
  yes(c.items.at(startingWeapon(c,"aw_class_assassin")).weapon==WeaponKind::Daggers);

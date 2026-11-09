@@ -1,1 +1,1 @@
-Place TRIPO-001.glb here. The 8.2 MB binary is not committed by the text-only GitHub editing flow. Keep the source GLB and do not replace it with a screenshot. The model catalog refers to /assets/models/characters/TRIPO-001.glb.
+New village NPCs use the local, skinned Quaternius models under villagers/. See villagers/PROVENANCE.json for source, license and checksums. TRIPO-001 is removed from the runtime and asset bundle.

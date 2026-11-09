@@ -1,28 +1,51 @@
 #include "aetherwild/runtime.hpp"
 namespace aw {
-void GameRuntime::tickNpcs(){
+void GameRuntime::tickNpcs(double dt){
+ if(dt<=0)return;
+ if(!contentState_.contains("npcHomes"))contentState_["npcHomes"]=Json::object();
+ if(!contentState_.contains("npcPoses"))contentState_["npcPoses"]=Json::object();
  for(auto&[id,n]:catalog_.npcs){
-  bool near=false;for(auto&[pid,p]:world_.players)if(p.scene=="world"&&distance(p.position,n.position)<180){near=true;break;}
+  bool near=false;for(const auto&[pid,p]:world_.players)if(p.scene=="world"&&distance(p.position,n.position)<180){near=true;break;}
   if(!near)continue;
-  if(!contentState_.contains("npcHomes"))contentState_["npcHomes"]=Json::object();
   if(!contentState_["npcHomes"].contains(id))contentState_["npcHomes"][id]=vec(n.position);
   auto profile=contentEntry("profiles",id);if(!profile)continue;
-  if(contentState_.at("life").contains(id)&&contentState_.at("life").at(id).num("until")>world_.now){
-   if(contentState_.at("life").at(id).str("mode")=="retreat"){auto next=n.position;next.x+=1;if(!blocked(next,buildings_)&&contentAllowed(next))n.position=next;}continue;
+  auto& life=contentState_["life"][id];if(!std::holds_alternative<Json::Object>(life.value))life=Json::object();
+  auto home=unvec(contentState_.at("npcHomes").at(id));auto goal=home;
+  double hour=std::fmod(world_.now/60+9,24);
+  std::string mode=hour<6||hour>=22?"rest":hour>=18?"social":"work";
+  life["speed"]=0;
+  // A short server lease pauses locomotion for everyone; stale/disconnected clients expire.
+  auto talker=world_.players.find(life.str("talker"));
+  if(life.num("talkUntil")>world_.now&&talker!=world_.players.end()&&talker->second.scene=="world"&&talker->second.vitals.alive()&&distance(talker->second.position,n.position)<=8&&clearSight(talker->second.position,n.position,buildings_)){
+   life["mode"]="talk";life["yaw"]=std::atan2(talker->second.position.x-n.position.x,talker->second.position.z-n.position.z);continue;
   }
-  double hour=std::fmod(world_.now/60+9,24);std::string mode=hour<6||hour>=22?"rest":hour>=18?(profile->at("personality").num("warmth")>.55?"social":"personal_work"):"work";
-  {
-   auto home=unvec(contentState_.at("npcHomes").at(id));auto goal=home;
-   if(mode=="social"||mode=="personal_work"){goal.x+=std::sin(world_.now/15+id.size())*4;goal.z+=std::cos(world_.now/15+id.size())*4;}
-   auto d=distance(n.position,goal);if(d>.1){auto step=n.position;step.x+=(goal.x-step.x)/d*std::min(1.0,d);step.z+=(goal.z-step.z)/d*std::min(1.0,d);if(!blocked(step,buildings_)&&contentAllowed(step))n.position=step;}
+  bool retreat=life.str("mode")=="retreat"&&life.num("until")>world_.now;
+  if(retreat){mode="retreat";goal.x+=5;}
+  else if(n.region=="windchime"){
+   // Short local circuits keep services reachable. Each resident has an independent phase.
+   unsigned seed=0;for(unsigned char c:id)seed=seed*31+c;
+   int node=static_cast<int>(life.num("route"))%4;
+   double radius=n.role=="resident"?3.2:1.5;
+   const double xs[]={0,1,0,-1},zs[]={0,0,1,0};
+   goal.x+=xs[node]*radius;goal.z+=zs[node]*radius;
+   if(mode=="rest")goal=home;
+   else if(distance(n.position,goal)<.12){
+    if(life.num("pauseUntil")<=0)life["pauseUntil"]=world_.now+2+seed%4;
+    if(world_.now>=life.num("pauseUntil")){life["route"]=(node+1)%4;life["pauseUntil"]=0;}
+   }
+  }else if(mode=="social"){goal.x+=std::sin(world_.now/15+id.size())*4;goal.z+=std::cos(world_.now/15+id.size())*4;}
+  double d=std::hypot(goal.x-n.position.x,goal.z-n.position.z);
+  if(d>.12&&(mode=="rest"||retreat||life.num("pauseUntil")<=world_.now)){
+   auto step=n.position;double speed=retreat?1.5:.85,amount=std::min(speed*dt,d);
+   step.x+=(goal.x-step.x)/d*amount;step.z+=(goal.z-step.z)/d*amount;step.y=groundBelow(step,catalog_);
+   if(std::abs(step.y-n.position.y)<.35&&!blocked(step,buildings_)&&clearSight(n.position,step,buildings_)&&contentAllowed(step)){
+    life["yaw"]=std::atan2(step.x-n.position.x,step.z-n.position.z);life["speed"]=amount/dt;n.position=step;
+   }else{life["route"]=(static_cast<int>(life.num("route"))+1)%4;life["pauseUntil"]=world_.now+2;}
   }
-  if(!contentState_.contains("npcPoses"))contentState_["npcPoses"]=Json::object();
-  contentState_["npcPoses"][id]=vec(n.position);
-  contentState_["life"][id]=Json{{"mode",mode},{"until",world_.now+1}};
+  life["mode"]=mode;contentState_["npcPoses"][id]=vec(n.position);
  }
 }
 }
-
 namespace aw {
 void GameRuntime::positionNpcs(){
  std::map<Id,int> residents;for(auto&[id,n]:catalog_.npcs){

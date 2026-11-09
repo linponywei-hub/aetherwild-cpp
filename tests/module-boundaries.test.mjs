@@ -26,5 +26,5 @@ test('extracted building collision adapter still updates movement prediction aft
 });
 test('NPC module retains identity, world anchors, nameplates and remote tracks',()=>{
  const registered=[];const view={catalog:{npcs:[{id:'guild',name:'艾琳',role:'guild',region:'windchime',position:{x:4,y:2,z:6}}]},root:new T.Group(),npcObjects:new Map(),human:()=>new T.Group(),nameplates:{register:(...args)=>registered.push(args)}};
- makeNpcs(view);const npc=view.npcObjects.get('guild');assert.deepEqual(npc.position.toArray(),[4,2,6]);assert.equal(npc.userData.data.id,'guild');assert.equal(npc.userData.eileenTest,true);assert.ok(npc.userData.track);assert.equal(registered[0][0],'npc:guild');
+ makeNpcs(view);const npc=view.npcObjects.get('guild');assert.deepEqual(npc.position.toArray(),[4,2,6]);assert.equal(npc.userData.data.id,'guild');assert.equal(npc.userData.externalVillager,true);assert.ok(npc.userData.track);assert.equal(registered[0][0],'npc:guild');
 });

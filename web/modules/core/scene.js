@@ -1,3 +1,4 @@
+import {updateNpcVisual} from '/modules/npc/animation.js';
 import {LookInput,lookAngles} from './look-input.js';
 import {syncVillageLayout} from '/modules/modeling/village-model-editor.js';
 import {StarterLandscape} from '/modules/world/starter-landscape.js';
@@ -138,40 +139,9 @@ export class RealmScene {
      }
 
    }
-   for(const npc of this.npcObjects.values()){if(npc.userData.eileenTest){
-        const player=this.state?.player;
-        const near=player?.scene==='world'&&Math.hypot(player.position.x-npc.position.x,player.position.z-npc.position.z)<5;
-         const model=npc.userData.modelInstance;
-         const walking=!near&&!!model&&!!npc.userData.modelClips?.some(c=>/walk|run|行走/i.test(c.name));
-         if(model){const phase=this.time*.48;const tx=walking?Math.sin(phase)*1.1:0;const tz=walking?Math.cos(phase)*.65-.65:0;const blend=Math.min(1,dt*2.5);model.position.x+=(tx-model.position.x)*blend;model.position.z+=(tz-model.position.z)*blend;}
-        if(near){
-          const desired=Math.atan2(player.position.x-npc.position.x,player.position.z-npc.position.z);
-          let delta=Math.atan2(Math.sin(desired-npc.rotation.y),Math.cos(desired-npc.rotation.y));
-          npc.rotation.y+=Math.max(-dt*2.4,Math.min(dt*2.4,delta));
-        }else{
-          const delta=Math.atan2(Math.sin(-npc.rotation.y),Math.cos(-npc.rotation.y));
-          npc.rotation.y+=Math.max(-dt*.8,Math.min(dt*.8,delta));
-        }
-        const mixer=npc.userData.modelMixer,clips=npc.userData.modelClips||[];
-        if(mixer){
-          const selected=near?clips.find(c=>/talk|speak|greet|交談/i.test(c.name)):(walking?clips.find(c=>/walk|run|行走/i.test(c.name)):null);
-          const next=selected||clips.find(c=>/idle|breathe|待機/i.test(c.name))||clips[0];
-          if(next&&npc.userData.activeClip!==next){
-            const previous=npc.userData.activeClip;
-            if(previous)mixer.clipAction(previous).fadeOut(.2);
-            mixer.clipAction(next).reset().fadeIn(.2).play();
-            npc.userData.activeClip=next;
-          }
-          mixer.update(dt);
-          // Idle/Walk/Talk clips omit upper-arm rotations: restore relaxed pose each frame.
-          for (const shoulder of npc.userData.eileenShoulders || []) {
-            shoulder.bone.rotation.z = shoulder.angle;
-          }
+   for(const a of [...this.arrowTrails]){a.life-=dt;a.g.position.addScaledVector(a.direction,dt*80);if(a.life<=0){this.world.remove(a.g);a.g.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});this.arrowTrails.splice(this.arrowTrails.indexOf(a),1);}}if(this.state){let p=this.state.player;this.remoteClock=advanceRemoteClock(this.remoteClock,this.state.now+Math.min(.25,performance.now()/1000-this.remoteSnapshotAt),dt);const rate=1-Math.exp(-dt*18);const k=this.keys,input={x:Number(k.has('KeyD')||k.has('ArrowRight'))-Number(k.has('KeyA')||k.has('ArrowLeft')),z:Number(k.has('KeyW')||k.has('ArrowUp'))-Number(k.has('KeyS')||k.has('ArrowDown')),yaw:this.yaw,sprint:k.has('ShiftLeft')};const predicted=this.preview.advance(dt,performance.now()/1000,input);const pos=new T.Vector3(predicted?.x??p.position.x,(predicted?.y??p.position.y)+1.68,predicted?.z??p.position.z);if(predicted)this.camera.position.copy(pos);else this.camera.position.lerp(pos,rate);this.camera.rotation.set(this.pitch,this.yaw,0);this.cb.heading?.(this.yaw);this.environment.update(p.position,p.scene==='world');this.starterLandscape.features?.update(this.camera.position);this.starterLandscape.scanned?.updateFocus?.(p.position);this.sky.position.copy(this.camera.position);this.cityScene.update(p.position,1-(this.lighting?.daylight||0),p.scene==='world');for(const g of this.entities.values()){let desired=g.userData.desired;if(desired){let moving=g.position.distanceTo(desired)>.03;const pose=g.userData.track?.at(this.remoteClock-.15,.1);if(pose)g.position.set(pose.x,pose.y,pose.z);else g.position.lerp(desired,rate);if(g.userData.desiredYaw!==undefined){const delta=Math.atan2(Math.sin(g.userData.desiredYaw-g.rotation.y),Math.cos(g.userData.desiredYaw-g.rotation.y));g.rotation.y+=delta*rate;}if(g.userData.legs)g.userData.legs.forEach((l,i)=>l.rotation.x=moving?Math.sin(this.time*10+i*Math.PI)*.4:0);}if(g.userData.kind==='objective')g.children[0].rotation.y=this.time;}
+ for(const npc of this.npcObjects.values())updateNpcVisual(npc,this.remoteClock-.15,dt,this.time);
 
-        }
-        if(model&&!mixer){model.position.y=Math.sin(this.time*1.65)*.025;model.rotation.y=Math.sin(this.time*.55)*.07;}
-      }}for(const a of [...this.arrowTrails]){a.life-=dt;a.g.position.addScaledVector(a.direction,dt*80);if(a.life<=0){this.world.remove(a.g);a.g.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});this.arrowTrails.splice(this.arrowTrails.indexOf(a),1);}}if(this.state){let p=this.state.player;this.remoteClock=advanceRemoteClock(this.remoteClock,this.state.now+Math.min(.25,performance.now()/1000-this.remoteSnapshotAt),dt);const rate=1-Math.exp(-dt*18);const k=this.keys,input={x:Number(k.has('KeyD')||k.has('ArrowRight'))-Number(k.has('KeyA')||k.has('ArrowLeft')),z:Number(k.has('KeyW')||k.has('ArrowUp'))-Number(k.has('KeyS')||k.has('ArrowDown')),yaw:this.yaw,sprint:k.has('ShiftLeft')};const predicted=this.preview.advance(dt,performance.now()/1000,input);const pos=new T.Vector3(predicted?.x??p.position.x,(predicted?.y??p.position.y)+1.68,predicted?.z??p.position.z);if(predicted)this.camera.position.copy(pos);else this.camera.position.lerp(pos,rate);this.camera.rotation.set(this.pitch,this.yaw,0);this.cb.heading?.(this.yaw);this.environment.update(p.position,p.scene==='world');this.starterLandscape.features?.update(this.camera.position);this.starterLandscape.scanned?.updateFocus?.(p.position);this.sky.position.copy(this.camera.position);this.cityScene.update(p.position,1-(this.lighting?.daylight||0),p.scene==='world');for(const g of this.entities.values()){let desired=g.userData.desired;if(desired){let moving=g.position.distanceTo(desired)>.03;const pose=g.userData.track?.at(this.remoteClock-.15,.1);if(pose)g.position.set(pose.x,pose.y,pose.z);else g.position.lerp(desired,rate);if(g.userData.desiredYaw!==undefined){const delta=Math.atan2(Math.sin(g.userData.desiredYaw-g.rotation.y),Math.cos(g.userData.desiredYaw-g.rotation.y));g.rotation.y+=delta*rate;}if(g.userData.legs)g.userData.legs.forEach((l,i)=>l.rotation.x=moving?Math.sin(this.time*10+i*Math.PI)*.4:0);}if(g.userData.kind==='objective')g.children[0].rotation.y=this.time;}
- for(const npc of this.npcObjects.values()){const pose=npc.userData.track?.at(this.remoteClock-1.05);if(pose){const dx=pose.x-npc.position.x,dz=pose.z-npc.position.z;if(Math.hypot(dx,dz)>.001)npc.rotation.y=Math.atan2(dx,dz);npc.position.set(pose.x,pose.y,pose.z);for(const [i,leg]of (npc.userData.legs||[]).entries())leg.rotation.x=Math.hypot(dx,dz)>.001?Math.sin(this.time*7+i*Math.PI)*.12:0;}}
  const walking=this.keys.size>0&&document.pointerLockElement===this.canvas;this.hand.position.y=-.48+(walking?Math.sin(this.time*9)*.015:Math.sin(this.time*1.4)*.009);const feedback=this.feedback.sample(performance.now()/1000);this.swing=Math.max(0,this.swing-(feedback.hold?0:dt*5));this.hand.position.z=-.65+Math.sin(this.swing*Math.PI)*.12+feedback.recoil*.045;this.hand.rotation.x=-Math.sin(this.swing*Math.PI)*1.35-feedback.recoil*.12;this.hand.rotation.z=(this.weapon==='warrior'?-.25:0)-Math.sin(this.swing*Math.PI)*.6; if(this.weaponKind==='daggers'){this.hand.position.set(0,0,0);this.hand.rotation.set(0,0,0);const poses=weaponPose('daggers',this.camera.aspect);for(const g of this.daggers){const side=g.userData.side,pose=side<0?poses.left:poses.right;g.position.set(...pose);g.position.y+=(walking?Math.sin(this.time*9+side)*.009:0)+Math.sin(this.swing*Math.PI)*.07;g.rotation.set(-.3-Math.sin(this.swing*Math.PI)*.5,side*.12,side*-.2);}}
  if(this.bowString){const charge=this.bowDrawing?Math.min(1,(performance.now()/1000-this.bowStarted)/1.2):0;this.bowString.geometry.attributes.position.setXYZ(1,0,.18,.28*charge);this.bowString.geometry.attributes.position.needsUpdate=true;this.bowArrow.position.z=.28*charge;this.hand.position.x=.32-.14*charge;this.hand.position.y=-.38+.07*charge;this.hand.rotation.x=-.06*charge+.08*Math.sin(this.swing*Math.PI);this.hand.rotation.z=-.04*charge-.05*Math.sin(this.swing*Math.PI);this.bowArrow.visible=this.bowDrawing||this.swing===0;}
 if(this.time-(this.lastCull||0)>.2){this.lastCull=this.time;for(const o of this.root.children){if(o===this.sky||o===this.globalTerrain||o===this.contentRoot||o===this.contentProps||o===this.capital)continue;const radius=o.userData.cullRadius||0;o.visible=Math.hypot(o.position.x-p.position.x,o.position.z-p.position.z)<this.renderDistance+radius;}}this.aim();}else{this.camera.position.set(7,3.4,41);this.camera.lookAt(0,2,13);this.sun.target.position.set(0,0,24);this.environment.update({x:0,y:0,z:24},true);}renderFrame(this.renderer,this.world,this.camera,this.weaponScene,this.weaponCamera);this.nameplates.update(this.camera,this.state?.player.scene==='world');this.renderedFrames=(this.renderedFrames||0)+1;const now=performance.now();this.fpsSince??=now;if(now-this.fpsSince>=1000){this.fps=this.renderedFrames*1000/(now-this.fpsSince);if(this.renderer.software)this.renderer.drawDistance=this.fps<20?140:this.fps<27?200:Math.min(280,this.renderDistance);this.renderedFrames=0;this.fpsSince=now;}}
