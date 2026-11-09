@@ -29,12 +29,13 @@ export function terrainMaterial(options={}) {
  const material=new T.MeshStandardMaterial({roughness:.94,...surfaceOptions});
  material.extensions={...(material.extensions||{}),derivatives:true};
  material.onBeforeCompile=shader=>{
-  if(external){shader.uniforms.awExternalReady=external.ready;for(const [name,map] of Object.entries(external.maps))shader.uniforms['awExternal'+name[0].toUpperCase()+name.slice(1)]={value:map};}
-  shader.vertexShader='attribute float awClimate; attribute float awBiome; varying float awBiomeType; varying float awSnow; varying float awBiomeType; varying vec3 awTerrainPosition; varying vec3 awTerrainNormal;\n'+shader.vertexShader;
+  shader.uniforms.awExternalReady=external?.ready||{value:0};
+  for(const name of ['grass','stone','lava'])shader.uniforms['awExternal'+name[0].toUpperCase()+name.slice(1)]={value:external?.maps[name]||null};
+  shader.vertexShader='attribute float awClimate; attribute float awBiome; varying float awBiomeType; varying float awSnow; varying vec3 awTerrainPosition; varying vec3 awTerrainNormal;\n'+shader.vertexShader;
   shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>',`#include <begin_vertex>
    awBiomeType=awBiome;awTerrainPosition=(modelMatrix*vec4(position,1.0)).xyz;
    awTerrainNormal=normalize(mat3(modelMatrix)*normal);awSnow=awClimate;`);
-  shader.fragmentShader=`uniform float awExternalReady; uniform sampler2D awExternalGrass; uniform sampler2D awExternalStone; uniform sampler2D awExternalLava; varying float awSnow; varying vec3 awTerrainPosition; varying vec3 awTerrainNormal;
+  shader.fragmentShader=`uniform float awExternalReady; uniform sampler2D awExternalGrass; uniform sampler2D awExternalStone; uniform sampler2D awExternalLava; varying float awSnow; varying float awBiomeType; varying vec3 awTerrainPosition; varying vec3 awTerrainNormal;
    float awHash(vec3 p){return fract(sin(dot(p,vec3(127.1,311.7,74.7)))*43758.5453);}
    float awNoise(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);
     return mix(mix(mix(awHash(i),awHash(i+vec3(1,0,0)),f.x),mix(awHash(i+vec3(0,1,0)),awHash(i+vec3(1,1,0)),f.x),f.y),
@@ -87,7 +88,7 @@ export function terrainMaterial(options={}) {
    normal=normalize(normal+vec3(dFdx(awFine),dFdy(awFine),0.0)*.16);`);
   installStarterSurface(shader,starter);
  };
- material.customProgramCacheKey=()=> 'atlas-terrain-material-v8' + (starter?'-starter':'');
+ material.customProgramCacheKey=()=> 'atlas-terrain-material-v9' + (starter?'-starter':'');
  return material;
 }
 
