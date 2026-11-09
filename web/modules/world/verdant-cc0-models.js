@@ -46,39 +46,16 @@ export async function attachVerdantCC0Models(root) {
   let loaded=0;
   for(let i=0;i<4;i++){
     const angle=i*Math.PI/2;
-    placeModel(trees[i%trees.length],root,Math.cos(angle)*49,-32,Math.sin(angle)*49,68+(i%3)*7);
+    placeModel(trees[i%trees.length],root,Math.cos(angle)*49,-32,Math.sin(angle)*49,37+(i%3)*3);
     loaded++;
   }
   // One dominant imported tree, with the base lifted to preserve the central
   // entrance. Satellite crowns stay separated so the skyline is not one slab.
-  placeModel(trees[0],root,0,-19,0,82);
+  placeModel(trees[0],root,0,-28,0,52);
   loaded++;
-  // Imported bridge GLB spans between the individual tree platforms.
-  try {
-    const bridgeSource=await fetchModel('/assets/models/verdant/aetherwild-rope-bridge.glb');
-    const bridgeBase=bridgeSource.scene;
-    for(let i=0;i<4;i++){
-      const a=i*Math.PI/2,b=(i+1)*Math.PI/2;
-      const x=Math.cos(a)*49,z=Math.sin(a)*49;
-      const nx=Math.cos(b)*49,nz=Math.sin(b)*49;
-      const dx=nx-x,dz=nz-z,length=Math.hypot(dx,dz);
-      const bridge=bridgeBase.clone(true);
-      bridge.updateMatrixWorld(true);
-      const box=new T.Box3().setFromObject(bridge);
-      const size=box.getSize(new T.Vector3());
-      const longitudinalX=size.x>=size.z;
-      const factor=length/Math.max(size.x,size.z);
-      bridge.scale.multiplyScalar(factor);
-      bridge.updateMatrixWorld(true);
-      const centered=new T.Box3().setFromObject(bridge);
-      const center=centered.getCenter(new T.Vector3());
-      bridge.position.set(-center.x,-center.y,-center.z);
-      bridge.rotation.y=(longitudinalX?-Math.atan2(dz,dx):Math.atan2(dx,dz));
-      const anchor=new T.Group();
-      anchor.position.set((x+nx)/2,1.2,(z+nz)/2);
-      anchor.add(bridge);root.add(anchor);loaded++;
-    }
-  } catch(error) {console.warn('[Verdant] bridge GLB unavailable',error);}
+  // Bridges are not placed until the GLB's axis, deck height and endpoint
+  // transforms are validated. Previous bridge clones floated through the air.
+  root.userData.bridgesPendingAlignment=true;
   // Performance: do not clone the bridge GLB dozens of times for every stair.
   // A dedicated low-draw-call stair asset will replace this in a later pass.
   // Reuse the game's already bundled authored GLB buildings, not primitive huts.
