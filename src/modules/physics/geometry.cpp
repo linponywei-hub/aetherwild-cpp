@@ -53,7 +53,7 @@ namespace aw {
                 // flight cannot teleport a character through the tree.
                 constexpr double pi=3.14159265358979323846;
                 for(int step=0;step<100;step++) {
-                    const double angle=step*(8*pi/100.0);
+                    const double angle=pi/2+step*(8*pi/100.0);
                     const double sx=std::cos(angle)*8.5,sz=std::sin(angle)*8.5;
                     const double tread=r.center.y+step*.32;
                     const double radial=std::hypot(dx-sx,dz-sz);
