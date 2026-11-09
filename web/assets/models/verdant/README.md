@@ -1,11 +1,9 @@
-# 翠冠城外部 GLB 檔案放置說明
+# 翠冠城模型
 
-目前已完成 Three.js 的可選模型載入與場景接線，但**尚未取得二進位模型**。
+目前已加入兩個**本專案原創的低面數 GLB 佔位模型**，可直接由場景載入：
+- `aetherwild-tree.glb`：樹冠裝飾模型
+- `aetherwild-rope-bridge.glb`：木板及繩索吊橋外觀
 
-需放置：
-- `quaternius-tree.glb`：由 Quaternius Stylized Nature MegaKit 的 CC0 樹木 glTF 轉換，僅作樹冠裝飾。來源：https://quaternius.com/packs/stylizednaturemegakit
-- `innerscene-rope-bridge.glb`：Innerscene Rope Bridge，CC0。來源：https://www.innerscene.com/tools/library/3d-parts/rope-bridge-4cb20765
+這兩個檔案**不是** Quaternius 或 Innerscene 下載素材；不得誤標外部作者。未來可在核對授權及實際模型檔後，以外部 CC0 素材替換。
 
-路徑為 `web/assets/models/verdant/`。下載時保留授權來源證據，核對 GLB magic、貼圖和尺寸，完成後才能在 PR 宣告資產實裝。缺檔時仍使用程序化樹木和木橋。
-
-注意：載入的外部 GLB 僅為視覺模型，尚無伺服器橋面碰撞。實際上線前須執行渲染、效能與 C++ 通行驗收。
+模型目前僅負責視覺；C++ 伺服器仍須補齊吊橋通行碰撞。部署前應完成 GitHub CI、渲染與通行驗證。
