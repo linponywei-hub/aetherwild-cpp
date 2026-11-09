@@ -1,3 +1,4 @@
+import {villageSceneMethods} from './village-scene.js';
 import {StarterLandscape,starterCenter} from '../world/starter-landscape.js';
 import * as T from '../../vendor/three.module.js';
 import {terrainMesh} from '../world/content-scene.js';
@@ -21,7 +22,8 @@ export class EditorTerrain {
   view.mesh=(geometry,material,position,parent=this.root)=>{const mesh=new T.Mesh(geometry,typeof material==='string'?view.mat(material):material);if(position)mesh.position.set(...position);parent.add(mesh);return mesh;};
   view.box=(parent,w,h,d,color,x=0,y=0,z=0)=>view.mesh(new T.BoxGeometry(w,h,d),view.mat(color),[x,y,z],parent);
   view.cylinder=(parent,r1,r2,h,color,x=0,y=0,z=0,segments=12)=>view.mesh(new T.CylinderGeometry(r1,r2,h,segments),view.mat(color),[x,y,z],parent);
-  makeLandscape(view);this.starterLandscape=new StarterLandscape(this.root,catalog,(x,z)=>this.height(x,z));this.onStatus('已載入原世界地圖與地形。');return catalog;
+  makeLandscape(view);view.preview={};view.landHeight=(x,z)=>this.height(x,z);view.villageMarkers=false;Object.assign(view,villageSceneMethods);this.villageView=view;let index=0;for(const b of catalog.buildings||[])if(b.region==='windchime'&&b.style?.endsWith('|house')&&index<5){const group=new T.Group();group.position.set(b.position.x,view.landHeight(b.position.x,b.position.z),b.position.z);this.root.add(group);view.loadVillageHouse(group,++index,b);}
+  this.starterLandscape=new StarterLandscape(this.root,catalog,(x,z)=>this.height(x,z));this.onStatus('已載入原世界地圖與地形。');return catalog;
  }
  key(x,z){const cell=this.catalog?.landscape?.tileSpec?.cell||512;return Math.floor(x/cell)+':'+Math.floor(z/cell);}
  async tile(x,z){
@@ -36,7 +38,7 @@ export class EditorTerrain {
  async ensurePatch(x,z){
   const id=++this.requestId,patch=await this.tile(x,z);if(!patch||id!==this.requestId)return patch;
   if(this.local){this.root.remove(this.local);this.local.geometry.dispose();this.local.material.dispose();}
-  this.patch=patch;this.local=terrainMesh(patch,'#718866',this.catalog.landscape);this.local.userData.localTerrain=true;this.root.add(this.local);clipTerrainPatch(this.global.material,patch);this.starterLandscape?.rebuild();return patch;
+  this.patch=patch;this.local=terrainMesh(patch,'#718866',this.catalog.landscape);this.local.userData.localTerrain=true;this.root.add(this.local);clipTerrainPatch(this.global.material,patch);this.starterLandscape?.rebuild();this.villageView?.refreshVillageGround();return patch;
  }
  async sampleHeight(x,z){if(!this.catalog)return 0;const patch=await this.tile(x,z);return gridHeight(patch,x,z);}
  height(x,z){if(!this.catalog)return 0;const current=gridHeight(this.patch,x,z);if(current!==null)return current;for(const tile of this.cache.values()){const h=gridHeight(tile,x,z);if(h!==null)return h;}return gridHeight(this.catalog.terrain,x,z)??0;}

@@ -1,18 +1,20 @@
+import {seatHouse} from './house-repair.js';
 import {TransformControls} from '../../vendor/TransformControls.js';
 // In-game village GLB transform editor. Local overrides are deliberately not server-authoritative.
-import {VILLAGE_KEY,readVillagePoses,validateVillagePoses,resolveVillagePose,captureVillagePose,applyPose,saveLocalPose} from './village-pose.js';
+import {VILLAGE_KEY,readVillagePoses,validateVillagePoses,resolveVillagePose,captureVillagePose,applyPose,saveLocalPose,rebaseVillagePose} from './village-pose.js';
 const KEY=VILLAGE_KEY;
 const read=()=>readVillagePoses();
 export function applyVillageTransform(index,group,model,layout){
  const resolved=resolveVillagePose(index,layout);if(!resolved)return;
- applyPose(resolved.pose,group,model);delete group.userData.poseError;group.userData.poseSource=resolved.source;
+ const pose=group.userData.villageSite?rebaseVillagePose(resolved.pose,group.userData.villageLegacySite,group.userData.villageSite,group.userData.villageCenter,group.userData.layoutSeed):resolved.pose;
+ applyPose(pose,group,model);delete group.userData.poseError;group.userData.poseSource=resolved.source;
  // Upgrade legacy values only after their exact angles and scale have been restored.
  if(resolved.source==='local'&&!resolved.pose.modelPosition)saveLocalPose(index,captureVillagePose(group,model));
 }
 export function syncVillageLayout(view,layout){
  if(!layout||view.modelEditing||view.villageLayoutRevision===layout.revision)return;
  view.villageLayoutRevision=layout.revision;
- for(const g of view.root.children)if(g.userData?.villageGLB){try{applyVillageTransform(g.userData.villageIndex,g,g.userData.villageGLB,layout);view.refreshVillageCollision?.(g);}catch(e){g.userData.poseError=e.message;}}
+ for(const g of view.root.children)if(g.userData?.villageGLB){try{applyVillageTransform(g.userData.villageIndex,g,g.userData.villageGLB,layout);seatHouse(g,(x,z)=>view.landHeight(x,z));view.refreshVillageCollision?.(g);}catch(e){g.userData.poseError=e.message;}}
  view.villageEditorRefresh?.();
 }
 export function installVillageEditor(view){
@@ -26,7 +28,7 @@ export function installVillageEditor(view){
  const houses=()=>[...view.root.children].filter(g=>g.userData?.villageModel).sort((a,b)=>a.userData.villageIndex-b.userData.villageIndex);
  const current=()=>houses().find(g=>String(g.userData.villageIndex)===select.value);
  const model=g=>g?.userData?.villageGLB;
- const persist=()=>{const g=current(),m=model(g);if(!m)return;try{saveLocalPose(g.userData.villageIndex,captureVillagePose(g,m));view.refreshVillageCollision?.(g);g.userData.poseSource='local';status.textContent='已儲存此瀏覽器的完整姿態；可匯出，或由擁有者保存至伺服器。';}catch(e){status.textContent='儲存失敗：'+e.message;}};
+ const persist=()=>{const g=current(),m=model(g);if(!m)return;try{g.userData.groundManual=true;saveLocalPose(g.userData.villageIndex,captureVillagePose(g,m));view.refreshVillageCollision?.(g);g.userData.poseSource='local';status.textContent='已儲存此瀏覽器的完整姿態；可匯出，或由擁有者保存至伺服器。';}catch(e){status.textContent='儲存失敗：'+e.message;}};
  const gizmo=view.renderer.software?null:new TransformControls(view.camera,view.canvas);if(gizmo){gizmo.enabled=false;gizmo.visible=false;view.world.add(gizmo);}let beforeDrag;
  const attach=()=>{if(!gizmo)return;const g=current(),m=model(g);if(body.hidden||!m){gizmo.detach();gizmo.enabled=false;return;}gizmo.enabled=true;gizmo.setMode(root.querySelector('#aw-edit-mode').value);gizmo.setSpace('local');gizmo.attach(gizmo.mode==='translate'?g:m);};
  const axes=['X','Y','Z'];
@@ -46,7 +48,7 @@ export function installVillageEditor(view){
  gizmo?.addEventListener('mouseUp',()=>{try{captureVillagePose(current(),model(current()));persist();}catch(error){if(beforeDrag)applyPose(beforeDrag,current(),model(current()));status.textContent=error.message;}beforeDrag=null;refresh();});
  select.onchange=refresh;
  root.querySelector('#aw-edit-reset').onclick=()=>{const g=current(),m=model(g);if(!m)return;const baseline=g.userData.villageBaseline;if(!baseline)return;applyPose(baseline,g,m);persist();refresh();status.textContent='已預覽預設姿態；伺服器設定尚未更動';};
- root.querySelector('#aw-edit-ground').onclick=()=>{const g=current(),m=model(g);if(!m)return;const box=new view.THREE.Box3().setFromObject(m);const h=view.landHeight(g.position.x,g.position.z);if(Number.isFinite(box.min.y)&&Number.isFinite(h)){g.position.y+=h-box.min.y-.08;persist();refresh()}};
+ root.querySelector('#aw-edit-ground').onclick=()=>{const g=current();if(g&&seatHouse(g,(x,z)=>view.landHeight(x,z),{force:true})){persist();g.userData.groundManual=false;refresh()}};
  root.querySelector('#aw-edit-export').onclick=()=>{try{const blob=new Blob([JSON.stringify({format:'aetherwild-village-poses',version:2,poses:read()},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='aetherwild-village-model-transforms.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}catch(e){status.textContent=e.message;}};
  root.querySelector('#aw-edit-import').onchange=async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;try{if(file.size>65536)throw Error('設定檔超過 64 KB');const parsed=JSON.parse(await file.text()),poses=validateVillagePoses(parsed.format==='aetherwild-village-poses'?parsed.poses:parsed);const combined={...read(),...poses};localStorage.setItem(KEY+'-backup',localStorage.getItem(KEY)||'{}');localStorage.setItem(KEY,JSON.stringify(combined));for(const g of houses()){applyVillageTransform(g.userData.villageIndex,g,model(g),view.state?.content?.villageLayout);view.refreshVillageCollision?.(g);}refresh();status.textContent='已還原匯入姿態；原設定另存本機備份，尚未發布至伺服器';}catch(err){status.textContent='匯入失敗：'+err.message;}};
  root.querySelector('#aw-edit-publish').onclick=async()=>{const g=current(),m=model(g),button=root.querySelector('#aw-edit-publish');if(!m||view.state?.role!=='owner')return;button.disabled=true;try{const pose=captureVillagePose(g,m),revision=view.state.content?.villageLayout?.revision||0;const ok=await view.cb.publishVillagePose?.({index:g.userData.villageIndex,revision,pose});if(!ok)throw Error('伺服器未接受變更，請查看提示並重新讀取');pose.serverRevision=view.state.content.villageLayout.revision;saveLocalPose(g.userData.villageIndex,pose);status.textContent='已保存至伺服器世界設定，會包含於世界備份；建議另匯出 JSON';}catch(err){status.textContent='未發布：'+err.message;}finally{button.disabled=view.state?.role!=='owner';}};

@@ -9,7 +9,7 @@ const patch=(x=0,z=0)=>({side:65,step:16,x:Math.floor(x/512)*512-256,z:Math.floo
 test('terrain material retains slope, climate and fine detail when native patch clipping is installed',()=>{
  const material=terrainMaterial();clipTerrainPatch(material,patch());const shader={uniforms:{},vertexShader:'#include <begin_vertex>',fragmentShader:'#include <color_fragment>\n#include <normal_fragment_maps>\n#include <clipping_planes_fragment>'};material.onBeforeCompile(shader);
  for(const token of ['awRock','awIce','dFdx','discard'])assert.ok(shader.fragmentShader.includes(token),token);
- assert.ok(shader.vertexShader.includes('awClimate'));assert.ok(shader.uniforms.patchBounds);assert.ok(material.customProgramCacheKey().includes('v3'));
+ assert.ok(shader.vertexShader.includes('awClimate'));assert.ok(shader.uniforms.patchBounds);assert.ok(material.customProgramCacheKey().includes('v5'));
 });
 test('terrain geometry carries native sample heights and climate data without raising or moving vertices',()=>{
  const grid={side:2,step:16,x:10,z:20,heights:[1,2,3,4]};const mesh=terrainMesh(grid,'#718866');const pos=mesh.geometry.attributes.position;

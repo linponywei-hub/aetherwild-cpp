@@ -91,6 +91,51 @@
         512,
         512
       ]
+    },
+    {
+      "file": "mud-color.webp",
+      "asset": "brown_mud_02",
+      "source": "https://polyhaven.com/a/brown_mud_02",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brown_mud_02/brown_mud_02_diff_1k.jpg",
+      "license": "CC0-1.0",
+      "sourceSha256": "058b6f12493305ec6b47cb5ea77f013c9e7e58216b34af3700a3d3d7d821732d",
+      "sourceBytes": 527741,
+      "sha256": "8ce90659d0116023c4cacb7bd46633a24322943ae14a28789ed5cece4b33770c",
+      "bytes": 278308,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "mud-normal.webp",
+      "asset": "brown_mud_02",
+      "source": "https://polyhaven.com/a/brown_mud_02",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brown_mud_02/brown_mud_02_nor_gl_1k.jpg",
+      "license": "CC0-1.0",
+      "sourceSha256": "9ca6f68d25599c98ba5e594df221f5653d93faceda1ba26a0babb1143e8c615f",
+      "sourceBytes": 1397011,
+      "sha256": "aa5e3c354cbf6ce2f1fb73eab539e2eb9cf4a5d229f342f99a46594ac3943311",
+      "bytes": 622208,
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "mud-arm.webp",
+      "asset": "brown_mud_02",
+      "source": "https://polyhaven.com/a/brown_mud_02",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brown_mud_02/brown_mud_02_arm_1k.jpg",
+      "license": "CC0-1.0",
+      "sourceSha256": "e747ee8ea4e3ca38aaa20acea1524b242c0b500abb93772c5a31aca112259f09",
+      "sourceBytes": 261722,
+      "sha256": "17bd4fa8a9951be4e4a009f1363f1d1bf7c0f30cdeca3c39b01f1f13b5d1d1f9",
+      "bytes": 423264,
+      "dimensions": [
+        512,
+        512
+      ]
     }
   ]
 }

@@ -1,5 +1,7 @@
 import * as THREE from '../../vendor/three.module.js';
 import {harborHeight} from '../world/landscape-model.js';
+const isBarrier=b=>b.style?.endsWith('|starter_wall')||b.style?.endsWith('|starter_fence');
+const inside=(p,b,padding=0)=>{const dx=p.x-b.position.x,dz=p.z-b.position.z,co=Math.cos(b.yaw||0),si=Math.sin(b.yaw||0);return Math.abs(co*dx-si*dz)<=b.width/2+padding&&Math.abs(si*dx+co*dz)<=b.depth/2+padding;};
 // Presentation only. Never writes to snapshots or sends a position to the server.
 export class MovementPreview {
  constructor(catalog){this.catalog=catalog;this.pose=null;this.history=[];this.offset={x:0,y:0,z:0};this.pendingJump=null;this.sent=new Map();}
@@ -12,7 +14,7 @@ export class MovementPreview {
   const patch=this.terrain;
   if(patch){const gx=(p.x-patch.x)/patch.step,gz=(p.z-patch.z)/patch.step,n=patch.side;if(gx>=0&&gz>=0&&gx<n-1&&gz<n-1){const x=Math.floor(gx),z=Math.floor(gz),tx=gx-x,tz=gz-z,h=patch.heights;const a=h[z*n+x]*(1-tx)+h[z*n+x+1]*tx,b=h[(z+1)*n+x]*(1-tx)+h[(z+1)*n+x+1]*tx;y=a*(1-tz)+b*tz;}}
 
-  for(const b of this.catalog.buildings)if(b.style?.endsWith("|starter_wall")&&Math.abs(p.x-b.position.x)<=b.width/2&&Math.abs(p.z-b.position.z)<=b.depth/2&&b.position.y+b.height<=p.y+1.4)y=Math.max(y,b.position.y+b.height);
+  for(const b of this.catalog.buildings)if(isBarrier(b)&&inside(p,b)&&b.position.y+b.height<=p.y+1.4)y=Math.max(y,b.position.y+b.height);
   for(const r of this.catalog.regions){
    const h=r.elevation||0;if(h===(r.position.y||0))continue;if(!h)continue;
    const dx=p.x-r.position.x,dz=p.z-r.position.z;
@@ -44,10 +46,9 @@ export class MovementPreview {
    if(side||back||(front&&!door))return true;
   }
   // Non-village regions keep their previous catalog collision.
-  return this.catalog.buildings.some(b=>(b.region!=='windchime'||b.style?.endsWith('|starter_wall'))&&
+  return this.catalog.buildings.some(b=>(b.region!=='windchime'||isBarrier(b))&&
    p.y+1.7>b.position.y&&p.y<b.position.y+b.height&&
-   Math.abs(p.x-b.position.x)<b.width/2+.45&&
-   Math.abs(p.z-b.position.z)<b.depth/2+.45);
+   inside(p,b,.45));
  }
  integrate(p,input,dt,jump=false){
   const length=Math.max(1,Math.hypot(input.x,input.z));

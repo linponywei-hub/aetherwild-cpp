@@ -23,9 +23,9 @@ test('groundcover rests on supplied native height, fits two draw calls and does 
  const pebbles=view.root.children.find(m=>m.name==='starter-pebbles');const normals=pebbles.geometry.attributes.normal;for(let i=0;i<normals.count;i++)assert.ok(normals.getY(i)>0,'pebbles must face the camera above ground');
  const fallback=new StarterLandscape(new T.Group(),catalog,()=>0,{software:true});assert.equal(fallback.root.children.filter(m=>m.isMesh).length,0);
 });
-test('PBR terrain becomes active only when all six local maps succeed, and retains fallback after any failure',()=>{
+test('PBR terrain becomes active only when all nine local maps succeed, and retains fallback after any failure',()=>{
  const pending=[];const loader={load:(path,ok,_progress,fail)=>{assert.ok(path.startsWith('/art/terrain/'));pending.push({ok,fail});return new T.Texture();}};
- const loaded=createStarterTextures(loader);for(const p of pending.slice(0,5))p.ok();assert.equal(loaded.ready.value,0);pending[5].ok();assert.equal(loaded.ready.value,1);
+ const loaded=createStarterTextures(loader);for(const p of pending.slice(0,8))p.ok();assert.equal(loaded.ready.value,0);pending[8].ok();assert.equal(loaded.ready.value,1);
  pending.length=0;const failed=createStarterTextures(loader);pending[0].fail();for(const p of pending.slice(1))p.ok();assert.equal(failed.ready.value,0);
  assert.equal(loaded.maps.grassColor.colorSpace,T.SRGBColorSpace);assert.equal(loaded.maps.grassNormal.colorSpace,T.NoColorSpace);
 });
@@ -36,7 +36,7 @@ test('PBR color, normals, roughness and AO survive native terrain clipping',()=>
  assert.equal(shader.uniforms.awVillage.value.x,center.x);assert.ok(material.customProgramCacheKey().includes('starter'));
 });
 test('all shipped photographic textures match the source manifest and have a bounded total payload',()=>{
- const manifest=JSON.parse(readFileSync(new URL('../assets/reference/terrain/sources.json',import.meta.url)));let bytes=0;assert.equal(manifest.maps.length,6);
+ const manifest=JSON.parse(readFileSync(new URL('../assets/reference/terrain/sources.json',import.meta.url)));let bytes=0;assert.equal(manifest.maps.length,9);
  for(const map of manifest.maps){const raw=readFileSync(new URL('../assets/reference/terrain/'+map.file,import.meta.url));assert.equal(createHash('sha256').update(raw).digest('hex'),map.sha256);assert.equal(map.license,'CC0-1.0');bytes+=raw.length;}
- assert.ok(bytes<3_000_000);
+ assert.ok(bytes<5_500_000);
 });

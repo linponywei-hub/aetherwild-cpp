@@ -30,7 +30,7 @@ export function terrainMaterial(options={}) {
    normal=normalize(normal+vec3(dFdx(awFine),dFdy(awFine),0.0)*.16);`);
   installStarterSurface(shader,starter);
  };
- material.customProgramCacheKey=()=> 'atlas-terrain-material-v3' + (starter?'-starter':'');
+ material.customProgramCacheKey=()=> 'atlas-terrain-material-v5' + (starter?'-starter':'');
  return material;
 }
 

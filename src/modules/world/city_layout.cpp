@@ -10,10 +10,12 @@ std::vector<Building> cityBuildings(const Catalog& c){
  std::vector<Building> out;
  for(const auto&[id,r]:c.regions){
   if(r.wilderness)continue;
-  double u=urbanRadius(r);int serial=0;
+  double u=urbanRadius(r);int serial=0,starterHouse=0;
   auto add=[&](std::string kind,double x,double z,double w,double d,double h,double y=-1e8){
+   double yaw=0;
+   if(id=="windchime"&&kind=="house"&&starterHouse<5){const auto& site=atlasSurface().at("starterVillage").at("houseSites").arrayItems().at(starterHouse++);x=site.num("x");z=site.num("z");yaw=site.num("yaw");}
    Vec3 p{r.center.x+x,r.center.y+cityElevation(id),r.center.z+z};if(y>-1e7)p.y=y;else if(id!="verdant"&&id!="astral")p.y=worldLandHeight(p,c);
-   out.push_back({id+"_urban_"+std::to_string(serial++),id,p,w,d,h,id+"|"+kind});
+   out.push_back({id+"_urban_"+std::to_string(serial++),id,p,w,d,h,id+"|"+kind,yaw});
   };
   const bool harbor=id=="tidehaven"||id=="aw_westport"||id=="aw_southmill";
   if(harbor){
@@ -58,6 +60,7 @@ std::vector<Building> cityBuildings(const Catalog& c){
    add("lamp",side*12,along,.45,.45,5);add("lamp",side*12,-along,.45,.45,5);
   }
   if(id=="windchime")for(const auto& w:atlasSurface().at("starterVillage").at("walls").arrayItems())add("starter_wall",w.num("x"),w.num("z"),w.num("width"),w.num("depth"),w.num("height"));
+  if(id=="windchime")for(const auto& f:atlasSurface().at("starterVillage").at("fences").arrayItems()){add("starter_fence",f.num("x"),f.num("z"),f.num("width"),f.num("depth"),f.num("height"));out.back().yaw=f.num("yaw");}
  }
  return out;
 }

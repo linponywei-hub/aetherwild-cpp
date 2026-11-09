@@ -23,7 +23,7 @@ with tempfile.TemporaryDirectory(prefix='aw_terrain_') as folder:
    except OSError:time.sleep(.05)
   else:raise RuntimeError('Terrain fixture did not start')
   # Real deployed asset route, bytes and MIME, not just JS import strings.
-  for name in ['grass-color','grass-normal','grass-arm','gravel-color','gravel-normal','gravel-arm']:
+  for name in ['grass-color','grass-normal','grass-arm','gravel-color','gravel-normal','gravel-arm','mud-color','mud-normal','mud-arm']:
    with urllib.request.urlopen(base.replace('/api/','/art/terrain/')+name+'.webp',timeout=15) as asset:
     assert asset.headers['Content-Type']=='image/webp'
     assert asset.read()==(root/'assets/reference/terrain'/(name+'.webp')).read_bytes()
@@ -33,7 +33,7 @@ with tempfile.TemporaryDirectory(prefix='aw_terrain_') as folder:
    if r['id']=='aw_underlost':continue
    code,result=request('terrain',{'x':r['position']['x'],'z':r['position']['z']})
    assert code==200 and set(result)=={'ok','terrain','worldLimit'}
-   tile=result['terrain'];assert tile['side']==65 and tile['step']==8 and tile['version']==4 and len(tile['heights'])==4225
+   tile=result['terrain'];assert tile['side']==65 and tile['step']==8 and tile['version']==5 and len(tile['heights'])==4225
   detail=request('terrain',{'x':-6272,'z':-14592,'detail':True})[1]['terrain'];assert detail['side']==129 and detail['step']==8 and len(detail['heights'])==16641
   assert request('health')[1]['profiles']==initial
   assert request('terrain',{'x':48001,'z':0})[0]==400

@@ -1,14 +1,15 @@
+import {roadDistance} from './village-layout.js';
 import {VillageFeatures} from './village-features.js';
 import {ScannedVegetation} from './scanned-vegetation.js';
 import * as T from '../../vendor/three.module.js';
 
 export function starterConfig(catalog){return catalog.landscape?.starterVillage;}
 export function starterCenter(config){return {x:(config.pixel[0]-633)*64,z:(config.pixel[1]-578)*64};}
-export function villageRoadDistance(x,z){return Math.min(Math.abs(x+.3*Math.sin(z*.075)),Math.abs(z+.3*Math.sin(x*.075)));}
+export function villageRoadDistance(x,z,config){return roadDistance(x,z,config);}
 export function starterHouses(catalog){return (catalog.buildings||[]).filter(b=>b.region==='windchime'&&b.style?.split('|')[1]==='house').slice(0,5);}
 export function decorativePointAllowed(x,z,config,houses,center){
  const dx=x-center.x,dz=z-center.z;const stream=config.stream;if(stream&&dz>stream.zMin-4&&dz<stream.zMax+4&&Math.abs(dx-stream.x-stream.meander*Math.sin(dz/stream.period))<stream.halfWidth+stream.bankWidth+1)return false;
- if(Math.hypot(dx,dz)<config.plazaRadius+2||villageRoadDistance(dx,dz)<config.roadHalfWidth+1.7)return false;
+ if(Math.hypot(dx,dz)<config.plazaRadius+2||villageRoadDistance(dx,dz,config)<config.roadHalfWidth+1.7)return false;
  return !houses.some(b=>Math.abs(x-b.position.x)<b.width/2+3&&Math.abs(z-b.position.z)<b.depth/2+3);
 }
 export function starterScatter(catalog,count=9000){
