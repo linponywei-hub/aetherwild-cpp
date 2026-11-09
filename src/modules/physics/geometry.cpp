@@ -33,7 +33,7 @@ namespace aw {
         if(cityElevation(r.id)==0)return std::hypot(dx,dz)<=r.radius&&std::abs(p.y-r.center.y)<6;
         if(std::abs(p.y-cityElevation(r.id))>4)return false;
         if(std::hypot(dx,dz)<=94) {
-            if(r.id=="verdant"&&std::abs(dx)<8&&dz>30)return false;
+            if(r.id=="verdant"&&std::hypot(dx,dz)<7)return false;
             return true;
         }
         return r.id=="astral"&&std::abs(dx)<7&&dz>=85&&dz<=116;
@@ -47,11 +47,20 @@ namespace aw {
         for(auto&[id,r]:c.regions) {
             double dx=p.x-r.center.x,dz=p.z-r.center.z,h=cityElevation(id);
             if(!h)continue;
-            if(id=="verdant"&&std::abs(dx)<7&&dz>=30&&dz<=150) {
-                double ramp=(150-dz)*32/120;
-                if(ramp<=p.y+1.4)y=std::max(y,ramp);
+            if(id=="verdant") {
+                // Interior spiral stairs: 100 treads, 0.32m rise, four turns.
+                // Evaluate only treads immediately below the player so a higher
+                // flight cannot teleport a character through the tree.
+                constexpr double pi=3.14159265358979323846;
+                for(int step=0;step<100;step++) {
+                    const double angle=pi/2+step*(8*pi/100.0);
+                    const double sx=std::cos(angle)*8.5,sz=std::sin(angle)*8.5;
+                    const double tread=r.center.y+step*.32;
+                    const double radial=std::hypot(dx-sx,dz-sz);
+                    if(radial<=2.0&&tread<=p.y+1.4&&tread>y)y=tread;
+                }
             }
-            bool disc=std::hypot(dx,dz)<=94&&!(id=="verdant"&&std::abs(dx)<8&&dz>30);
+            bool disc=std::hypot(dx,dz)<=94&&!(id=="verdant"&&std::hypot(dx,dz)<7);
             bool bridge=id=="astral"&&std::abs(dx)<7&&dz>=85&&dz<=116;
             if((disc||bridge)&&h<=p.y+1.4)y=std::max(y,h);
         }
