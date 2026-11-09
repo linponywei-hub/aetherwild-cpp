@@ -18,4 +18,6 @@ assert.match(canopy,/Math\.PI\/2\+level\*8\*Math\.PI\/100/);
 assert.match(physics,/for\(int step=0;step<100;step\+\+\)/);
 assert.match(physics,/pi\/2\+step\*\(8\*pi\/100\.0\)/);
 assert.doesNotMatch(physics,/double ramp=\(150-dz\)/);
+assert.match(physics,/bool disc=std::hypot\(dx,dz\)<=94&&\!\(id=="verdant"&&std::hypot\(dx,dz\)<7\)/);
+assert.match(physics,/if\(r.id=="verdant"&&std::hypot\(dx,dz\)<7\)return false/);
 console.log('Verdant canopy source wiring and staircase constants passed; runtime physics still requires testing.');
