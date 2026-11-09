@@ -1,10 +1,10 @@
 import * as T from '../../vendor/three.module.js';
 
-// Optional CC0 meshes. Missing files leave the procedural city intact.
+// Bundled original low-poly placeholder meshes. Missing files leave the procedural city intact.
 // The game server, not these GLBs, owns all collision.
 const SOURCES = Object.freeze({
-  canopy: '/assets/models/verdant/quaternius-tree.glb',
-  bridge: '/assets/models/verdant/innerscene-rope-bridge.glb'
+  canopy: '/assets/models/verdant/aetherwild-tree.glb',
+  bridge: '/assets/models/verdant/aetherwild-rope-bridge.glb'
 });
 let loaderPromise;
 function loader() {
