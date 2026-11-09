@@ -1,18 +1,40 @@
 import * as T from '../../vendor/three.module.js';
 import {installStarterSurface} from './starter-surface.js';
 
+// External, openly licensed textures. Loaded once; shader keeps procedural fallback
+// until all three image requests complete. See THIRD_PARTY_TERRAIN.md.
+let externalSurfaces;
+function terrainExternalTextures(){
+ if(externalSurfaces)return externalSurfaces;
+ const ready={value:0},maps={};let loaded=0,failed=false;
+ const sources={
+  grass:'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/terrain/grasslight-big.jpg',
+  stone:'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/brick_diffuse.jpg',
+  lava:'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/lava/lavatile.jpg'
+ };
+ const loader=new T.TextureLoader();
+ for(const [name,url] of Object.entries(sources)){
+  maps[name]=loader.load(url,()=>{loaded++;if(loaded===3&&!failed)ready.value=1;},undefined,()=>{failed=true;ready.value=0;});
+  maps[name].wrapS=maps[name].wrapT=T.RepeatWrapping;
+  maps[name].colorSpace=T.SRGBColorSpace;maps[name].anisotropy=4;
+ }
+ return externalSurfaces={maps,ready};
+}
+
 // World-space detail avoids stretched UVs on cliffs. Both editor and game use
 // this material; geometry and collision heights still come from native tiles.
 export function terrainMaterial(options={}) {
  const {starter,...surfaceOptions}=options;
+ const external=typeof document==='undefined'?null:terrainExternalTextures();
  const material=new T.MeshStandardMaterial({roughness:.94,...surfaceOptions});
  material.extensions={...(material.extensions||{}),derivatives:true};
  material.onBeforeCompile=shader=>{
+  if(external){shader.uniforms.awExternalReady=external.ready;for(const [name,map] of Object.entries(external.maps))shader.uniforms['awExternal'+name[0].toUpperCase()+name.slice(1)]={value:map};}
   shader.vertexShader='attribute float awClimate; attribute float awBiome; varying float awBiomeType; varying float awSnow; varying float awBiomeType; varying vec3 awTerrainPosition; varying vec3 awTerrainNormal;\n'+shader.vertexShader;
   shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>',`#include <begin_vertex>
    awBiomeType=awBiome;awTerrainPosition=(modelMatrix*vec4(position,1.0)).xyz;
    awTerrainNormal=normalize(mat3(modelMatrix)*normal);awSnow=awClimate;`);
-  shader.fragmentShader=`varying float awSnow; varying vec3 awTerrainPosition; varying vec3 awTerrainNormal;
+  shader.fragmentShader=`uniform float awExternalReady; uniform sampler2D awExternalGrass; uniform sampler2D awExternalStone; uniform sampler2D awExternalLava; varying float awSnow; varying vec3 awTerrainPosition; varying vec3 awTerrainNormal;
    float awHash(vec3 p){return fract(sin(dot(p,vec3(127.1,311.7,74.7)))*43758.5453);}
    float awNoise(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);
     return mix(mix(mix(awHash(i),awHash(i+vec3(1,0,0)),f.x),mix(awHash(i+vec3(0,1,0)),awHash(i+vec3(1,1,0)),f.x),f.y),
@@ -46,6 +68,18 @@ export function terrainMaterial(options={}) {
    diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.16,.24,.14)+vec3(.09,.10,.04)*awFine,awWet*.65);
    diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.12,.12,.13)+vec3(.16,.07,.03)*awPatch,awLava*.82);
    diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.12,.20,.10)+vec3(.09,.07,.02)*awFine,awForestFloor*.50);
+   // World-space tiled source images, blended by authored biome and slope.
+   // No new mesh vertices, no separate texture material per terrain tile.
+   if(awExternalReady>.5){
+    vec2 awGroundUV=awTerrainPosition.xz/12.0;
+    vec3 awGrassTex=texture2D(awExternalGrass,awGroundUV).rgb;
+    vec3 awStoneTex=texture2D(awExternalStone,awGroundUV*.75).rgb;
+    vec3 awLavaTex=texture2D(awExternalLava,awGroundUV*.6).rgb;
+    float awPlain=max(0.0,1.0-max(max(awSand,awMesa),max(awWet,awLava)));
+    diffuseColor.rgb=mix(diffuseColor.rgb,awGrassTex,awPlain*.43+awForestFloor*.25);
+    diffuseColor.rgb=mix(diffuseColor.rgb,awStoneTex,awMesa*.32+smoothstep(.3,.65,awSlope)*.4);
+    diffuseColor.rgb=mix(diffuseColor.rgb,awLavaTex,awLava*.34);
+   }
    // Snow accumulation follows slope; rock faces stay exposed.
    float awIce=awSnow*(1.0-smoothstep(.35,.7,awSlope));
    diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.88,.91,.90),awIce*.65);`);
@@ -53,7 +87,7 @@ export function terrainMaterial(options={}) {
    normal=normalize(normal+vec3(dFdx(awFine),dFdy(awFine),0.0)*.16);`);
   installStarterSurface(shader,starter);
  };
- material.customProgramCacheKey=()=> 'atlas-terrain-material-v7' + (starter?'-starter':'');
+ material.customProgramCacheKey=()=> 'atlas-terrain-material-v8' + (starter?'-starter':'');
  return material;
 }
 
