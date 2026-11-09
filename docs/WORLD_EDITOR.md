@@ -32,3 +32,7 @@
 GLB 支援範圍沿用專案 vendor loader；Draco、Meshopt、KTX2 等 required extensions 不支援時會報錯。並非完整 Blender 網格編輯器，無法藉調整整個模型位置直接修補網格破洞。
 
 新手村近景 v3：實拍草地與碎石道路材質、草叢及小石子由遊戲與編輯器共用。選「風鈴新手村」會以較近視角開啟，方便檢視；其他區域仍採全區視角。新手村近景草叢只作裝飾，不是碰撞或採集物。來源為 Poly Haven CC0，詳見素材清單與 `STARTER_LANDSCAPE.md`。
+
+第三方操作器：視角使用 Three.js 官方 OrbitControls；移動／旋轉／縮放使用官方 TransformControls。拖曳操作器時會停用相機操作，完成一次拖曳視為一次可復原修改。GLB 使用官方 r160 GLTFLoader。
+
+遊戲內五棟房屋的舊手動設定可在「模型編輯器」匯入 JSON；擁有者可選「保存至伺服器世界設定」，讓其他裝置讀到相同完整姿態。這與獨立編輯器場景草稿不同，仍未發布精確原生 GLB 碰撞。詳見 `STABLE_SCENE_LAYOUT.md`。

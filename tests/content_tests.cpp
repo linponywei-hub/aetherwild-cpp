@@ -103,6 +103,14 @@ int main(){try{
  }
  {GameRuntime full(pathFile);const auto& c=full.definitions();const auto p=full.world().players.at(pid);yes(p.coins==1871);yes(std::abs(p.position.y-worldLandHeight(p.position,c))<.00001);yes(!terrainResource.empty()&&!terrainMonster.empty());const auto r=full.world().resources.at(terrainResource);yes(std::abs(r.position.y-worldLandHeight(r.position,c))<.00001);const auto m=full.world().monsters.at(terrainMonster);yes(std::abs(m.position.y-worldLandHeight(m.position,c))<.00001);full.save();}
  {GameRuntime full(pathFile);yes(full.world().players.at(pid).coins==1871);std::ifstream f(pathFile);const auto raw=Json::parse(std::string(std::istreambuf_iterator<char>(f),{}));yes(raw.at("contentState").num("terrainVersion")==3);for(const auto& m:raw.at("monsters").arrayItems())if(m.str("id")==terrainMonster){const auto& p=m.at("home");Vec3 home{p.num("x"),p.num("y"),p.num("z")};yes(std::abs(home.y-worldLandHeight(home,full.definitions()))<.00001);}}
+ // World house poses use owner authority, optimistic revisions, receipts and durable state.
+ {const auto file=pathFile.parent_path()/"house-poses.json";Id ownerKey;Json pose{{"position",Json::Array{-6272,0,-14592}},{"modelPosition",Json::Array{1.13,-.73,2.08}},{"rotation",Json::Array{.234,-.81,.12}},{"scale",Json::Array{.82,.82,.82}},{"rotationOrder","XYZ"}};
+  {GameRuntime full(file);auto owner=create(full),guest=create(full);ownerKey=owner.str("token");Json body{{"type","village_pose_save"},{"index",1},{"revision",0},{"pose",pose},{"request","pose-first"}};
+   no([&]{full.command(guest.str("token"),body);});auto saved=full.command(ownerKey,body);yes(saved.at("content").at("villageLayout").num("revision")==1);yes(saved.at("content").at("villageLayout").at("poses").at("1").dump()==pose.dump());full.command(ownerKey,body);yes(full.catalog().at("villageLayout").num("revision")==1);
+   auto before=full.exportBackup(ownerKey).dump();body["request"]="stale-pose";no([&]{full.command(ownerKey,body);});yes(before==full.exportBackup(ownerKey).dump());body["revision"]=1;body["request"]="invalid-pose";body["pose"]["scale"]=Json::Array{0,1,1};no([&]{full.command(ownerKey,body);});yes(before==full.exportBackup(ownerKey).dump());full.save();
+  }
+  {GameRuntime full(file);yes(full.snapshot(ownerKey).at("content").at("villageLayout").at("poses").at("1").dump()==pose.dump());yes(full.catalog().at("villageLayout").num("revision")==1);}
+ }
  std::filesystem::remove_all(pathFile.parent_path());
  std::cout<<"OK content integration: "<<checks<<" checks\n";return 0;
 }catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 1;}}
