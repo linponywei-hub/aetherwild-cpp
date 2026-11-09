@@ -8,7 +8,7 @@ import sys, zipfile, struct
 ROOT=Path(__file__).resolve().parents[1]
 DEST=ROOT/"web/assets/models/environment/trees"
 NAMES=[*(f"CommonTree_{i}" for i in range(1,6)),*(f"Pine_{i}" for i in range(1,6)),*(f"TwistedTree_{i}" for i in range(1,6)),*(f"DeadTree_{i}" for i in range(1,6))]
-ROCKS=[f"Rock_{i}" for i in range(1,4)]
+ROCKS=[f"Rock_Medium_{i}" for i in range(1,4)]
 
 def main(path):
     with zipfile.ZipFile(path) as archive:
