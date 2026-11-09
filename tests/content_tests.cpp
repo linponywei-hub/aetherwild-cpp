@@ -78,7 +78,7 @@ int main(){try{
  // Terrain v2 preserves reference anchors and shares native authoring tiles with gameplay.
  {GameRuntime full;auto session=create(full);const auto p=full.world().players.at(session.at("player").str("id")).position;
   const auto before=full.exportBackup(session.str("token")).dump();const auto tile=full.terrain(Json{{"x",p.x},{"z",p.z}}).at("terrain");
-  yes(tile.num("side")==65&&tile.num("step")==16&&tile.at("heights").arrayItems().size()==4225);yes(tile.num("version")==2);
+  yes(tile.num("side")==65&&tile.num("step")==16&&tile.at("heights").arrayItems().size()==4225);yes(tile.num("version")==3);
   yes(tile.dump()==full.snapshot(session.str("token")).at("content").at("terrainPatch").dump());yes(before==full.exportBackup(session.str("token")).dump());
   for(int row:{0,32,64})for(int col:{0,32,64}){double expected=worldLandHeight({tile.num("x")+col*16,0,tile.num("z")+row*16},full.definitions());yes(std::abs(tile.at("heights").arrayItems()[row*65+col].number()-expected)<=.00051);}
   no([&]{full.terrain(Json{{"x",48001},{"z",0}});});no([&]{full.terrain(Json{{"x","wrong"},{"z",0}});});
@@ -86,6 +86,23 @@ int main(){try{
   for(int z=-4000;z<=4000;z+=500)for(int x=-4000;x<=4000;x+=500)if(std::hypot(x,z)<=4000){double h=atlasHeight({center.x+x,0,center.z+z});yes(std::isfinite(h)&&h>=0);low=std::min(low,h);high=std::max(high,h);}
   yes(high-low<=1.4001);const Vec3 ridge{(425-633)*64.0,0,(130-578)*64.0};yes(atlasHeight(ridge)>900);yes(atlasHeight(ridge)==atlasHeight(ridge));
  }
+ // The village keeps safe service/building pads, with genuine relief outside them.
+ {GameRuntime full;const auto& c=full.definitions();const auto village=c.regions.at("windchime").center;
+  for(int z=-64;z<=64;z+=16)for(int x=-64;x<=64;x+=16)yes(std::abs(worldLandHeight({village.x+x,0,village.z+z},c)-village.y)<.00001);
+  double variation=0;for(int d=112;d<=400;d+=16){Vec3 p{village.x+d,0,village.z+80};double h=worldLandHeight(p,c);variation=std::max(variation,std::abs(h-village.y));Vec3 q{p.x+1,0,p.z};yes(std::abs(worldLandHeight(q,c)-h)<1);}
+  yes(variation>.5);for(const auto& b:cityBuildings(c))if(b.region=="windchime")yes(std::abs(b.position.y-village.y)<.00001);
+ }
+ // A terrain-v2 save relocates only entity heights, keeping progression and homes.
+ Id terrainResource,terrainMonster;
+ {GameRuntime full(pathFile);full.save();auto raw=Json::parse([&]{std::ifstream f(pathFile);return std::string(std::istreambuf_iterator<char>(f),{});}());const auto village=full.definitions().regions.at("windchime").center;
+  raw["contentState"]["terrainVersion"]=2;
+  for(auto& p:std::get<Json::Array>(raw["players"].value))if(p.str("id")==pid){p["coins"]=1871;p["position"]=Json{{"x",village.x+240},{"y",0},{"z",village.z+80}};}
+  for(auto& r:std::get<Json::Array>(raw["resources"].value))if(r.str("scene")=="world"&&terrainResource.empty()){terrainResource=r.str("id");r["position"]=Json{{"x",village.x+240},{"y",-25},{"z",village.z+80}};}
+  for(auto& m:std::get<Json::Array>(raw["monsters"].value))if(m.str("scene")=="world"&&m.str("region")=="windchime"&&terrainMonster.empty()){terrainMonster=m.str("id");m["position"]=Json{{"x",village.x+240},{"y",-25},{"z",village.z+80}};m["home"]=m.at("position");}
+  std::ofstream(pathFile)<<raw.dump();
+ }
+ {GameRuntime full(pathFile);const auto& c=full.definitions();const auto p=full.world().players.at(pid);yes(p.coins==1871);yes(std::abs(p.position.y-worldLandHeight(p.position,c))<.00001);yes(!terrainResource.empty()&&!terrainMonster.empty());const auto r=full.world().resources.at(terrainResource);yes(std::abs(r.position.y-worldLandHeight(r.position,c))<.00001);const auto m=full.world().monsters.at(terrainMonster);yes(std::abs(m.position.y-worldLandHeight(m.position,c))<.00001);full.save();}
+ {GameRuntime full(pathFile);yes(full.world().players.at(pid).coins==1871);std::ifstream f(pathFile);const auto raw=Json::parse(std::string(std::istreambuf_iterator<char>(f),{}));yes(raw.at("contentState").num("terrainVersion")==3);for(const auto& m:raw.at("monsters").arrayItems())if(m.str("id")==terrainMonster){const auto& p=m.at("home");Vec3 home{p.num("x"),p.num("y"),p.num("z")};yes(std::abs(home.y-worldLandHeight(home,full.definitions()))<.00001);}}
  std::filesystem::remove_all(pathFile.parent_path());
  std::cout<<"OK content integration: "<<checks<<" checks\n";return 0;
 }catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 1;}}

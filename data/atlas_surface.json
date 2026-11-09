@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "metersPerPixel": 64,
   "originPixel": [
     633,
@@ -863,5 +863,17 @@
         "amplitude": 0.7
       }
     ]
+  },
+  "starterVillage": {
+    "region": "windchime",
+    "pixel": [
+      535,
+      350
+    ],
+    "flatRadius": 96,
+    "blendMeters": 650,
+    "detailRadius": 320,
+    "roadHalfWidth": 2.8,
+    "plazaRadius": 14
   }
 }

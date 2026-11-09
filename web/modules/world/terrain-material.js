@@ -1,9 +1,11 @@
 import * as T from '../../vendor/three.module.js';
+import {installStarterSurface} from './starter-surface.js';
 
 // World-space detail avoids stretched UVs on cliffs. Both editor and game use
 // this material; geometry and collision heights still come from native tiles.
 export function terrainMaterial(options={}) {
- const material=new T.MeshStandardMaterial({roughness:.94,...options});
+ const {starter,...surfaceOptions}=options;
+ const material=new T.MeshStandardMaterial({roughness:.94,...surfaceOptions});
  material.extensions={...(material.extensions||{}),derivatives:true};
  material.onBeforeCompile=shader=>{
   shader.vertexShader='attribute float awClimate; varying float awSnow; varying vec3 awTerrainPosition; varying vec3 awTerrainNormal;\n'+shader.vertexShader;
@@ -26,20 +28,21 @@ export function terrainMaterial(options={}) {
    diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.88,.91,.90),awIce*.65);`);
   shader.fragmentShader=shader.fragmentShader.replace('#include <normal_fragment_maps>',`#include <normal_fragment_maps>
    normal=normalize(normal+vec3(dFdx(awFine),dFdy(awFine),0.0)*.16);`);
+  installStarterSurface(shader,starter);
  };
- material.customProgramCacheKey=()=> 'atlas-terrain-material-v2';
+ material.customProgramCacheKey=()=> 'atlas-terrain-material-v3' + (starter?'-starter':'');
  return material;
 }
 
 export function clipTerrainPatch(material,patch){
  if(!material.userData.patchBounds){
-  material.userData.patchBounds=new T.Vector4();const compile=material.onBeforeCompile;
+  material.userData.patchBounds=new T.Vector4();const compile=material.onBeforeCompile,cacheKey=material.customProgramCacheKey();
   material.onBeforeCompile=shader=>{
    compile.call(material,shader);shader.uniforms.patchBounds={value:material.userData.patchBounds};
    shader.vertexShader='varying vec2 patchWorld;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\npatchWorld=(modelMatrix*vec4(position,1.0)).xz;');
    shader.fragmentShader='uniform vec4 patchBounds; varying vec2 patchWorld;\n'+shader.fragmentShader.replace('#include <clipping_planes_fragment>','#include <clipping_planes_fragment>\nif(patchWorld.x>patchBounds.x && patchWorld.y>patchBounds.y && patchWorld.x<patchBounds.z && patchWorld.y<patchBounds.w) discard;');
   };
-  material.customProgramCacheKey=()=> 'atlas-terrain-material-v2-patch-clip';material.needsUpdate=true;
+  material.customProgramCacheKey=()=>cacheKey+'-patch-clip';material.needsUpdate=true;
  }
  material.userData.patchBounds.set(patch.x+1,patch.z+1,patch.x+(patch.side-1)*patch.step-1,patch.z+(patch.side-1)*patch.step-1);
 }

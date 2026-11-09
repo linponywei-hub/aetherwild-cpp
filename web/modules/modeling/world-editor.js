@@ -22,14 +22,14 @@ async function task(fn){if(busy)return;busy=true;document.body.classList.add('bu
 const canvas=$('#editor-canvas'),viewport=$('#viewport');
 let renderer;
 try{renderer=new T.WebGLRenderer({canvas,antialias:true});}catch{status('此裝置無法啟用 WebGL，請使用支援 WebGL 的瀏覽器。');throw Error('WebGL unavailable');}
-renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;
 const scene=new T.Scene();scene.background=new T.Color('#233332');
 const camera=new T.PerspectiveCamera(50,1,.05,100000),content=new T.Group();scene.add(content);
-scene.add(new T.HemisphereLight('#e2f2ec','#485c46',2.5));const sun=new T.DirectionalLight('#fff0d0',3);sun.position.set(30,60,20);scene.add(sun);
+scene.add(new T.HemisphereLight('#e2f2ec','#485c46',2.5));const sun=new T.DirectionalLight('#fff0d0',3);sun.position.set(30,60,20);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-120,right:120,top:120,bottom:-120,near:.1,far:350});sun.shadow.bias=-.0002;scene.add(sun,sun.target);
 const referenceGrid=new T.GridHelper(200,200,'#687e70','#3a5047');scene.add(referenceGrid,new T.AxesHelper(4));
 const selection=new T.Box3Helper(new T.Box3(),0xc6d9a1);selection.visible=false;scene.add(selection);
 const target=new T.Vector3(0,1,0);let distance=24,yaw=.6,pitch=.45;
-const worldTerrain=new EditorTerrain(scene,{onStatus:message=>$('#terrain-status').textContent=message,onJump:p=>{target.set(p.x,p.y,p.z);distance=1800;camera.far=200000;camera.updateProjectionMatrix();updateCamera();}});
+const worldTerrain=new EditorTerrain(scene,{onStatus:message=>$('#terrain-status').textContent=message,onJump:p=>{target.set(p.x,p.y,p.z);distance=p.viewDistance||1800;sun.position.set(p.x+80,p.y+110,p.z+45);sun.target.position.set(p.x,p.y,p.z);camera.far=200000;camera.updateProjectionMatrix();updateCamera();}});
 function updateCamera(){camera.position.set(target.x+distance*Math.cos(pitch)*Math.sin(yaw),target.y+distance*Math.sin(pitch),target.z+distance*Math.cos(pitch)*Math.cos(yaw));camera.lookAt(target);camera.updateMatrixWorld();}
 function resize(){const {width,height}=viewport.getBoundingClientRect();renderer.setSize(width,height,false);camera.aspect=width/Math.max(1,height);camera.updateProjectionMatrix();}
 new ResizeObserver(resize).observe(viewport);resize();updateCamera();

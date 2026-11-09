@@ -14,7 +14,7 @@ def request(path,body=None,token=''):
  except urllib.error.HTTPError as e:return e.code,json.load(e)
 with tempfile.TemporaryDirectory(prefix='aw_terrain_') as folder:
  env=dict(os.environ,AETHERWILD_DATA_DIR=folder,AETHERWILD_PUBLIC='0');env.pop('GAME_OWNER_CODE',None);env.pop('GAME_INVITE_CODE',None)
- process=subprocess.Popen([str(exe),'--root',folder,'--port',str(port)],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+ process=subprocess.Popen([str(exe),'--root',str(root),'--port',str(port)],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
  try:
   for _ in range(200):
    if process.poll() is not None:raise RuntimeError(process.communicate()[1].decode())
@@ -22,13 +22,18 @@ with tempfile.TemporaryDirectory(prefix='aw_terrain_') as folder:
     if request('health')[0]==200:break
    except OSError:time.sleep(.05)
   else:raise RuntimeError('Terrain fixture did not start')
+  # Real deployed asset route, bytes and MIME, not just JS import strings.
+  for name in ['grass-color','grass-normal','grass-arm','gravel-color','gravel-normal','gravel-arm']:
+   with urllib.request.urlopen(base.replace('/api/','/art/terrain/')+name+'.webp',timeout=15) as asset:
+    assert asset.headers['Content-Type']=='image/webp'
+    assert asset.read()==(root/'assets/reference/terrain'/(name+'.webp')).read_bytes()
   initial=request('health')[1]['profiles']
   code,catalog=request('catalog');assert code==200
   for r in catalog['regions']:
    if r['id']=='aw_underlost':continue
    code,result=request('terrain',{'x':r['position']['x'],'z':r['position']['z']})
    assert code==200 and set(result)=={'ok','terrain','worldLimit'}
-   tile=result['terrain'];assert tile['side']==65 and tile['step']==16 and tile['version']==2 and len(tile['heights'])==4225
+   tile=result['terrain'];assert tile['side']==65 and tile['step']==16 and tile['version']==3 and len(tile['heights'])==4225
   assert request('health')[1]['profiles']==initial
   assert request('terrain',{'x':48001,'z':0})[0]==400
   assert request('terrain',{'x':'bad','z':0})[0]==400

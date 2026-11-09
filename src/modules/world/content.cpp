@@ -102,7 +102,7 @@ void expandContentWorld(Catalog& c){
 double worldLandHeight(Vec3 p,const Catalog& c){
  if(c.worldLimit<=1800)return 0;
  double y=atlasHeight(p);
- for(auto&[id,r]:c.regions){if(r.wilderness||id=="tidehaven"||id=="aw_westport"||id=="aw_southmill")continue;double d=std::hypot(p.x-r.center.x,p.z-r.center.z);double t=std::clamp((d-r.radius-30)/1000,0.0,1.0);t=t*t*(3-2*t);y=r.center.y*(1-t)+y*t;}
+ for(auto&[id,r]:c.regions){if(r.wilderness||id=="tidehaven"||id=="aw_westport"||id=="aw_southmill")continue;double d=std::hypot(p.x-r.center.x,p.z-r.center.z);const auto& starter=atlasSurface().at("starterVillage");const bool village=id==starter.str("region");double t=std::clamp((d-(village?starter.num("flatRadius"):r.radius+30))/(village?starter.num("blendMeters"):1000),0.0,1.0);t=t*t*(3-2*t);y=r.center.y*(1-t)+y*t;}
  return y;
 }
 bool contentRegionOpen(const Catalog& c,const Id& id){return !c.regionReleases.contains(id)||c.regionReleases.at(id)<=c.contentRelease;}

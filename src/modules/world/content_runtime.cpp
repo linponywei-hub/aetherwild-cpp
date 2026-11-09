@@ -24,7 +24,7 @@ Json GameRuntime::adminMap(const Id& key)const{
 void GameRuntime::applyWorldPatch(){
  const bool expanded=contentState_.flag("expanded");
  const bool remap=expanded&&contentState_.num("layoutVersion")<2;
- const bool terrainChanged=contentState_.num("terrainVersion")<2;
+ const bool terrainChanged=contentState_.num("terrainVersion")<3;
  contentState_["release"]=5;
  if(!expanded)startExpandedWorld();
  else if(remap){
@@ -35,10 +35,20 @@ void GameRuntime::applyWorldPatch(){
   for(auto&[id,m]:world_.monsters)if(m.scene=="world"){m.position=shift(m.position,m.region);homes_[id]=m.position;}
   for(auto&[id,r]:world_.resources)r.position=shift(r.position,nearest(r.position));
  }
- contentState_["layoutVersion"]=2;contentState_["terrainVersion"]=2;contentState_["expanded"]=true;catalog_.contentRelease=5;
+ contentState_["layoutVersion"]=2;contentState_["terrainVersion"]=3;contentState_["expanded"]=true;catalog_.contentRelease=5;
  for(const auto&[rid,r]:catalog_.regions)if(rid!="aw_underlost"){int index=0;for(const auto&[code,definition]:catalog_.resources){const auto id="resource_"+rid+"_"+code;if(world_.resources.contains(id))continue;double a=++index*2.399963;Vec3 pos{r.center.x+std::cos(a)*(r.radius+30),0,r.center.z+std::sin(a)*(r.radius+30)};pos.y=worldLandHeight(pos,catalog_);ResourceNode node;node.id=id;node.definition=code;node.position=pos;world_.resources.emplace(id,node);}}
 
- if(!expanded||remap||terrainChanged){contentState_["npcPoses"]=Json::object();contentState_["npcHomes"]=Json::object();configureContent(true);for(auto&[id,p]:world_.players)if(p.scene=="world"){auto&m=motion_[id];m.velocityY=0;m.lift.clear();m.grounded=true;p.position.y=std::max(p.position.y,catalog_.regions.at(p.lastCity).center.y);p.position.y=groundBelow(p.position,catalog_);m.peak=p.position.y;}}
+ if(!expanded||remap||terrainChanged){contentState_["npcPoses"]=Json::object();contentState_["npcHomes"]=Json::object();configureContent(true);for(auto&[id,p]:world_.players)if(p.scene=="world"){auto&m=motion_[id];m.velocityY=0;m.lift.clear();m.grounded=true;p.position.y=std::max(p.position.y,catalog_.regions.at(p.lastCity).center.y);p.position.y=groundBelow(p.position,catalog_);m.peak=p.position.y;}
+  // Existing village entities must follow the same changed ground, including
+  // dormant resources and monster homes which are not advanced every frame.
+  const auto center=catalog_.regions.at("windchime").center;
+  const auto affected=[&](Vec3 p){return planeDistance(p,center)<2000;};
+  for(auto&[id,r]:world_.resources)if(r.scene=="world"&&affected(r.position))r.position.y=worldLandHeight(r.position,catalog_);
+  for(auto&[id,m]:world_.monsters)if(m.scene=="world"){
+   if(affected(m.position))m.position.y=worldLandHeight(m.position,catalog_);
+   if(homes_.contains(id)&&affected(homes_.at(id)))homes_[id].y=worldLandHeight(homes_.at(id),catalog_);
+  }
+ }
 }
 void GameRuntime::configureContent(bool expanded){
  if(!contentState_.contains("expanded"))contentState_=initialContent();
