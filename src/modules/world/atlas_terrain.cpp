@@ -35,21 +35,40 @@ double atlasHeight(Vec3 p){
  const auto& model=surface();const Point pixel{p.x/64+633,p.z/64+578};
  const double broad=fractal(p.x/1900,p.z/1900,model.seed),detail=fractal(p.x/180,p.z/180,model.seed+7);
  double y=6+18*broad+2*(detail-.5);
+ // Long-wavelength erosion valleys: smooth depressions without a hard V-shaped cusp.
+ const double valleySignal=fractal(p.x/1250,p.z/1250,model.seed+59)*2-1;
+ const double valleyDepth=std::pow(std::max(0.0,1.0-std::sqrt(valleySignal*valleySignal+.02*.02)),4);
+ y-=std::min(9.0,y*.32)*valleyDepth;
  // Authored peak envelopes keep mountains in the reference map. Domain warping
  // and ridges break the old smooth domes without moving their geographic anchors.
  const double warpX=(noise(p.x/2400,p.z/2400,model.seed+11)-.5)*380;
  const double warpZ=(noise(p.x/2400,p.z/2400,model.seed+13)-.5)*380;
- const double ridge=1-std::abs(fractal((p.x+warpX)/720,(p.z+warpZ)/720,model.seed+23)*2-1);
- for(const auto& peak:model.peaks){double dx=(pixel.x-peak.center.x)/peak.radius,dz=(pixel.z-peak.center.z)/peak.radius;double envelope=std::exp(-(dx*dx+dz*dz));y+=peak.height*envelope*(.69+.31*ridge)+peak.height*envelope*.09*(detail-.5);}
+ const double ridgeSignal=fractal((p.x+warpX)/720,(p.z+warpZ)/720,model.seed+23)*2-1;
+ // Smooth ridge crests instead of a sharp absolute-value cusp. This keeps
+ // adjacent 8m terrain samples continuous and prevents needle-like peaks.
+ const double ridge=1-std::sqrt(ridgeSignal*ridgeSignal+.035*.035);
+ const double trough=fractal((p.x+warpX)/1050,(p.z+warpZ)/1050,model.seed+83)*2-1;
+ const double cut=std::pow(std::max(0.0,1.0-std::sqrt(trough*trough+.06*.06)),5);
+ for(const auto& peak:model.peaks){double dx=(pixel.x-peak.center.x)/peak.radius,dz=(pixel.z-peak.center.z)/peak.radius;double envelope=std::exp(-(dx*dx+dz*dz));double height=peak.height*envelope; y+=height*(.69+.31*ridge)+height*.045*(detail-.5);
+  // Broad glacial troughs carve valleys within mountain envelopes without cliffs.
+  y-=height*.19*cut;
+ }
  for(const auto& biome:model.biomes){if(!polygon(pixel.x,pixel.z,biome.points))continue;double w=smooth(0,500,edgeDistance(pixel,biome.points));
-  if(biome.id=="desert"){double wave=std::sin(p.x/210+p.z/410+3*broad);y=mix(y,8+10*broad+14*std::pow(.5+.5*wave,2),w);}
-  if(biome.id=="mesa"){double t=fractal(p.x/1500,p.z/1500,model.seed+31)*4;double terrace=(std::floor(t)+smooth(.6,1,t-std::floor(t)))/4;y=mix(y,32+240*terrace+4*(detail-.5),w*.85);}
+  if(biome.id=="desert"){double phase=p.x/210+p.z/410+3*broad;double dunes=std::sin(phase)*.7+std::sin(phase*.53+1.7)*.3; y=mix(y,8+10*broad+14*std::pow(.5+.5*dunes,2),w);}
+  if(biome.id=="mesa"){double t=fractal(p.x/1500,p.z/1500,model.seed+31)*4;double terrace=(std::floor(t)+smooth(.25,.75,t-std::floor(t)))/4;y=mix(y,32+240*terrace+4*(detail-.5),w*.85);}
   if(biome.id=="marsh")y=mix(y,1.5+.8*broad,w);
+  if(biome.id=="snow"){const double snowRelief=fractal(p.x/900,p.z/900,model.seed+97);y+=w*(7+19*snowRelief);}
+  if(biome.id=="volcanic"){const double lavaRidges=fractal(p.x/510,p.z/510,model.seed+107);y+=w*(10+24*lavaRidges);}
+  if(biome.id=="forest"){y+=w*3.5*(fractal(p.x/750,p.z/750,model.seed+113)-.5);}
  }
  for(const auto& flat:model.flat){double d=std::hypot(pixel.x-flat.center.x,pixel.z-flat.center.z);double w=1-smooth(flat.radius,flat.radius+flat.feather,d);y=mix(y,flat.base+flat.amplitude*(2*detail-1),w);}
+ // Coast and riverbank use the same water boundary as atlasWater, keeping
+ // the dry-land approach continuous instead of creating vertical cliffs.
  double shore=1e20;for(const auto& water:model.water)shore=std::min(shore,edgeDistance(pixel,water));
  double bank=1e20;for(const auto& r:model.rivers)for(std::size_t i=1;i<r.points.size();i++)bank=std::min(bank,segmentDistance(pixel,r.points[i-1],r.points[i])*64-r.width/2);
- y*=std::min(smooth(0,model.coast,shore),smooth(0,model.bank,bank));
+ const double coastBlend=smooth(0,std::max(1.0,model.coast),shore);
+ const double riverBlend=smooth(0,std::max(1.0,model.bank),bank);
+ y*=std::min(coastBlend,riverBlend);
  return std::max(0.0,y);
 }
 double harborGround(Vec3 p,const Catalog& c){double result=-1e9;if(c.worldLimit<=1800)return result;for(const auto& harbor:atlasSurface().at("harbors").arrayItems()){const auto& r=c.regions.at(harbor.str("region"));double x=p.x-r.center.x,z=p.z-r.center.z;if(std::abs(x)>harbor.num("extent")||std::abs(z)>harbor.num("extent"))continue;for(const auto& box:harbor.at("platforms").arrayItems())if(std::abs(x-box.num("x"))<=box.num("width")/2&&std::abs(z-box.num("z"))<=box.num("depth")/2&&box.num("height")<=p.y+1.4)result=std::max(result,box.num("height"));const auto& ramp=harbor.at("ramp");if(std::abs(x-ramp.num("x"))<=ramp.num("width")/2&&std::abs(z-ramp.num("z"))<=ramp.num("depth")/2){double h=ramp.num("height")*(ramp.num("z")+ramp.num("depth")/2-z)/ramp.num("depth");if(h<=p.y+1.4)result=std::max(result,h);}}

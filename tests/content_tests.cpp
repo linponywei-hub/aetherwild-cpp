@@ -107,6 +107,16 @@ int main(){try{
   no([&]{full.terrain(Json{{"x",48001},{"z",0}});});no([&]{full.terrain(Json{{"x","wrong"},{"z",0}});});
   double low=1e9,high=-1e9;const auto center=full.definitions().regions.at("darkforest").center;
   for(int z=-4000;z<=4000;z+=500)for(int x=-4000;x<=4000;x+=500)if(std::hypot(x,z)<=4000){double h=atlasHeight({center.x+x,0,center.z+z});yes(std::isfinite(h)&&h>=0);low=std::min(low,h);high=std::max(high,h);}
+  // Terrain samples on both sides of a tile boundary must use the same
+  // continuous height function; rivers and coasts must stay at water level.
+  for(int x=-2048;x<=2048;x+=256)for(int z=-2048;z<=2048;z+=256){
+   const Vec3 a{static_cast<double>(x),0,static_cast<double>(z)};
+   const double h=atlasHeight(a),repeat=atlasHeight(a);
+   yes(std::isfinite(h)&&h>=0&&h==repeat);
+   if(atlasWater(a))yes(h==0);
+  }
+  const Vec3 coastalWater{(1180-633)*64.0,0,(550-578)*64.0};
+  yes(atlasWater(coastalWater)&&atlasHeight(coastalWater)==0);
   yes(high-low<=1.4001);const Vec3 ridge{(425-633)*64.0,0,(130-578)*64.0};yes(atlasHeight(ridge)>900);yes(atlasHeight(ridge)==atlasHeight(ridge));
  }
  // The village keeps safe service/building pads, with genuine relief outside them.
