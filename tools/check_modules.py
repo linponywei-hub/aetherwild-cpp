@@ -34,6 +34,8 @@ assert not list(root.glob('*.glb')), 'Root models must use canonical runtime or 
 cleanup = json.loads((root / 'docs/architecture/cleanup.json').read_text())
 for entry in cleanup['removed']:
     assert not (root / entry['path']).exists(), entry['path']
-    if 'canonical' in entry:
+    if entry.get('canonicalRetired'):
+        assert not (root / entry['canonical']).exists(), entry['canonical']
+    elif 'canonical' in entry:
         assert (root / entry['canonical']).is_file(), entry['canonical']
 print(f'MODULE CHECK OK: {checks} dependency paths; {len(cleanup["removed"])} cleaned files')

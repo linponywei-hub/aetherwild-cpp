@@ -27,7 +27,7 @@ function requestDetail(scene,patch){
 export function updateContentScene(scene,state){
  const c=state.content;if(!c)return;
  if(!scene.contentRoot){scene.contentRoot=new T.Group();scene.root.add(scene.contentRoot);scene.contentProps=new T.Group();scene.root.add(scene.contentProps);}
- for(const live of c.npcs||[]){const obj=scene.npcObjects.get(live.id);if(obj)obj.userData.track.push(live.position,state.now);}
+ for(const live of c.npcs||[]){const obj=scene.npcObjects.get(live.id);if(obj){obj.userData.track.push(live.position,state.now);obj.userData.npcLife=live;}}
  const patch=c.terrainPatch,patchKey=patch?[patch.version,patch.x,patch.z].join(':'):'';
  if(patch&&scene.patchKey!==patchKey){
   scene.terrainHistory??=new TerrainCache();scene.terrainHistory.put(patch);scene.sceneryCell='';scene.patchKey=patchKey;scene.starterLandscape?.rebuild();scene.refreshVillageGround?.();

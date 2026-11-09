@@ -49,7 +49,7 @@ namespace aw {
         void configureContent(bool expanded);
         bool contentCommand(Player&,const Json&);
         bool npcCommand(Player&,const Json&);
-        void tickNpcs();
+        void tickNpcs(double dt);
         void positionNpcs();
         void contentTick(double);
         bool monsterAbility(Monster&,Player*);

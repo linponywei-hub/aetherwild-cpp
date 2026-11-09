@@ -1,3 +1,7 @@
+# 2026-11-09 新手村外部 NPC 與對話
+
+見 docs/npc/starter-village.md。18 位新手村 NPC 使用六款 Quaternius Universal 外部角色與共用真實骨架動畫，TRIPO-001 已移除。C++ 控制平滑走路、貼地、碰撞與交談停步保留；前端只呈現，原 ID／服務／信任條件保留。素材來源與校驗碼在 villagers/PROVENANCE.json。正常 C++、HTTP／WebSocket、重啟與骨架取樣驗證通過；GPU 最終外觀因測試瀏覽器 WebGL 停用尚未驗收。部署狀態以此分支的 PR 與 Render 實際結果為準。
+
 # 最新程式結構：功能模組整理
 
 先讀 docs/architecture/README.md。C++ 實作依功能位於 src/modules，生成資料位於 src/generated；瀏覽器模組位於 web/modules。舊 src/runtime.cpp 已拆成物理、怪物 AI、網路投影、存檔備份與核心協調。build.py、CMake、資料生成器及網頁入口已同步新路徑。services.hpp 只保留向後相容的聚合 include，定義在各系統 system.hpp。以下舊交接的功能與版本狀態仍須依實際測試確認。
