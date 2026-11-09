@@ -14,7 +14,7 @@ function terrainExternalTextures(){
  };
  const loader=new T.TextureLoader();
  for(const [name,url] of Object.entries(sources)){
-  maps[name]=loader.load(url,()=>{loaded++;if(loaded===3&&!failed)ready.value=1;},undefined,()=>{failed=true;ready.value=0;});
+  maps[name]=loader.load(url,()=>{loaded++;if(loaded===Object.keys(sources).length&&!failed)ready.value=1;},undefined,()=>{failed=true;ready.value=0;});
   maps[name].wrapS=maps[name].wrapT=T.RepeatWrapping;
   maps[name].colorSpace=T.SRGBColorSpace;maps[name].anisotropy=4;
  }
@@ -82,13 +82,21 @@ export function terrainMaterial(options={}) {
     diffuseColor.rgb=mix(diffuseColor.rgb,awLavaTex,awLava*.34);
    }
    // Snow accumulation follows slope; rock faces stay exposed.
+   // Snow caps and wind-scoured ridges; shallow coastal sand and wet banks.
+   float awSnowBiome=1.0-smoothstep(.35,.8,abs(awBiomeType-5.0));
+   float awShore=1.0-smoothstep(.35,.8,abs(awBiomeType-7.0));
+   float awSnowDrift=awNoise(vec3(awTerrainPosition.xz*.045,24.0));
+   float awExposed=smoothstep(.18,.58,awSlope);
+   vec3 awPowder=mix(vec3(.73,.81,.85),vec3(.96,.97,.94),awSnowDrift);
+   diffuseColor.rgb=mix(diffuseColor.rgb,awPowder,awSnowBiome*(1.0-awExposed)*.85);
+   diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.56,.49,.34)+awFine*.10,awShore*(1.0-awExposed)*.45);
    float awIce=awSnow*(1.0-smoothstep(.35,.7,awSlope));
    diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.88,.91,.90),awIce*.65);`);
   shader.fragmentShader=shader.fragmentShader.replace('#include <normal_fragment_maps>',`#include <normal_fragment_maps>
    normal=normalize(normal+vec3(dFdx(awFine),dFdy(awFine),0.0)*.16);`);
   installStarterSurface(shader,starter);
  };
- material.customProgramCacheKey=()=> 'atlas-terrain-material-v10' + (starter?'-starter':'');
+ material.customProgramCacheKey=()=> 'atlas-terrain-material-v11' + (starter?'-starter':'');
  return material;
 }
 
