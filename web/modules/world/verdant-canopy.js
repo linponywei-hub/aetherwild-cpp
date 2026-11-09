@@ -24,6 +24,7 @@ export function addVerdantCanopy(scene) {
   // Stair treads match the C++ groundBelow spiral; trunk walls remain visual-only.
   const bark = new T.MeshStandardMaterial({color:'#58442f',roughness:1,side:T.DoubleSide});
   const innerRadius=8.5;
+  // Entry faces +Z; the first tread must be reachable from the doorway.
   for(let j=0;j<20;j++) {
     const theta=j*Math.PI/10;
     // Leave a wide entrance opening on the south side of the trunk.
@@ -32,7 +33,7 @@ export function addVerdantCanopy(scene) {
     segment.userData.decorativeTrunk=true;
   }
   for(let level=0;level<100;level++) {
-    const a=level*8*Math.PI/100, y=-32+level*.32;
+    const a=Math.PI/2+level*8*Math.PI/100, y=-32+level*.32;
     const step=add(new T.BoxGeometry(4,.24,2.7),wood,Math.cos(a)*innerRadius,y,Math.sin(a)*innerRadius);
     step.rotation.y=-a;
     if(level%5===0)add(new T.BoxGeometry(.5,.65,.5),windowMat,Math.cos(a)*6.8,y+.55,Math.sin(a)*6.8);
