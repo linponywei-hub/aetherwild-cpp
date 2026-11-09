@@ -47,10 +47,10 @@ double atlasHeight(Vec3 p){
  // Smooth ridge crests instead of a sharp absolute-value cusp. This keeps
  // adjacent 8m terrain samples continuous and prevents needle-like peaks.
  const double ridge=1-std::sqrt(ridgeSignal*ridgeSignal+.035*.035);
+ const double trough=fractal((p.x+warpX)/1050,(p.z+warpZ)/1050,model.seed+83)*2-1;
+ const double cut=std::pow(std::max(0.0,1.0-std::sqrt(trough*trough+.06*.06)),5);
  for(const auto& peak:model.peaks){double dx=(pixel.x-peak.center.x)/peak.radius,dz=(pixel.z-peak.center.z)/peak.radius;double envelope=std::exp(-(dx*dx+dz*dz));double height=peak.height*envelope; y+=height*(.69+.31*ridge)+height*.045*(detail-.5);
   // Broad glacial troughs carve valleys within mountain envelopes without cliffs.
-  const double trough=fractal((p.x+warpX)/1050,(p.z+warpZ)/1050,model.seed+83)*2-1;
-  const double cut=std::pow(std::max(0.0,1.0-std::sqrt(trough*trough+.06*.06)),5);
   y-=height*.19*cut;
  }
  for(const auto& biome:model.biomes){if(!polygon(pixel.x,pixel.z,biome.points))continue;double w=smooth(0,500,edgeDistance(pixel,biome.points));
