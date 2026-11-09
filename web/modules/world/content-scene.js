@@ -8,7 +8,7 @@ export function terrainMesh(data,color,landscape){
  const colors=[];if(landscape){const palette={plain:'#79925f',water:'#3c889c',snow:'#d7e2e5',volcanic:'#68574b',forest:'#355f3a',desert:'#d5b57e',mesa:'#b78054',marsh:'#6f9468'};for(let i=0;i<vertices.length;i+=3){const kind=surfaceAt(vertices[i],vertices[i+2],landscape),color=new T.Color(palette[kind]||palette.plain);colors.push(color.r,color.g,color.b);}}
  const climate=[];for(let i=0;i<vertices.length;i+=3)climate.push(landscape&&surfaceAt(vertices[i],vertices[i+2],landscape)==='snow'?1:0);
  const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geometry.setAttribute('awClimate',new T.Float32BufferAttribute(climate,1));geometry.setIndex(indices);if(colors.length)geometry.setAttribute('color',new T.Float32BufferAttribute(colors,3));geometry.computeVertexNormals();
- const mesh=new T.Mesh(geometry,terrainMaterial({color:landscape?'#ffffff':color,vertexColors:!!landscape}));mesh.receiveShadow=true;mesh.userData.fullIndices=indices;return mesh;
+ const mesh=new T.Mesh(geometry,terrainMaterial({color:landscape?'#ffffff':color,vertexColors:!!landscape,starter:landscape?.starterVillage}));mesh.receiveShadow=true;mesh.userData.fullIndices=indices;return mesh;
 }
 export function updateContentScene(scene,state){
  const c=state.content;if(!c)return;
@@ -16,7 +16,7 @@ export function updateContentScene(scene,state){
  for(const live of c.npcs||[]){const obj=scene.npcObjects.get(live.id);if(obj)obj.userData.track.push(live.position,state.now);}
  const patch=c.terrainPatch;
  if(patch&&scene.patchKey!==patch.x+':'+patch.z){
-  scene.sceneryCell='';scene.patchKey=patch.x+':'+patch.z;if(scene.terrainPatch){scene.contentRoot.remove(scene.terrainPatch);scene.terrainPatch.geometry.dispose();scene.terrainPatch.material.dispose();}
+  scene.sceneryCell='';scene.patchKey=patch.x+':'+patch.z;scene.starterLandscape?.rebuild();if(scene.terrainPatch){scene.contentRoot.remove(scene.terrainPatch);scene.terrainPatch.geometry.dispose();scene.terrainPatch.material.dispose();}
   scene.terrainPatch=terrainMesh(patch,'#708766',scene.catalog.landscape);scene.terrainPatch.userData.localTerrain=true;scene.contentRoot.add(scene.terrainPatch);
   if(scene.globalTerrain)clipTerrainPatch(scene.globalTerrain.material,patch);
  }

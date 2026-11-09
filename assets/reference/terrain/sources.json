@@ -1,0 +1,96 @@
+{
+  "provider": "Poly Haven",
+  "credit": "Powered by Poly Haven",
+  "maps": [
+    {
+      "file": "grass-color.webp",
+      "asset": "leafy_grass",
+      "source": "https://polyhaven.com/a/leafy_grass",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/leafy_grass/leafy_grass_diff_1k.jpg",
+      "license": "CC0-1.0",
+      "sourceSha256": "cfa40bc9d9417d1852db8753a8d5917f110c40101179f63543c382e39bc05e4a",
+      "sourceBytes": 1195394,
+      "sha256": "c2a16149b05e0d2bacc13c15d67e2e59d832d6a78dddce521b39890fdfd4b4d4",
+      "bytes": 420566,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "grass-normal.webp",
+      "asset": "leafy_grass",
+      "source": "https://polyhaven.com/a/leafy_grass",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/leafy_grass/leafy_grass_nor_gl_1k.jpg",
+      "license": "CC0-1.0",
+      "sourceSha256": "832328216adc0a7e1f70a31d5ee48c9ab7f2152d83816122736cf42ac4b2ebd6",
+      "sourceBytes": 1466049,
+      "sha256": "e9d87bc74813464e9a03b35aa6ca90afa7ccee550f5cce917bd4e2c22154c2d0",
+      "bytes": 616870,
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "grass-arm.webp",
+      "asset": "leafy_grass",
+      "source": "https://polyhaven.com/a/leafy_grass",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/leafy_grass/leafy_grass_arm_1k.jpg",
+      "license": "CC0-1.0",
+      "sourceSha256": "95432451cb2693794459fe7ea339ea9ffdb5959c40373740f80a4aa1703f089d",
+      "sourceBytes": 1010081,
+      "sha256": "b623ea3806d28007e42247cbe77fb216cf79e4d2fc43327b50c7d409c84ccb89",
+      "bytes": 421690,
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "gravel-color.webp",
+      "asset": "gravel_ground_01",
+      "source": "https://polyhaven.com/a/gravel_ground_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/gravel_ground_01/gravel_ground_01_diff_1k.jpg",
+      "license": "CC0-1.0",
+      "sourceSha256": "c3a12b0e3a9399913158dd5cfa1d67ede066970acd1f99e5b89969ac13f89089",
+      "sourceBytes": 954257,
+      "sha256": "7573e787450171a18441e50e42a5b22acc755b56ff443996cef771fcbf6ec4e6",
+      "bytes": 482882,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "file": "gravel-normal.webp",
+      "asset": "gravel_ground_01",
+      "source": "https://polyhaven.com/a/gravel_ground_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/gravel_ground_01/gravel_ground_01_nor_gl_1k.jpg",
+      "license": "CC0-1.0",
+      "sourceSha256": "3a832b27276d1457031b164147434558bd245469dc27fd1ff6ae075bde0b12b2",
+      "sourceBytes": 1314248,
+      "sha256": "e3cff4d1b91aa72cb2ff0afc0f595e4f594e0ebe908dc7fa5bc242784b6a4679",
+      "bytes": 504738,
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "gravel-arm.webp",
+      "asset": "gravel_ground_01",
+      "source": "https://polyhaven.com/a/gravel_ground_01",
+      "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/gravel_ground_01/gravel_ground_01_arm_1k.jpg",
+      "license": "CC0-1.0",
+      "sourceSha256": "cf78bb8dd9c0079874ebceba2cbb58fc3eccf03d84204b3fccdcf0549b808e03",
+      "sourceBytes": 151288,
+      "sha256": "63c9563e076831afd54da65b4c1f02d25613dd9a14cc84b8c28fda4194417815",
+      "bytes": 322644,
+      "dimensions": [
+        512,
+        512
+      ]
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import {StarterLandscape,starterCenter} from '../world/starter-landscape.js';
 import * as T from '../../vendor/three.module.js';
 import {terrainMesh} from '../world/content-scene.js';
 import {gridHeight} from '../world/landscape-model.js';
@@ -20,7 +21,7 @@ export class EditorTerrain {
   view.mesh=(geometry,material,position,parent=this.root)=>{const mesh=new T.Mesh(geometry,typeof material==='string'?view.mat(material):material);if(position)mesh.position.set(...position);parent.add(mesh);return mesh;};
   view.box=(parent,w,h,d,color,x=0,y=0,z=0)=>view.mesh(new T.BoxGeometry(w,h,d),view.mat(color),[x,y,z],parent);
   view.cylinder=(parent,r1,r2,h,color,x=0,y=0,z=0,segments=12)=>view.mesh(new T.CylinderGeometry(r1,r2,h,segments),view.mat(color),[x,y,z],parent);
-  makeLandscape(view);this.onStatus('已載入原世界地圖與地形。');return catalog;
+  makeLandscape(view);this.starterLandscape=new StarterLandscape(this.root,catalog,(x,z)=>this.height(x,z));this.onStatus('已載入原世界地圖與地形。');return catalog;
  }
  key(x,z){return Math.floor(x/512)+':'+Math.floor(z/512);}
  async tile(x,z){
@@ -35,14 +36,14 @@ export class EditorTerrain {
  async ensurePatch(x,z){
   const id=++this.requestId,patch=await this.tile(x,z);if(!patch||id!==this.requestId)return patch;
   if(this.local){this.root.remove(this.local);this.local.geometry.dispose();this.local.material.dispose();}
-  this.patch=patch;this.local=terrainMesh(patch,'#718866',this.catalog.landscape);this.local.userData.localTerrain=true;this.root.add(this.local);clipTerrainPatch(this.global.material,patch);return patch;
+  this.patch=patch;this.local=terrainMesh(patch,'#718866',this.catalog.landscape);this.local.userData.localTerrain=true;this.root.add(this.local);clipTerrainPatch(this.global.material,patch);this.starterLandscape?.rebuild();return patch;
  }
  async sampleHeight(x,z){if(!this.catalog)return 0;const patch=await this.tile(x,z);return gridHeight(patch,x,z);}
  height(x,z){if(!this.catalog)return 0;return gridHeight(this.patch,x,z)??gridHeight(this.catalog.terrain,x,z)??0;}
  async jumpToRegion(id){const r=this.catalog?.regions.find(r=>r.id===id);if(!r)return;await this.jumpAt(r.position.x,r.position.z,r.name);}
  async jumpAt(x,z,label='地圖位置'){
   const id=++this.jumpId;this.jumping=true;this.lastRequest=this.key(x,z);
-  try{const patch=await this.ensurePatch(x,z);if(!patch||id!==this.jumpId)return;this.onJump({x,y:gridHeight(patch,x,z),z});this.onStatus(label+' · 已載入實際地形');}
+  try{const patch=await this.ensurePatch(x,z);if(!patch||id!==this.jumpId)return;const config=this.catalog.landscape.starterVillage,center=config&&starterCenter(config);const viewDistance=center&&Math.hypot(x-center.x,z-center.z)<config.detailRadius?140:1800;this.onJump({x,y:gridHeight(patch,x,z),z,viewDistance});this.onStatus(label+' · 已載入實際地形');}
   finally{if(id===this.jumpId)this.jumping=false;}
  }
  updateTarget(target,now){
