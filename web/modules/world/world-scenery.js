@@ -15,6 +15,7 @@ export class WorldScenery {
  }
  update(x,z){
   const cx=Math.floor(x/CELL),cz=Math.floor(z/CELL),wanted=new Set();
+  for(const [key,group] of this.tiles){const [tx,tz]=key.split(':').map(Number);if(Math.abs(tx-cx)>RADIUS||Math.abs(tz-cz)>RADIUS){this.root.remove(group);this.tiles.delete(key);}}
   for(let dz=-RADIUS;dz<=RADIUS;dz++)for(let dx=-RADIUS;dx<=RADIUS;dx++){
    const tx=cx+dx,tz=cz+dz,key=tx+':'+tz;wanted.add(key);
    if(!this.tiles.has(key))this.create(tx,tz,key);
