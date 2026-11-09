@@ -12,6 +12,9 @@ export function addVerdantCanopy(scene) {
   const wood = new T.MeshStandardMaterial({color:'#67513a',roughness:1});
   const rail = new T.MeshStandardMaterial({color:'#9b8054',roughness:1});
   const leaves = new T.MeshStandardMaterial({color:'#54764b',roughness:1,side:T.DoubleSide});
+  const plaster = new T.MeshStandardMaterial({color:'#b6aa7f',roughness:1});
+  const roofMat = new T.MeshStandardMaterial({color:'#435e3e',roughness:1});
+  const windowMat = new T.MeshStandardMaterial({color:'#d9bd75',emissive:'#7c5c29',emissiveIntensity:.2});
   const add = (geometry, material, x,y,z) => {
     const mesh = new T.Mesh(geometry,material);
     mesh.position.set(x,y,z); mesh.castShadow=true;mesh.receiveShadow=true;
@@ -30,6 +33,18 @@ export function addVerdantCanopy(scene) {
     }
     add(new T.ConeGeometry(16,18,9),leaves,x,16,z);
     add(new T.ConeGeometry(12,14,9),leaves,x,26,z);
+    // Compact tree dwelling: timber frame, pitched roof, warm window and porch.
+    // Offset from the trunk; all geometry is visual-only until C++ paths are defined.
+    const hx=x+Math.cos(a)*6,hz=z+Math.sin(a)*6;
+    add(new T.BoxGeometry(7,5,6),plaster,hx,3.15,hz);
+    const roof=add(new T.ConeGeometry(5.4,3.4,4),roofMat,hx,7.2,hz);
+    roof.rotation.y=Math.PI/4;
+    add(new T.BoxGeometry(1.5,2.8,.12),wood,hx,1.9,hz+3.07);
+    add(new T.BoxGeometry(1.15,1.15,.15),windowMat,hx-2,4.1,hz+3.09);
+    add(new T.BoxGeometry(1.15,1.15,.15),windowMat,hx+2,4.1,hz+3.09);
+    for (const side of [-1,1]) {
+      add(new T.CylinderGeometry(.17,.17,3.5,6),wood,hx+side*3.3,3.1,hz+2.8);
+    }
     // Narrow decorative connecting span, kept above the existing city surface.
     const next=(i+1)*Math.PI/3;
     const nx=Math.cos(next)*radius,nz=Math.sin(next)*radius;
@@ -38,5 +53,7 @@ export function addVerdantCanopy(scene) {
     bridge.rotation.y=Math.atan2(dx,dz);
   }
   root.userData.visualOnly = true;
+  root.userData.regionId = 'verdant';
+  root.userData.assetPhase = 'procedural-phase1';
   return root;
 }
