@@ -40,7 +40,7 @@ async function api(path,body){
  const started=performance.now(),controller=new AbortController();
  const timeout=setTimeout(()=>controller.abort(),15000);
  try {
-  const r=await fetch('/api/'+path,{signal:controller.signal,method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json','X-Aetherwild-Client':'1',...(session?{Authorization:'Bearer '+session}:{})},...(body===undefined?{}:{body:JSON.stringify(body)})});
+  const r=await fetch('/api/'+path,{priority:'high',signal:controller.signal,method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json','X-Aetherwild-Client':'1',...(session?{Authorization:'Bearer '+session}:{})},...(body===undefined?{}:{body:JSON.stringify(body)})});
   let j;try{j=await r.json();}catch(error){if(error.name==='AbortError')throw error;throw Error('伺服器回傳格式錯誤，請稍後重試。');}
   if(view&&['input','state','command'].includes(path))view.networkRTT=(performance.now()-started)/1000;
   if(!r.ok||j.ok===false)throw Error(j.error||'操作未完成');return j;

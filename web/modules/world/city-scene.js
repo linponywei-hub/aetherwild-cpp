@@ -6,14 +6,14 @@ import {buildingParts,chunkKey,desiredCells} from './city-architecture.js';
 import {batchParts} from '../rendering/mesh-batch.js';
 import {surfaceAt} from './landscape-model.js';
 export class CityScene {
- constructor(scene){this.scene=scene;this.verdantCanopy=addVerdantCanopy(scene);this.chunks=[];this.glows=[];this.lamps=[];this.scenery=new Map();this.lights=[];this.pending=[];
+ constructor(scene){this.scene=scene;this.villagePending=[];this.verdantCanopy=addVerdantCanopy(scene);this.chunks=[];this.glows=[];this.lamps=[];this.scenery=new Map();this.lights=[];this.pending=[];
   const batches=new Map();let starterHouseIndex=0;for(const b of scene.catalog.buildings){if(!b.style.includes('|'))continue;
    // Hide all old procedural buildings in the starter village. Only the five uploaded GLBs remain.
    if(b.region==='verdant')continue;
    if(b.region==='windchime'){
     if(b.style.split('|')[1]==='house'&&starterHouseIndex<5){
      const house=new T.Group();house.position.set(b.position.x,scene.landHeight(b.position.x,b.position.z),b.position.z);
-     scene.root.add(house);scene.loadVillageHouse(house,++starterHouseIndex,b);
+     scene.root.add(house);this.villagePending.push({house,index:++starterHouseIndex,building:b});
     }
     continue;
    }const key=chunkKey(b.position.x,b.position.z);if(!batches.has(key))batches.set(key,{x:Math.floor(b.position.x/128)*128,z:Math.floor(b.position.z/128)*128,parts:[]});const batch=batches.get(key);for(const p of buildingParts(b))batch.parts.push({...p,x:p.x+b.position.x-batch.x,y:p.y+b.position.y,z:p.z+b.position.z-batch.z});if(b.style.endsWith('|lamp'))this.lamps.push({x:b.position.x,y:b.position.y+b.height,z:b.position.z});}
@@ -22,6 +22,8 @@ export class CityScene {
   for(let i=0;i<6;i++){const light=new T.PointLight('#ffd391',0,18,2);scene.world.add(light);this.lights.push(light);}
  }
  update(p,night,world=true){
+  // Do not let large house downloads/parsing compete with login verification.
+  for(let i=this.villagePending.length-1;i>=0;i--){const job=this.villagePending[i];if(world&&Math.hypot(p.x-job.house.position.x,p.z-job.house.position.z)<500){this.villagePending.splice(i,1);this.scene.loadVillageHouse(job.house,job.index,job.building);}}
   const canopy=this.verdantCanopy;
   if(canopy){const near=world&&Math.hypot(p.x-canopy.position.x,p.z-canopy.position.z)<500;canopy.visible=near;if(near&&!this.verdantLoading&&canopy.userData.assetPhase!=='ready'&&performance.now()>(this.verdantRetryAt||0)){this.verdantLoading=true;attachVerdantCC0Models(canopy).catch(error=>{this.verdantRetryAt=performance.now()+15000;this.scene.cb.toast?.('翠冠城模型載入失敗，正在重試');console.warn('[Verdant]',error);}).finally(()=>{this.verdantLoading=false;});}}
  if(this.lastCell!==chunkKey(p.x,p.z,160)){this.lastCell=chunkKey(p.x,p.z,160);const cells=desiredCells(p.x,p.z);const keep=new Set(cells.map(c=>c.x+':'+c.z));for(const[key,g]of this.scenery)if(!keep.has(key)){this.scene.ambient.remove(g);g.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});this.scenery.delete(key);}this.pending=cells.filter(c=>!this.scenery.has(c.x+':'+c.z));}
