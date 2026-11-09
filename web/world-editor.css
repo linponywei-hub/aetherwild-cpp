@@ -2,3 +2,5 @@
 
 .terrain-region{display:block;margin:12px 0 8px;font-size:12px;color:#b8c9c0}.terrain-region select{margin-top:6px}#terrain-status{font-size:11px;line-height:1.6;color:#c6d9a1}.terrain-atlas{margin:12px 0;font-size:12px;color:#b8c9c0}.terrain-atlas img{display:block;width:100%;height:auto;margin-top:8px;cursor:crosshair;border-radius:4px}#objects{margin-top:14px}
 footer a{font-size:10px;padding:0;border:0;background:none;color:#a8bcb1;white-space:nowrap}footer a:hover{background:none;color:#d3dfca}
+
+.viewport-top button{pointer-events:auto;font-size:11px;padding:5px 8px}.viewport-top button[aria-pressed=true]{background:#597b60}

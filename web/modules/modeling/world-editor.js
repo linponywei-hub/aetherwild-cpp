@@ -1,3 +1,5 @@
+import {OrbitControls} from '../../vendor/OrbitControls.js';
+import {TransformControls} from '../../vendor/TransformControls.js';
 import {EditorTerrain} from './editor-terrain.js';
 import * as T from '/vendor/three.module.js';
 import {GLTFLoader} from '/vendor/GLTFLoader.js';
@@ -28,14 +30,14 @@ const camera=new T.PerspectiveCamera(50,1,.05,100000),content=new T.Group();scen
 scene.add(new T.HemisphereLight('#e2f2ec','#485c46',2.5));const sun=new T.DirectionalLight('#fff0d0',3);sun.position.set(30,60,20);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-120,right:120,top:120,bottom:-120,near:.1,far:350});sun.shadow.bias=-.0002;scene.add(sun,sun.target);
 const referenceGrid=new T.GridHelper(200,200,'#687e70','#3a5047');scene.add(referenceGrid,new T.AxesHelper(4));
 const selection=new T.Box3Helper(new T.Box3(),0xc6d9a1);selection.visible=false;scene.add(selection);
-const target=new T.Vector3(0,1,0);let distance=24,yaw=.6,pitch=.45;
+const target=new T.Vector3(0,1,0);let distance=24,yaw=.6,pitch=.45,orbit;
 const worldTerrain=new EditorTerrain(scene,{onStatus:message=>$('#terrain-status').textContent=message,onJump:p=>{target.set(p.x,p.y,p.z);distance=p.viewDistance||1800;sun.position.set(p.x+80,p.y+110,p.z+45);sun.target.position.set(p.x,p.y,p.z);camera.far=200000;camera.updateProjectionMatrix();updateCamera();}});
-function updateCamera(){camera.position.set(target.x+distance*Math.cos(pitch)*Math.sin(yaw),target.y+distance*Math.sin(pitch),target.z+distance*Math.cos(pitch)*Math.cos(yaw));camera.lookAt(target);camera.updateMatrixWorld();}
+function updateCamera(){camera.position.set(target.x+distance*Math.cos(pitch)*Math.sin(yaw),target.y+distance*Math.sin(pitch),target.z+distance*Math.cos(pitch)*Math.cos(yaw));camera.lookAt(target);camera.updateMatrixWorld();if(orbit){orbit.target.copy(target);orbit.update();}}
 function resize(){const {width,height}=viewport.getBoundingClientRect();renderer.setSize(width,height,false);camera.aspect=width/Math.max(1,height);camera.updateProjectionMatrix();}
 new ResizeObserver(resize).observe(viewport);resize();updateCamera();
 const boxGeometry=new T.BoxGeometry(1,1,1),boxMaterial=new T.MeshBasicMaterial({color:0x62d9e4,transparent:true,opacity:.16,depthWrite:false}),edgeGeometry=new T.EdgesGeometry(boxGeometry),edgeMaterial=new T.LineBasicMaterial({color:0x72e3ed});
 function apply(o){const g=groups.get(o.id);if(!g)return;g.position.fromArray(o.position);g.rotation.set(...o.rotation);g.scale.fromArray(o.scale);const boxes=g.userData.boxes;boxes.clear();for(const c of o.colliders){const b=new T.Mesh(boxGeometry,boxMaterial);b.position.fromArray(c.position);b.rotation.set(...c.rotation);b.scale.fromArray(c.size);b.add(new T.LineSegments(edgeGeometry,edgeMaterial));boxes.add(b);}boxes.visible=$('#show-colliders').checked;g.updateMatrixWorld(true);updateSelection();}
-function updateSelection(){const g=groups.get(selected);selection.visible=!!g;if(g){selection.box.copy(new T.Box3().setFromObject(g.userData.model));selection.updateMatrixWorld(true);}}
+function updateSelection(){const g=groups.get(selected);if(g&&gizmo.object!==g)gizmo.attach(g);else if(!g)gizmo.detach();selection.visible=!!g;if(g){selection.box.copy(new T.Box3().setFromObject(g.userData.model));selection.updateMatrixWorld(true);}}
 function dispose(group){const geometries=new Set(),materials=new Set(),textures=new Set();group.userData.model.traverse(n=>{if(n.geometry)geometries.add(n.geometry);for(const m of Array.isArray(n.material)?n.material:n.material?[n.material]:[]){materials.add(m);for(const value of Object.values(m))if(value?.isTexture)textures.add(value);}n.skeleton?.dispose();});geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());textures.forEach(t=>{t.image?.close?.();t.dispose();});}
 async function loadAsset(asset){checkGLB(asset.bytes);const url=URL.createObjectURL(new Blob([asset.bytes],{type:'model/gltf-binary'}));try{const {scene:model}=await new GLTFLoader().loadAsync(url);if(new T.Box3().setFromObject(model).isEmpty())throw Error('模型沒有可顯示的幾何');return model;}finally{URL.revokeObjectURL(url);}}
 async function buildObject(o,p=project){const model=await loadAsset(p.assets.find(a=>a.id===o.assetId));const g=new T.Group(),boxes=new T.Group();g.add(model,boxes);g.userData={model,boxes,id:o.id};return g;}
@@ -69,20 +71,21 @@ const toBase64=bytes=>new Promise((resolve,reject)=>{const r=new FileReader();r.
 $('#export').onclick=()=>task(async()=>{validateProject(project);const used=new Set(project.objects.map(o=>o.assetId));const assets=[];for(const a of project.assets.filter(a=>used.has(a.id)))assets.push({...a,bytes:undefined,base64:await toBase64(a.bytes)});const blob=new Blob([JSON.stringify({...project,assets})],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='aetherwild-world-scene.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);status('已匯出場景，包含 GLB 原檔與碰撞箱。');});
 $('#project-file').onchange=async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;await task(async()=>{if(file.size>215*1024*1024)throw Error('場景檔超過大小限制');const next=JSON.parse(await file.text());if(!Array.isArray(next.assets))throw Error('缺少資產資料');let total=0;for(const a of next.assets){if(typeof a.base64!=='string')throw Error('缺少內嵌 GLB');total+=a.base64.length;if(total>MAX_BYTES*4/3+800)throw Error('內嵌模型過大');const raw=atob(a.base64),bytes=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i);a.bytes=bytes.buffer;delete a.base64;checkGLB(a.bytes);}validateProject(next);const staged=new Map();try{for(const o of next.objects)staged.set(o.id,await buildObject(o,next));}catch(error){staged.forEach(dispose);throw error;}checkpoint();for(const g of groups.values()){content.remove(g);dispose(g);}groups.clear();project=next;for(const [id,g] of staged){groups.set(id,g);content.add(g);}for(const o of project.objects)apply(o);refresh();focus(true);changed();});};
 
-// Pointer camera controls work with mouse, pen and one/two finger touch.
-const pointers=new Map();let gesture=null;
-canvas.oncontextmenu=e=>e.preventDefault();
-canvas.onpointerdown=e=>{if(busy)return;canvas.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});gesture={x:e.clientX,y:e.clientY,moved:false,pan:e.button===2||e.shiftKey};};
-canvas.onpointermove=e=>{const previous=pointers.get(e.pointerId);if(!previous||!gesture)return;const dx=e.clientX-previous.x,dy=e.clientY-previous.y;if(Math.hypot(e.clientX-gesture.x,e.clientY-gesture.y)>4)gesture.moved=true;
- if(pointers.size===2){const other=[...pointers.entries()].find(([id])=>id!==e.pointerId)[1];const old=Math.hypot(previous.x-other.x,previous.y-other.y),now=Math.hypot(e.clientX-other.x,e.clientY-other.y);if(now>0)distance=Math.max(.1,Math.min(100000,distance*old/now));gesture.moved=true;}
- else if(gesture.pan){const k=distance*.0015;target.addScaledVector(new T.Vector3().setFromMatrixColumn(camera.matrix,0),-dx*k);target.addScaledVector(new T.Vector3().setFromMatrixColumn(camera.matrix,1),dy*k);}else{yaw-=dx*.006;pitch=Math.max(-1.5,Math.min(1.5,pitch+dy*.006));}
- pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});updateCamera();};
-canvas.onpointerup=e=>{if(gesture&&!gesture.moved&&pointers.size===1&&e.button!==2){const rect=canvas.getBoundingClientRect(),ray=new T.Raycaster();ray.setFromCamera(new T.Vector2((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1),camera);const hits=ray.intersectObjects([...groups.values()].map(g=>g.userData.model),true);if(hits[0]){let n=hits[0].object;while(n&&!n.userData.id)n=n.parent;if(n)select(n.userData.id);}}pointers.delete(e.pointerId);if(!pointers.size)gesture=null;else if(gesture)gesture.moved=true;};
-canvas.onpointercancel=e=>{pointers.delete(e.pointerId);gesture=null;};
-canvas.addEventListener('wheel',e=>{e.preventDefault();distance=Math.max(.1,Math.min(100000,distance*Math.exp(e.deltaY*.001)));updateCamera();},{passive:false});
+// Official Three.js controls use one interaction model for mouse and touch.
+orbit=new OrbitControls(camera,canvas);orbit.target.copy(target);orbit.minDistance=.1;orbit.maxDistance=100000;
+orbit.addEventListener('change',()=>{target.copy(orbit.target);const delta=camera.position.clone().sub(target);distance=delta.length();yaw=Math.atan2(delta.x,delta.z);pitch=Math.asin(delta.y/Math.max(.001,distance));});
+const gizmo=new TransformControls(camera,canvas);gizmo.setSpace('local');scene.add(gizmo);let gizmoBefore=null;
+gizmo.addEventListener('dragging-changed',e=>{orbit.enabled=!e.value;});
+gizmo.addEventListener('mouseDown',()=>{if(!current()||busy)return;gizmoBefore=structuredClone(current());checkpoint();});
+gizmo.addEventListener('objectChange',()=>{const o=current(),g=groups.get(selected);if(!o||!g)return;o.position=g.position.toArray();o.rotation=[g.rotation.x,g.rotation.y,g.rotation.z];o.scale=g.scale.toArray();updateSelection();});
+gizmo.addEventListener('mouseUp',()=>{if(!gizmoBefore)return;try{validateProject(project);changed();}catch(error){Object.assign(current(),gizmoBefore);undo.pop();apply(current());status(error.message);}gizmoBefore=null;refresh();});
+for(const button of document.querySelectorAll('[data-gizmo]'))button.onclick=()=>{gizmo.setMode(button.dataset.gizmo);for(const b of document.querySelectorAll('[data-gizmo]'))b.setAttribute('aria-pressed',String(b===button));};
+let pointerStart;
+canvas.addEventListener('pointerdown',e=>{pointerStart={x:e.clientX,y:e.clientY,blocked:gizmo.dragging||!!gizmo.axis};});
+canvas.addEventListener('pointerup',e=>{if(!pointerStart||pointerStart.blocked||gizmo.dragging||Math.hypot(e.clientX-pointerStart.x,e.clientY-pointerStart.y)>4||e.button===2)return;const rect=canvas.getBoundingClientRect(),ray=new T.Raycaster();ray.setFromCamera(new T.Vector2((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1),camera);const hit=ray.intersectObjects([...groups.values()].map(g=>g.userData.model),true)[0];if(hit){let n=hit.object;while(n&&!n.userData.id)n=n.parent;if(n)select(n.userData.id);}pointerStart=null;});
 document.addEventListener('keydown',e=>{if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;if(e.key.toLowerCase()==='f')focus();if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();restore(e.shiftKey?redo:undo,e.shiftKey?undo:redo);}});
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='';}});
-renderer.setAnimationLoop(()=>{worldTerrain.updateTarget(target,performance.now());renderer.render(scene,camera);});
+renderer.setAnimationLoop(()=>{gizmo.enabled=!busy;worldTerrain.updateTarget(target,performance.now());renderer.render(scene,camera);});
 await task(async()=>{const saved=await storage('readonly');if(saved){validateProject(saved);project=saved;await reconcile();focus(true);status('已恢復此瀏覽器的場景草稿。');}else{refresh();status('加入 GLB，開始編輯位置、角度與碰撞箱。');}});
 
 $('#terrain-region').onchange=e=>worldTerrain.jumpToRegion(e.target.value).catch(error=>$('#terrain-status').textContent=error.message);

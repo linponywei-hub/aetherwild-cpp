@@ -33,5 +33,6 @@ jobs:
           python3 tests/cloud_access.py
           python3 tests/module_http.py
           python3 tests/terrain_http.py
+          python3 tests/village_pose_http.py
           python3 tests/bow_http.py build/aetherwild_workstation
           python3 tests/enhancement_http.py build/aetherwild_workstation

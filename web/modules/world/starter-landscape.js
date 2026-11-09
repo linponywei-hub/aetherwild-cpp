@@ -1,3 +1,4 @@
+import {ScannedVegetation} from './scanned-vegetation.js';
 import * as T from '../../vendor/three.module.js';
 
 export function starterConfig(catalog){return catalog.landscape?.starterVillage;}
@@ -27,11 +28,11 @@ export class StarterLandscape {
   this.catalog=catalog;this.height=height;this.root=new T.Group();this.root.name='starter-village-groundcover';this.config=starterConfig(catalog);
   if(!this.config)return;
   this.center=starterCenter(this.config);this.root.position.set(this.center.x,0,this.center.z);this.root.userData.cullRadius=220;parent.add(this.root);
-  this.points=software?[]:starterScatter(catalog,count);this.rebuild();
+  this.points=software?[]:starterScatter(catalog,count);this.rebuild();if(!software&&typeof document!=='undefined')this.scanned=new ScannedVegetation(this.root,this.points,this.center,height,{onReady:()=>{const grass=this.root.children.find(m=>m.name==='starter-grass');if(grass)grass.visible=false;}});
  }
  rebuild(){
   if(!this.config)return;
-  for(const child of [...this.root.children]){this.root.remove(child);child.geometry.dispose();child.material.dispose();}
+  for(const child of [...this.root.children]){if(child.isInstancedMesh)continue;this.root.remove(child);child.geometry.dispose();child.material.dispose();}
   const positions=[],colors=[],rockPositions=[],rockColors=[];const leaf=new T.Color(),stone=new T.Color();
   const triangle=(a,b,c,color,target=positions,tints=colors)=>{for(const p of [a,b,c]){target.push(...p);tints.push(color.r,color.g,color.b);}};
   for(const p of this.points){
@@ -52,7 +53,8 @@ export class StarterLandscape {
   for(const [vertices,tints,name] of [[positions,colors,'grass'],[rockPositions,rockColors,'pebbles']]){
    if(!vertices.length)continue;const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geometry.setAttribute('color',new T.Float32BufferAttribute(tints,3));geometry.computeVertexNormals();geometry.computeBoundingSphere();
    const material=new T.MeshStandardMaterial({vertexColors:true,roughness:.95,side:name==='grass'?T.DoubleSide:T.FrontSide});
-   const mesh=new T.Mesh(geometry,material);mesh.name='starter-'+name;mesh.receiveShadow=true;mesh.castShadow=name==='pebbles';this.root.add(mesh);
+   const mesh=new T.Mesh(geometry,material);mesh.name='starter-'+name;if(name==='grass'&&this.scanned?.ready)mesh.visible=false;mesh.receiveShadow=true;mesh.castShadow=name==='pebbles';this.root.add(mesh);
   }
+  this.scanned?.update();
  }
 }

@@ -115,6 +115,21 @@ void GameRuntime::startExpandedWorld(){
 }
 bool GameRuntime::contentCommand(Player& p,const Json& j){
  auto type=j.str("type"),target=j.str("target"),request=j.str("request");
+ if(type=="village_pose_save"){
+  require(social_.accounts.at(p.accountId).role==Role::Owner,"只有擁有者可保存世界房屋設定");
+  auto index=j.at("index").integer();require(index>=1&&index<=5,"房屋編號不正確");
+  require(j.at("revision").integer()==contentState_.num("villagePoseRevision"),"世界房屋設定已更新，請重新讀取後再保存");
+  const auto& pose=j.at("pose");Json saved=Json::object();
+  for(const auto& field:{"position","modelPosition","rotation","scale"}){
+   const auto& a=pose.at(field).arrayItems();require(a.size()==3,"房屋向量必須有三個數值");
+   for(const auto& v:a){double n=v.number();require(std::isfinite(n)&&std::abs(n)<=100000,"房屋數值超出範圍");if(std::string(field)=="scale")require(n>=.0001&&n<=1000,"房屋縮放超出範圍");}
+   saved[field]=pose.at(field);
+  }
+  const auto& position=saved.at("position").arrayItems();require(std::abs(position[0].number())<=catalog_.worldLimit&&std::abs(position[2].number())<=catalog_.worldLimit,"房屋位置超出世界範圍");
+  require(pose.str("rotationOrder","XYZ")=="XYZ","房屋旋轉順序不相容");saved["rotationOrder"]="XYZ";
+  if(!contentState_.contains("villagePoses"))contentState_["villagePoses"]=Json::object();
+  contentState_["villagePoses"][std::to_string(index)]=saved;contentState_["villagePoseRevision"]=contentState_.num("villagePoseRevision")+1;return true;
+ }
  if(type=="skill_slot"){
   require(p.vitals.alive(),"倒下時無法調整技能欄");auto index=j.at("slot").integer();require(index>=0&&index<5,"技能欄僅有五格");auto skill=j.str("skill");
   require(skill.empty()||(p.learnedSkills.contains(skill)&&catalog_.skills.contains(skill)&&catalog_.skills.at(skill).effect!="dash"&&(!catalog_.skillOwners.contains(skill)||catalog_.skillOwners.at(skill)==p.profession)),"尚未學會或不屬於目前職業的技能");
@@ -178,6 +193,7 @@ Json GameRuntime::equippedSkills(const Player& p)const{
 }
 Json GameRuntime::contentSnapshot(const Player& p)const{
  auto now=NpcSystem::clock();Json out{{"expanded",contentState_.flag("expanded")},{"release",contentState_.num("release",1)},{"worldLimit",catalog_.worldLimit},{"relations",Json::object()},{"npcs",Json::array()},{"books",Json::array()},{"collections",Json::object()},{"blockers",Json::array()}};
+ out["villageLayout"]=Json{{"revision",contentState_.num("villagePoseRevision")},{"poses",contentState_.contains("villagePoses")?contentState_.at("villagePoses"):Json::object()}};
  const Json* rel=nullptr;if(contentState_.at("relations").contains(p.id))rel=&contentState_.at("relations").at(p.id);
  for(auto&[id,n]:catalog_.npcs){
   if(distance(p.position,n.position)>180||p.scene!="world")continue;

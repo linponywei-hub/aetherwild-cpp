@@ -1,3 +1,4 @@
+import {starterCenter,starterConfig} from './starter-landscape.js';
 import * as T from '../../vendor/three.module.js';
 import {buildingParts,chunkKey,desiredCells} from './city-architecture.js';
 import {batchParts} from '../rendering/mesh-batch.js';
@@ -25,6 +26,7 @@ export class CityScene {
  makeCell(cell){const scene=this.scene,parts=[],key=cell.x+':'+cell.z;let seed=(cell.x*73856093^cell.z*19349663)>>>0;const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};const root=new T.Group();root.position.set(cell.x*160,0,cell.z*160);
   for(let i=0;i<(scene.renderer.software?10:20);i++){const x=root.position.x+rand()*160,z=root.position.z+rand()*160;
    if(scene.catalog.regions.some(r=>!r.wilderness&&Math.hypot(x-r.position.x,z-r.position.z)<(r.urbanRadius||100)+15)||surfaceAt(x,z,scene.catalog.landscape)==='water')continue;
+   const starter=starterConfig(scene.catalog),center=starter&&starterCenter(starter);if(center&&Math.hypot(x-center.x,z-center.z)<220)continue;
    const h=6+rand()*6,y=scene.landHeight(x,z),dx=x-root.position.x,dz=z-root.position.z;
    parts.push({shape:'cylinder',x:dx,y:y+h*.28,z:dz,sx:.5,sy:h*.56,sz:.5,color:'#66513c'},{shape:'cone',x:dx,y:y+h*.68,z:dz,sx:h*.55,sy:h*.8,sz:h*.55,color:'#5d7850'});
   }

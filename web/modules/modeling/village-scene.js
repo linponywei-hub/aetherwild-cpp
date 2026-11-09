@@ -1,3 +1,4 @@
+import {resolveVillagePose,captureVillagePose} from './village-pose.js';
 import * as T from '/vendor/three.module.js';
 import {applyVillageTransform} from '/modules/modeling/village-model-editor.js';
 // Rendering adapters; authoritative simulation remains in C++.
@@ -17,9 +18,10 @@ export const villageSceneMethods = {
  loadVillageHouse(group,index,building){
   const filename='village_building_'+String(index).padStart(2,'0')+'_lod0.glb';
   import('/vendor/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync('/assets/models/buildings/village/'+filename)).then(({scene})=>{
+    let savedPose;try{savedPose=resolveVillagePose(index,this.state?.content?.villageLayout||this.catalog.villageLayout)?.pose;}catch(error){group.userData.poseError=error.message;}
     // House 01: infer the base from broad near-planar underside faces.
     // This fixes an incorrectly authored up axis without guessing a 90-degree yaw.
-    if(index===1){
+    if(index===1&&!savedPose?.modelPosition){
       scene.updateMatrixWorld(true);
       const faces=[];
       const a=new T.Vector3(),b=new T.Vector3(),c=new T.Vector3();
@@ -90,7 +92,7 @@ export const villageSceneMethods = {
     // Sink the bottom trim into the terrain rather than allowing a visible air gap.
     // Clamp to avoid burying short houses or changing their overall proportions.
     scene.position.y-=Math.min(.45,Math.max(.16,building.height*.065));
-    if(index===1){
+    if(index===1&&!savedPose?.modelPosition){
       // Recompute the actual underside AFTER correcting the GLB orientation.
       // Use a low percentile to ignore isolated stray triangles and align
       // the foundation with the terrain sampled under its whole footprint.
@@ -154,8 +156,8 @@ export const villageSceneMethods = {
     group.userData.villageModel=filename;
     group.userData.villageIndex=index;
     group.userData.villageGLB=scene;
-    group.userData.villageBaseline={position:group.position.toArray(),rotation:[scene.rotation.x,scene.rotation.y,scene.rotation.z],scale:scene.scale.toArray()};
-    applyVillageTransform(index,group,scene);
+    group.userData.villageBaseline=captureVillagePose(group,scene);
+    try{applyVillageTransform(index,group,scene,this.state?.content?.villageLayout||this.catalog.villageLayout);}catch(error){group.userData.poseError=error.message;}
     this.villageEditorRefresh?.();
     // Generate cheap wall proxies once, from the lower/middle portion of the GLB.
     // Full mesh bounds include roof overhangs and create invisible walls.
