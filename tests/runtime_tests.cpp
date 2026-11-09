@@ -89,7 +89,8 @@ int main() {
             auto pos=t.center;
             pos.z+=90;
             pos.y=17;
-            CHECK(std::abs(groundBelow(pos,c)-16)<.001);
+            // The former external ramp at z+90 must no longer support players.
+            CHECK(groundBelow(pos,c)<16);
         });
         test("verified actor ownership and permissions",[] {
             GameRuntime g({},true);
