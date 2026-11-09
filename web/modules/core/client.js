@@ -122,7 +122,24 @@ function renderPanel(){if(!state)return;$('#terminal').dataset.view=tab;lastPane
 function renderChat(){$('#messages').replaceChildren(...state.chat.map(m=>{let d=document.createElement('div'),b=document.createElement('strong');b.textContent=m.name+'：';d.append(b,document.createTextNode(m.text));return d;}));$('#messages').scrollTop=$('#messages').scrollHeight;}
 function connectRealtime(){realtime?.close();const url=(location.protocol==='https:'?'wss://':'ws://')+location.host+'/api/socket';realtime=new RealtimeLink({url,token:session,onState:(j,rtt)=>{if(rtt!==undefined)view.networkRTT=rtt;apply(j);},onStatus:status=>{linkStatus=status==='ready'?'WebSocket':status==='connecting'?'連線中':'HTTP 備援';}});realtime.connect();}
 async function enterWorld(){const j=await api('state');$('#welcome').classList.add('hidden');$('#hud').classList.remove('hidden');apply(j);connectRealtime();toast('歡迎來到界域。按 B 開啟旅人終端，走近 NPC 按 E 交談。');}
-$('#create-form').addEventListener('submit',async e=>{e.preventDefault();if(busy)return;busy=true;$('#create-error').textContent='';try{const j=await api('session',{name:$('#character-name').value.trim(),profession:chosenClass,inviteCode:$('#invite-code').value,ownerCode:$('#owner-code').value});session=j.token;localStorage.setItem('aw-session',session);await enterWorld();}catch(e){$('#create-error').textContent=e.message;}finally{busy=false;}});
+$('#create-form').addEventListener('submit',async e=>{
+ e.preventDefault();if(busy)return;
+ busy=true;
+ const button=$('#create-form button[type="submit"]');
+ const previousLabel=button.textContent;
+ button.disabled=true;
+ $('#create-error').textContent='正在驗證並進入世界…';
+ try {
+  const j=await api('session',{name:$('#character-name').value.trim(),profession:chosenClass,inviteCode:$('#invite-code').value,ownerCode:$('#owner-code').value});
+  if(!j.token)throw Error('伺服器未回傳登入憑證');
+  session=j.token;localStorage.setItem('aw-session',session);
+  $('#create-error').textContent='驗證成功，正在載入角色…';
+  await enterWorld();
+ }catch(error){
+  console.error('[Aetherwild] enter world failed:',error);
+  $('#create-error').textContent='無法進入世界：'+(error?.message||String(error));
+ }finally{busy=false;button.disabled=false;button.textContent=previousLabel;}
+});
 for(let b of document.querySelectorAll('[data-class]'))b.onclick=()=>{chosenClass=b.dataset.class;document.querySelectorAll('[data-class]').forEach(x=>x.classList.toggle('selected',x===b));};
 $('#continue').onclick=()=>enterWorld().catch(e=>toast(e.message));$('#open-terminal').onclick=()=>openPanel('character');$('#close-terminal').onclick=closePanel;$('#settings-button').onclick=()=>openPanel('settings');$('#save-button').onclick=()=>command('save',{},'進度已儲存');$('#respawn').onclick=()=>command('respawn',{},'已返回城鎮');$('#capture').onclick=()=>view.capture();$('#world').addEventListener('mousedown',e=>{if(view.modelEditing||e.button!==0||!state||$('#hud').classList.contains('hidden')||!$('#terminal').classList.contains('hidden')||!$('#chat-panel').classList.contains('hidden'))return;if(document.pointerLockElement!==view.canvas){view.capture();return;}if(isBow())beginBow();else action('attack');});
  document.addEventListener('mouseup',e=>{if(e.button===0&&bowInput.held)releaseBow();});
