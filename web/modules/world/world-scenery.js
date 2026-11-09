@@ -61,7 +61,7 @@ export class WorldScenery {
  }
  async replaceTrees(group,fallback,items,key){
   const buckets=new Map();for(const p of items){if(!buckets.has(p.species.id))buckets.set(p.species.id,[]);buckets.get(p.species.id).push(p);}
-  const replacements=[];let loaded=0;
+  let loaded=0;const loadedSpecies=new Set();
   for(const points of buckets.values()){
    const asset=await this.loadTree(points[0].species);
    if(this.tiles.get(key)!==group)return;
@@ -69,12 +69,12 @@ export class WorldScenery {
    const pivot=new T.Matrix4().makeTranslation(-asset.center.x,-asset.floor,-asset.center.z);
    for(const part of asset.meshes){const mesh=new T.InstancedMesh(part.geometry,part.material,points.length);mesh.name='external-tree-'+points[0].species.id;
     points.forEach((p,i)=>{const transform=new T.Matrix4().compose(new T.Vector3(p.x,p.y,p.z),new T.Quaternion().setFromAxisAngle(new T.Vector3(0,1,0),hash(Math.floor(p.x),Math.floor(p.z),17)*Math.PI*2),new T.Vector3(1,1,1).multiplyScalar(p.s/asset.height));mesh.setMatrixAt(i,transform.multiply(pivot).multiply(part.matrix));});
-    mesh.instanceMatrix.needsUpdate=true;mesh.frustumCulled=false;mesh.receiveShadow=true;group.add(mesh);replacements.push(mesh);
+    mesh.instanceMatrix.needsUpdate=true;mesh.frustumCulled=false;mesh.receiveShadow=true;group.add(mesh);
    }
-   loaded+=points.length;
+   loaded+=points.length;loadedSpecies.add(points[0].species.id);
   }
-  // Keep fallback for missing species; avoid hiding all trees on partial asset failure.
-  if(loaded===items.length){fallback.visible=false;}else if(loaded>0){for(const mesh of replacements)mesh.visible=false;}
+  // Keep only missing species on the fallback mesh; loaded trees use GLB instances.
+  if(loaded){let count=0;for(const p of items){if(loadedSpecies.has(p.species.id))continue;this.dummy.position.set(p.x,p.y,p.z);this.dummy.rotation.set(0,0,0);this.dummy.scale.setScalar(p.s/3);this.dummy.updateMatrix();fallback.setMatrixAt(count++,this.dummy.matrix);}fallback.count=count;fallback.instanceMatrix.needsUpdate=true;fallback.visible=count>0;fallback.computeBoundingSphere();}
  }
  dispose(){for(const g of this.tiles.values())this.root.remove(g);this.tiles.clear();this.treeGeo.dispose();this.rockGeo.dispose();this.treeMat.dispose();this.rockMat.dispose();}
 }
