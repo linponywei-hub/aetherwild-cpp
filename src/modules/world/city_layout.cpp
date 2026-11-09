@@ -9,7 +9,7 @@ double urbanRadius(const RegionDefinition& r){
 std::vector<Building> cityBuildings(const Catalog& c){
  std::vector<Building> out;
  for(const auto&[id,r]:c.regions){
-  if(r.wilderness)continue;
+  if(r.wilderness||id=="verdant")continue;
   double u=urbanRadius(r);int serial=0,starterHouse=0;
   auto add=[&](std::string kind,double x,double z,double w,double d,double h,double y=-1e8){
    double yaw=0;

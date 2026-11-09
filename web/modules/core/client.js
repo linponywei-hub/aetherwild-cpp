@@ -36,7 +36,17 @@ function equipmentShowcase(p){
  return '<div class="equipped-gallery">'+slotNames.map((slot,slotIndex)=>{const instanceId=p.equipped[String(slotIndex)],item=p.inventory.find(i=>i.id===instanceId);if(!item)return '<article class="equipment-card empty"><div class="equipment-art"><span>◇</span></div><div><small>'+slot+'</small><strong>尚未裝備</strong><p>從背包選擇可用裝備</p></div></article>';const region=String(item.code).match(/^boss_([^_]+)_/)?.[1]||'journey',origin=equipmentRegions[region]||'旅途';return '<article class="equipment-card region-'+esc(region)+'"><div class="equipment-art">'+picture(item.code)+'</div><div class="equipment-copy"><small>'+slot+' · '+origin+'</small><strong>'+esc(name(item.code))+'</strong><p>'+rarities[item.rarity]+' · 強化 +'+item.upgrade+'</p>'+button('卸下','unequip',{target:item.id})+'</div></article>';}).join('')+'</div>';
 }
 function toast(message){$('#toast').textContent=message;$('#toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.add('hidden'),3500);}
-async function api(path,body){const started=performance.now();const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),15000);let r;try{r=await fetch('/api/'+path,{signal:controller.signal,method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json','X-Aetherwild-Client':'1',...(session?{Authorization:'Bearer '+session}:{})},...(body===undefined?{}:{body:JSON.stringify(body)})});}catch(error){throw Error(error.name==='AbortError'?'世界伺服器回應逾時，請重新整理或稍後重試。':'無法連線到世界伺服器：'+error.message);}finally{clearTimeout(timeout);}let j;try{j=await r.json();}catch{throw Error('工作站沒有回應，請稍後重試。');}if(view&&['input','state','command'].includes(path))view.networkRTT=(performance.now()-started)/1000;if(!r.ok||j.ok===false)throw Error(j.error||'操作未完成');return j;}
+async function api(path,body){
+ const started=performance.now(),controller=new AbortController();
+ const timeout=setTimeout(()=>controller.abort(),15000);
+ try {
+  const r=await fetch('/api/'+path,{priority:'high',signal:controller.signal,method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json','X-Aetherwild-Client':'1',...(session?{Authorization:'Bearer '+session}:{})},...(body===undefined?{}:{body:JSON.stringify(body)})});
+  let j;try{j=await r.json();}catch(error){if(error.name==='AbortError')throw error;throw Error('伺服器回傳格式錯誤，請稍後重試。');}
+  if(view&&['input','state','command'].includes(path))view.networkRTT=(performance.now()-started)/1000;
+  if(!r.ok||j.ok===false)throw Error(j.error||'操作未完成');return j;
+ }catch(error){if(error.name==='AbortError')throw Error('世界伺服器回應逾時，請稍後重試。');throw error;}
+ finally{clearTimeout(timeout);}
+}
 function sound(kind){const volume=Number(localStorage.getItem('aw-volume')??.35);if(!volume)return;try{const ctx=sound.ctx||(sound.ctx=new (window.AudioContext||window.webkitAudioContext)());let o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.type=kind==='hit'?'triangle':kind==='swing'?'sawtooth':'sine';o.frequency.setValueAtTime(kind==='hit'?160:kind==='swing'?110:550,ctx.currentTime);o.frequency.exponentialRampToValueAtTime(kind==='hit'?45:kind==='swing'?40:850,ctx.currentTime+.12);g.gain.setValueAtTime(volume*.07,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.18);o.start();o.stop(ctx.currentTime+.2);}catch{}}
 async function command(type,extra={},message){try{const body={type,request:crypto.randomUUID?.()||Date.now()+'-'+Math.random(),...extra};const j=realtime?.ready?await realtime.call('command',body):await api('command',body);apply(j);if(message)toast(message);return true;}catch(e){toast(e.message);return false;}}
 function log(text){let line=document.createElement('div');line.textContent=text;$('#event-log').appendChild(line);while($('#event-log').children.length>4)$('#event-log').firstElementChild.remove();}
@@ -121,7 +131,7 @@ function renderPanel(){if(!state)return;$('#terminal').dataset.view=tab;lastPane
  panel.innerHTML=html;panel.scrollTop=scroll;if(tab==='talents')requestAnimationFrame(drawTalentLinks);if($('#recipe-filter'))$('#recipe-filter').value=filter;}
 function renderChat(){$('#messages').replaceChildren(...state.chat.map(m=>{let d=document.createElement('div'),b=document.createElement('strong');b.textContent=m.name+'：';d.append(b,document.createTextNode(m.text));return d;}));$('#messages').scrollTop=$('#messages').scrollHeight;}
 function connectRealtime(){realtime?.close();const url=(location.protocol==='https:'?'wss://':'ws://')+location.host+'/api/socket';realtime=new RealtimeLink({url,token:session,onState:(j,rtt)=>{if(rtt!==undefined)view.networkRTT=rtt;apply(j);},onStatus:status=>{linkStatus=status==='ready'?'WebSocket':status==='connecting'?'連線中':'HTTP 備援';}});realtime.connect();}
-async function enterWorld(){const j=await api('state');$('#welcome').classList.add('hidden');$('#hud').classList.remove('hidden');apply(j);connectRealtime();toast('歡迎來到界域。按 B 開啟旅人終端，走近 NPC 按 E 交談。');}
+async function enterWorld(initialState){const j=initialState?.player&&initialState?._motion?initialState:await api('state');$('#welcome').classList.add('hidden');$('#hud').classList.remove('hidden');apply(j);connectRealtime();toast('歡迎來到界域。按 B 開啟旅人終端，走近 NPC 按 E 交談。');}
 $('#create-form').addEventListener('submit',async e=>{
  e.preventDefault();if(busy)return;
  busy=true;
@@ -134,7 +144,7 @@ $('#create-form').addEventListener('submit',async e=>{
   if(!j.token)throw Error('伺服器未回傳登入憑證');
   session=j.token;localStorage.setItem('aw-session',session);
   $('#create-error').textContent='驗證成功，正在載入角色…';
-  await enterWorld();
+  await enterWorld(j.initialState);
  }catch(error){
   console.error('[Aetherwild] enter world failed:',error);
   $('#create-error').textContent='無法進入世界：'+(error?.message||String(error));

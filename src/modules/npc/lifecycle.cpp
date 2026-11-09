@@ -29,8 +29,17 @@ void GameRuntime::positionNpcs(){
   const auto& r=catalog_.regions.at(n.region);auto p=cityArrival(r);
   if(n.role=="guild")p.z-=5;else if(n.role=="merchant")p.x+=5;else if(n.role=="smith")p.x-=5;else if(n.role=="healer")p.z+=5;else if(n.role=="cartographer"){p.x+=5;p.z+=5;}
   else{int i=residents[n.region]++;static const double xs[]={-18,-12,-6,6,12,18};p.x+=xs[i%6];p.z+=(i/6%2?1:-1)*(14+8*(i/12));}
+  if(r.id=="verdant"&&n.role!="resident"){
+   p.x=r.center.x+(n.role=="guild"?-8:n.role=="merchant"?-4:n.role=="healer"?4:n.role=="cartographer"?8:0);
+   p.z=r.center.z+18;
+  }
+  if(r.id=="verdant"&&n.role=="resident"){
+   int i=residents[n.region]-1,arm=i%4;double u=((i/4)%3-1)*4.8,v=54+((i/12)%3-1)*4.8;
+   p.x=r.center.x+(arm==0?u:arm==1?v:arm==2?-u:-v);
+   p.z=r.center.z+(arm==0?v:arm==1?-u:arm==2?-v:u);
+  }
   p.y=groundBelow(p,catalog_);n.position=p;
-  if(contentState_.contains("npcPoses")&&contentState_.at("npcPoses").contains(id)){auto saved=unvec(contentState_.at("npcPoses").at(id));if(distance(saved,p)<=100&&!blocked(saved,buildings_))n.position=saved;}
+  if(contentState_.contains("npcPoses")&&contentState_.at("npcPoses").contains(id)){auto saved=unvec(contentState_.at("npcPoses").at(id));if(r.id!="verdant"&&distance(saved,p)<=100&&!blocked(saved,buildings_))n.position=saved;}
  }
 }
 }

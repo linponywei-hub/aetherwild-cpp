@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import * as T from '../web/vendor/three.module.js';
+import {CityScene} from '../web/modules/world/city-scene.js';
+const loaded=[];
+const scene={catalog:{regions:[{id:'windchime',position:{x:0,z:0},urbanRadius:160}],buildings:Array.from({length:5},(_,i)=>({id:`house${i}`,region:'windchime',style:'windchime|house',position:{x:i*10,y:0,z:0}}))},root:new T.Group(),world:new T.Scene(),ambient:new T.Group(),renderer:{software:true},landHeight:()=>0,loadVillageHouse:(house,index)=>loaded.push(index)};
+const city=new CityScene(scene);
+assert.equal(loaded.length,0,'Constructing the login scene must not start house downloads');
+city.update({x:0,z:0},0,false);
+assert.equal(loaded.length,0,'No model work before entering the world');
+city.update({x:5000,z:5000},0,true);
+assert.equal(loaded.length,0,'A returning player in a distant region must not download the starter village');
+city.update({x:0,z:0},0,true);
+assert.equal(loaded.length,5,'Entering the village starts all five houses');
+city.update({x:0,z:0},0,true);
+assert.equal(loaded.length,5,'Repeated frames must not restart model requests');
+console.log('Login asset order: houses defer until verified nearby world entry');

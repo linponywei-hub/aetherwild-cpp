@@ -180,7 +180,12 @@ int main(int argc,char**argv) {
                             require(request.headers["content-type"].starts_with("application/json"),"需要JSON內容");
                             auto body=Json::parse(request.body);
                             if(request.path=="/api/admin/restore"){result=runtime.importBackup(token,body);syncEpoch+="-r"+std::to_string(++syncSequence);}
-                            else if(request.path=="/api/session")result=runtime.createSession(body);
+                            else if(request.path=="/api/session"){
+                                result=runtime.createSession(body);
+                                auto initial=runtime.snapshot(result.str("token"));
+                                initial["_sync"]=Json{{"epoch",syncEpoch},{"sequence",++syncSequence}};
+                                result["initialState"]=std::move(initial);
+                            }
                             else if(request.path=="/api/terrain")result=runtime.terrain(body);
                             else if(request.path=="/api/input") {
                                 runtime.input(token,body);

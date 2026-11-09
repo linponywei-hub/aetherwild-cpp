@@ -1,5 +1,6 @@
 #include "aetherwild/geometry.hpp"
 #include "aetherwild/content.hpp"
+#include "aetherwild/verdant_layout.hpp"
 namespace aw {
     double cityElevation(const Id&id) {
         return id=="astral"?62:id=="verdant"?32:0;
@@ -7,13 +8,14 @@ namespace aw {
     Vec3 cityArrival(const RegionDefinition&r) {
         auto p=r.center;
         p.y=r.center.y+cityElevation(r.id);
+        if(r.id=="verdant")p.z+=18;
         return p;
     }
     std::vector<Building> buildings(const Catalog&c) {
         if(c.worldLimit>1800)return cityBuildings(c);
         std::vector<Building> v;
         for(auto&[id,r]:c.regions) {
-            if(r.wilderness)continue;
+            if(r.wilderness||id=="verdant")continue;
             for(int i=0;i<(r.city?12:8);i++) {
                 double a=i*6.283185307/(r.city?12:8),rad=r.city?48:28;
                 v.push_back( {
@@ -35,10 +37,10 @@ namespace aw {
     }
     bool onCityFloor(Vec3 p,const RegionDefinition&r) {
         double dx=p.x-r.center.x,dz=p.z-r.center.z;
+        if(r.id=="verdant"){const auto surface=verdantSurface(dx,dz);return surface> -1e8&&std::abs(p.y-r.center.y-cityElevation(r.id)-surface)<4;}
         if(cityElevation(r.id)==0)return std::hypot(dx,dz)<=r.radius&&std::abs(p.y-r.center.y)<6;
         if(std::abs(p.y-cityElevation(r.id))>4)return false;
         if(std::hypot(dx,dz)<=94) {
-            if(r.id=="verdant"&&std::hypot(dx,dz)<7)return false;
             return true;
         }
         return r.id=="astral"&&std::abs(dx)<7&&dz>=85&&dz<=116;
@@ -58,6 +60,9 @@ namespace aw {
             double dx=p.x-r.center.x,dz=p.z-r.center.z,h=cityElevation(id);
             if(!h)continue;
             if(id=="verdant") {
+                if(std::abs(dx)>80||std::abs(dz)>80)continue;
+                const double surface=r.center.y+h+verdantSurface(dx,dz);
+                if(surface<=p.y+1.4)y=std::max(y,surface);
                 // Interior spiral stairs: 100 treads, 0.32m rise, four turns.
                 // Evaluate only treads immediately below the player so a higher
                 // flight cannot teleport a character through the tree.
@@ -66,11 +71,13 @@ namespace aw {
                     const double angle=pi/2+step*(8*pi/100.0);
                     const double sx=std::cos(angle)*8.5,sz=std::sin(angle)*8.5;
                     const double tread=r.center.y+step*.32;
-                    const double radial=std::hypot(dx-sx,dz-sz);
-                    if(radial<=2.0&&tread<=p.y+1.4&&tread>y)y=tread;
+                    const double rx=dx-sx,rz=dz-sz;
+                    const bool onTread=std::abs(rx*std::cos(angle)+rz*std::sin(angle))<=1.9&&std::abs(-rx*std::sin(angle)+rz*std::cos(angle))<=1.5;
+                    if(onTread&&tread<=p.y+1.4&&tread>y)y=tread;
                 }
+                continue;
             }
-            bool disc=std::hypot(dx,dz)<=94&&!(id=="verdant"&&std::hypot(dx,dz)<7);
+            bool disc=std::hypot(dx,dz)<=94;
             bool bridge=id=="astral"&&std::abs(dx)<7&&dz>=85&&dz<=116;
             if((disc||bridge)&&h<=p.y+1.4)y=std::max(y,h);
         }

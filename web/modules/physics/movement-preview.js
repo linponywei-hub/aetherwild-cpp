@@ -1,3 +1,4 @@
+import {verdantSurface} from '../world/verdant-layout.js';
 import * as THREE from '../../vendor/three.module.js';
 import {harborHeight} from '../world/landscape-model.js';
 const isBarrier=b=>b.style?.endsWith('|starter_wall')||b.style?.endsWith('|starter_fence');
@@ -14,12 +15,18 @@ export class MovementPreview {
   const patch=this.terrain;
   if(patch){const gx=(p.x-patch.x)/patch.step,gz=(p.z-patch.z)/patch.step,n=patch.side;if(gx>=0&&gz>=0&&gx<n-1&&gz<n-1){const x=Math.floor(gx),z=Math.floor(gz),tx=gx-x,tz=gz-z,h=patch.heights;const a=h[z*n+x]*(1-tx)+h[z*n+x+1]*tx,b=h[(z+1)*n+x]*(1-tx)+h[(z+1)*n+x+1]*tx;y=a*(1-tz)+b*tz;}}
 
-  for(const b of this.catalog.buildings)if(isBarrier(b)&&inside(p,b)&&b.position.y+b.height<=p.y+1.4)y=Math.max(y,b.position.y+b.height);
+  for(const b of this.catalog.buildings.filter(b=>b.region!=='verdant'))if(isBarrier(b)&&inside(p,b)&&b.position.y+b.height<=p.y+1.4)y=Math.max(y,b.position.y+b.height);
   for(const r of this.catalog.regions){
    const h=r.elevation||0;if(h===(r.position.y||0))continue;if(!h)continue;
    const dx=p.x-r.position.x,dz=p.z-r.position.z;
-   if(r.id==='verdant'&&Math.abs(dx)<7&&dz>=30&&dz<=150){const ramp=(150-dz)*h/120;if(ramp<=p.y+1.4)y=Math.max(y,ramp);}
-   const disc=Math.hypot(dx,dz)<=94&&!(r.id==='verdant'&&Math.abs(dx)<8&&dz>30);
+   if(r.id==='verdant'){
+    if(Math.abs(dx)>80||Math.abs(dz)>80)continue;
+    const surface=verdantSurface(dx,dz,p.y-h);
+    if(surface!==null&&h+surface<=p.y+1.4)y=Math.max(y,h+surface);
+    for(let step=0;step<100;step++){const a=Math.PI/2+step*8*Math.PI/100,tread=(r.position.y||0)+step*.32;const rx=dx-Math.cos(a)*8.5,rz=dz-Math.sin(a)*8.5;if(Math.abs(rx*Math.cos(a)+rz*Math.sin(a))<=1.9&&Math.abs(-rx*Math.sin(a)+rz*Math.cos(a))<=1.5&&tread<=p.y+1.4)y=Math.max(y,tread);}
+    continue;
+   }
+   const disc=Math.hypot(dx,dz)<=94;
    const bridge=r.id==='astral'&&Math.abs(dx)<7&&dz>=85&&dz<=116;
    if((disc||bridge)&&h<=p.y+1.4)y=Math.max(y,h);
   }
